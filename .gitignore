@@ -1,0 +1,31 @@
+# Laravel
+/bootstrap/compiled.php
+/vendor
+.env
+.env.local.php
+.env.staging.php
+.env.php
+
+# Assets
+/public/error_log
+/public/images/upload
+
+# Composer
+composer.phar
+
+# OS
+.DS_Store
+.idea/
+vagrant
+.vagrant
+Thumbs.db
+
+# Packages
+_ide_helpers.php
+rocketeer.phar
+/app/config/templates
+
+# Node.js & Grunt
+bower_components
+node_modules/
+npm-debug.log

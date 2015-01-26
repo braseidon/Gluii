@@ -1,0 +1,17 @@
+/* -----------------------------------
+| Buttons
+----------------------------------- */
+/* Btn-Addon */
+.btn-addon i {position:relative;float:left;display:block;width:34px;height:34px;margin:-7px -12px;margin-right:12px;line-height:34px;text-align:center;background-color:rgba(0,0,0,0.1);border-radius:2px 0 0 2px}
+.btn-addon > i,
+.btn-addon > i.pull-right {line-height: 34px;}
+.btn-addon i.pull-right {margin-right:-12px;margin-left:12px;border-radius:0 2px 2px 0;}
+.btn-addon.btn-default i {background-color:transparent;border-right: 1px solid #d2dae1;}
+.btn-addon.btn-default i.pull-right {border-color: #d2dae1;border-right: 0;border-left: 1px solid #d2dae1;}
+.btn-addon.btn-default:hover i {border-color: #b9c6d0;}
+.btn-addon.btn-lg i {width:45px;height:45px;margin:-11px -16px;margin-right:16px;line-height:45px}
+.btn-addon.btn-lg i.pull-right {margin-right:-16px;margin-left:16px}
+.btn-addon.btn-sm i {width:30px;height:30px;margin:-6px -10px;margin-right:10px;line-height:30px}
+.btn-addon.btn-sm i.pull-right {margin-right:-10px;margin-left:10px}
+.btn-addon.btn-xs i {width:22px;height:22px;margin:-2px -5px;margin-right:6px;line-height:22px}
+.btn-addon.btn-xs i.pull-right {margin-right:-4px;margin-left:4px}

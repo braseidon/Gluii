@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Gluii
+        psr4_prefix: Gluii
+        src_path: app
