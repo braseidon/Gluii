@@ -1,6 +1,9 @@
 {
-  "devDependencies": {
-    "gulp": "^3.8.8",
-    "laravel-elixir": "*"
-  }
+	"devDependencies": {
+	"gulp": "^3.8.8",
+	"laravel-elixir": "*"
+	},
+	"repository": {
+		"private": true
+	}
 }
