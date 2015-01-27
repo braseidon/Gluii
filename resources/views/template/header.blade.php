@@ -1,8 +1,19 @@
-<header class="app-header navbar" id="header">
+<header class="app-header navbar" id="header" role="menu">
 	<!-- navbar header -->
 	<div class="navbar-header bg-dark">
-		<button class="pull-right visible-xs dk glyphicon glyphicon-cog"></button> <button class="pull-right visible-xs glyphicon glyphicon-align-justify"></button> <!-- brand -->
-		 <a class="navbar-brand text-lt" href="#/"><i class="fa fa-btc"></i> <img alt="." class="hide" src="img/logo.png"> <span class="hidden-folded m-l-xs">Angulr</span></a> <!-- / brand -->
+		<button class="pull-right visible-xs dk" ui-toggle="show" target=".navbar-collapse">
+			<i class="glyphicon glyphicon-cog"></i>
+		</button>
+		<button class="pull-right visible-xs" ui-toggle="off-screen" target=".app-aside" ui-scroll="app">
+			<i class="glyphicon glyphicon-align-justify"></i>
+		</button>
+		<!-- brand -->
+		<a href="#/" class="navbar-brand text-lt">
+			<i class="fa fa-btc"></i>
+			<img src="/assets/img/logo.png" alt="." class="hide">
+			<span class="hidden-folded m-l-xs">Angulr</span>
+		</a>
+		<!-- / brand -->
 	</div>
 	<!-- / navbar header -->
 
@@ -10,37 +21,138 @@
 	<div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
 		<!-- buttons -->
 		<div class="nav navbar-nav hidden-xs">
-			<a class="btn no-shadow navbar-btn" href="#" target=".app"><i class="fa fa-dedent fa-fw text"></i> <i class="fa fa-indent fa-fw text-active"></i></a> <a class="btn no-shadow navbar-btn icon-user fa-fw" href="#" target="#aside-user"></a>
+			<a href="#" class="btn no-shadow navbar-btn" ui-toggle="app-aside-folded" target=".app">
+				<i class="fa fa-dedent fa-fw text"></i>
+				<i class="fa fa-indent fa-fw text-active"></i>
+			</a>
+			<a href="#" class="btn no-shadow navbar-btn" ui-toggle="show" target="#aside-user">
+				<i class="icon-user fa-fw"></i>
+			</a>
 		</div>
 		<!-- / buttons -->
 
 		<!-- link and dropdown -->
 		<ul class="nav navbar-nav hidden-sm">
 			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<a href="#" data-toggle="dropdown" class="dropdown-toggle">
 					<i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-					<span>New</span> <span class="caret"></span>
+					<span translate="header.navbar.new.NEW">New</span> <span class="caret"></span>
 				</a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Projects</a></li>
-					<li><a href=""><span class="badge bg-info pull-right">5</span> <span>Task</span></a></li>
-					<li><a href="">User</a></li>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#" translate="header.navbar.new.PROJECT">Projects</a></li>
+					<li>
+						<a href>
+							<span class="badge bg-info pull-right">5</span>
+							<span translate="header.navbar.new.TASK">Task</span>
+						</a>
+					</li>
+					<li><a href translate="header.navbar.new.USER">User</a></li>
 					<li class="divider"></li>
-					<li><a href=""><span class="badge bg-danger pull-right">4</span> <span>Email</span></a></li>
+					<li>
+						<a href>
+							<span class="badge bg-danger pull-right">4</span>
+							<span translate="header.navbar.new.EMAIL">Email</span>
+						</a>
+					</li>
 				</ul>
 			</li>
 		</ul>
 		<!-- / link and dropdown -->
 
 		<!-- search form -->
-		<form class="navbar-form navbar-form-sm navbar-left shift" data-target=".navbar-collapse">
+		<form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" data-target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
 			<div class="form-group">
 				<div class="input-group">
-					<input class="form-control input-sm bg-light no-border rounded padder" placeholder="Search projects..." type="text"> <span class="input-group-btn"><button class="btn btn-sm bg-light rounded" type="submit"><span class="input-group-btn fa fa-search"></span></button></span>
+					<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder" placeholder="Search projects...">
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+					</span>
 				</div>
 			</div>
 		</form>
 		<!-- / search form -->
+
+		<!-- nabar right -->
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+				<a href="#" data-toggle="dropdown" class="dropdown-toggle">
+					<i class="icon-bell fa-fw"></i>
+					<span class="visible-xs-inline">Notifications</span>
+					<span class="badge badge-sm up bg-danger pull-right-xs">2</span>
+				</a>
+				<!-- dropdown -->
+				<div class="dropdown-menu w-xl animated fadeInUp">
+					<div class="panel bg-white">
+						<div class="panel-heading b-light bg-light">
+							<strong>You have <span>2</span> notifications</strong>
+						</div>
+						<div class="list-group">
+							<a href class="media list-group-item">
+							<span class="pull-left thumb-sm">
+								<img src="/assets/img/a0.jpg" alt="..." class="img-circle">
+							</span>
+							<span class="media-body block m-b-none">
+								Use awesome animate.css<br>
+								<small class="text-muted">10 minutes ago</small>
+							</span>
+							</a>
+							<a href class="media list-group-item">
+							<span class="media-body block m-b-none">
+								1.0 initial released<br>
+								<small class="text-muted">1 hour ago</small>
+							</span>
+							</a>
+						</div>
+						<div class="panel-footer text-sm">
+							<a href class="pull-right"><i class="fa fa-cog"></i></a>
+							<a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
+						</div>
+					</div>
+				</div>
+				<!-- / dropdown -->
+			</li>
+			<li class="dropdown">
+				<a href="#" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown">
+					<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+						<img src="/assets/img/a0.jpg" alt="...">
+						<i class="on md b-white bottom"></i>
+					</span>
+					<span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>
+				</a>
+				<!-- dropdown -->
+				<ul class="dropdown-menu animated fadeInRight w">
+					<li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+						<div>
+							<p>300mb of 500mb used</p>
+						</div>
+						<div class="progress progress-xs m-b-none dker">
+							<div class="progress-bar progress-bar-info" data-toggle="tooltip" data-original-title="50%" style="width: 50%"></div>
+						</div>
+					</li>
+					<li>
+						<a href>
+							<span class="badge bg-danger pull-right">30%</span>
+							<span>Settings</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.page.profile">Profile</a>
+					</li>
+					<li>
+						<a ui-sref="app.docs">
+							<span class="label bg-info pull-right">new</span>
+							Help
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a ui-sref="access.signin">Logout</a>
+					</li>
+				</ul>
+				<!-- / dropdown -->
+			</li>
+		</ul>
+		<!-- / navbar right -->
 	</div>
 	<!-- / navbar collapse -->
 </header>

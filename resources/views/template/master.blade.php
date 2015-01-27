@@ -20,7 +20,7 @@
 
 </head>
 <body>
-	<div class="app app-header-fixed app-aside-fixed">
+	<div class="app app-header-fixed">
 
 		<!-- header -->
 		@include('template.header')
@@ -36,7 +36,7 @@
 					<!-- / user -->
 
 					<!-- nav -->
-					<nav class="navi clearfix">
+					<nav ui-nav class="navi clearfix">
 						<ul class="nav">
 							@include('template.navigation')
 						</ul>
@@ -52,12 +52,12 @@
 		<!-- / aside -->
 
 		<!-- content -->
-		<div class="app-content" id="content">
+		<div class="app-content" id="content" role="main">
 			<div class="app-content-body app-content-full">
 				<!-- hbox layout -->
-				<div class="hbox hbox-auto-xs bg-light">
+				<div class="hbox hbox-auto-xs hbox-auto-sm">
 					<!-- column -->
-					@include('template.partials.sidebar-left')
+
 					<!-- /column -->
 
 					<!-- column -->
