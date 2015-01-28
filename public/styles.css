@@ -1,0 +1,6 @@
+/*
+ * Template Setup
+ */
+body.app-header-fixed {padding-top: 0;}
+.app-header-fixed {padding-top: 20px;}
+.app:before {background-color: #fff;}

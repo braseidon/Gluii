@@ -64,6 +64,10 @@ return [
 			'region'    => 'IAD',
 		],
 
+		'dropbox' => [
+			'driver'    => 'dropbox',
+		],
+
 	],
 
 ];

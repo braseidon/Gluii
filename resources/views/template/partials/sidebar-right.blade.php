@@ -1,16 +1,18 @@
-<div class="col w-md lter b-l">
+<div class="col w lter b-l">
 	<div class="vbox">
 		<div class="wrapper b-b b-light">
 			<div class="font-thin h4">
 				Header
 			</div>
-			<small class="text-muted">with fluid height</small>
 		</div>
 		<div class="row-row">
 			<div class="cell">
 				<div class="cell-inner">
 					<div class="wrapper-md">
+
+						{{-- Sidebar - Right --}}
 						@yield('sidebar-right')
+
 					</div>
 				</div>
 			</div>

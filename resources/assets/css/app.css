@@ -854,7 +854,7 @@ body {
 }
 }
 html {
-	background:url(../img/bg.jpg);
+	background: #fff;
 	background-attachment:fixed;
 	background-size:cover
 }

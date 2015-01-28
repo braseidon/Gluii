@@ -13,3 +13,4 @@ HTML::macro('liLinkNav', function($name, $title = null, $parameters = array(), $
 
 	return '<li' . $active . '>' . htmlspecialchars_decode(HTML::linkRoute($name, '<i class="i i-dot"></i><span> ' . $title . '</span>', $parameters, $attributes)) . '</li>';
 });
+

@@ -14,16 +14,51 @@
 # Index
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@getIndex']);
 
-
-
 # Authentication
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function(){
 	# Log In
 	Route::get('login', ['as' => 'auth/login', 'uses' => 'AuthController@getLogin']);
-	Route::post('login', ['uses' => 'AuthController@postLogin']);
+	Route::post('login', 'AuthController@postLogin');
 	# Log Out
-	Route::get('logout', ['as' => 'auth/lgout', 'uses' => 'AuthController@getLogout']);
+	Route::get('logout', ['as' => 'auth/logout', 'uses' => 'AuthController@getLogout']);
 	# Register
 	Route::get('register', ['as' => 'auth/register', 'uses' => 'AuthController@getRegister']);
-	Route::post('register', ['uses' => 'AuthController@postRegister']);
+	Route::post('register', 'AuthController@postRegister');
+
+	# Forgot Password
+	Route::get('forgot-password', ['as' => 'auth/forgot-password', 'uses' => 'PasswordController@getEmail']);
+	Route::post('forgot-password', 'PasswordController@postEmail');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Users
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+# Users - RESTful
+Route::resource('user', 'UserController');
+
+/*
+|--------------------------------------------------------------------------
+| Explore
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+# Explore
+Route::get('explore', ['as' => 'explore', 'uses' => 'ExploreController@getIndex']);
+
+/*
+|--------------------------------------------------------------------------
+| Festivals
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+# Festivals
+Route::get('festivals', ['as' => 'festivals', 'uses' => 'FestivalsController@getIndex']);

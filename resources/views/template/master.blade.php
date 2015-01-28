@@ -16,66 +16,45 @@
 
 	<!-- assets - header -->
 	@include('template.assets.header')
-	<!-- / assets - header -->
 
 </head>
-<body>
-	<div class="app app-header-fixed">
+<body class="app-header-fixed">
+	<!-- header -->
+	@include('template.header')
 
-		<!-- header -->
-		@include('template.header')
-		<!-- / header -->
+		<!-- aside - left -->
+		@include('template.aside-left')
 
-		<!-- aside -->
-		<aside class="app-aside hidden-xs bg-dark" id="aside">
-			<div class="aside-wrap">
-				<div class="navi-wrap">
-					<!-- user -->
-					{{--@include('template.partials.navigation-user-menu')--}}
-					<!-- / user -->
+	<div class="app app-header-fixed container no-shadow">
 
-					<!-- nav -->
-					@include('template.navigation')
-					<!-- nav -->
+			<!-- content -->
+				<div id="content" class="app-content-body app-content-full" role="main">
+					<!-- hbox layout -->
+					<div class="hbox hbox-auto-xs hbox-auto-sm">
+						<!-- content sidebar - left -->
+						@if(! empty(trim($__env->yieldContent('sidebar-left'))))
+							@include('template.partials.sidebar-left')
+						@endif
 
-					<!-- aside footer -->
-					{{--@include('template.partials.navigation-footer')--}}
-					<!-- / aside footer -->
+						<!-- main content -->
+						@include('template.partials.content')
+
+						<!-- content sidebar - right -->
+						@if(! empty(trim($__env->yieldContent('sidebar-right'))))
+							@include('template.partials.sidebar-right')
+						@endif
+					</div>
 				</div>
-			</div>
-		</aside>
-		<!-- / aside -->
 
-		<!-- content -->
-		<div class="app-content" id="content" role="main">
-			<div class="app-content-body app-content-full">
-				<!-- hbox layout -->
-				<div class="hbox hbox-auto-xs hbox-auto-sm">
-					<!-- column -->
-					{{--@include('template.partials.sidebar-right')--}}
-					<!-- /column -->
+		<!-- aside - right -->
+		{{--@include('template.aside-right')--}}
 
-					<!-- column -->
-					@include('template.partials.content')
-					<!-- /column -->
-
-					<!-- column -->
-					@include('template.partials.sidebar-right')
-					<!-- /column -->
-				</div>
-				<!-- /hbox layout -->
-			</div>
-		</div>
-		<!-- / content -->
-
+	</div>
 		<!-- footer -->
 		@include('template.footer')
-		<!-- / footer -->
-	</div>
 
 	<!-- assets - footer -->
 	@include('template.assets.footer')
-	<!-- / assets - footer -->
 
 	</body>
 </html>

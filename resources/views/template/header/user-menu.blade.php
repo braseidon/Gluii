@@ -17,6 +17,6 @@
 		<li><a ui-sref="app.page.profile">Profile</a></li>
 		<li><a ui-sref="app.docs"><span class="label bg-info pull-right">new</span>Help</a></li>
 		<li class="divider"></li>
-		<li><a ui-sref="access.signin">Logout</a></li>
+		<li><a href="{{ route('auth/logout') }}">Logout</a></li>
 	</ul>
 </li>

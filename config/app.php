@@ -146,10 +146,11 @@ return [
 		'App\Providers\RouteServiceProvider',
 
 		/*
-		 * Service Providers Not Originally Included
+		 * Package Service Providers
 		 */
 		'Illuminate\Html\HtmlServiceProvider',
 		'Laravel\Socialite\SocialiteServiceProvider',
+		// 'Way\Generators\GeneratorsServiceProvider',
 
 		/*
 		 * ShutteR Service Providers
