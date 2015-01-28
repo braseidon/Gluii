@@ -1,4 +1,4 @@
-<?php namespace Gluii\Providers;
+<?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

@@ -1,10 +1,7 @@
-<?php namespace Gluii\Providers;
-
+<?php namespace App\Providers;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-
 class RouteServiceProvider extends ServiceProvider {
-
 	/**
 	 * This namespace is applied to the controller routes in your routes file.
 	 *
@@ -12,8 +9,7 @@ class RouteServiceProvider extends ServiceProvider {
 	 *
 	 * @var string
 	 */
-	protected $namespace = 'Gluii\Http\Controllers';
-
+	protected $namespace = 'App\Http\Controllers';
 	/**
 	 * Define your route model bindings, pattern filters, etc.
 	 *
@@ -23,10 +19,8 @@ class RouteServiceProvider extends ServiceProvider {
 	public function boot(Router $router)
 	{
 		parent::boot($router);
-
 		//
 	}
-
 	/**
 	 * Define the routes for the application.
 	 *
@@ -40,5 +34,4 @@ class RouteServiceProvider extends ServiceProvider {
 			require app_path('Http/routes.php');
 		});
 	}
-
 }

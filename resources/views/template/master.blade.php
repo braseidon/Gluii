@@ -30,21 +30,16 @@
 		<aside class="app-aside hidden-xs bg-dark" id="aside">
 			<div class="aside-wrap">
 				<div class="navi-wrap">
-
 					<!-- user -->
-					@include('template.header.user-menu')
+					{{--@include('template.partials.navigation-user-menu')--}}
 					<!-- / user -->
 
 					<!-- nav -->
-					<nav ui-nav class="navi clearfix">
-						<ul class="nav">
-							@include('template.navigation')
-						</ul>
-					</nav>
+					@include('template.navigation')
 					<!-- nav -->
 
 					<!-- aside footer -->
-					@include('template.partials.navigation-footer')
+					{{--@include('template.partials.navigation-footer')--}}
 					<!-- / aside footer -->
 				</div>
 			</div>
@@ -57,7 +52,7 @@
 				<!-- hbox layout -->
 				<div class="hbox hbox-auto-xs hbox-auto-sm">
 					<!-- column -->
-
+					{{--@include('template.partials.sidebar-right')--}}
 					<!-- /column -->
 
 					<!-- column -->

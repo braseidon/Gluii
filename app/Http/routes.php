@@ -11,11 +11,19 @@
 |
 */
 
-Route::get('/', 'HomeController@getIndex');
+# Index
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@getIndex']);
 
-Route::get('home', 'HomeController@getHome');
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+
+# Authentication
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function(){
+	# Log In
+	Route::get('login', ['as' => 'auth/login', 'uses' => 'AuthController@getLogin']);
+	Route::post('login', ['uses' => 'AuthController@postLogin']);
+	# Log Out
+	Route::get('logout', ['as' => 'auth/lgout', 'uses' => 'AuthController@getLogout']);
+	# Register
+	Route::get('register', ['as' => 'auth/register', 'uses' => 'AuthController@getRegister']);
+	Route::post('register', ['uses' => 'AuthController@postRegister']);
+});

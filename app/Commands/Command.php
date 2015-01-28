@@ -1,4 +1,4 @@
-<?php namespace Gluii\Commands;
+<?php namespace App\Commands;
 
 abstract class Command {
 

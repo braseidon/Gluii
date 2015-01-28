@@ -1,6 +1,6 @@
-<?php namespace Gluii\Services;
+<?php namespace App\Services;
 
-use Gluii\User;
+use App\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
