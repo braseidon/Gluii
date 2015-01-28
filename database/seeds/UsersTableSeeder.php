@@ -2,7 +2,7 @@
 
 class UsersTableSeeder extends Seeder {
 
-    /**
+	/**
      * Run the database seeds.
      *
      * @return void
@@ -26,7 +26,6 @@ class UsersTableSeeder extends Seeder {
 				'password' => Hash::make('alexsears')
 			]);
  		}
-
     }
 
 }

@@ -1,0 +1,28 @@
+/*
+ * Template Setup
+ */
+body.app-header-fixed {padding-top: 0;}
+.app-header-fixed {padding-top: 50px;}
+.app:before {background-color: #fff;}
+
+/* Text & Colors */
+a {
+	color: #428bca;
+}
+
+/* Images */
+.img-full {width: auto;max-width: 100%;height: auto;}
+
+/* Tablets & Up */
+@media (min-width: 768px) {
+	.app-content,
+	.app-footer {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.app-aside-fixed .app-header .navbar-header {
+		position: relative;
+	}
+	.navbar>.container .navbar-brand,
+	.navbar>.container-fluid .navbar-brand {margin-left: 0;}
+}

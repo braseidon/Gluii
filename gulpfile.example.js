@@ -34,4 +34,3 @@ elixir(function(mix) {
        .scripts(scripts, combine_dir)
        .version(version, build_dir);
 });
-

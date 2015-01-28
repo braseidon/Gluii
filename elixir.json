@@ -1,5 +1,9 @@
 {
-    "assetsDir": "app/assets/",
-    "bowerDir": "app/assets/bower_components",
-    "production": true
+	"assetsDir": "assets/",
+
+	"cssOutput": "public/css/",
+
+	"jsOutput": "public/js/",
+
+	"production": true
 }

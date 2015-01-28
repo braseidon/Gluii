@@ -22,9 +22,11 @@ class RegisterRequest extends Request {
 	public function rules()
 	{
 		return [
-			'name'		=> 'required|min:2',
-			'email'		=> 'required|email|unique:users',
-			'password'	=> 'required|confirmed|min:6',
+			'first_name'	=> 'required|min:2',
+			'last_name'		=> 'required|min:2',
+			'email'			=> 'required|email|unique:users',
+			'password'		=> 'required|confirmed|min:6',
+			'agree_tos'		=> 'required',
 		];
 	}
 

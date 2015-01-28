@@ -11,7 +11,7 @@ $errors = Session::get('errors', new Illuminate\Support\MessageBag);
  *
  * @var boolean
  */
-Form::macro('group', function($name, $label, $cols = [3, 9], callable $callback) use ($errors)
+Form::macro('group', function($name, $label = false, $cols = [3, 9], callable $callback) use ($errors)
 {
 	if(is_array($cols) && count($cols) == 2)
 	{
@@ -21,7 +21,7 @@ Form::macro('group', function($name, $label, $cols = [3, 9], callable $callback)
 	}
 
 	$output = '<div class="form-group' . ($errors->has($name) ? ' has-error' : '') . '">';
-	$output .= '<label class="control-label' . (! $cols ? '' : $labelCols) . '">' . $label . '</label>';
+	$output .= ! $label ? '' : '<label class="control-label' . (! $cols ? '' : $labelCols) . '">' . $label . '</label>';
 	$output .= (! $cols ? '' : '<div class="' . $divCols . '">');
 	$output .= $callback($name);
 	$output .= $errors->first($name, '<span class="help-block">:message</span>');
@@ -37,11 +37,11 @@ Form::macro('group', function($name, $label, $cols = [3, 9], callable $callback)
  *
  * @var integer
  */
-Form::macro('iCheckbox', function($name, $label, $value = 1, $checked = null, $options = array())
+Form::macro('iCheckbox', function($name, $label, $value = 1, $checked = false, $options = array())
 {
 	$output = '<div class="checkbox">';
 	$output .= '<label class="i-checks">';
-	$output .= Form::checkbox($name, 1, false);
+	$output .= Form::checkbox($name, 1, $checked);
 	$output .= '<i></i> ' . $label;
 	$output .= '</label>';
 	$output .= '</div>';

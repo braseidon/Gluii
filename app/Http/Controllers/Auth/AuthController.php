@@ -71,7 +71,7 @@ class AuthController extends Controller {
 	{
 		$validator = $this->registrar->validator($request->all());
 
-		if ($validator->fails())
+		if($validator->fails())
 		{
 			$this->throwValidationException(
 				$request, $validator

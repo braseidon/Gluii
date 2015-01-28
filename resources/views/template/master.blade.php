@@ -18,40 +18,46 @@
 	@include('template.assets.header')
 
 </head>
-<body class="app-header-fixed">
-	<!-- header -->
-	@include('template.header')
+<body>
 
-		<!-- aside - left -->
-		@include('template.aside-left')
+	<div class="app app-header-fixed app-aside-fixed">
 
-	<div class="app app-header-fixed container no-shadow">
+		<!-- header -->
+		<header id="header" class="app-header navbar bg-primary box-shadow" role="menu">
+			@include('template.header')
+		</header>
 
-			<!-- content -->
-				<div id="content" class="app-content-body app-content-full" role="main">
-					<!-- hbox layout -->
-					<div class="hbox hbox-auto-xs hbox-auto-sm">
-						<!-- content sidebar - left -->
-						@if(! empty(trim($__env->yieldContent('sidebar-left'))))
-							@include('template.partials.sidebar-left')
-						@endif
+		<!-- content -->
+		<div class="app-content">
+			<div id="content" class="app-content-body fade-in-up" role="main">
+				<!-- hbox layout -->
+				<div class="hbox hbox-auto-xs hbox-auto-sm">
 
-						<!-- main content -->
-						@include('template.partials.content')
+					<!-- page title -->
+					@if(! empty(trim($__env->yieldContent('title'))))
+						<div class="bg-light lter b-b wrapper-md ng-scope">
+							<div class="container">
+								<h1 class="m-n font-thin h3">{{ trim($__env->yieldContent('title')) }}</h1>
+							</div>
+						</div>
+					@endif
 
-						<!-- content sidebar - right -->
-						@if(! empty(trim($__env->yieldContent('sidebar-right'))))
-							@include('template.partials.sidebar-right')
-						@endif
+					<!-- main content -->
+					<div class="container padder-v">
+						@include('template.partials.flash-messages')
+
+						@yield('content')
 					</div>
 				</div>
+			</div>
+		</div>
 
 		<!-- aside - right -->
-		{{--@include('template.aside-right')--}}
+		@include('template.aside-right')
 
-	</div>
 		<!-- footer -->
 		@include('template.footer')
+	</div>
 
 	<!-- assets - footer -->
 	@include('template.assets.footer')
