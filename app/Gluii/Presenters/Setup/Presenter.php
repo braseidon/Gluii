@@ -1,4 +1,4 @@
-<?php namespace Laracasts\Presenter;
+<?php namespace App\Gluii\Presenters\Setup;
 
 abstract class Presenter {
 
@@ -31,4 +31,4 @@ abstract class Presenter {
 		return $this->entity->{$property};
 	}
 
-} 
+}

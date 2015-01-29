@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Auth;
 
+use App\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Contracts\Auth\Guard;
@@ -58,6 +59,9 @@ class AuthController extends Controller {
 	 */
 	public function getRegister()
 	{
+		if($this->auth->check())
+			return redirect()->route('home');
+
 		return view('auth.register');
 	}
 
@@ -67,20 +71,17 @@ class AuthController extends Controller {
 	 * @param  \Illuminate\Foundation\Http\FormRequest  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function postRegister(RegisterRequest $request)
+	public function postRegister(Request $request)
 	{
 		$validator = $this->registrar->validator($request->all());
-
-		if($validator->fails())
+		if ($validator->fails())
 		{
 			$this->throwValidationException(
 				$request, $validator
 			);
 		}
-
 		$this->auth->login($this->registrar->create($request->all()));
-
-		return redirect()->route('home');
+		return redirect($this->redirectPath());
 	}
 
 	/**

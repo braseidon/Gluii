@@ -1,5 +1,3 @@
-var elixir = require('laravel-elixir');
-
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -19,18 +17,21 @@ var combine_dir = 'resources/assets/compiled',
 	// set scripts to combine
 	scripts = [
 		'vendor/jquery/jquery.js',
-		'js/main.js'
+		'public/js/main.js'
 	],
 	// set styles to combine - compiled less file should be last
 	styles = [
 		'vendor/normalize/normalize.css',
-		'css/' + less_file + '.css'
+		'css/' + less_file + '.css',
+		'css/fontawesome.css',
+		'css/icon.css',
+		'css/gluii.css',
 	];
 
 	// files to version (cache bust)
 	version = [
-		'css/all.css',
-		'js/all.js'
+		'public/css/all.css',
+		'public/js/all.js'
 	];
 
 // require elixir
@@ -39,7 +40,7 @@ var elixir = require('laravel-elixir');
 // mix ingredients
 elixir(function(mix) {
 	mix.less(less_file + '.less', less_output)
-		.styles(styles, combine_dir + '/compiled')
-		.scripts(scripts, combine_dir + '/compiled')
+		.styles(styles, combine_dir)
+		.scripts(scripts, combine_dir)
 		.version(version, build_dir);
 });

@@ -1,8 +1,9 @@
-<?php
+<?php namespace App;
 
 use Laracasts\Presenter\PresentableTrait;
+use App\Gluii\Presenters\CommentPresenter;
 
-class Comment extends \Eloquent {
+class Comment extends Model {
 
 	use PresentableTrait;
 
@@ -11,18 +12,10 @@ class Comment extends \Eloquent {
 	 */
 	protected $fillable = ['user_id', 'status_id', 'body'];
 
-	/**
-	 * Path to the presenter for a status.
-	 *
-	 * @var string
-	 */
-	protected $presenter = 'Poseidon\Presenters\Social\CommentPresenter';
-
 	/*
 	|--------------------------------------------------------------------------
 	| Relationships
 	|--------------------------------------------------------------------------
-	|
 	|
 	|
 	*/
@@ -39,7 +32,6 @@ class Comment extends \Eloquent {
 	|--------------------------------------------------------------------------
 	| Random Shit
 	|--------------------------------------------------------------------------
-	|
 	|
 	|
 	*/

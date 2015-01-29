@@ -96,14 +96,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @param  \Illuminate\Contracts\Events\Dispatcher  $events
 	 * @return void
 	 */
-	public function boot(DispatcherContract $events)
-	{
-		parent::boot($events);
+	// public static function boot(\Illuminate\Contracts\Events\Dispatcher $event)
+	// {
+	// 	parent::boot();
 
-		User::created(function($user)
-		{
-			\Event::fire(new App\Events\Users\UserRegistered($user->id));
-		});
-	}
+	// 	parent::created(function($user)
+	// 	{
+	// 		$event->fire('UserRegistered');
+	// 	});
+	// }
 
 }

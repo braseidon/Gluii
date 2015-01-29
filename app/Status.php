@@ -1,10 +1,11 @@
-<?php
+<?php namespace App;
 
-use Poseidon\Social\Statuses\Events\StatusWasPublished;
+// use Poseidon\Social\Statuses\Events\StatusWasPublished;
 use Laracasts\Commander\Events\EventGenerator;
 use Laracasts\Presenter\PresentableTrait;
+use Gluii\Presenters\Status;
 
-class Status extends \Eloquent {
+class Status extends Model {
 
 	use EventGenerator, PresentableTrait;
 
@@ -15,18 +16,10 @@ class Status extends \Eloquent {
 	 */
 	protected $fillable = ['body'];
 
-	/**
-	 * Path to the presenter for a status.
-	 *
-	 * @var string
-	 */
-	protected $presenter = 'Poseidon\Presenters\Social\StatusPresenter';
-
 	/*
 	|--------------------------------------------------------------------------
 	| Relationships
 	|--------------------------------------------------------------------------
-	|
 	|
 	|
 	*/
@@ -53,7 +46,6 @@ class Status extends \Eloquent {
 	|--------------------------------------------------------------------------
 	|
 	|
-	|
 	*/
 
 	/**
@@ -66,7 +58,7 @@ class Status extends \Eloquent {
 	{
 		$status = new static(compact('body'));
 
-		$status->raise(new StatusWasPublished($body));
+		// $status->raise(new StatusWasPublished($body));
 
 		return $status;
 	}

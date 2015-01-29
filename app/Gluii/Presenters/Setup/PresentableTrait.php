@@ -1,4 +1,4 @@
-<?php namespace Laracasts\Presenter;
+<?php namespace App\Gluii\Presenters\Setup;
 
 use App\Gluii\Presenter\Exceptions\PresenterException;
 
@@ -19,17 +19,17 @@ trait PresentableTrait {
 	 */
 	public function present()
 	{
-        	if ( ! $this->presenter )
-        	{
-            		$this->presenter = get_class($this).'Presenter';
-		}
-
-		if ( ! class_exists($this->presenter) )
+		if(! $this->presenter)
 		{
-			throw new PresenterException('Presenter Not Found : '.$this->presenter);
+			$this->presenter = get_class($this) . 'Presenter';
 		}
 
-		if ( ! $this->presenterInstance)
+		if(! class_exists($this->presenter))
+		{
+			throw new PresenterException('Presenter Not Found : ' . $this->presenter);
+		}
+
+		if(! $this->presenterInstance)
 		{
 			$this->presenterInstance = new $this->presenter($this);
 		}

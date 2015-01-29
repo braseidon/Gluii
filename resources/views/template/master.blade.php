@@ -34,13 +34,13 @@
 				<div class="hbox hbox-auto-xs hbox-auto-sm">
 
 					<!-- page title -->
-					@if(! empty(trim($__env->yieldContent('title'))))
+					{{--@if(! empty(trim($__env->yieldContent('title'))))
 						<div class="bg-light lter b-b wrapper-md ng-scope">
 							<div class="container">
 								<h1 class="m-n font-thin h3">{{ trim($__env->yieldContent('title')) }}</h1>
 							</div>
 						</div>
-					@endif
+					@endif--}}
 
 					<!-- main content -->
 					<div class="container padder-v">

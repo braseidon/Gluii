@@ -1,5 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
+use App\Events\Users\UserRegistered;
+
 class WelcomeController extends Controller {
 
 	/*
@@ -28,8 +31,10 @@ class WelcomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getTestEvent()
 	{
+		\Event::fire(new UserRegistered(1));
+
 		return view('welcome');
 	}
 

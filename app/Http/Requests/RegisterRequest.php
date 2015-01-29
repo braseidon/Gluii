@@ -1,7 +1,5 @@
 <?php namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class RegisterRequest extends Request {
 
 	/**
@@ -22,8 +20,8 @@ class RegisterRequest extends Request {
 	public function rules()
 	{
 		return [
-			'first_name'	=> 'required|min:2',
-			'last_name'		=> 'required|min:2',
+			'first_name'	=> 'required|min:3',
+			'last_name'		=> 'required|min:3',
 			'email'			=> 'required|email|unique:users',
 			'password'		=> 'required|confirmed|min:6',
 			'agree_tos'		=> 'required',

@@ -10,6 +10,7 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $middleware = [
+		// 'Clockwork\Support\Laravel\ClockworkMiddleware',
 		'Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode',
 		'Illuminate\Cookie\Middleware\EncryptCookies',
 		'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
@@ -24,9 +25,9 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $routeMiddleware = [
-		'auth' => 'App\Http\Middleware\Authenticate',
-		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-		'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
+		'auth'			=> 'App\Http\Middleware\Authenticate',
+		'auth.basic'	=> 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
+		'guest'			=> 'App\Http\Middleware\RedirectIfAuthenticated',
 	];
 
 }

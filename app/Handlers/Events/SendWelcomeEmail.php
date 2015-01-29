@@ -5,7 +5,7 @@ use App\Events\Users\UserRegistered;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 
-class SendWelcomeEmail {
+class SendWelcomeEmail implements ShouldBeQueued {
 
 	/**
 	 * Create the event handler.
@@ -25,7 +25,7 @@ class SendWelcomeEmail {
 	 */
 	public function handle(UserRegistered $event)
 	{
-		dd($event);
+		dd('this is your email.');
 	}
 
 }

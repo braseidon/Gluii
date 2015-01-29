@@ -1,20 +1,16 @@
 @extends('template.master')
 
 @section('title')
-	Login
+	Sign In
 @endsection
 
 @section('content')
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<div class="panel panel-default">
-					<div class="panel-heading">Login</div>
-					<div class="panel-body">
-						@include('auth.forms.login')
-					</div>
-				</div>
-			</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+			@include('auth.partials.login')
 		</div>
 	</div>
 @endsection

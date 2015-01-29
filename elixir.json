@@ -1,9 +1,3 @@
 {
-	"assetsDir": "assets/",
-
-	"cssOutput": "public/css/",
-
-	"jsOutput": "public/js/",
-
-	"production": true
+	"production": false
 }

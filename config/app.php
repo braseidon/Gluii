@@ -156,6 +156,7 @@ return [
 		 * ShutteR Service Providers
 		 */
 		'App\Providers\MacroServiceProvider',
+		// 'Clockwork\Support\Laravel\ClockworkServiceProvider',
 
 	],
 
@@ -208,6 +209,7 @@ return [
 		'Form'      => 'Illuminate\Html\FormFacade',
 		'HTML'      => 'Illuminate\Html\HtmlFacade',
 		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
+		// 'Clockwork' => 'Clockwork\Support\Laravel\Facade',
 
 	],
 

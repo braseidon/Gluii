@@ -8,4 +8,36 @@ abstract class Controller extends BaseController {
 
 	use DispatchesCommands, ValidatesRequests;
 
+	/**
+	 * The currently authenticated user
+	 *
+	 * @var User|null
+	 */
+	protected $currentUser = false;
+
+	public function __construct()
+	{
+		parent::__construct();
+
+		// Clockwork //
+		// if (App::environment('local'))
+		// {
+		// 	$this->beforeFilter(function()
+		// 	{
+		// 		Event::fire('clockwork.controller.start');
+		// 	});
+
+		// 	$this->afterFilter(function()
+		// 	{
+		// 		Event::fire('clockwork.controller.end');
+		// 	});
+		// }
+
+
+		if(Auth::user())
+			$this->currentUser = Auth::user();
+
+		View::share('currentUser', $this->currentUser);
+	}
+
 }
