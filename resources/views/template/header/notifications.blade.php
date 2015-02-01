@@ -1,8 +1,8 @@
 <li class="dropdown">
-	<a href="#" data-toggle="dropdown" class="dropdown-toggle">
-		<i class="icon-bell fa-fw"></i>
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		<i class="icon icon-bell fa-fw"></i>
 		<span class="visible-xs-inline">Notifications</span>
-		<span class="badge badge-sm up bg-danger pull-right-xs">2</span>
+		<!-- <span class="badge badge-sm up bg-danger pull-right-xs">2</span> -->
 	</a>
 	<div class="dropdown-menu w-xl animated fadeInUp">
 		<div class="panel bg-white">
@@ -15,13 +15,13 @@
 						<img src="/assets/img/a0.jpg" alt="..." class="img-circle">
 					</span>
 					<span class="media-body block m-b-none">
-						Use awesome animate.css<br>
+						Use awesome animate.css<br />
 						<small class="text-muted">10 minutes ago</small>
 					</span>
 				</a>
 				<a href class="media list-group-item">
 					<span class="media-body block m-b-none">
-						1.0 initial released<br>
+						1.0 initial released<br />
 						<small class="text-muted">1 hour ago</small>
 					</span>
 				</a>

@@ -1,6 +1,6 @@
 <?php namespace App\Gluii\Presenters;
 
-use Setup\Presenter;
+use App\Gluii\Presenters\Setup\Presenter;
 
 class CommentPresenter extends Presenter {
 

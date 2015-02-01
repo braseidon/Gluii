@@ -22,7 +22,6 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@getIndex']);
 |
 */
 
-# Authentication
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
 {
 	# Log In
@@ -46,8 +45,11 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
 |
 */
 
-# Users - RESTful
-// Route::resource('user', 'UserController');
+Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
+{
+	# View Profile
+	Route::get('{id}/view', ['as' => 'user/view', 'uses' => 'UserController@getViewUser']);
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +72,19 @@ Route::get('explore', ['as' => 'explore', 'uses' => 'ExploreController@getIndex'
 
 # Festivals
 Route::get('festivals', ['as' => 'festivals', 'uses' => 'FestivalsController@getIndex']);
+
+/*
+|--------------------------------------------------------------------------
+| Images
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+Route::group(['prefix' => 'img'], function()
+{
+	Route::get('/cover/{path}', ['as' => 'image/cover', 'uses' => 'ImageController@getCoverPhoto']);
+});
 
 /*
 |--------------------------------------------------------------------------

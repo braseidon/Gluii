@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Auth;
+
 class HomeController extends Controller {
 
 	/*
@@ -14,23 +16,16 @@ class HomeController extends Controller {
 	*/
 
 	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		// $this->middleware('auth');
-	}
-
-	/**
 	 * Show the Home Page
 	 *
 	 * @return Response
 	 */
 	public function getIndex()
 	{
-		return view('home');
+		if(Auth::check())
+			return view('home');
+
+		return view('auth.register');
 	}
 
 	/**

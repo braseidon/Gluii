@@ -17,8 +17,6 @@ abstract class Controller extends BaseController {
 
 	public function __construct()
 	{
-		parent::__construct();
-
 		// Clockwork //
 		// if (App::environment('local'))
 		// {
@@ -32,12 +30,6 @@ abstract class Controller extends BaseController {
 		// 		Event::fire('clockwork.controller.end');
 		// 	});
 		// }
-
-
-		if(Auth::user())
-			$this->currentUser = Auth::user();
-
-		View::share('currentUser', $this->currentUser);
 	}
 
 }

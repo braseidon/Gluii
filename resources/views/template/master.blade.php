@@ -23,7 +23,7 @@
 	<div class="app app-header-fixed app-aside-fixed">
 
 		<!-- header -->
-		<header id="header" class="app-header navbar bg-primary box-shadow" role="menu">
+		<header id="header" class="app-header navbar bg-primary" role="menu">
 			@include('template.header')
 		</header>
 

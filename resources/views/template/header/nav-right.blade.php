@@ -1,5 +1,9 @@
 @if(Auth::check())
 	<ul class="nav navbar-nav navbar-right">
+		<!-- friend requets -->
+		@include('template.header.friendrequests')
+		<!-- messages -->
+		@include('template.header.messages')
 		<!-- notifications -->
 		@include('template.header.notifications')
 		<!-- user dropdown -->
@@ -11,10 +15,9 @@
 	<!-- / login form -->
 
 	<!-- sign in link -->
-	<div class="nav navbar-nav navbar-right hidden-xs">
-		<a href="{{ route('auth/login') }}" class="btn btn-default navbar-btn">
-			Sign in
-		</a>
-	</div>
+	<ul class="nav navbar-nav navbar-right hidden-xs">
+		{!! HTML::liLinkRoute('auth/login', 'Sign In', [], ['class' => '']) !!}
+		{!! HTML::liLinkRoute('auth/register', 'Create Account', [], ['class' => '']) !!}
+	</ul>
 	<!-- / sign in link -->
 @endif

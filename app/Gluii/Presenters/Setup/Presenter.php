@@ -10,7 +10,7 @@ abstract class Presenter {
 	/**
 	 * @param $entity
 	 */
-	function __construct($entity)
+	public function __construct($entity)
 	{
 		$this->entity = $entity;
 	}

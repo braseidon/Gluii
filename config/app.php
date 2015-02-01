@@ -155,6 +155,7 @@ return [
 		/*
 		 * ShutteR Service Providers
 		 */
+		'App\Providers\GliderServiceProvider',
 		'App\Providers\MacroServiceProvider',
 		// 'Clockwork\Support\Laravel\ClockworkServiceProvider',
 

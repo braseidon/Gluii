@@ -5,20 +5,9 @@
 @endsection
 
 @section('content')
-	<div class="row no-gutter text-center">
-		<div class="col-lg-12">
-			<!-- <img src="/images/slides/eletric_forest_banner.jpg" class="img-full" /> -->
-		</div>
-	</div>
-	<div class="row">
-		<!-- left column -->
-		<div class="col-lg-7">
-			<h2 class="m-b">Reconnect with the family</h2>
-			<h3 class="m-t-none">you've been meeting at festivals around the globe</h3>
-		</div>
-		<!-- right column -->
-		<div class="col-lg-5">
-			@include('auth.partials.register')
-		</div>
-	</div>
+	{{-- post new status --}}
+	@include('statuses.forms.newstatus')
+
+	<h2>Howdy!</h2>
+	<p>A team of monkeys have been dispatched to make sure that this page is fininshed before the next time you see it.</p>
 @endsection

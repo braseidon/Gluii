@@ -1,6 +1,10 @@
-<?php
+<?php namespace App\Helpers;
 
-$errors = Session::get('errors', new Illuminate\Support\MessageBag);
+use Form;
+use Illuminate\Support\MessageBag;
+use Session;
+
+$errors = Session::get('errors', new MessageBag);
 
 /**
  * Wrap a return value in a form-group

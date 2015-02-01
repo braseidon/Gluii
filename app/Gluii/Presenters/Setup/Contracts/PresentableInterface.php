@@ -1,4 +1,4 @@
-<?php namespace Laracasts\Presenter\Contracts;
+<?php namespace App\Gluii\Presenters\Setup\Contracts;
 
 interface PresentableInterface {
 
@@ -9,4 +9,4 @@ interface PresentableInterface {
 	 */
 	public function present();
 
-} 
+}

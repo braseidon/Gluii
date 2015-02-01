@@ -28,9 +28,9 @@ var elixir = require('laravel-elixir');
 
 // mix ingredients
 elixir(function(mix) {
-    mix.routes().events()
-       .less(less_file+'.less', less_output)
-       .styles(styles, combine_dir)
-       .scripts(scripts, combine_dir)
-       .version(version, build_dir);
+	mix.routes().events()
+		.less(less_file+'.less', less_output)
+		.styles(styles, combine_dir)
+		.scripts(scripts, combine_dir)
+		.version(version, build_dir);
 });

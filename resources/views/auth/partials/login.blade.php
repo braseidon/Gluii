@@ -12,6 +12,9 @@
 				<!-- CSRF -->
 				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<button type="submit" class="btn btn-primary">Sign In</button>
+				<a href="#" class="btn btn-link">
+					Forgot Password?
+				</a>
 			</footer>
 		</form>
 	</section>

@@ -1,8 +1,15 @@
 <?php namespace App\Gluii\Presenters\Setup;
 
-use App\Gluii\Presenter\Exceptions\PresenterException;
+use App\Gluii\Presenters\Setup\Exceptions\PresenterException;
 
 trait PresentableTrait {
+
+	/**
+	 * View presenter namespace
+	 *
+	 * @var mixed
+	 */
+	protected $presenterNamespace = 'App\\Gluii\\Presenters\\';
 
 	/**
 	 * View presenter instance
@@ -21,7 +28,7 @@ trait PresentableTrait {
 	{
 		if(! $this->presenter)
 		{
-			$this->presenter = get_class($this) . 'Presenter';
+			$this->presenter = $this->presenterNamespace . class_basename(get_class($this)) . 'Presenter';
 		}
 
 		if(! class_exists($this->presenter))

@@ -1,7 +1,6 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use App\Events\Users\UserRegistered;
 
 class WelcomeController extends Controller {
 
@@ -33,7 +32,7 @@ class WelcomeController extends Controller {
 	 */
 	public function getTestEvent()
 	{
-		\Event::fire(new UserRegistered(1));
+		\Event::fire(new App\Events\Users\UserRegistered(1));
 
 		return view('welcome');
 	}
