@@ -40,7 +40,7 @@
 							<small>Following</small>
 						</h4>
 
-						@include('backend.profile.partials.follows')
+						@include('profile.partials.follows')
 					</div>
 				</div>
 				<div class="col-sm-6">
@@ -78,10 +78,10 @@
 				</div>
 				<div class="col-sm-3">
 					<!-- Followers -->
-					@include('backend.profile.partials.followers')
+					@include('profile.partials.followers')
 
 					<!-- Following -->
-					@include('backend.profile.partials.following')
+					@include('profile.partials.following')
 				</div>
 			</div>
 		</div>
@@ -113,10 +113,10 @@
 					<div class="panel-body">
 						<div class="tab-content m-t-sm">
 							<div class="tab-pane fade active in" id="profile-recentarticles">
-								@include('backend.profile.partials.recent-articles')
+								@include('profile.partials.recent-articles')
 							</div>
 							<div class="tab-pane fade" id="profile-newmembers">
-								@include('backend.profile.partials.recent-members')
+								@include('profile.partials.recent-members')
 							</div><!-- end tab -->
 						</div>
 					</div>

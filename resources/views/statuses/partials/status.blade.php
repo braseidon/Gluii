@@ -1,6 +1,6 @@
 <li class="message">
 	<div class="clear">
-		<img class="online clear" src="{{ $status->user->present()->getGravatar(50) }}" width="50" height="50"  alt="{{ $status->user->username }}" />
+		<img class="online clear" src="{{ $status->user->present()->gravatar(50) }}" width="50" height="50"  alt="{{ $status->user->username }}" />
 		<small class="text-muted pull-right font-thin">
 			{{ $status->created_at->diffForHumans() }}
 		</small>
@@ -25,5 +25,5 @@
 
 <!-- Status Replies -->
 @foreach($status->comments as $comment)
-	@include('backend.statuses.partials.status-reply')
+	@include('statuses.partials.reply')
 @endforeach

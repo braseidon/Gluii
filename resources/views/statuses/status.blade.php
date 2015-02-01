@@ -5,7 +5,7 @@
 			<span class="caret single"></span>
 		</a>
 		<ul class="dropdown-menu text-left animated flipInX">
-			@if($status->user_id == $currentUser->id)
+			@if($status->user_id == Auth::user()->id)
 				<li><a href="javascript:void(0);">Delete post</a></li>
 			@else
 				<li><a href="javascript:void(0);">Hide this post</a></li>
@@ -18,9 +18,9 @@
 
 <div class="chat-body no-padding profile-message">
 	<ul>
-		@include('backend.statuses.partials.status')
+		@include('statuses.partials.status')
 
 		<!-- Reply Form -->
-		@include('backend.statuses.forms.status-reply')
+		@include('statuses.forms.reply')
 	</ul>
 </div>

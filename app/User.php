@@ -1,12 +1,13 @@
 <?php namespace App;
 
+use Illuminate\Database\Eloquent\Model;
+
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Database\Eloquent\Model;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -48,9 +49,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function friends()
 	{
-		return $this->belongsToMany('User', 'users_friends', 'user_id', 'friend_id')
+		return $this->belongsToMany('App\User', 'users_friends', 'user_id', 'friend_id')
 			->withPivot('accepted')
 			->withTimestamps();
+	}
+
+	/**
+	 * Relationship with Status
+	 *
+	 * @return Collection
+	 */
+	public function statuses()
+	{
+		return $this->hasMany('App\Status', 'user_id');
 	}
 
     /*

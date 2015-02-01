@@ -1,20 +1,27 @@
 <?php namespace App;
 
-// use Poseidon\Social\Statuses\Events\StatusWasPublished;
-use Laracasts\Commander\Events\EventGenerator;
-use Laracasts\Presenter\PresentableTrait;
-use Gluii\Presenters\Status;
+use Illuminate\Database\Eloquent\Model;
+
+use App\Gluii\Presenters\Setup\PresentableTrait;
+use Gluii\Presenters\StatusPresenter;
 
 class Status extends Model {
 
-	use EventGenerator, PresentableTrait;
+	use PresentableTrait;
+
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'statuses';
 
 	/**
 	 * Fillable fields for a new status.
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['body'];
+	protected $fillable = ['user_id', 'body'];
 
 	/*
 	|--------------------------------------------------------------------------
@@ -29,7 +36,7 @@ class Status extends Model {
 	 */
 	public function user()
 	{
-		return $this->belongsTo('User', 'user_id');
+		return $this->belongsTo('App\User', 'user_id');
 	}
 
 	/**
@@ -37,30 +44,7 @@ class Status extends Model {
 	 */
 	public function comments()
 	{
-		return $this->hasMany('Comment', 'status_id');
-	}
-
-	/*
-	|--------------------------------------------------------------------------
-	| Random Shit
-	|--------------------------------------------------------------------------
-	|
-	|
-	*/
-
-	/**
-	 * Publish a new status.
-	 *
-	 * @param $body
-	 * @return static
-	 */
-	public static function publish($body)
-	{
-		$status = new static(compact('body'));
-
-		// $status->raise(new StatusWasPublished($body));
-
-		return $status;
+		return $this->hasMany('App\Comment', 'status_id');
 	}
 
 }

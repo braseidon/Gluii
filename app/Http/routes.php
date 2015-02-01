@@ -21,7 +21,6 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@getIndex']);
 |
 |
 */
-
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
 {
 	# Log In
@@ -44,11 +43,17 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
 |
 |
 */
-
 Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
 {
 	# View Profile
 	Route::get('{id}/view', ['as' => 'user/view', 'uses' => 'UserController@getViewUser']);
+
+	# Statuses
+	Route::group(['prefix' => 'status'], function()
+	{
+		# New Status
+		Route::post('new', ['as' => 'user/status/new', 'uses' => 'UserController@postNewStatus']);
+	});
 });
 
 /*
@@ -58,9 +63,10 @@ Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
 |
 |
 */
-
-# Explore
-Route::get('explore', ['as' => 'explore', 'uses' => 'ExploreController@getIndex']);
+Route::group(['prefix' => 'explore'], function()
+{
+	Route::get('/', ['as' => 'explore', 'uses' => 'ExploreController@getIndex']);
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -69,9 +75,10 @@ Route::get('explore', ['as' => 'explore', 'uses' => 'ExploreController@getIndex'
 |
 |
 */
-
-# Festivals
-Route::get('festivals', ['as' => 'festivals', 'uses' => 'FestivalsController@getIndex']);
+Route::group(['prefix' => 'festivals'], function()
+{
+	Route::get('/', ['as' => 'festivals', 'uses' => 'FestivalsController@getIndex']);
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -80,9 +87,9 @@ Route::get('festivals', ['as' => 'festivals', 'uses' => 'FestivalsController@get
 |
 |
 */
-
 Route::group(['prefix' => 'img'], function()
 {
+	# Cover Images
 	Route::get('/cover/{path}', ['as' => 'image/cover', 'uses' => 'ImageController@getCoverPhoto']);
 });
 

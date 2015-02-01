@@ -16,11 +16,8 @@
 		</div>
 		<!-- statuses -->
 		<div class="col-lg-9">
-			<!-- write on timeline -->
-			@include('statuses.forms.newstatus')
-
 			<!-- timeline -->
-			<h4 class="text-muted">{!! $user->first_name !!}'s timeline</h4>
+			@include('statuses.view-timeline', ['statuses' => $user->statuses])
 		</div>
 
 	</div>

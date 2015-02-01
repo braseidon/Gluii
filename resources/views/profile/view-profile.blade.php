@@ -1,4 +1,4 @@
-@extends('backend.template.master')
+@extends('template.master')
 
 {{-- Page title --}}
 @section('title')
@@ -13,12 +13,12 @@
 
 				<!-- User Profile -->
 				<div class="col-sm-12 col-md-12 col-lg-6">
-					@include('backend.profile.profile')
+					@include('profile.profile')
 				</div>
 
 				<!-- User Timeline -->
 				<div class="col-sm-12 col-md-12 col-lg-6">
-					@include('backend.statuses.view-timeline')
+					@include('statuses.view-timeline')
 				</div>
 			</div>
 		</div>

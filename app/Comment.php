@@ -1,7 +1,8 @@
 <?php namespace App;
 
-use Laracasts\Presenter\PresentableTrait;
-use App\Gluii\Presenters\CommentPresenter;
+use Illuminate\Database\Eloquent\Model;
+
+use App\Gluii\Presenters\Setup\PresentableTrait;
 
 class Comment extends Model {
 
@@ -25,7 +26,7 @@ class Comment extends Model {
 	 */
 	public function owner()
 	{
-		return $this->belongsTo('User', 'user_id');
+		return $this->belongsTo('App\User', 'user_id');
 	}
 
 	/*
