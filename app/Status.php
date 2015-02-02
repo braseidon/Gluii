@@ -21,7 +21,7 @@ class Status extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['user_id', 'body'];
+	protected $fillable = ['profile_user_id', 'author_id', 'body'];
 
 	/*
 	|--------------------------------------------------------------------------
@@ -32,11 +32,19 @@ class Status extends Model {
 	*/
 
 	/**
-	 * A status belongs to a user.
+	 * A status belongs to a User
 	 */
-	public function user()
+	public function profileuser()
 	{
-		return $this->belongsTo('App\User', 'user_id');
+		return $this->belongsTo('App\User', 'profile_user_id');
+	}
+
+	/**
+	 * A status writer belongs to a User
+	 */
+	public function author()
+	{
+		return $this->belongsTo('App\User', 'author_id');
 	}
 
 	/**

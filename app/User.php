@@ -61,7 +61,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function statuses()
 	{
-		return $this->hasMany('App\Status', 'user_id');
+		return $this->hasMany('App\Status', 'profile_user_id');
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Query Scopes
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+
+	public function scopeViewProfile($query)
+	{
+		return $query->with([
+			'statuses' => function($q)
+			{
+				$q->orderBy('id', 'DESC');
+			},
+			'statuses.profileuser',
+			'statuses.author',
+			]);
 	}
 
     /*

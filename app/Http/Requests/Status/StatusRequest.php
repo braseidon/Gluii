@@ -11,6 +11,7 @@ class StatusRequest extends Request {
 	 */
 	public function authorize()
 	{
+		// Need to make sure the author_id is friends with the profile_user_id
 		return true;
 	}
 
@@ -22,7 +23,8 @@ class StatusRequest extends Request {
 	public function rules()
 	{
 		return [
-			'status' => 'required|min:3'
+			'profile_user_id'	=> 'required|integer',
+			'status'			=> 'required|min:3'
 		];
 	}
 

@@ -26,8 +26,9 @@ class NewStatusCommandHandler {
 	public function handle(NewStatusCommand $command)
 	{
 		Status::create([
-			'user_id'	=> $command->userId,
-			'body'		=> $command->status,
+			'profile_user_id'	=> $command->profileUserId,
+			'author_id'			=> $command->authorId,
+			'body'				=> $command->status,
 		]);
 	}
 

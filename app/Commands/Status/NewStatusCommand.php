@@ -5,11 +5,19 @@ use App\Commands\Command;
 class NewStatusCommand extends Command {
 
 	/**
+	 * The user_id of the User whos profile the status is going on
+	 *
+	 * @var integer $profileUserId
+	 */
+	public $profileUserId;
+
+	/**
 	 * The user_id of the User posting the status
 	 *
-	 * @var integer $userId
+	 * @var integer $authorId
 	 */
-	public $userId;
+	public $authorId;
+
 
 	/**
 	 * The status to be posted
@@ -21,12 +29,14 @@ class NewStatusCommand extends Command {
 	/**
 	 * Instantiate the Object
 	 *
-	 * @param integer $userId
+	 * @param integer $profileUserId
+	 * @param integer $authorId
 	 * @param string $status
 	 */
-	public function __construct($userId, $status)
+	public function __construct($profileUserId, $authorId, $status)
 	{
-		$this->userId = $userId;
-		$this->status = $status;
+		$this->profileUserId	= $profileUserId;
+		$this->authorId			= $authorId;
+		$this->status			= $status;
 	}
 }

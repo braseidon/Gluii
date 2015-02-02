@@ -1,12 +1,12 @@
 <li class="message">
 	<div class="clear">
-		<img class="online clear" src="{{ $status->user->present()->gravatar(50) }}" width="50" height="50"  alt="{{ $status->user->username }}" />
+		<img class="online clear" src="{{ $status->author->present()->gravatar(50) }}" width="50" height="50"  alt="{{ $status->author->present()->name }}" />
 		<small class="text-muted pull-right font-thin">
 			{{ $status->created_at->diffForHumans() }}
 		</small>
 		<span class="message-text">
 			<a class="username font-semibold" href="javascript:void(0);">
-				{{ $status->user->username }}
+				{{ $status->author->present()->name }}
 			</a>
 			<p class="block">{{ $status->body }}</p>
 		</span>

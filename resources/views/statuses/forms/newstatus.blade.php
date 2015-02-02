@@ -7,6 +7,8 @@
 		<a class="btn btn-link profile-link-btn fa fa-camera text-underline-none" href="javascript:void(0);" {!! tooltip('Add Photo', 'bottom') !!}></a>
 		<a class="btn btn-link profile-link-btn fa fa-file text-underline-none" href="javascript:void(0);" {!! tooltip('Add File', 'bottom') !!}></a>
 
+		<!-- Profile User ID -->
+		<input type="hidden" name="profile_user_id" value="{{ isset($user) ? $user->id : Auth::user()->id }}">
 		<!-- CSRF -->
 		{!! Form::token() !!}
 		<button class="btn btn-sm btn-primary pull-right" type="submit">Post</button>

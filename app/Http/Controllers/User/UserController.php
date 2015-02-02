@@ -17,7 +17,10 @@ class UserController extends Controller {
 	 */
 	public function getViewUser($userId)
 	{
-		if(! $user = User::with('statuses')->find($userId))
+		$user = User::viewProfile()
+			->find($userId);
+
+		if(! $user)
 		{
 			return redirect()->route('home')->withErrors(['Jesus', 'You retard']);
 		}
@@ -32,11 +35,15 @@ class UserController extends Controller {
 	 */
 	public function postNewStatus(\App\Http\Requests\Status\StatusRequest $request)
 	{
-		$userId = Auth::user()->id;
+		$authorId = Auth::user()->id;
 
-		$this->dispatch(new NewStatusCommand($userId, $request->input('status')));
+		$this->dispatch(new NewStatusCommand(
+			$request->input('profile_user_id'), // profileUserId
+			$authorId, 							// authorId
+			$request->input('status')			// status
+			));
 
-		return redirect()->route('user/view', $userId);
+		return redirect()->route('user/view', $authorId);
 	}
 
 }
