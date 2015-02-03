@@ -9,27 +9,23 @@ abstract class Controller extends BaseController {
 	use DispatchesCommands, ValidatesRequests;
 
 	/**
-	 * The currently authenticated user
-	 *
-	 * @var User|null
+	 * Instantiate the Object
 	 */
-	protected $currentUser = false;
-
 	public function __construct()
 	{
 		// Clockwork //
-		// if (App::environment('local'))
-		// {
-		// 	$this->beforeFilter(function()
-		// 	{
-		// 		Event::fire('clockwork.controller.start');
-		// 	});
+		if (\App::environment('local'))
+		{
+			$this->beforeFilter(function()
+			{
+				\Event::fire('clockwork.controller.start');
+			});
 
-		// 	$this->afterFilter(function()
-		// 	{
-		// 		Event::fire('clockwork.controller.end');
-		// 	});
-		// }
+			$this->afterFilter(function()
+			{
+				\Event::fire('clockwork.controller.end');
+			});
+		}
 	}
 
 }

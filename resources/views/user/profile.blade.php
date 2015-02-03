@@ -4,18 +4,19 @@
 	{!! $user->present()->name !!}
 @endsection
 
-@section('content')
+@section('content-top')
 	<!-- cover photo & profile picture -->
 	@include('user.partials.cover')
+@endsection
 
+@section('content')
 	<div class="row">
 		<!-- sidebar -->
-		<div class="col-lg-3">
-			<!-- friends list -->
-			@include('user.partials.friends')
+		<div class="col-md-4 hidden-xs hidden-sm m-t">
+			@include('user.sidebar')
 		</div>
 		<!-- statuses -->
-		<div class="col-lg-9">
+		<div class="col-md-8">
 			<!-- timeline -->
 			@include('statuses.view-timeline', ['statuses' => $user->statuses])
 		</div>

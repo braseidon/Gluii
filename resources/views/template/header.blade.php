@@ -10,9 +10,9 @@
 		</button>
 
 		<!-- brand -->
-		<a href="#" class="navbar-brand text-lt m-r">
+		<a href="{{ route('home') }}" class="navbar-brand text-lt m-r" title="{{ Config::get('gluii.appname') }}">
 			<i class="icon icon-music-tone"></i>
-			<img src="/assets/img/logo.png" alt="." class="hide">
+			<img src="/assets/img/logo.png" alt="{{ Config::get('gluii.appname') }}" class="hide">
 			<span class="hidden-folded m-l-xs">{{ Config::get('gluii.appname') }}</span>
 		</a>
 	</div>

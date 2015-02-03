@@ -4,7 +4,7 @@
 		<a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
 			<span class="caret single"></span>
 		</a>
-		<ul class="dropdown-menu text-left animated flipInX">
+		<ul class="dropdown-menu text-left"> <!-- animated flipInX -->
 			@if($status->profileuser->id == Auth::user()->id)
 				<li><a href="javascript:void(0);">Delete post</a></li>
 			@else

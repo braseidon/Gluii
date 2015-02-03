@@ -27,6 +27,12 @@
 			@include('template.header')
 		</header>
 
+		<!-- aside - left -->
+		{{--@include('template.aside-left')--}}
+
+		<!-- aside - right -->
+		{{--@include('template.aside-right')--}}
+
 		<!-- content -->
 		<div class="app-content">
 			<div id="content" class="app-content-body fade-in-up" role="main">
@@ -42,6 +48,11 @@
 						</div>
 					@endif--}}
 
+					<!-- top content -->
+					<div class="container">
+						@yield('content-top')
+					</div>
+
 					<!-- main content -->
 					<div class="container padder-v">
 						@include('template.partials.flash-messages')
@@ -51,9 +62,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- aside - right -->
-		@include('template.aside-right')
 
 		<!-- footer -->
 		@include('template.footer')

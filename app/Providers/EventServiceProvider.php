@@ -1,7 +1,5 @@
 <?php namespace App\Providers;
 
-use App\Events\Users\UserRegistered;
-use App\Handlers\Events\SendWelcomeEmail;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -17,8 +15,18 @@ class EventServiceProvider extends ServiceProvider {
 			'EventListener',
 		],
 
-		UserRegistered::class => [
-			SendWelcomeEmail::class,
+		// Users
+		\App\Events\Users\UserRegistered::class => [
+			\App\Handlers\Events\SendWelcomeEmail::class,
+		],
+		\App\Events\Users\FriendRequestReceived::class => [
+			\App\Handlers\Events\Users\FriendRequestWasReceived::class,
+		],
+		\App\Events\Users\FriendRequestAccepted::class => [
+			\App\Handlers\Events\Users\FriendRequestWasAccepted::class,
+		],
+		\App\Events\Users\FriendRequestCanceled::class => [
+			\App\Handlers\Events\Users\FriendRequestWasCanceled::class,
 		],
 	];
 

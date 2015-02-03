@@ -5,11 +5,18 @@ body.app-header-fixed {padding-top: 0;}
 .app-header-fixed {padding-top: 50px;}
 .app:before {background-color: #fff;}
 
+@media (min-width: 768px) {
+	.app-aside-fixed .app-aside-right .aside-wrap {
+		right: 0;
+		left: auto;
+	}
+}
+
 /* -----------------------------------
 | Navigation
 ----------------------------------- */
-.navbar-collapse {
-
+.container>.navbar-header {
+	z-index: 2;
 }
 
 /* -----------------------------------
@@ -24,6 +31,14 @@ a {
 }
 .text-underline-none:hover {
 	text-decoration: none;
+}
+
+/* -----------------------------------
+| Icons
+----------------------------------- */
+/* i.icon in lists */
+ul > li i.icon {
+  vertical-align: -1px;
 }
 
 /* -----------------------------------
@@ -173,16 +188,32 @@ a.profile-pic > img {
 /* -----------------------------------
 | User Profile - Friends Lists
 ----------------------------------- */
-.friends-list li {
-	margin-bottom:10px;
-	margin-right:3px;
-	padding:0
+.userprofile-sidebar-list > div {}
+.userprofile-sidebar-list a {
+	display: block;
+	position: relative;
 }
-.friends-list img {
+.userprofile-sidebar-list img {
 	max-width: 100%;
 	height: auto;
 	border:1px solid #fff;
-	outline:1px solid #bfbfbf
+}
+.userprofile-sidebar-list a > div {
+	display: block;
+	position: absolute;
+	background: #000;
+	background: -webkit-gradient(linear, center top, center bottom, from(transparent), to(rgba(0, 0, 0, .6)));
+	background: -webkit-linear-gradient(transparent, rgba(0, 0, 0, .6));
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	word-wrap: break-word;
+	color: #fff;
+}
+.userprofile-sidebar-list a > div > span {
+	margin: 5px;
+	display: block;
+	text-shadow: 1px 1px rgba(0, 0, 0, .7);
 }
 .profile-link-btn {
 	color:#999;

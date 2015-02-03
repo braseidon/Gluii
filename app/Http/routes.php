@@ -46,13 +46,30 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
 Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
 {
 	# View Profile
-	Route::get('{id}/view', ['as' => 'user/view', 'uses' => 'UserController@getViewUser']);
+	Route::get('{id}/view', ['as' => 'user/view', 'uses' => 'UserController@getViewUserProfile']);
 
 	# Statuses
 	Route::group(['prefix' => 'status'], function()
 	{
 		# New Status
 		Route::post('new', ['as' => 'user/status/new', 'uses' => 'UserController@postNewStatus']);
+	});
+
+	# Friends
+	Route::group(['prefix' => 'friends'], function()
+	{
+		# Friend Requests
+		Route::group(['prefix' => 'requests'], function()
+		{
+			# Send Request
+			Route::post('addnew', ['as' => 'user/request/add', 'uses' => 'FriendRequestController@postSendFriendRequest']);
+			# Accept Request
+			Route::get('accept', ['as' => 'user/request/accept', 'uses' => 'FriendRequestController@getAcceptFriendRequest']);
+			# Deny Request
+			Route::get('deny', ['as' => 'user/request/deny', 'uses' => 'FriendRequestController@getDenyFriendRequest']);
+			# Cancel/Delete Request
+			Route::get('cancel', ['as' => 'user/request/cancel', 'uses' => 'FriendRequestController@getRemoveFriend']);
+		});
 	});
 });
 

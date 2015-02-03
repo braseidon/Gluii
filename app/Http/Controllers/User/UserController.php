@@ -15,9 +15,10 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function getViewUser($userId)
+	public function getViewUserProfile($userId)
 	{
 		$user = User::viewProfile()
+			->loadFriendsByStatus(true)
 			->find($userId);
 
 		if(! $user)
@@ -35,12 +36,10 @@ class UserController extends Controller {
 	 */
 	public function postNewStatus(\App\Http\Requests\Status\StatusRequest $request)
 	{
-		$authorId = Auth::user()->id;
-
 		$this->dispatch(new NewStatusCommand(
 			$request->input('profile_user_id'), // profileUserId
-			$authorId, 							// authorId
-			$request->input('status')			// status
+				Auth::user()->id, 					// authorId
+				$request->input('status')			// status
 			));
 
 		return redirect()->route('user/view', $authorId);

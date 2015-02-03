@@ -6,13 +6,17 @@
 		</a>
 		<!-- profile pic -->
 		<a href="#" class="profile-pic">
-			<img src="{!! $user->present()->gravatar(160) !!}" alt="{!! $user->present()->name !!}">
+			{!! $user->present()->photoThumb(160) !!}
 		</a>
 	</div>
 </div>
 <div class="row">
 	<div class="col-lg-12">
 		<!-- name -->
-		<h3 class="profile-name">Brandon <span class="font-bold">Johnson</span></h3>
+		<h3 class="profile-name pull-left">{!! $user->first_name !!} <span class="font-bold">{!! $user->last_name !!}</span></h3>
+		<!-- friend request -->
+		<div class="pull-right m-t-xs">
+			@include('user.partials.actions-friend')
+		</div>
 	</div>
 </div>

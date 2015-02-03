@@ -74,13 +74,16 @@ class AuthController extends Controller {
 	public function postRegister(Request $request)
 	{
 		$validator = $this->registrar->validator($request->all());
+
 		if ($validator->fails())
 		{
 			$this->throwValidationException(
 				$request, $validator
 			);
 		}
+
 		$this->auth->login($this->registrar->create($request->all()));
+
 		return redirect($this->redirectPath());
 	}
 
@@ -103,7 +106,8 @@ class AuthController extends Controller {
 	public function postLogin(Request $request)
 	{
 		$this->validate($request, [
-			'email' => 'required', 'password' => 'required',
+			'email' => 'required',
+			'password' => 'required',
 		]);
 
 		$credentials = $request->only('email', 'password');

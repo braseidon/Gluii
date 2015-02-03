@@ -1,13 +1,13 @@
 @if(Auth::check())
 	<ul class="nav navbar-nav navbar-right">
 		<!-- friend requets -->
-		@include('template.header.friendrequests')
+		@include('template.header.dropdowns.friendrequests')
 		<!-- messages -->
-		@include('template.header.messages')
+		@include('template.header.dropdowns.messages')
 		<!-- notifications -->
-		@include('template.header.notifications')
+		@include('template.header.dropdowns.notifications')
 		<!-- user dropdown -->
-		@include('template.header.user-menu')
+		@include('template.header.dropdowns.user-menu')
 	</ul>
 @else
 	<!-- login form -->

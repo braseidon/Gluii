@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 
 use App\Gluii\Presenters\Setup\PresentableTrait;
+use App\Gluii\User\Traits\FriendableTrait;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -11,7 +12,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword, PresentableTrait;
+	use Authenticatable, CanResetPassword, FriendableTrait, PresentableTrait;
 
 	/**
 	 * The database table used by the model.
@@ -43,18 +44,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	*/
 
 	/**
-	 * Relationship with Friends
-	 *
-	 * @return Collection
-	 */
-	public function friends()
-	{
-		return $this->belongsToMany('App\User', 'users_friends', 'user_id', 'friend_id')
-			->withPivot('accepted')
-			->withTimestamps();
-	}
-
-	/**
 	 * Relationship with Status
 	 *
 	 * @return Collection
@@ -72,46 +61,60 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	|
 	*/
 
+	/**
+	 * Load relationships when viewing a User's profile
+	 *
+	 * @param  Builder $query
+	 * @return Builder
+	 */
 	public function scopeViewProfile($query)
 	{
 		return $query->with([
-			'statuses' => function($q)
-			{
-				$q->orderBy('id', 'DESC');
-			},
-			'statuses.profileuser',
-			'statuses.author',
+				'statuses' => function($q)
+				{
+					$q->orderBy('id', 'DESC');
+				},
+				'statuses.profileuser',
+				'statuses.author',
+				'statuses.comments',
+				'statuses.comments.author',
 			]);
 	}
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
-	| Data
+	| Repository
 	|--------------------------------------------------------------------------
 	|
 	|
 	*/
 
 	/**
-	 * Send a Friend Request
+	 * Get a User's pending received friend requets
 	 *
-	 * @param User $user
+	 * @return Collection
 	 */
-	public function addFriend(User $user)
+	public function requestsPending()
 	{
-		$this->friends()->attach($user->id);
+		return static::friendsfrom()
+			->where('users_friends.accepted', '=', 0)
+			// ->select('users.id', 'users_friends.id', 'users_friends.user_id', 'users_friends.friend_id', 'users_friends.accepted')
+			->get();
 	}
 
 	/**
-	 * Remove a Friend Request
+	 * Get a User's pending sent friend requets
 	 *
-	 * @param  User   $user
-	 * @return void
+	 * @return Collection
 	 */
-	public function removeFriend(User $user)
+	public function requestsSent()
 	{
-		$this->friends()->detach($user->id);
+		return static::friends()
+			->where('users_friends.accepted', '=', 0)
+			->get();
 	}
+
+
 
 	/*
 	|--------------------------------------------------------------------------
@@ -127,14 +130,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @param  \Illuminate\Contracts\Events\Dispatcher  $events
 	 * @return void
 	 */
-	// public static function boot(\Illuminate\Contracts\Events\Dispatcher $event)
-	// {
-	// 	parent::boot();
+	public static function boot()
+	{
+		parent::boot();
 
-	// 	parent::created(function($user)
-	// 	{
-	// 		$event->fire('UserRegistered');
-	// 	});
-	// }
+		// parent::created(function($user)
+		// {
+		// 	//
+		// });
+	}
 
 }

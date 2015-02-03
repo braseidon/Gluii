@@ -24,7 +24,7 @@ class Comment extends Model {
 	/**
 	 * @return mixed
 	 */
-	public function owner()
+	public function author()
 	{
 		return $this->belongsTo('App\User', 'user_id');
 	}
