@@ -41,7 +41,7 @@ class RemoveFriendRequestCommandHandler {
 
 		$user->removeFriend($command->toId);
 
-		Event::fire(new \App\Events\Users\FriendRequestCanceled(
+		Event::fire(new \App\Events\Users\FriendRequestRemoved(
 			$user->id,			// fromId
 			$command->toId		// toId
 		));
