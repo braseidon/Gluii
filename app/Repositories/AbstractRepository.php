@@ -1,30 +1,8 @@
 <?php namespace App\Repositories;
 
+use App\User;
+
 class AbstractRepository {
-
-	/**
-	 * The Model being wrapped
-	 *
-	 * @var Model
-	 */
-	protected $model;
-
-	/**
-	 * Repository cache
-	 *
-	 * @var array $cache
-	 */
-	protected $cache = [];
-
-	/**
-	 * Instantiate the Object
-	 *
-	 * @param Model $model
-	 */
-	public function __construct($model)
-	{
-		$this->model = $model;
-	}
 
 	/*
 	|--------------------------------------------------------------------------
@@ -34,18 +12,45 @@ class AbstractRepository {
 	|
 	*/
 
-    /**
-     * Persist a Model
-     *
-     * @param Model $user
-     * @return mixed
-     */
-    public function save($model)
-    {
-        $model->save();
-    }
+	/**
+	 * Persist a Model
+	 *
+	 * @param Model $user
+	 * @return mixed
+	 */
+	public function save($model)
+	{
+		$model->save();
+	}
 
-    /*
+	public function getUserById($id)
+	{
+		return User::find($id);
+	}
+
+	/**
+	 * Get User's profile for viewing
+	 *
+	 * @param  integer $userId
+	 * @return User
+	 */
+	public function loadUserProfile(User $user)
+	{
+		return $user->with([
+				'friends',
+				'statuses' => function($q)
+				{
+					$q->orderBy('id', 'DESC')
+						->addSelect('profile_user_id', 'author_id', 'body', 'created_at');
+				},
+				'statuses.profileuser',
+				'statuses.author',
+				'statuses.comments',
+			])
+			->first();
+	}
+
+	/*
 	|--------------------------------------------------------------------------
 	| Caching
 	|--------------------------------------------------------------------------
@@ -89,4 +94,5 @@ class AbstractRepository {
 	{
 		return $this->cache[$section][$key] = $value;
 	}
+
 }

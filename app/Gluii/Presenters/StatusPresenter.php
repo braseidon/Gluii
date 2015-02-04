@@ -24,9 +24,17 @@ class StatusPresenter extends Presenter {
 		return $this->entity->created_at->format('g:ia F jS, Y');
 	}
 
+	/**
+	 * Count the replies to a Status
+	 *
+	 * @return int
+	 */
 	public function replyCount()
 	{
-		return number_format($this->entity->comments->count());
+		if(! $this->entity->comments->isEmpty())
+			return number_format($this->entity->comments->count());
+
+		return 0;
 	}
 
 }

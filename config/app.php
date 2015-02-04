@@ -157,6 +157,7 @@ return [
 		 */
 		'App\Providers\GliderServiceProvider',
 		'App\Providers\MacroServiceProvider',
+		'App\Providers\RepositoryServiceProvider',
 		'Clockwork\Support\Laravel\ClockworkServiceProvider',
 
 	],
@@ -207,11 +208,11 @@ return [
 		/**
 		 * Facades not Originally Included
 		 */
-		'Form'      => 'Illuminate\Html\FormFacade',
-		'HTML'      => 'Illuminate\Html\HtmlFacade',
-		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
-		// 'Clockwork' => 'Clockwork\Support\Laravel\Facade',
+		'Form'				=> 'Illuminate\Html\FormFacade',
+		'HTML'				=> 'Illuminate\Html\HtmlFacade',
+		'Socialize'			=> 'Laravel\Socialite\Facades\Socialite',
 		// 'UserRepository'	=> 'App\Repositories\Facades\UserRepository',
+		// 'Clockwork' => 'Clockwork\Support\Laravel\Facade',
 
 	],
 

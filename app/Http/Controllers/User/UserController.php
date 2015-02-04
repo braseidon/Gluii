@@ -1,10 +1,11 @@
 <?php namespace App\Http\Controllers\User;
 
-use Auth;
 use App\Commands\Status\NewStatusCommand;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
-// use App\User;
+use App\Repositories\UserRepositoryInterface;
+use App\User;
+use Auth;
 
 use Illuminate\Http\Request;
 
@@ -13,18 +14,20 @@ class UserController extends Controller {
 	/**
 	 * User Repository
 	 *
-	 * @var UserRepository $userRepository
+	 * @var UserRepository $repository
 	 */
-	protected $userRepository;
+	protected $repository;
 
 	/**
 	 * Instantiate the Object
 	 *
-	 * @param UserRepository $userRepository
+	 * @param UserRepository $repository
 	 */
-	public function __construct(UserRepository $userRepository)
+	public function __construct(UserRepository $repository)
 	{
-		$this->userRepository = $userRepository;
+		// parent::__construct();
+
+		$this->repository = $repository;
 	}
 
 	/**
@@ -35,7 +38,8 @@ class UserController extends Controller {
 	 */
 	public function getViewUserProfile($userId)
 	{
-		$user = $this->userRepository->getProfile($userId);
+		$user			= $this->repository->getUserById($userId);
+		$userProfile	= $this->repository->loadUserProfile($user);
 
 		if(! $user)
 			return redirect()->route('home')->withErrors(['User Error' => 'User not found!']);
@@ -56,7 +60,7 @@ class UserController extends Controller {
 				$request->input('status')			// status
 			));
 
-		return redirect()->route('user/view', $authorId);
+		return redirect()->route('user/view', Auth::user()->id);
 	}
 
 }

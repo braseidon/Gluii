@@ -5,9 +5,11 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.0.*@dev",
-		"illuminate/html": "5.0.*@dev",
+		"laravel/framework": "5.0.*",
+		"illuminate/html": "5.0.*",
+		"illuminate/filesystem": "5.0.*",
 		"laravel/socialite": "~2.0",
+		"illuminate/support": "5.0.*",
 		"predis/predis": "~1.0",
 		"league/glide": "~0.3.0",
 		"intervention/imagecache": "~2.1.1",

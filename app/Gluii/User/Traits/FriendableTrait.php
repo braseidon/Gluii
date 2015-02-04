@@ -1,5 +1,7 @@
 <?php namespace App\Gluii\User\Traits;
 
+use App\User;
+
 trait FriendableTrait {
 
 	/**

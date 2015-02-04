@@ -22,7 +22,19 @@ class Comment extends Model {
 	*/
 
 	/**
-	 * @return mixed
+	 * Relationship to Status
+	 *
+	 * @return Status
+	 */
+	public function status()
+	{
+		return $this->belongsTo('App\Status', 'status_id');
+	}
+
+	/**
+	 * Relationship to User
+	 *
+	 * @return User
 	 */
 	public function author()
 	{

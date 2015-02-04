@@ -24,7 +24,7 @@
 </li>
 
 <!-- Status Replies -->
-@if($status->has('comments'))
+@if(! $status->comments->isEmpty())
 	@foreach($status->comments as $comment)
 		@include('statuses.partials.reply')
 	@endforeach

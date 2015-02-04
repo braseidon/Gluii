@@ -1,18 +1,10 @@
 <?php namespace App\Repositories;
 
 use App\User;
+use AbstractRepository;
+// use Illuminate\Contacts\Cache\Repository as Cache;
 
-class UserRepository extends AbstractRepository {
-
-	/**
-	 * Instantiate the Object
-	 *
-	 * @param User $model
-	 */
-	public function __construct(User $model)
-	{
-		parent::__construct($model);
-	}
+class UserRepository {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -23,18 +15,46 @@ class UserRepository extends AbstractRepository {
 	*/
 
 	/**
+	 * Retrieve all users from the database
+	 *
+	 * @return Collection
+	 */
+	public function getAllUsers()
+	{
+		//
+	}
+
+	/**
+	 * Retrieve a user by their unique identifier.
+	 *
+	 * @param  integer  $identifier
+	 * @return Model|null
+	 */
+	public function getUserById($id)
+	{
+		return User::find($id);
+	}
+
+	/**
+	 * Create or update a user based on its unique identifier
+	 *
+	 * @param  integer|null $id
+	 * @return Model
+	 */
+	public function createOrUpdate($id = null)
+	{
+		//
+	}
+
+	/**
 	 * Get User's profile for viewing
 	 *
 	 * @param  integer $userId
 	 * @return User
 	 */
-	public function getProfile($userId)
+	public function loadUserProfile(User $user)
 	{
-		// if(! $user = User::find($userId)->getStatuses())
-		// 	return false;
-
-		return $user = User::whereId($userId)
-			->with([
+		return $user->with([
 				'friends',
 				'statuses' => function($q)
 				{
@@ -137,5 +157,6 @@ class UserRepository extends AbstractRepository {
 		$friend = User::find($userId);
 		$friend->friendsto()->detach($user->id);
 	}
+
 
 }
