@@ -53,6 +53,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->hasMany('App\Status', 'profile_user_id', 'id');
 	}
 
+	public function comments()
+	{
+		return $this->hasMany('App\Comment', 'user_id', 'id');
+	}
+
 	/**
 	 * Relationship with Photo
 	 *

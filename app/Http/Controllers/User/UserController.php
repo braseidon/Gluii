@@ -2,7 +2,6 @@
 
 use App\Commands\Status\NewStatusCommand;
 use App\Http\Controllers\Controller;
-use App\Repositories\UserRepository;
 use App\Repositories\UserRepositoryInterface;
 use App\User;
 use Auth;
@@ -23,7 +22,7 @@ class UserController extends Controller {
 	 *
 	 * @param UserRepository $repository
 	 */
-	public function __construct(UserRepository $repository)
+	public function __construct(UserRepositoryInterface $repository)
 	{
 		// parent::__construct();
 
@@ -38,8 +37,8 @@ class UserController extends Controller {
 	 */
 	public function getViewUserProfile($userId)
 	{
-		$user			= $this->repository->getUserById($userId);
-		$userProfile	= $this->repository->loadUserProfile($user);
+		// dd($userId);
+		$user = $this->repository->loadUserProfile($userId);
 
 		if(! $user)
 			return redirect()->route('home')->withErrors(['User Error' => 'User not found!']);

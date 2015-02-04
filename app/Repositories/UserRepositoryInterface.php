@@ -24,4 +24,5 @@ interface UserRepositoryInterface {
 	 * @return Model
 	 */
 	public function createOrUpdate($id = null);
+
 }

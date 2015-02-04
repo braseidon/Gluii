@@ -1,10 +1,8 @@
 <?php namespace App\Repositories;
 
 use App\User;
-use AbstractRepository;
-// use Illuminate\Contacts\Cache\Repository as Cache;
 
-class UserRepository {
+class UserRepository extends AbstractRepository implements UserRepositoryInterface {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -21,7 +19,7 @@ class UserRepository {
 	 */
 	public function getAllUsers()
 	{
-		//
+		return User::all();
 	}
 
 	/**
@@ -43,7 +41,14 @@ class UserRepository {
 	 */
 	public function createOrUpdate($id = null)
 	{
-		//
+		return User::updateOrCreate(
+			[
+				'id' => $id
+			],
+			[
+				'id' => $id
+			]
+		);
 	}
 
 	/**
@@ -52,18 +57,21 @@ class UserRepository {
 	 * @param  integer $userId
 	 * @return User
 	 */
-	public function loadUserProfile(User $user)
+	public function loadUserProfile($userId)
 	{
-		return $user->with([
+		return User::whereId($userId)
+			->with([
 				'friends',
 				'statuses' => function($q)
 				{
-					$q->orderBy('id', 'DESC')
-						->addSelect('profile_user_id', 'author_id', 'body', 'created_at');
+					$q->orderBy('created_at', 'DESC')
+						->addSelect('profile_user_id', 'author_id', 'body', 'created_at')
+						->limit(10);
 				},
 				'statuses.profileuser',
 				'statuses.author',
 				'statuses.comments',
+				'statuses.comments.author',
 			])
 			->first();
 	}

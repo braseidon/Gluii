@@ -2,7 +2,7 @@
 
 use App\Status;
 
-class UserRepository extends AbstractRepository {
+class StatusRepository extends AbstractRepository {
 
 	/*
 	|--------------------------------------------------------------------------
