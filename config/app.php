@@ -211,6 +211,7 @@ return [
 		'HTML'      => 'Illuminate\Html\HtmlFacade',
 		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
 		// 'Clockwork' => 'Clockwork\Support\Laravel\Facade',
+		// 'UserRepository'	=> 'App\Repositories\Facades\UserRepository',
 
 	],
 

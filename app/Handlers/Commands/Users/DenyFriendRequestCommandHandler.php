@@ -3,6 +3,7 @@
 use App\Commands\Users\DenyFriendRequestCommand;
 
 use App\User;
+use App\Repositories\UserRepository;
 use Auth;
 use Event;
 use Illuminate\Queue\InteractsWithQueue;
@@ -10,13 +11,20 @@ use Illuminate\Queue\InteractsWithQueue;
 class DenyFriendRequestCommandHandler {
 
 	/**
+	 * User Repository
+	 *
+	 * @var UserRepository $userRepository
+	 */
+	protected $userRepository;
+
+	/**
 	 * Create the command handler.
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(UserRepository $userRepository)
 	{
-		//
+		$this->userRepository = $userRepository;
 	}
 
 	/**
@@ -39,12 +47,15 @@ class DenyFriendRequestCommandHandler {
 		if(! $friendship)
 			return false;
 
-		$user->removeFriend($command->toId);
+		// Perform the action
+		$this->userRepository->removeFriend($command->toId, $user);
 
 		// Event::fire(new \App\Events\Users\FriendRequestDenied(
 		// 	$user->id,	// fromId
 		// 	$command->toId		// toId
 		// ));
+
+		return true;
 	}
 
 }

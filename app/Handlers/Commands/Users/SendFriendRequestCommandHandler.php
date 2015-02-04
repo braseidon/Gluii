@@ -3,6 +3,7 @@
 use App\Commands\Users\SendFriendRequestCommand;
 
 use App\User;
+use App\Repositories\UserRepository;
 use Auth;
 use Event;
 use Illuminate\Queue\InteractsWithQueue;
@@ -10,13 +11,20 @@ use Illuminate\Queue\InteractsWithQueue;
 class SendFriendRequestCommandHandler {
 
 	/**
+	 * User Repository
+	 *
+	 * @var UserRepository $userRepository
+	 */
+	protected $userRepository;
+
+	/**
 	 * Create the command handler.
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(UserRepository $userRepository)
 	{
-		//
+		$this->userRepository = $userRepository;
 	}
 
 	/**
@@ -34,17 +42,21 @@ class SendFriendRequestCommandHandler {
 		if(! $user = User::find($command->fromId))
 			return false;
 
-		$friendship = $user->isFriendsWith($command->toId);
+		// Make sure there is no friendship already
+		$friendship = $user->getFriendship($command->toId, $user);
 
-		if($friendship)
+		if($friendship !== false)
 			return false;
 
-		$user->addFriend($command->toId);
+		// Perform the action
+		$this->userRepository->addFriend($command->toId, $user);
 
 		Event::fire(new \App\Events\Users\FriendRequestReceived(
 			$user->id,	// fromId
-			$command->toId		// toId
+			$command->toId	// toId
 		));
+
+		return true;
 	}
 
 }

@@ -50,7 +50,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function statuses()
 	{
-		return $this->hasMany('App\Status', 'profile_user_id');
+		return $this->hasMany('App\Status', 'profile_user_id', 'id');
+	}
+
+	/**
+	 * Relationship with Photo
+	 *
+	 * @return Collection
+	 */
+	public function photos()
+	{
+		return $this->hasMany('App\Photo', 'user_id', 'id');
+	}
+
+	/**
+	 * Relationship with Notification
+	 *
+	 * @return Collection
+	 */
+	public function notifications()
+	{
+		return $this->hasMany('App\Notification', 'user_id', 'id');
 	}
 
 	/*
@@ -62,59 +82,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	*/
 
 	/**
-	 * Load relationships when viewing a User's profile
+	 * Load a User's Profile
 	 *
 	 * @param  Builder $query
 	 * @return Builder
 	 */
-	public function scopeViewProfile($query)
+	public function scopeLoadProfile($query)
 	{
-		return $query->with([
-				'statuses' => function($q)
-				{
-					$q->orderBy('id', 'DESC');
-				},
-				'statuses.profileuser',
-				'statuses.author',
-				'statuses.comments',
-				'statuses.comments.author',
-			]);
+		// return $query->with([
+		// 		'statuses' => function($q)
+		// 		{
+		// 			$q->orderBy('id', 'DESC');
+		// 		},
+		// 		'statuses.profileuser',
+		// 		'statuses.author',
+		// 		'friends',
+		// 	]);
 	}
-
-	/*
-	|--------------------------------------------------------------------------
-	| Repository
-	|--------------------------------------------------------------------------
-	|
-	|
-	*/
-
-	/**
-	 * Get a User's pending received friend requets
-	 *
-	 * @return Collection
-	 */
-	public function requestsPending()
-	{
-		return static::friendsfrom()
-			->where('users_friends.accepted', '=', 0)
-			// ->select('users.id', 'users_friends.id', 'users_friends.user_id', 'users_friends.friend_id', 'users_friends.accepted')
-			->get();
-	}
-
-	/**
-	 * Get a User's pending sent friend requets
-	 *
-	 * @return Collection
-	 */
-	public function requestsSent()
-	{
-		return static::friends()
-			->where('users_friends.accepted', '=', 0)
-			->get();
-	}
-
-
 
 	/*
 	|--------------------------------------------------------------------------

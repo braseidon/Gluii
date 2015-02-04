@@ -1,7 +1,7 @@
 <section class="panel panel-default m-b">
 	<header class="panel-heading">
 		<a href="#" class="font-bold text-black">Friends</a>
-		({{ number_format($user->loadFriendsByStatus(true)->count()) }})
+		({{ number_format($user->friends->count()) }})
 	</header>
 	<div class="panel-body no-padder">
 		<div class="row userprofile-sidebar-list no-gutter">

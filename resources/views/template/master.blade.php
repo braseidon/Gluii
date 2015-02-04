@@ -48,17 +48,18 @@
 						</div>
 					@endif--}}
 
-					<!-- top content -->
 					<div class="container">
+						<!-- top content -->
 						@yield('content-top')
-					</div>
-
-					<!-- main content -->
-					<div class="container padder-v">
+						<!-- flash messages -->
 						@include('template.partials.flash-messages')
-
-						@yield('content')
+						<!-- main content -->
+						<div class="m-t">
+							@include('template.partials.content')
+						</div>
 					</div>
+
+
 				</div>
 			</div>
 		</div>

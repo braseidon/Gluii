@@ -22,72 +22,46 @@ trait FriendableTrait {
 	 *
 	 * @return Collection
 	 */
-	public function allfriends()
+	public function friends()
 	{
+		// Original
+		// return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
+		// 	->withPivot('accepted')//, 'user_id', 'friend_id'
+		// 	->withTimestamps();
+
+		// Hack-ish
 		return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
-			->withPivot('accepted')
+			->join('users as users2', 'users2.id', '=', 'users_friends.friend_id')  // join users table to..
+			->wherePivot('accepted', '=', 1) // to filter only accepted
+			->withPivot('accepted', 'user_id', 'friend_id')
+			->orWherePivot('friend_id', '=', $this->id)
 			->withTimestamps();
 	}
 
 	/**
-	 * Relationship with Friends (one way)
+	 * Pending Friend Requests (sent)
 	 *
 	 * @return Collection
 	 */
 	public function friendsto()
 	{
 		return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
-			// ->wherePivot('accepted', '=', 1) // to filter only accepted
-			->withPivot('accepted')
+			->wherePivot('accepted', '=', 0) // to filter only accepted
+			->withPivot('accepted', 'user_id', 'friend_id')
 			->withTimestamps();
 	}
 
 	/**
-	 * Relationship with Friends (one way) reversed
+	 * Pending Friend Requests (received)
 	 *
 	 * @return Collection
 	 */
 	public function friendsfrom()
 	{
 		return $this->belongsToMany(static::class, 'users_friends', 'friend_id', 'user_id')
-			// ->wherePivot('accepted', '=', 1) // to filter only accepted
-			->withPivot('accepted')
+			->wherePivot('accepted', '=', 0) // to filter only pending
+			->withPivot('accepted', 'user_id', 'friend_id')
 			->withTimestamps();
-	}
-
-	// **
-
-	// accessor allowing you call $user->friends
-	public function getFriendsAttribute()
-	{
-		if (! array_key_exists('friends', $this->relations)) $this->loadFriends();
-
-		return $this->getRelation('friends');
-	}
-
-	/**
-	 * Set & load a custom 'friends' relationship
-	 *
-	 * @return void
-	 */
-	protected function loadFriends()
-	{
-		if (! array_key_exists('friends', $this->relations))
-		{
-			$friends = $this->mergeFriends();
-
-			$this->setRelation('friends', $friends);
-		}
-	}
-
-	/**
-	 * Merge the two belongsToMany queries
-	 *
-	 * @return Builder
-	 */
-	protected function mergeFriends()
-	{
-		return $this->friendsto->merge($this->friendsfrom);
 	}
 
 	/*
@@ -97,58 +71,6 @@ trait FriendableTrait {
 	|
 	|
 	*/
-
-	/**
-	 * Send a friend request
-	 *
-	 * @param integer $userId
-	 * @return void
-	 */
-	public function addFriend($userId)
-	{
-		$this->friendsto()->attach($userId);
-
-		// return static::find($userId)->friends()->attach($this->id);
-	}
-
-	/**
-	 * Cancel a friend request
-	 *
-	 * @param  integer $userId
-	 * @return void
-	 */
-	public function removeFriend($userId)
-	{
-		$this->friendsto()
-			->detach($userId);
-
-		$this->friendsfrom()
-			->detach($userId);
-	}
-
-	/**
-	 * Accepts a friend request
-	 *
-	 * @param  integer $userId
-	 * @return Builder
-	 */
-	public function acceptRequest($userId)
-	{
-		return $this->friendsfrom()->updateExistingPivot($userId, ['accepted' => true]);
-
-		// static::find($userId)->friends()->updateExistingPivot($this->id, ['accepted' => true]);
-	}
-
-	/**
-	 * Deny a friend request
-	 *
-	 * @param  integer $userId
-	 * @return void
-	 */
-	public function denyRequest($userId)
-	{
-		return static::find($userId)->friendsto()->detach($this->id);
-	}
 
 	/*
 	|--------------------------------------------------------------------------
@@ -162,66 +84,75 @@ trait FriendableTrait {
 	 * Determines if the current User is friends with the specified User ID
 	 *
 	 * @param  integer  $friendId
+	 * @param  User     $user
 	 * @return boolean
 	 */
-	public function isFriendsWith($friendId)
+	public function friendshipWith($friendId, User $user)
 	{
-		// Check cache
-		if(isset($this->cacheFriendships[$friendId]))
-			return $this->cacheFriendships[$friendId];
-
-		// Query the DB for the relationship
-		$friendship = static::with([
-				'friendsto' => function($q) use ($friendId)
-				{
-					$q->where('friend_id', '=', $friendId);
-						// ->where('user_id', '=', $this->id);
-				},
-				'friendsfrom' => function($q) use ($friendId)
-				{
-					$q->where('user_id', '=', $friendId);
-						// ->where('friend_id', '=', $this->id);
-				}
-			])
-			->first();
-
-		$merged = $friendship->friends->first();
-
-		if(! $merged)
+		if(! $friendship = $this->getFriendship($friendId, $user))
 			return false;
 
-		// Accepted friend request
-		if($merged->pivot->accepted == true)
-		{
-			$this->cacheFriendships[$friendId] = 'accepted';
 
-			return 'accepted';
-		}
+		// dd($friendship);
+		$friendship = $friendship->first()->toArray();
 
-		// Sent friend request
-		if($merged->pivot->user_id == $this->id)
-		{
-			$this->cacheFriendships[$friendId] = 'sent';
+		if(! is_array($friendship))
+			return false;
 
+		if($user->id == $friendship['user_id'] && $friendship['accepted'] == false)
 			return 'sent';
-		}
 
-		// Pending received friend request
-		$this->cacheFriendships[$friendId] = 'pending';
-
-		return 'pending';
+		if($user->id == $friendship['friend_id'] && $friendship['accepted'] == false)
+			return 'pending';
 	}
 
 	/**
-	 * Eager load friends with friend_count and such
+	 * Returns the two Users' friendship
 	 *
-	 * @param  Builder $query
-	 * @return Builder
+	 * @param  integer $friendId
+	 * @param  User   $user
+	 * @return mixed
 	 */
-	public function scopeGetAllFriends($query)
+	public function getFriendship($friendId, User $user)
 	{
-		return $query->with(['friendsto', 'friendsfrom']);
+		// Check cache
+		// if(UserRepository::cacheHas('friendships', $user->id))
+		// 	return UserRepository::cacheGet('friendships', $user->id);
+
+		$friendship = $user->friends()
+			// ->wherePivot('user_id', '=', $user->id)
+			->orWherePivot('friend_id', '=', $friendId)
+			->select('users.id', 'users_friends.user_id', 'users_friends.friend_id', 'users_friends.accepted')
+			->get();
+
+		$friendship = $friendship->filter(function($collection) use ($friendId, $user)
+		{
+			// dd($collection->pivot->user_id);
+			if(! isset($collection->pivot))
+				return false;
+
+			if(($collection->pivot->user_id == $friendId && $collection->pivot->friend_id == $user->id) or ($collection->pivot->user_id == $user->id && $collection->pivot->friend_id == $friendId))
+				return true;
+
+			return false;
+		});
+
+		if(! $friendship or $friendship->isEmpty())
+			return false;
+
+		// Set the cache
+		// UserRepository::cacheSet('friendships', $user->id, $friendship);
+
+		return $friendship;
 	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Repository Shit
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
 
 	/**
 	 * Eager load friends with friend_count and such
@@ -231,15 +162,18 @@ trait FriendableTrait {
 	 */
 	public function scopeLoadFriendsByStatus($query, $accepted = true)
 	{
-		return $query->with([
-				'friendsto' => function($q) use ($accepted)
-				{
-					$q->where('accepted', $accepted);
-				},
-				'friendsfrom' => function($q) use ($accepted)
-				{
-					$q->where('accepted', $accepted);
-				}
-			]);
+		// return $query->??
+	}
+
+	/**
+	 * Eager load friends with friend_count and such
+	 *
+	 * @param  Builder $query
+	 * @return Builder
+	 */
+	public function getAllFriends($accepted = true)
+	{
+		return static::with('friends')
+			->wherePivot('accepted', $accepted);
 	}
 }

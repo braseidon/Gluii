@@ -24,6 +24,8 @@
 </li>
 
 <!-- Status Replies -->
-@foreach($status->comments as $comment)
-	@include('statuses.partials.reply')
-@endforeach
+@if($status->has('comments'))
+	@foreach($status->comments as $comment)
+		@include('statuses.partials.reply')
+	@endforeach
+@endif

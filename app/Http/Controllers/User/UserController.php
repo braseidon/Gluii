@@ -3,11 +3,29 @@
 use Auth;
 use App\Commands\Status\NewStatusCommand;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Repositories\UserRepository;
+// use App\User;
 
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
+
+	/**
+	 * User Repository
+	 *
+	 * @var UserRepository $userRepository
+	 */
+	protected $userRepository;
+
+	/**
+	 * Instantiate the Object
+	 *
+	 * @param UserRepository $userRepository
+	 */
+	public function __construct(UserRepository $userRepository)
+	{
+		$this->userRepository = $userRepository;
+	}
 
 	/**
 	 * Display the specified resource.
@@ -17,14 +35,10 @@ class UserController extends Controller {
 	 */
 	public function getViewUserProfile($userId)
 	{
-		$user = User::viewProfile()
-			->loadFriendsByStatus(true)
-			->find($userId);
+		$user = $this->userRepository->getProfile($userId);
 
 		if(! $user)
-		{
-			return redirect()->route('home')->withErrors(['Jesus', 'You retard']);
-		}
+			return redirect()->route('home')->withErrors(['User Error' => 'User not found!']);
 
 		return view()->make('user.profile', ['user' => $user]);
 	}
