@@ -59,8 +59,9 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 	 */
 	public function loadUserProfile($userId)
 	{
-		return User::whereId($userId)
-			->with([
+		$user = User::whereId($userId);
+
+		return $user->with([
 				'friends',
 				'statuses' => function($q)
 				{

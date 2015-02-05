@@ -26,18 +26,28 @@ trait FriendableTrait {
 	 */
 	public function friends()
 	{
+		// Fresh
+		return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
+			->withPivot('accepted', 'user_id', 'friend_id')
+			->wherePivot('accepted', '=', 1)
+			->withTimestamps();
+
 		// Original
 		// return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
 		// 	->withPivot('accepted')//, 'user_id', 'friend_id'
 		// 	->withTimestamps();
 
 		// Hack-ish
-		return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
-			->join('users as users2', 'users2.id', '=', 'users_friends.friend_id')  // join users table to..
-			->wherePivot('accepted', '=', 1) // to filter only accepted
-			->withPivot('accepted', 'user_id', 'friend_id')
-			->orWherePivot('friend_id', '=', $this->id)
-			->withTimestamps();
+		// return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
+		// 	->withPivot('accepted', 'user_id', 'friend_id')
+		// 	->wherePivot('accepted', '=', 1)
+		// 	->where(function($q)
+		// 	{
+		// 		$q->where('friend_id', '=', $this->id)
+		// 			->orWhere('user_id', '=', $this->id)
+		// 	})
+		// 	->join('users as users2', 'users2.id', '=', 'users_friends.friend_id')  // join users table to..
+		// 	->withTimestamps();
 	}
 
 	/**
@@ -48,8 +58,8 @@ trait FriendableTrait {
 	public function friendsto()
 	{
 		return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
-			->wherePivot('accepted', '=', 0) // to filter only accepted
 			->withPivot('accepted', 'user_id', 'friend_id')
+			// ->wherePivot('accepted', '=', 0) // to filter only accepted
 			->withTimestamps();
 	}
 
@@ -61,8 +71,8 @@ trait FriendableTrait {
 	public function friendsfrom()
 	{
 		return $this->belongsToMany(static::class, 'users_friends', 'friend_id', 'user_id')
-			->wherePivot('accepted', '=', 0) // to filter only pending
 			->withPivot('accepted', 'user_id', 'friend_id')
+			// ->wherePivot('accepted', '=', 0) // to filter only pending
 			->withTimestamps();
 	}
 
@@ -86,25 +96,22 @@ trait FriendableTrait {
 	 * Determines if the current User is friends with the specified User ID
 	 *
 	 * @param  integer  $friendId
-	 * @param  User     $user
 	 * @return boolean
 	 */
-	public function friendshipWith($friendId, User $user)
+	public function friendshipWith($friendId)
 	{
-		if(! $friendship = $this->getFriendship($friendId, $user))
+		if(! $friendship = $this->getFriendship($friendId))
 			return false;
 
+		$friendship = $friendship->first()->pivot->toArray();
 
-		// dd($friendship);
-		$friendship = $friendship->first()->toArray();
+		if($friendship['accepted'])
+			return true;
 
-		if(! is_array($friendship))
-			return false;
-
-		if($user->id == $friendship['user_id'] && $friendship['accepted'] == false)
+		if($this->id == $friendship['user_id'] && $friendship['accepted'] == false)
 			return 'sent';
 
-		if($user->id == $friendship['friend_id'] && $friendship['accepted'] == false)
+		if($this->id == $friendship['friend_id'] && $friendship['accepted'] == false)
 			return 'pending';
 	}
 
@@ -112,28 +119,22 @@ trait FriendableTrait {
 	 * Returns the two Users' friendship
 	 *
 	 * @param  integer $friendId
-	 * @param  User   $user
 	 * @return mixed
 	 */
-	public function getFriendship($friendId, User $user)
+	public function getFriendship($friendId)
 	{
-		// Check cache
-		// if(UserRepository::cacheHas('friendships', $user->id))
-		// 	return UserRepository::cacheGet('friendships', $user->id);
+		$userOtherFriends = $this->friendsfrom()->get();
+		$userFriends = $this->friends->merge($userOtherFriends);
 
-		$friendship = $user->friends()
-			// ->wherePivot('user_id', '=', $user->id)
-			->orWherePivot('friend_id', '=', $friendId)
-			->select('users.id', 'users_friends.user_id', 'users_friends.friend_id', 'users_friends.accepted')
-			->get();
-
-		$friendship = $friendship->filter(function($collection) use ($friendId, $user)
+		$friendship = $userFriends->filter(function($collection) use ($friendId)
 		{
-			// dd($collection->pivot->user_id);
 			if(! isset($collection->pivot))
 				return false;
 
-			if(($collection->pivot->user_id == $friendId && $collection->pivot->friend_id == $user->id) or ($collection->pivot->user_id == $user->id && $collection->pivot->friend_id == $friendId))
+			if($collection->pivot->user_id == $friendId && $collection->pivot->friend_id == $this->id)
+				return true;
+
+			if($collection->pivot->user_id == $this->id && $collection->pivot->friend_id == $friendId)
 				return true;
 
 			return false;
@@ -141,9 +142,6 @@ trait FriendableTrait {
 
 		if(! $friendship or $friendship->isEmpty())
 			return false;
-
-		// Set the cache
-		// UserRepository::cacheSet('friendships', $user->id, $friendship);
 
 		return $friendship;
 	}

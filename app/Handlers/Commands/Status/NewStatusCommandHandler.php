@@ -30,6 +30,12 @@ class NewStatusCommandHandler {
 			'author_id'			=> $command->authorId,
 			'body'				=> $command->status,
 		]);
+
+		// If the status was posted on someone's wall...
+		if($command->profileUserId !== $command->authorId)
+		{
+			//
+		}
 	}
 
 }

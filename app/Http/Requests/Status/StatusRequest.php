@@ -23,7 +23,7 @@ class StatusRequest extends Request {
 	public function rules()
 	{
 		return [
-			'profile_user_id'	=> 'required|integer',
+			'profile_user_id'	=> 'required|integer|exists:users,id',
 			'status'			=> 'required|min:3'
 		];
 	}

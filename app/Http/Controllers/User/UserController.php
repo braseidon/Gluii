@@ -37,7 +37,6 @@ class UserController extends Controller {
 	 */
 	public function getViewUserProfile($userId)
 	{
-		// dd($userId);
 		$user = $this->repository->loadUserProfile($userId);
 
 		if(! $user)
@@ -54,7 +53,7 @@ class UserController extends Controller {
 	public function postNewStatus(\App\Http\Requests\Status\StatusRequest $request)
 	{
 		$this->dispatch(new NewStatusCommand(
-			$request->input('profile_user_id'), // profileUserId
+				$request->input('profile_user_id'), // profileUserId
 				Auth::user()->id, 					// authorId
 				$request->input('status')			// status
 			));
