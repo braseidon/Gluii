@@ -149,7 +149,6 @@ return [
 		 * Package Service Providers
 		 */
 		'Illuminate\Html\HtmlServiceProvider',
-		'Laravel\Socialite\SocialiteServiceProvider',
 		// 'Way\Generators\GeneratorsServiceProvider',
 
 		/*
@@ -159,6 +158,11 @@ return [
 		'App\Providers\GliderServiceProvider',
 		'App\Providers\MacroServiceProvider',
 		'App\Providers\RepositoryServiceProvider',
+
+		/*
+		 * Cartalyst Packages
+		 */
+		'Cartalyst\Sentinel\Laravel\SentinelServiceProvider',
 
 	],
 
@@ -210,9 +214,14 @@ return [
 		 */
 		'Form'				=> 'Illuminate\Html\FormFacade',
 		'HTML'				=> 'Illuminate\Html\HtmlFacade',
-		'Socialize'			=> 'Laravel\Socialite\Facades\Socialite',
-		// 'UserRepository'	=> 'App\Repositories\Facades\UserRepository',
-		// 'Clockwork' => 'Clockwork\Support\Laravel\Facade',
+		// 'Clockwork' => 'Clockwork\Support\Laravel\Facade',\
+
+		/*
+		 * Cartalyst Packages
+		 */
+		'Activation' => 'Cartalyst\Sentinel\Laravel\Facades\Activation',
+		'Reminder'   => 'Cartalyst\Sentinel\Laravel\Facades\Reminder',
+		'Sentinel'   => 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
 
 	],
 

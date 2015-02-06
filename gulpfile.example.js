@@ -6,21 +6,21 @@ var less_output = combine_dir + '/css';
 
 // set scripts to combine
 var scripts = [
-    'vendor/jquery/jquery.js',
-    'js/main.js'
+	'vendor/jquery/jquery.js',
+	'js/main.js'
 ];
 
 // set styles to combine
 // compiled less file should be last
 var styles = [
-    'vendor/normalize/normalize.css',
-    'css/'+less_file+'.css'
+	'vendor/normalize/normalize.css',
+	'css/'+less_file+'.css'
 ];
 
 // files to version (cache bust)
 var version = [
-    'css/all.css',
-    'js/all.js'
+	'css/all.css',
+	'js/all.js'
 ];
 
 // require elixir
