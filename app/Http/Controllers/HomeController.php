@@ -20,12 +20,15 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getIndex()
+	public function getIndex(\App\Repositories\StatusRepository $repository)
 	{
-		if(Auth::check())
-			return view('home');
+		if(! Auth::check())
+			return view('auth.register');
 
-		return view('auth.register');
+		$statuses = $repository->allStatuses()->get();
+
+		return view('home', compact('statuses'));
+
 	}
 
 	/**

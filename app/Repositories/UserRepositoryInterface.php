@@ -15,7 +15,23 @@ interface UserRepositoryInterface {
 	 * @param  integer  $identifier
 	 * @return Model|null
 	 */
-	public function getUserById($id);
+	public function findById($id);
+
+	/**
+     * Fetch a user by their username.
+     *
+     * @param $username
+     * @return mixed
+     */
+    public function findByUsername($username);
+
+	/**
+     * Fetch a user by their email.
+     *
+     * @param $email
+     * @return mixed
+     */
+    public function findByEmail($email);
 
 	/**
 	 * Create or update a user based on its unique identifier

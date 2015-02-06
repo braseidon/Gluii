@@ -48,13 +48,6 @@ Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
 	# View Profile
 	Route::get('{id}/view', ['as' => 'user/view', 'uses' => 'UserController@getViewUserProfile']);
 
-	# Statuses
-	Route::group(['prefix' => 'status'], function()
-	{
-		# New Status
-		Route::post('new', ['as' => 'user/status/new', 'uses' => 'UserController@postNewStatus']);
-	});
-
 	# Friends
 	Route::group(['prefix' => 'friends'], function()
 	{
@@ -70,6 +63,40 @@ Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
 			# Cancel/Delete Request
 			Route::get('cancel', ['as' => 'user/request/cancel', 'uses' => 'FriendRequestController@getRemoveFriend']);
 		});
+	});
+});
+
+/*
+|--------------------------------------------------------------------------
+| Statuses
+|--------------------------------------------------------------------------
+|
+|
+*/
+Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function()
+{
+	# View Single
+	Route::post('{id}/view', ['as' => 'status/view', 'uses' => 'StatusController@getViewStatus']);
+	# Post Status
+	Route::post('post-new', ['as' => 'status/new', 'uses' => 'StatusController@postNewStatus']);
+	# Like Status
+	Route::post('like', ['as' => 'status/like', 'uses' => 'StatusController@postLikeStatus']);
+	# Unlike Status
+	Route::post('unlike', ['as' => 'status/unlike', 'uses' => 'StatusController@postUnlikeStatus']);
+	# Delete Status
+	Route::post('delete', ['as' => 'status/delete', 'uses' => 'StatusController@postDeleteStatus']);
+
+	# Comments
+	Route::group(['prefix' => 'comments'], function()
+	{
+		# Post Comment
+		Route::post('post-new', ['as' => 'status/comment/new', 'uses' => 'StatusController@postNewComment']);
+		# Like Comment
+		Route::post('like', ['as' => 'status/comment/like', 'uses' => 'StatusController@postLikeComment']);
+		# Unlike Comment
+		Route::post('unlike', ['as' => 'status/comment/unlike', 'uses' => 'StatusController@postUnlikeComment']);
+		# Delete Comment
+		Route::post('delete', ['as' => 'status/comment/delete', 'uses' => 'StatusController@postDeleteComment']);
 	});
 });
 

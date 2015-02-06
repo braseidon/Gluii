@@ -59,7 +59,7 @@ trait FriendableTrait {
 	{
 		return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
 			->withPivot('accepted', 'user_id', 'friend_id')
-			// ->wherePivot('accepted', '=', 0) // to filter only accepted
+			// ->wherePivot('accepted', 0) // to filter only accepted
 			->withTimestamps();
 	}
 
@@ -72,10 +72,34 @@ trait FriendableTrait {
 	{
 		return $this->belongsToMany(static::class, 'users_friends', 'friend_id', 'user_id')
 			->withPivot('accepted', 'user_id', 'friend_id')
-			// ->wherePivot('accepted', '=', 0) // to filter only pending
+			// ->wherePivot('accepted', 0) // to filter only pending
 			->withTimestamps();
 	}
 
+	/**
+	 * Set & load a custom 'friends' relationship
+	 *
+	 * @return void
+	 */
+	public function loadFriends()
+	{
+		if (! array_key_exists('friends', $this->relations))
+		{
+			$friends = $this->mergeFriends();
+
+			$this->setRelation('friends', $friends);
+		}
+	}
+
+	/**
+	 * Merge the two belongsToMany queries
+	 *
+	 * @return Builder
+	 */
+	protected function mergeFriends()
+	{
+		return $this->friendsto->merge($this->friendsfrom);
+	}
 	/*
 	|--------------------------------------------------------------------------
 	| Friend Requests
@@ -123,11 +147,11 @@ trait FriendableTrait {
 	 */
 	public function getFriendship($friendId)
 	{
-		$userOtherFriends = $this->friendsfrom()->get();
-		$userFriends = $this->friends->merge($userOtherFriends);
+		$this->loadFriends();
 
-		$friendship = $userFriends->filter(function($collection) use ($friendId)
+		$friendship = $this->friends->filter(function($collection) use ($friendId)
 		{
+
 			if(! isset($collection->pivot))
 				return false;
 
@@ -153,17 +177,6 @@ trait FriendableTrait {
 	|
 	|
 	*/
-
-	/**
-	 * Eager load friends with friend_count and such
-	 *
-	 * @param  Builder $query
-	 * @return Builder
-	 */
-	public function scopeLoadFriendsByStatus($query, $accepted = true)
-	{
-		// return $query->??
-	}
 
 	/**
 	 * Eager load friends with friend_count and such

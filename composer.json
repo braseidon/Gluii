@@ -8,6 +8,7 @@
 		"laravel/framework": "5.0.*",
 		"illuminate/html": "5.0.*",
 		"illuminate/filesystem": "5.0.*",
+		"graham-campbell/credentials": "0.4.*",
 		"laravel/socialite": "~2.0",
 		"illuminate/support": "5.0.*",
 		"predis/predis": "~1.0",
@@ -19,7 +20,8 @@
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
 		"way/generators": "~3.0",
-		"itsgoingd/clockwork": "dev-master"
+		"itsgoingd/clockwork": "dev-master",
+		"fzaninotto/faker": "~1.5.0"
 	},
 	"autoload": {
 		"classmap": [
@@ -54,5 +56,6 @@
 	"config": {
 		"preferred-install": "dist"
 	},
-	"minimum-stability": "dev"
+	"minimum-stability": "dev",
+	"prefer-stable": true
 }

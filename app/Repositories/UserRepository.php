@@ -28,9 +28,31 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 	 * @param  integer  $identifier
 	 * @return Model|null
 	 */
-	public function getUserById($id)
+	public function findById($id)
 	{
-		return User::find($id);
+		return User::findOrFail($id);
+	}
+
+	/**
+     * Fetch a user by their username.
+     *
+     * @param $username
+     * @return mixed
+     */
+    public function findByUsername($username)
+    {
+    	return User::with('statuses')->where('username', $username)->first();
+    }
+
+    /**
+     * Fetch a user by their email.
+     *
+     * @param $email
+     * @return mixed
+     */
+	public function findByEmail($email)
+	{
+		return User::with('statuses')->where('email', $email)->first();
 	}
 
 	/**
@@ -62,17 +84,31 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 		$user = User::whereId($userId);
 
 		return $user->with([
-				'friends',
+				'friendsto',
+				'friendsfrom',
 				'statuses' => function($q)
 				{
 					$q->orderBy('created_at', 'DESC')
-						->addSelect('profile_user_id', 'author_id', 'body', 'created_at')
-						->limit(10);
+						->addSelect('id', 'profile_user_id', 'author_id', 'body', 'created_at')
+						->limit(30);
 				},
-				'statuses.profileuser',
-				'statuses.author',
-				'statuses.comments',
-				'statuses.comments.author',
+				'statuses.profileuser' => function($q)
+				{
+					$q->addSelect('id', 'first_name', 'last_name', 'email');
+				},
+				'statuses.author' => function($q)
+				{
+					$q->addSelect('id', 'first_name', 'last_name', 'email');
+				},
+				'statuses.comments' => function($q)
+				{
+					$q->orderBy('id', 'DESC')
+						->limit(20);
+				},
+				'statuses.comments.author' => function($q)
+				{
+					$q->addSelect('id', 'first_name', 'last_name', 'email');
+				},
 			])
 			->first();
 	}

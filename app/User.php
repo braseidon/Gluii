@@ -1,9 +1,10 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\User\Traits\FriendableTrait;
+use App\Gluii\User\Traits\LikeableTrait;
+
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -12,7 +13,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword, FriendableTrait, PresentableTrait;
+	use Authenticatable, CanResetPassword, FriendableTrait, LikeableTrait, PresentableTrait;
 
 	/**
 	 * The database table used by the model.

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Repositories\StatusRepository;
+
 class RepositoryServiceProvider extends ServiceProvider {
 
 	/**
@@ -28,10 +30,12 @@ class RepositoryServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->bind(
-			'App\Repositories\UserRepositoryInterface',
-			'App\Repositories\UserRepository'
-		);
+		// UserRepository
+		$this->app->bind('App\Repositories\UserRepositoryInterface',
+			'App\Repositories\UserRepository');
+
+		// StatusRepository
+		$this->app->bind('App\Repositories\StatusRepository');
 	}
 
 	/**
@@ -41,7 +45,10 @@ class RepositoryServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return ['App\Repositories\UserRepositoryInterface'];
+		return [
+			'App\Repositories\UserRepositoryInterface',
+			'App\Repositories\StatusRepository',
+		];
 	}
 
 }

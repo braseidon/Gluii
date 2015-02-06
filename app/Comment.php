@@ -3,10 +3,11 @@
 use Illuminate\Database\Eloquent\Model;
 
 use App\Gluii\Presenters\Setup\PresentableTrait;
+use App\Gluii\Comment\Traits\CommentLikeableTrait;
 
 class Comment extends Model {
 
-	use PresentableTrait;
+	use CommentLikeableTrait, PresentableTrait;
 
 	/**
 	 * @var array
@@ -41,6 +42,16 @@ class Comment extends Model {
 		return $this->belongsTo('App\User', 'user_id');
 	}
 
+	/**
+	 * Relationship to User by Likes
+	 *
+	 * @return Collection
+	 */
+	public function likes()
+	{
+		return $this->belongsToMany('App\User', 'comment_likes', 'comment_id', 'user_id');
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Random Shit
@@ -48,18 +59,5 @@ class Comment extends Model {
 	|
 	|
 	*/
-
-	/**
-	 * @param $body
-	 * @param $statusId
-	 * @return static
-	 */
-	public static function leave($body, $statusId)
-	{
-		return new static([
-			'body' => $body,
-			'status_id' => $statusId
-		]);
-	}
 
 }

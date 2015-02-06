@@ -1,31 +1,34 @@
 <?php
 
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+
+use Faker\Factory as Faker;
+use App\User;
+use App\Status;
+
 class UsersTableSeeder extends Seeder {
 
 	/**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        Eloquent::unguard();
- 		$amount = 50;
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		Model::unguard();
 
- 		$first = Storage::get('first_name.txt');
- 		dd($first);
- 		$last = Storage::get('last_name.txt');
+		$faker = Faker::create();
 
- 		for($x = 0;$x < $amount;$x++)
- 		{
- 			$email = str_random(10);
+		foreach(range(1, 50) as $index)
+		{
 			User::create([
-				'email' => $email . '@gmail.com',
-				'first_name' => 'Alex',
-				'last_name' => 'Sears',
-				'password' => Hash::make('alexsears')
+				'first_name'	=> $faker->firstName,
+				'last_name'		=> $faker->lastName,
+				'email'			=> $faker->email,
+				'password'		=> 'secret'
 			]);
- 		}
-    }
+		}
+	}
 
 }

@@ -1,13 +1,14 @@
 <?php namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 use App\Gluii\Presenters\Setup\PresentableTrait;
+use App\Gluii\Status\Traits\StatusLikeableTrait;
 use Gluii\Presenters\StatusPresenter;
+
+use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model {
 
-	use PresentableTrait;
+	use PresentableTrait, StatusLikeableTrait;
 
 	/**
 	 * The database table used by the model.
@@ -32,7 +33,9 @@ class Status extends Model {
 	*/
 
 	/**
-	 * A status belongs to a User
+	 * A status belongs to a User's profile
+	 *
+	 * @return User
 	 */
 	public function profileuser()
 	{
@@ -40,7 +43,9 @@ class Status extends Model {
 	}
 
 	/**
-	 * A status writer belongs to a User
+	 * A status belongs to the User author
+	 *
+	 * @return User
 	 */
 	public function author()
 	{
@@ -48,11 +53,44 @@ class Status extends Model {
 	}
 
 	/**
-	 * @return mixed
+	 * Statuses have many Comments
+	 *
+	 * @return Collection
 	 */
 	public function comments()
 	{
 		return $this->hasMany('App\Comment', 'status_id');
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Query Scopes
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+
+	public function scopeAllFriendUpdates($query, $limit = 20)
+	{
+		return $query->with([
+			'profileuser',
+			'author',
+			'likes' => function($q)
+			{
+				$q->select('users.id', 'first_name', 'last_name')
+					->withPivot('user_id');
+			},
+			'comments' => function($q)
+			{
+				$q->orderBy('id', 'ASC');
+			},
+			'comments.author',
+			'comments.likes' => function($q)
+			{
+				$q->select('users.id', 'first_name', 'last_name')
+					->withPivot('user_id');
+			},
+		]);
 	}
 
 }

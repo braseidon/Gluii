@@ -1,26 +1,23 @@
-<span class="timeline-seperator text-center">
-	<span>{{ $status->present()->timeFormatted }}</span>
-	<div class="btn-group pull-right">
-		<a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
-			<span class="caret single"></span>
-		</a>
-		<ul class="dropdown-menu text-left"> <!-- animated flipInX -->
-			@if($status->profileuser->id == Auth::user()->id)
-				<li><a href="javascript:void(0);">Delete post</a></li>
-			@else
-				<li><a href="javascript:void(0);">Hide this post</a></li>
-				<li><a href="javascript:void(0);">Hide future posts from this user</a></li>
-				<li><a href="javascript:void(0);">Mark as spam</a></li>
-			@endif
-		</ul>
+<section class="panel panel-default panel-status">
+	<div class="panel-body">
+		<!-- status actions dropdown -->
+		@include('statuses.partials.status-dropdown')
+		<!-- status body -->
+		@include('statuses.partials.status-content')
+		<!-- interactions -->
+		@include('statuses.partials.status-interactions')
 	</div>
-</span>
+	<footer class="panel-footer">
+		<ul class="list-group no-borders no-radius no-bg m-b-none auto">
+			<!-- Status Comments -->
+			@if(! $status->comments->isEmpty())
+				@foreach($status->comments as $comment)
+					@include('statuses.partials.comment')
+				@endforeach
+			@endif
 
-<div class="chat-body no-padding profile-message">
-	<ul>
-		@include('statuses.partials.status')
-
-		<!-- Reply Form -->
-		@include('statuses.forms.reply')
-	</ul>
-</div>
+			<!-- Reply Form -->
+			@include('statuses.forms.reply')
+		</ul>
+	</footer>
+</section>

@@ -155,10 +155,10 @@ return [
 		/*
 		 * ShutteR Service Providers
 		 */
+		'Clockwork\Support\Laravel\ClockworkServiceProvider',
 		'App\Providers\GliderServiceProvider',
 		'App\Providers\MacroServiceProvider',
 		'App\Providers\RepositoryServiceProvider',
-		'Clockwork\Support\Laravel\ClockworkServiceProvider',
 
 	],
 

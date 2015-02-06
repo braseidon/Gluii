@@ -4,7 +4,7 @@ use App\Events\Event;
 
 use Illuminate\Queue\SerializesModels;
 
-class UserReceivedNewStatus extends Event {
+class StatusReceivedNewComment extends Event {
 
 	use SerializesModels;
 
