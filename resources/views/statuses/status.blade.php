@@ -17,7 +17,7 @@
 			@endif
 
 			<!-- Reply Form -->
-			@include('statuses.forms.reply')
+			@include('statuses.forms.new-comment')
 		</ul>
 	</footer>
 </section>

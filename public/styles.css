@@ -220,3 +220,6 @@ time.icon * {display: block;width: 100%;font-size: 10px;font-weight: 700;font-st
 .panel.panel-status .panel-footer {background-color: #f8f8f8;}
 .status-reply {overflow:hidden;word-wrap:break-word;padding-left: 8px;position:relative;}
 .status-reply > input {position:relative;}
+.panel.panel-status ul.list-group > .list-group-item:first-child {
+	border-top: 1px solid #edf1f2;
+}

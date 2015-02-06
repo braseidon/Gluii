@@ -35,32 +35,32 @@
 
 		<!-- content -->
 		<div class="app-content">
-			<div id="content" class="app-content-body fade-in-up" role="main">
+			<div id="content" class="app-content-body app-content-full" role="main">
 				<!-- hbox layout -->
-				<div class="hbox hbox-auto-xs hbox-auto-sm">
+				<div class="hbox hbox-auto-xs bg-light">
+					<div class="vbox">
+						<!-- page title -->
+						{{--@if(! empty(trim($__env->yieldContent('title'))))
+							<div class="bg-light lter b-b wrapper-md ng-scope">
+								<div class="container">
+									<h1 class="m-n font-thin h3">{{ trim($__env->yieldContent('title')) }}</h1>
+								</div>
+							</div>
+						@endif--}}
 
-					<!-- page title -->
-					{{--@if(! empty(trim($__env->yieldContent('title'))))
-						<div class="bg-light lter b-b wrapper-md ng-scope">
-							<div class="container">
-								<h1 class="m-n font-thin h3">{{ trim($__env->yieldContent('title')) }}</h1>
+						<div class="container">
+							<!-- top content -->
+							@yield('content-top')
+							<!-- flash messages -->
+							@include('template.partials.flash-messages')
+							<!-- main content -->
+							<div class="m-t">
+								@include('template.partials.content')
 							</div>
 						</div>
-					@endif--}}
 
-					<div class="container">
-						<!-- top content -->
-						@yield('content-top')
-						<!-- flash messages -->
-						@include('template.partials.flash-messages')
-						<!-- main content -->
-						<div class="m-t">
-							@include('template.partials.content')
-						</div>
-					</div>
-
-
-				</div>
+					</div><!-- /.vbox -->
+				</div><!-- /.hbox -->
 			</div>
 		</div>
 

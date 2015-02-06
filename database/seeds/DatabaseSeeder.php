@@ -17,9 +17,11 @@ class DatabaseSeeder extends Seeder {
 	 * @var array
 	 */
 	protected $seeders = [
-		'UsersTableSeeder',
-		'StatusTableSeeder',
-		'StatusCommentsTableSeeder'
+		// 'UsersTableSeeder',
+		// 'StatusTableSeeder',
+		'StatusCommentsTableSeeder',
+		// 'StatusLikesTableSeeder',
+		// 'CommentLikesTableSeeder',
 	];
 
 	/**
@@ -31,7 +33,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->cleanDatabase();
+		// $this->cleanDatabase();
 
 		foreach ($this->seeders as $seedClass)
 		{
