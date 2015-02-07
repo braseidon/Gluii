@@ -1,96 +1,69 @@
-var elixir = require('laravel-elixir');
-var gulp = require('gulp');
-var autoprefixer = require('gulp-autoprefixer');
-var minifyCSS = require('gulp-minify-css');
-var notify = require('gulp-notify');
-var rename = require('gulp-rename');
-// var publish = require('laravel-elixir/ingredients/commands/CopyFiles');
+var gulp			= require('gulp'),
+	path			= require('path'),
+	util		= require('gulp-util'),
+	rename			= require('gulp-rename');
+	// less			= require(' '),
+	// autoPrefixer	= require('gulp-autoprefixer');
+	// minifyCss		= require('gulp-minify-css'),
+	// concatJs		= require('gulp-concat'),
+	// concatCss		= require('gulp-concat-css'),
+	// uglify			= require('gulp-uglify'),
+//load in the plugins via the gulp-load-plugins plugin - the plugins are defined in the package.json file
+var plugins = require('gulp-load-plugins')();
 
-// Paths
-var asset_dir = 'resources/assets';
-var publish_dir = 'public/assets/compiled';
-
-// Options
-var optionsMinifyCSS = {
-	aggressiveMerging: true,
-	keepBreaks: true
+var config = {
+	paths: {
+		vendors: {
+			less:	[],
+			css:	['resources/assets/vendor/normalize.css', 'resources/assets/vendor/animate.css', 'resources/assets/vendor/bootstrap.css'],
+			js:		['jquery.min.js', 'bootstrap.js']
+		},
+		less: {
+			src:	['resources/assets/less/app.less']
+		},
+		javascript: {
+			src:	["resources/assets/js/ui-*.js", 'eldarion-ajax.min.js', 'jquery.ui.touch-punch.min.js']
+		},
+		css: {
+			src:	["resources/assets/css/*.css"]
+		},
+		fonts: {
+			src:	['resources/assets/fonts']
+		},
+		dist: {
+			build:	"public/assets",
+			dist:	"public/assets/dist",
+		},
+	}
 };
 
-/*
- |--------------------------------------------------------------------------
- | Custom Gulp Tasks
- |--------------------------------------------------------------------------
- |
- |
- */
-
-// Combine selectors on CSS
-elixir.extend('shutterfy', function(source, destination) {
-
-	// Styles
-	gulp.task('shutterfyCSS', function() {
-	  return gulp.src(source)
-		.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-		.pipe(gulp.dest(destination + '/dist'))
-		.pipe(rename({ suffix: '.min' }))
-		.pipe(minifyCSS())
-		.pipe(gulp.dest(destination + '/min/'))
-		.pipe(notify({ message: 'CSS minification complete' }));
-	});
-
-	return this.queueTask("shutterfyCSS");
+gulp.task("less", function(){
+	return gulp.src(config.paths.less.src)
+		.pipe(plugins.less().on('error', gutil.log(log)))
+		.pipe(plugins.autoprefixer('last 10 versions'))
+		// .pipe(gulp.dest(config.paths.dist.build))
+		.pipe(plugins.rename({ suffix: '.min' }))
+		.pipe(plugins.minifycss())
+		.pipe(gulp.dest(config.paths.dist.dist))
+		.pipe(plugins.notify({ message: 'Less compiled and minified' }));
 });
 
-
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Less
- | file for our application, as well as publishing vendor resources.
- |
- */
-
-// Stylesheets
-var styles = [
-	'angular.css',
-	'simple-line-icons.css',
-	'fontawesome.css',
-	'gluii.css',
-];
-
-
-
-// Scripts
-var scripts = [
-	'app.js',
-	'gluii.js',
-	'eldarion-ajax.min.js'
-];
-
-// -----------------------------------------------------------
-// BUILD TIME
-// -----------------------------------------------------------
-
-// Stylesheets
-elixir(function(mix) {
-	mix.less("angular.less", asset_dir + '/css/');
-
-	mix.styles(styles, publish_dir + '/css/gluii.css', asset_dir + '/css');
-
-	// mix.version(distCSS);
-
-	mix.shutterfy(publish_dir + '/css/gluii.css', publish_dir + '/css');
+gulp.task("scripts", function(){
+	return gulp.src(config.paths.javascript.src, config.paths.custom.js)
+		.pipe(plugins.concat("app.min.js"))
+		.pipe(plugins.rename({ suffix: '.min' }))
+		.pipe(plugins.uglify())
+		.pipe(gulp.dest(config.paths.dist.dist))
+		.pipe(plugins.notify({ message: 'Javascripts compiled and minified' }));
 });
 
-// Javascripts
-elixir(function(mix) {
-	mix.scripts(scripts, publish_dir + '/js/allofthem.js', 'resources/assets/js');
-
-	// mix.version(publish_dir + '/js/gluii.js');
+gulp.task("css", function(){	//	['', ' ', 'public/assets/build/css']
+	return gulp.src(config.paths.css.src, config.paths.vendors.css)
+		.pipe(plugins.autoprefixer('last 10 versions'))
+		.pipe(plugins.rename({ suffix: '.min' }))
+		.pipe(plugins.minifyCss())
+		.pipe(gulp.dest(config.paths.dist.dist))
+		.pipe(plugins.notify({ message: 'Stylesheets compiled and minified' }));
 });
 
-// Trashed methods
-// .copy(less_dir + '/angular.css', asset_dir + '/angular.css');
+gulp.task("default", ["less", "scripts", "css"]);
