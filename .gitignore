@@ -25,7 +25,7 @@ _ide_helpers.php
 rocketeer.phar
 /app/config/templates
 
-# Node.js & Grunt
+# Node.js & Gulp & Bower
 bower_components
-node_modules/
+node_modules
 npm-debug.log

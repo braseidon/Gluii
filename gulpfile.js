@@ -1,69 +1,80 @@
-var gulp			= require('gulp'),
-	path			= require('path'),
-	util		= require('gulp-util'),
-	rename			= require('gulp-rename');
-	// less			= require(' '),
-	// autoPrefixer	= require('gulp-autoprefixer');
-	// minifyCss		= require('gulp-minify-css'),
-	// concatJs		= require('gulp-concat'),
-	// concatCss		= require('gulp-concat-css'),
-	// uglify			= require('gulp-uglify'),
+var gulp			= require('gulp');
+var path			= require('path');
+var autoPrefixer	= require('gulp-autoprefixer');
+var clean			= require('gulp-rimraf');
+var concat			= require('gulp-concat');
+var concatCss		= require('gulp-concat-css');
+var del				= require('del');
+// var es				= require('event-stream');
+var gutil			= require('gulp-util');
+var less			= require('gulp-less');
+var minifyCss		= require('gulp-minify-css');
+var notify			= require('gulp-notify');
+var rename			= require('gulp-rename');
+var uglify			= require('gulp-uglify');
+
 //load in the plugins via the gulp-load-plugins plugin - the plugins are defined in the package.json file
 var plugins = require('gulp-load-plugins')();
+
+// Distribution aka the fishing line for all files
+var dir = {
+	assets:		'./resources/assets/',
+	source:		'./resources/assets/source/',
+	vendor:		'./resources/assets/vendor/',
+	dist:		'./public/assets/dist/'
+	};
 
 var config = {
 	paths: {
 		vendors: {
-			less:	[],
-			css:	['resources/assets/vendor/normalize.css', 'resources/assets/vendor/animate.css', 'resources/assets/vendor/bootstrap.css'],
-			js:		['jquery.min.js', 'bootstrap.js']
+			css:	[dir.vendor + "animate.css/animate.css"],
+			js:		[dir.vendor + "jquery/jquery.js", dir.vendor + "bootstrap/dist/js/bootstrap.js"]
 		},
 		less: {
-			src:	['resources/assets/less/app.less']
+			src:	[
+				dir.vendor + "bootstrap/less/bootstrap.less",
+				dir.source + "less/app.less",
+				dir.vendor + "simple-line-icons/less/simple-line-icons.less",
+				dir.vendor + "font-awesome/less/font-awesome.less",
+			]
 		},
-		javascript: {
-			src:	["resources/assets/js/ui-*.js", 'eldarion-ajax.min.js', 'jquery.ui.touch-punch.min.js']
-		},
-		css: {
-			src:	["resources/assets/css/*.css"]
-		},
-		fonts: {
-			src:	['resources/assets/fonts']
-		},
-		dist: {
-			build:	"public/assets",
-			dist:	"public/assets/dist",
-		},
-	}
+		js: {
+			src:	[dir.source + 'js/*.js']
+		}
+	},
+	autoPrefixBrowers: ["Android2.3","Android>=4","Chrome>=20","Firefox>=24","Explorer>=8","iOS>=6","Opera>=12","Safari>=6"]
 };
 
-gulp.task("less", function(){
-	return gulp.src(config.paths.less.src)
-		.pipe(plugins.less().on('error', gutil.log(log)))
-		.pipe(plugins.autoprefixer('last 10 versions'))
-		// .pipe(gulp.dest(config.paths.dist.build))
-		.pipe(plugins.rename({ suffix: '.min' }))
-		.pipe(plugins.minifycss())
-		.pipe(gulp.dest(config.paths.dist.dist))
-		.pipe(plugins.notify({ message: 'Less compiled and minified' }));
+// Less
+gulp.task('less', ['clean'], function(){
+	return gulp.src(config.paths.less.src, {base: dir.vendor + './css'})
+		.pipe(less().on('error', gutil.log))
+		.pipe(concatCss('app.css'))
+		.pipe(autoPrefixer(config.autoPrefixBrowers))
+		.pipe(gulp.dest(dir.dist + 'css/'))
+		.pipe(rename({ suffix: '.min' }))
+		.pipe(minifyCss())
+		.pipe(gulp.dest(dir.dist + 'css/'))
+		.pipe(notify({ message: 'CSS compiled and minified from Less' }));
 });
 
-gulp.task("scripts", function(){
-	return gulp.src(config.paths.javascript.src, config.paths.custom.js)
-		.pipe(plugins.concat("app.min.js"))
-		.pipe(plugins.rename({ suffix: '.min' }))
-		.pipe(plugins.uglify())
-		.pipe(gulp.dest(config.paths.dist.dist))
-		.pipe(plugins.notify({ message: 'Javascripts compiled and minified' }));
+// Javascript
+gulp.task('js', function(){
+	return gulp.src(config.paths.js.src)
+		.pipe(concat("app.js"))
+		.pipe(gulp.dest(dir.dist + 'js/'))
+		.pipe(rename({ suffix: '.min' }))
+		.pipe(uglify())
+		.pipe(gulp.dest(dir.dist + 'js/'))
+		.pipe(notify({ message: 'Javascripts compiled and minified' }));
 });
 
-gulp.task("css", function(){	//	['', ' ', 'public/assets/build/css']
-	return gulp.src(config.paths.css.src, config.paths.vendors.css)
-		.pipe(plugins.autoprefixer('last 10 versions'))
-		.pipe(plugins.rename({ suffix: '.min' }))
-		.pipe(plugins.minifyCss())
-		.pipe(gulp.dest(config.paths.dist.dist))
-		.pipe(plugins.notify({ message: 'Stylesheets compiled and minified' }));
+// Clean the public dist folder
+gulp.task('clean', function(cb) {
+	del([
+		'./public/assets/dist/css/**',
+		'./public/assets/dist/js/**',
+	], cb);
 });
 
-gulp.task("default", ["less", "scripts", "css"]);
+gulp.task("default", ['clean', 'less', 'js']); // 'scripts',

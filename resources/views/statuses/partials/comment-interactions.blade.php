@@ -1,5 +1,5 @@
 <!-- time posted -->
-<span class="btn btn-link btn-sm text-muted">
+<span class="">
 	{{ $comment->created_at->diffForHumans() }}
 </span>
 <!-- like -->
@@ -7,7 +7,7 @@
 	<form class="inline" action="{{ route('status/comment/unlike') }}" method="POST">
 		{!! Form::hidden('comment_id', $comment->id) !!}
 		{!! Form::token() !!}
-		<button type="submit" class="btn btn-link btn-xs text-base">
+		<button type="submit" class="btn btn-link btn-xs text-base no-padder">
 			Unlike
 		</button>
 	</form>
