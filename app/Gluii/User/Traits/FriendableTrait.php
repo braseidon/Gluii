@@ -124,19 +124,13 @@ trait FriendableTrait {
 	 */
 	public function friendshipWith($friendId)
 	{
-		if(! $friendship = $this->getFriendship($friendId))
-			return false;
+		// Check cache
+		if(isset($this->cacheFriendships[$friendId]))
+			return $this->cacheFriendships[$friendId];
 
-		$friendship = $friendship->first()->pivot->toArray();
+		$this->cacheFriendships[$friendId] = $this->getFriendship($friendId);
 
-		if($friendship['accepted'])
-			return true;
-
-		if($this->id == $friendship['user_id'] && $friendship['accepted'] == false)
-			return 'sent';
-
-		if($this->id == $friendship['friend_id'] && $friendship['accepted'] == false)
-			return 'pending';
+		return $this->cacheFriendships[$friendId];
 	}
 
 	/**
@@ -147,27 +141,47 @@ trait FriendableTrait {
 	 */
 	public function getFriendship($friendId)
 	{
-		$this->loadFriends();
-
-		$friendship = $this->friends->filter(function($collection) use ($friendId)
-		{
-
-			if(! isset($collection->pivot))
-				return false;
-
-			if($collection->pivot->user_id == $friendId && $collection->pivot->friend_id == $this->id)
-				return true;
-
-			if($collection->pivot->user_id == $this->id && $collection->pivot->friend_id == $friendId)
-				return true;
-
-			return false;
-		});
+		// Get merged friendship
+		$friendship = $this->queryFriendship($friendId);
 
 		if(! $friendship or $friendship->isEmpty())
 			return false;
 
-		return $friendship;
+		if(! $friendship = $friendship->first()->pivot)
+			return false;
+
+		// If friendship is approved
+		if($friendship->accepted !== 0)
+			return true;
+
+		// If $this sent Request
+		if($this->id == $friendship->friend_id)
+			return 'sent';
+
+		// If $this receiving Request
+		if($this->id == $friendship->user_id)
+			return 'pending';
+
+		return 'error';
+	}
+
+	/**
+	 * Query that finds the relationship between two Users
+	 *
+	 * @param  integer $friendId
+	 * @return Collection|null
+	 */
+	public function queryFriendship($friendId)
+	{
+		$friendsto = $this->friendsto()
+			->wherePivot('friend_id', '=', $friendId)
+			->get();
+
+		$friendsfrom = $this->friendsfrom()
+			->wherePivot('user_id', '=', $friendId)
+			->get();
+
+		return $friendsto->merge($friendsfrom);
 	}
 
 	/*

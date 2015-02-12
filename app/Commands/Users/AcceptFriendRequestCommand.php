@@ -49,6 +49,7 @@ class AcceptFriendRequestCommand extends Command implements SelfHandling {
 		if(! $user = User::find($this->toId))
 			return false;
 
+		// Check friendship
 		// if(! $friendship = $user->isFriendsWith($this->fromId))
 		// 	return false;
 

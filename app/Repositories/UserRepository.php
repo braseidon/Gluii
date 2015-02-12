@@ -90,7 +90,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 				{
 					$q->orderBy('updated_at', 'DESC')
 						->addSelect('id', 'profile_user_id', 'author_id', 'body', 'created_at')
-						->limit(30);
+						->limit(5);
 				},
 				'statuses.profileuser' => function($q)
 				{
@@ -100,17 +100,23 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 				{
 					$q->addSelect('id', 'first_name', 'last_name', 'email');
 				},
-				'statuses.likes',
+				'statuses.likes' => function($q)
+				{
+					$q->addSelect('users.id', 'first_name', 'last_name');
+				},
 				'statuses.comments' => function($q)
 				{
 					$q->orderBy('id', 'DESC')
-						->limit(20);
+						->limit(10);
 				},
 				'statuses.comments.author' => function($q)
 				{
 					$q->addSelect('id', 'first_name', 'last_name', 'email');
 				},
-				'statuses.comments.likes',
+				'statuses.comments.likes' => function($q)
+				{
+					$q->addSelect('users.id', 'first_name', 'last_name');
+				},
 			])
 			->first();
 	}
@@ -128,11 +134,10 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 	 *
 	 * @return Collection
 	 */
-	public function requestsPending()
+	public function requestsPending(User $user)
 	{
-		return User::friendsfrom()
-			->where('users_friends.accepted', '=', 0)
-			// ->select('users.id', 'users_friends.id', 'users_friends.user_id', 'users_friends.friend_id', 'users_friends.accepted')
+		return $user->friendsfrom()
+			->wherePivot('accepted', '=', 0)
 			->get();
 	}
 
@@ -141,10 +146,10 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 	 *
 	 * @return Collection
 	 */
-	public function requestsSent()
+	public function requestsSent(User $user)
 	{
-		return User::friends()
-			->where('users_friends.accepted', '=', 0)
+		return $user->friends()
+			->wherePivot('accepted', '=', 0)
 			->get();
 	}
 
@@ -176,8 +181,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 	public function removeFriend($userId, User $user)
 	{
 		$user->friendsto()->detach($userId);
-		$friend = User::find($userId);
-		$friend->friends()->detach($userId);
+		$user->friendsfrom()->detach($userId);
 	}
 
 	/**
@@ -189,8 +193,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 	public function acceptRequest($userId, User $user)
 	{
 		$user->friendsfrom()->updateExistingPivot($userId, ['accepted' => true]);
-		$friend = User::find($userId);
-		$friend->friends()->attach($user->id, ['accepted' => true]);
+		$user->friendsto()->attach($userId, ['accepted' => true]);
 	}
 
 	/**

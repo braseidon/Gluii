@@ -11,9 +11,36 @@ class StatusRepository extends AbstractRepository {
 	 * @param  integer $limit
 	 * @return Collection
 	 */
-	public function allStatuses($limit = 20)
+	public function allStatuses($limit = 10)
 	{
-		return Status::allFriendUpdates($limit)
+		return Status::with([
+				'profileuser' => function($q)
+				{
+					$q->addSelect('id', 'first_name', 'last_name', 'email');
+				},
+				'author' => function($q)
+				{
+					$q->addSelect('id', 'first_name', 'last_name', 'email');
+				},
+				'likes' => function($q)
+				{
+					$q->select('users.id', 'first_name', 'last_name')
+						->withPivot('user_id');
+				},
+				'comments' => function($q)
+				{
+					$q->orderBy('id', 'ASC');
+				},
+				'comments.author' => function($q)
+				{
+					$q->addSelect('id', 'first_name', 'last_name', 'email');
+				},
+				'comments.likes' => function($q)
+				{
+					$q->select('users.id', 'first_name', 'last_name')
+						->withPivot('user_id');
+				},
+			])
 			->orderBy('statuses.updated_at', 'DESC')
 			->limit($limit);
 	}
@@ -26,7 +53,10 @@ class StatusRepository extends AbstractRepository {
 	 */
 	public function getAllForUser(User $user)
 	{
-		return $user->statuses()->with('user')->latest()->get();
+		return $user->statuses()
+			->with('user')
+			->latest()
+			->get();
 	}
 
 	/**
@@ -39,7 +69,11 @@ class StatusRepository extends AbstractRepository {
 	{
 		$userIds = $user->followedUsers()->lists('followed_id');
 		$userIds[] = $user->id;
-		return Status::with('comments')->whereIn('user_id', $userIds)->latest()->get();
+
+		return Status::with('comments')
+			->whereIn('user_id', $userIds)
+			->latest()
+			->get();
 	}
 
 	/**
