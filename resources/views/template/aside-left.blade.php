@@ -5,7 +5,11 @@
 			{{--@include('template.partials.navigation-user-menu')--}}
 
 			<!-- nav -->
-			@include('template.navigation')
+			<nav ui-nav class="navi clearfix">
+				<ul class="nav">
+					@include('template.navigation')
+				</ul>
+			</nav>
 
 			<!-- aside footer -->
 			{{--@include('template.partials.navigation-footer')--}}

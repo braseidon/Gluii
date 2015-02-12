@@ -2,12 +2,12 @@
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 		<i class="icon icon-bell fa-fw"></i>
 		<span class="visible-xs-inline">Notifications</span>
-		<span class="badge badge-sm up bg-danger pull-right-xs">2</span>
+		<!-- <span class="badge badge-sm up bg-danger pull-right-xs">2</span> -->
 	</a>
 	<div class="dropdown-menu w-xl animated flipInX">
 		<div class="panel bg-white">
 			<div class="panel-heading b-light bg-light">
-				<strong>You have <span>2</span> notifications</strong>
+				<strong>You have <span>0</span> notifications</strong>
 			</div>
 			<div class="list-group">
 				<a href class="media list-group-item">

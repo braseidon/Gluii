@@ -72,7 +72,7 @@ class StatusController extends BaseController {
 				$request->input('status_id')			// statusId
 			));
 
-		if(! $request->isAjax())
+		if(! $request->ajax())
 			return redirect()->back();
 	}
 
@@ -86,7 +86,7 @@ class StatusController extends BaseController {
 	{
 		$this->repository->unlikeStatus(Auth::getUser(), $request->input('status_id'));
 
-		if(! $request->isAjax())
+		if(! $request->ajax())
 			return redirect()->back();
 	}
 
@@ -121,7 +121,7 @@ class StatusController extends BaseController {
 				$request->input('comment_id')			// commentId
 			));
 
-		if(! $request->isAjax())
+		if(! $request->ajax())
 			return redirect()->back();
 	}
 
@@ -135,7 +135,7 @@ class StatusController extends BaseController {
 	{
 		$this->repository->unlikeComment(Auth::getUser(), $request->input('comment_id'));
 
-		if(! $request->isAjax())
+		if(! $request->ajax())
 			return redirect()->back();
 	}
 }

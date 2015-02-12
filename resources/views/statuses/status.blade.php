@@ -10,17 +10,23 @@
 	<footer class="panel-footer">
 		<ul class="list-group no-borders no-radius no-bg m-b-none auto">
 			<!-- status likes display -->
-			@include('statuses.partials.status-likecount')
+			<li class="list-group-item clear">
+				@include('statuses.partials.status-likecount')
+			</li>
 
 			<!-- comments loop -->
 			@if(! $status->comments->isEmpty())
 				@foreach($status->comments as $comment)
-					@include('statuses.partials.comment')
+					<li class="list-group-item clear">
+						@include('statuses.partials.comment')
+					</li>
 				@endforeach
 			@endif
 
 			<!-- new comment form -->
-			@include('statuses.forms.new-comment')
+			<li class="list-group-item clear">
+				@include('statuses.forms.new-comment')
+			</li>
 		</ul>
 	</footer>
 </section>

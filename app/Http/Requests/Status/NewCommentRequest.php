@@ -1,6 +1,6 @@
 <?php namespace App\Http\Requests\Status;
 
-use Illuminate\Contracts\Auth\Guard;
+use Auth;
 
 use App\Http\Requests\Request;
 
@@ -11,13 +11,13 @@ class NewCommentRequest extends Request {
 	 *
 	 * @return bool
 	 */
-	public function authorize(Guard $auth)
+	public function authorize()
 	{
 		// Check permissions:
 		// - Make sure the author_id is friends with the Status's profile_user_id
 		// - OR check if the Status's profile_user_id's permissions are free
 
-		return $auth->check();
+		return Auth::check();
 	}
 
 	/**

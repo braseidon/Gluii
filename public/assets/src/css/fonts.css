@@ -8,6 +8,20 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'Simple-Line-Icons';
+	content: attr(data-icon);
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: 1;
+	speak: none;
+	text-transform: none;
+}
 @font-face {
   font-family: 'Glyphicons Halflings';
 
