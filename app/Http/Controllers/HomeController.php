@@ -2,7 +2,7 @@
 
 use Auth;
 
-class HomeController extends Controller {
+class HomeController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,6 @@ class HomeController extends Controller {
 		$statuses = $repository->allStatuses()->get();
 
 		return view('home', compact('statuses'));
-
 	}
 
 	/**

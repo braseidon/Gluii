@@ -163,6 +163,8 @@ return [
 		 * Cartalyst Packages
 		 */
 		'Cartalyst\Sentinel\Laravel\SentinelServiceProvider',
+		'Cartalyst\Sentinel\Addons\Social\Laravel\SocialServiceProvider',
+		'Cartalyst\Sentinel\Addons\UniquePasswords\Laravel\UniquePasswordsServiceProvider',
 
 	],
 
@@ -214,14 +216,16 @@ return [
 		 */
 		'Form'				=> 'Illuminate\Html\FormFacade',
 		'HTML'				=> 'Illuminate\Html\HtmlFacade',
-		// 'Clockwork' => 'Clockwork\Support\Laravel\Facade',\
+		'Clockwork'			=> 'Clockwork\Support\Laravel\Facade',
 
 		/*
 		 * Cartalyst Packages
 		 */
-		'Activation' => 'Cartalyst\Sentinel\Laravel\Facades\Activation',
-		'Reminder'   => 'Cartalyst\Sentinel\Laravel\Facades\Reminder',
-		'Sentinel'   => 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
+		'Activation'		=> 'Cartalyst\Sentinel\Laravel\Facades\Activation',
+		'Auth'				=> 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
+		'Reminder'			=> 'Cartalyst\Sentinel\Laravel\Facades\Reminder',
+		'Sentinel'			=> 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
+		'Social'			=> 'Cartalyst\Sentinel\Addons\Social\Laravel\Facades\Social',
 
 	],
 

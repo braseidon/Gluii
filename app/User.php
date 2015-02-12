@@ -1,17 +1,17 @@
 <?php namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\User\Traits\FriendableTrait;
 use App\Gluii\User\Traits\LikeableTrait;
 
+use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Events\Dispatcher;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+class User extends EloquentUser implements AuthenticatableContract, CanResetPasswordContract {
 
 	use Authenticatable, CanResetPassword, FriendableTrait, LikeableTrait, PresentableTrait;
 
@@ -27,7 +27,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['first_name','last_name', 'email', 'password'];
+	protected $fillable = ['email', 'password', 'first_name','last_name', 'birthday', 'gender'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.

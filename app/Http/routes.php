@@ -21,7 +21,7 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@getIndex']);
 |
 |
 */
-Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
+Route::group(['namespace' => 'Auth'], function()
 {
 	# Log In
 	Route::get('login', ['as' => 'auth/login', 'uses' => 'AuthController@getLogin']);
@@ -34,6 +34,8 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function()
 	# Forgot Password
 	Route::get('forgot-password', ['as' => 'auth/forgot-password', 'uses' => 'PasswordController@getEmail']);
 	Route::post('forgot-password', 'PasswordController@postEmail');
+	# Reset Password
+	Route::get('reset-password/{token}', ['as' => 'auth/reset-password', 'uses' => 'PasswordController@getResetPassword']);
 });
 
 /*

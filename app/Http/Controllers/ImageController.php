@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use League\Glide\Server;
 
-class ImageController extends Controller {
+class ImageController extends BaseController {
 
 	/**
 	 * The Glide\Server implementation

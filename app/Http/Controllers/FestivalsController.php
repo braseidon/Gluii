@@ -1,14 +1,14 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
 use Illuminate\Http\Request;
 
 use DB;
 use App\User;
 
-class FestivalsController extends Controller {
+class FestivalsController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.

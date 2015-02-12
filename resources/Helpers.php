@@ -55,3 +55,42 @@ function helpIcon($content, $position = 'top')
 {
 	return '<a href="javascript:void(0);" class="fa fa-info-circle text-muted" ' . tooltip($content, $position) . '></a>';
 }
+
+/*
+|---------------------------
+| Form Select Macros
+|---------------------------
+|
+|
+*/
+
+/**
+ * Returns an array meant for form selects
+ *
+ * @param  string $type
+ * @return array
+ */
+function formFill($type)
+{
+	if($type == 'years')
+		return array_combine(range(2015, 1905), range(2015, 1905));
+
+	if($type == 'months')
+		return [
+			'01'	=> 'January',
+			'02'	=> 'February',
+			'03'	=> 'March',
+			'04'	=> 'April',
+			'05'	=> 'May',
+			'06'	=> 'June',
+			'07'	=> 'July',
+			'08'	=> 'August',
+			'09'	=> 'September',
+			'10'	=> 'October',
+			'11'	=> 'November',
+			'12'	=> 'December',
+		];
+
+	if($type == 'days')
+		return array_combine(range(1, 31), range(1, 31));
+}

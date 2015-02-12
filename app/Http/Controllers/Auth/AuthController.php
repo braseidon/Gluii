@@ -1,91 +1,25 @@
 <?php namespace App\Http\Controllers\Auth;
 
-use App\User;
-use App\Http\Controllers\Controller;
+use App\Commands\Auth\RegisterUserCommand;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\RegisterRequest;
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\Registrar;
+use App\User;
+use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
+use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Illuminate\Http\Request;
-// use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Input;
+use Sentinel;
+use Validator;
 
-class AuthController extends Controller {
-
-	/**
-	 * The Guard implementation.
-	 *
-	 * @var Guard
-	 */
-	protected $auth;
-
-	/**
-	 * The registrar implementation.
-	 *
-	 * @var Registrar
-	 */
-	protected $registrar;
+class AuthController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Registration & Login Controller
+	| Login
 	|--------------------------------------------------------------------------
 	|
-	| This controller handles the registration of new users, as well as the
-	| authentication of existing users. By default, this controller uses
-	| a simple trait to add these behaviors. Why don't you explore it?
 	|
 	*/
-
-	// use AuthenticatesAndRegistersUsers;
-
-	/**
-	 * Create a new authentication controller instance.
-	 *
-	 * @param  \Illuminate\Contracts\Auth\Guard  $auth
-	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
-	 * @return void
-	 */
-	public function __construct(Guard $auth, Registrar $registrar)
-	{
-		$this->auth = $auth;
-		$this->registrar = $registrar;
-
-		$this->middleware('guest', ['except' => 'getLogout']);
-	}
-
-	/**
-	 * Show the application registration form.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function getRegister()
-	{
-		if($this->auth->check())
-			return redirect()->route('home');
-
-		return view('auth.register');
-	}
-
-	/**
-	 * Handle a registration request for the application.
-	 *
-	 * @param  \Illuminate\Foundation\Http\FormRequest  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function postRegister(Request $request)
-	{
-		$validator = $this->registrar->validator($request->all());
-
-		if ($validator->fails())
-		{
-			$this->throwValidationException(
-				$request, $validator
-			);
-		}
-
-		$this->auth->login($this->registrar->create($request->all()));
-
-		return redirect($this->redirectPath());
-	}
 
 	/**
 	 * Show the application login form.
@@ -105,24 +39,56 @@ class AuthController extends Controller {
 	 */
 	public function postLogin(Request $request)
 	{
-		$this->validate($request, [
-			'email' => 'required',
-			'password' => 'required',
-		]);
-
-		$credentials = $request->only('email', 'password');
-
-		if ($this->auth->attempt($credentials, $request->has('remember')))
+		try
 		{
-			return redirect()->intended($this->redirectPath());
+			$input = Input::all();
+
+			$remember = (bool) array_pull($input, 'remember', false);
+
+			$rules = [
+				'email'    => 'required|email',
+				'password' => 'required',
+			];
+
+			$validator = Validator::make($input, $rules);
+
+			if ($validator->fails())
+			{
+				return redirect()->back()->withInput()->withErrors($validator);
+			}
+
+			if ($auth = Sentinel::authenticate($input, $remember))
+			{
+				return redirect()->intended('account')->withSuccess(
+					'Successfully logged in.'
+				);
+			}
+
+			$errors = 'Invalid login or password.';
+		}
+		catch (NotActivatedException $e)
+		{
+			$errors = 'Account is not activated!';
+
+			return redirect()->to('reactivate')->with('user', $e->getUser());
+		}
+		catch (ThrottlingException $e)
+		{
+			$delay = $e->getDelay();
+
+			$errors = "Your account is blocked for {$delay} second(s).";
 		}
 
-		return redirect()->route('auth/login')
-			->withInput($request->only('email'))
-			->withErrors([
-				'email' => 'These credentials do not match our records.',
-			]);
+		return redirect()->back()->withInput()->withErrors($errors);
 	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Logout
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
 
 	/**
 	 * Log the user out of the application.
@@ -135,6 +101,59 @@ class AuthController extends Controller {
 
 		return redirect()->route('auth/login')->with('success', 'You are now logged out.');
 	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Register
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+
+	/**
+	 * Show the application registration form.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function getRegister()
+	{
+		// if($this->auth->check())
+		// 	return redirect()->route('home');
+
+		return view('auth.register');
+	}
+
+	/**
+	 * Handle a registration request for the application.
+	 *
+	 * @param  \App\Http\Requests\Auth\RegisterRequest  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function postRegister(\App\Http\Requests\Auth\RegisterRequest $request)
+	{
+		$input = $request->input();
+
+		$registerCommand = $this->dispatch(new RegisterUserCommand($input));
+
+		// Command returns false
+		if(! $registerCommand)
+			return redirect()->to('auth/register')->withInput()->withErrors(
+				'Failed to register.'
+			);
+
+		// Command returns true
+		return redirect()->route('auth/login')->withSuccess(
+			'Your accout was successfully created. Please check your email to activate your account.'
+		);
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Misc
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
 
 	/**
 	 * Get the post register / login redirect path.

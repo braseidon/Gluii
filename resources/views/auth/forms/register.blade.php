@@ -23,6 +23,22 @@
 {!! Form::group('password_confirmation', 'Confirm Password', false, function($name)
 { return Form::password($name, ['class' => 'form-control']); }) !!}
 
+<!-- Birthday -->
+{!! Form::group('birthday', 'Birthday', false, function($name)
+{
+	return '<div class="row"><div class="col-lg-12"><div class="row no-gutter"><div class="col-md-4">'.
+		Form::select('birthday_month', ['' => 'Month'] + formFill('months'), null, ['class' => 'form-control']) .
+		'</div><div class="col-md-4">'.
+		Form::select('birthday_day', ['' => 'Day'] + formFill('days'), null, ['class' => 'form-control']) .
+		'</div><div class="col-md-4">'.
+		Form::select('birthday_year', ['' => 'Year'] + formFill('years'), null, ['class' => 'form-control']) .
+		'</div></div></div></div>';
+}) !!}
+
+<!-- Gender -->
+{!! Form::group('gender', 'Gender', false, function($name)
+{ return Form::select('gender', ['' => 'Select', 'male' => 'Male', 'female' => 'Female'], null, ['class' => 'form-control']); }) !!}
+
 <hr>
 
 <!-- Password Confirmation -->

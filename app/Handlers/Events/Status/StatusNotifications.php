@@ -14,16 +14,16 @@ class StatusNotifications {
 		// dd($event);
 	}
 
-    /**
-     * Register the listeners for the subscriber.
-     *
-     * @param  Illuminate\Events\Dispatcher  $events
-     * @return array
-     */
-    public function subscribe($events)
-    {
+	/**
+	 * Register the listeners for the subscriber.
+	 *
+	 * @param  Illuminate\Events\Dispatcher  $events
+	 * @return array
+	 */
+	public function subscribe($events)
+	{
 		$events->listen(\App\Events\Status\UserReceivedNewStatus::class,
 			'App\Handlers\Events\Status\StatusNotifications@userReceivedNewStatus');
-    }
+	}
 
 }

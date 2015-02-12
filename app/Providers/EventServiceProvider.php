@@ -49,6 +49,7 @@ class EventServiceProvider extends ServiceProvider {
 	{
 		parent::boot($events);
 
+		\Event::subscribe(\App\Handlers\Events\Auth\UserJustRegistered::class);
 		\Event::subscribe(\App\Handlers\Events\Status\StatusNotifications::class);
 	}
 

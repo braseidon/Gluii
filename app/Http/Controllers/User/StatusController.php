@@ -3,14 +3,14 @@
 use App\Commands\Status\LikeStatusCommand;
 use App\Commands\Status\NewCommentCommand;
 use App\Commands\Status\NewStatusCommand;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Commands\Status\LikeCommentCommand;
 use App\Repositories\StatusRepository;
 use Auth;
 
 use Illuminate\Http\Request;
 
-class StatusController extends Controller {
+class StatusController extends BaseController {
 
 	/**
 	 * Status Repository

@@ -1,11 +1,11 @@
 <?php namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Repositories\UserRepositoryInterface;
 
 use Illuminate\Http\Request;
 
-class UserController extends Controller {
+class UserController extends BaseController {
 
 	/**
 	 * User Repository

@@ -2,7 +2,7 @@
 
 use App\Http\Requests\RegisterRequest;
 
-class WelcomeController extends Controller {
+class WelcomeController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------

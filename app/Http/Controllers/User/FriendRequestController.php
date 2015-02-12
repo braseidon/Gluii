@@ -3,13 +3,13 @@
 use App\Commands\Users\AcceptFriendRequestCommand;
 use App\Commands\Users\RemoveFriendRequestCommand;
 use App\Commands\Users\SendFriendRequestCommand;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\User;
 use Auth;
 
 use Illuminate\Http\Request;
 
-class FriendRequestController extends Controller {
+class FriendRequestController extends BaseController {
 
 	/**
 	 * Send a friend request

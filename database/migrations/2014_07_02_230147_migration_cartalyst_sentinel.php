@@ -31,6 +31,8 @@ class MigrationCartalystSentinel extends Migration {
 	{
 		Schema::create('activations', function(Blueprint $table)
 		{
+			$table->engine = 'InnoDB';
+
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
 			$table->string('code');
@@ -38,18 +40,16 @@ class MigrationCartalystSentinel extends Migration {
 			$table->timestamp('completed_at')->nullable();
 			$table->timestamps();
 
-			$table->engine = 'InnoDB';
 		});
 
 		Schema::create('persistences', function(Blueprint $table)
 		{
+			$table->engine = 'InnoDB';
+
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
-			$table->string('code');
+			$table->string('code')->unique();
 			$table->timestamps();
-
-			$table->engine = 'InnoDB';
-			$table->unique('code');
 		});
 
 		Schema::create('reminders', function(Blueprint $table)
@@ -64,51 +64,47 @@ class MigrationCartalystSentinel extends Migration {
 
 		Schema::create('roles', function(Blueprint $table)
 		{
+			$table->engine = 'InnoDB';
+
 			$table->increments('id');
-			$table->string('slug');
+			$table->string('slug')->unique();
 			$table->string('name');
 			$table->text('permissions')->nullable();
 			$table->timestamps();
-
-			$table->engine = 'InnoDB';
-			$table->unique('slug');
 		});
 
 		Schema::create('role_users', function(Blueprint $table)
 		{
-			$table->integer('user_id')->unsigned();
-			$table->integer('role_id')->unsigned();
-			$table->nullableTimestamps();
-
 			$table->engine = 'InnoDB';
-			$table->primary(['user_id', 'role_id']);
+
+			$table->integer('user_id')->unsigned()->primary();
+			$table->integer('role_id')->unsigned()->index();
+			$table->nullableTimestamps();
 		});
 
 		Schema::create('throttle', function(Blueprint $table)
 		{
+			$table->engine = 'InnoDB';
+
 			$table->increments('id');
-			$table->integer('user_id')->unsigned()->nullable();
+			$table->integer('user_id')->unsigned()->nullable()->index();
 			$table->string('type');
 			$table->string('ip')->nullable();
 			$table->timestamps();
-
-			$table->engine = 'InnoDB';
-			$table->index('user_id');
 		});
 
 		Schema::create('users', function(Blueprint $table)
 		{
+			$table->engine = 'InnoDB';
+
 			$table->increments('id');
-			$table->string('email');
+			$table->string('email')->unique();
 			$table->string('password');
 			$table->text('permissions')->nullable();
 			$table->timestamp('last_login')->nullable();
 			$table->string('first_name')->nullable();
 			$table->string('last_name')->nullable();
 			$table->timestamps();
-
-			$table->engine = 'InnoDB';
-			$table->unique('email');
 		});
 	}
 

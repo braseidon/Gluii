@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'host' => env('APP_URL', 'localhost'),
+	'host' => env('MAIL_HOST', 'localhost'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return [
 	|
 	*/
 
-	'port' => 465,
+	'port' => env('MAIL_PORT', '465'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => env('MAIL_EMAIL', 'system@gluii.com'), 'name' => 'The Gluii Team'],
+	'from' => ['address' => env('MAIL_EMAIL', 'system@laravel.com'), 'name' => env('MAIL_FROM', 'The Web Team')],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return [
 	|
 	*/
 
-	'encryption' => 'tls',
+	'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 
 	/*
 	|--------------------------------------------------------------------------
