@@ -14,7 +14,7 @@ class StatusRepository extends AbstractRepository {
 	public function allStatuses($limit = 20)
 	{
 		return Status::allFriendUpdates($limit)
-			->orderBy('statuses.created_at', 'DESC')
+			->orderBy('statuses.updated_at', 'DESC')
 			->limit($limit);
 	}
 

@@ -50,10 +50,14 @@ Route::group(['namespace' => 'Auth'], function()
  */
 Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
 {
-	# View Profile
+	/**
+	 * View Profile
+	 */
 	Route::get('{id}/view', ['as' => 'user/view', 'uses' => 'UserController@getViewUserProfile']);
 
-	# Friends
+	/**
+	 * Friend & Friend Requests
+	 */
 	Route::group(['prefix' => 'friends'], function()
 	{
 		# Friend Requests
@@ -108,7 +112,7 @@ Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function()
  *
  * @namespace Explore
  */
-Route::group(['prefix' => 'explore'], function()
+Route::group(['namespace' => 'Explore', 'prefix' => 'explore'], function()
 {
 	Route::get('/', ['as' => 'explore', 'uses' => 'ExploreController@getIndex']);
 });
@@ -118,7 +122,7 @@ Route::group(['prefix' => 'explore'], function()
  *
  * @namespace Festivals
  */
-Route::group(['prefix' => 'festivals'], function()
+Route::group(['namespace' => 'Festivals', 'prefix' => 'festivals'], function()
 {
 	Route::get('/', ['as' => 'festivals', 'uses' => 'FestivalsController@getIndex']);
 });

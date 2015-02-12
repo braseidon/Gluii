@@ -1,8 +1,13 @@
 <?php namespace App\Commands\Users;
 
-use App\Commands\Command;
+use App\Repositories\UserRepository;
+use App\User;
+use Event;
 
-class DenyFriendRequestCommand extends Command {
+use App\Commands\Command;
+use Illuminate\Contracts\Bus\SelfHandling;
+
+class DenyFriendRequestCommand extends Command implements SelfHandling {
 
 	/**
 	 * The User sending the friend request
@@ -28,6 +33,36 @@ class DenyFriendRequestCommand extends Command {
 	{
 		$this->fromId	= $fromId;
 		$this->toId		= $toId;
+	}
+
+	/**
+	 * Execute the command.
+	 *
+	 * @return void
+	 */
+	public function handle(UserRepository $userRepository)
+	{
+		// No friend requests to self!
+		if($this->fromId == $this->toId)
+			return false;
+
+		if(! $user = User::find($this->fromId))
+			return false;
+
+		$friendship = $user->isFriendsWith($this->toId);
+
+		if(! $friendship)
+			return false;
+
+		// Perform the action
+		$userRepository->removeFriend($this->toId, $user);
+
+		// Event::fire(new \App\Events\Users\FriendRequestDenied(
+		// 	$user->id,	// fromId
+		// 	$this->toId		// toId
+		// ));
+
+		return true;
 	}
 
 }

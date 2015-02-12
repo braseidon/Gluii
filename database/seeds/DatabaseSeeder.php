@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder {
 	 * @var array
 	 */
 	protected $seeders = [
-		// 'UsersTableSeeder',
-		// 'StatusTableSeeder',
+		'UsersTableSeeder',
+		'StatusTableSeeder',
 		'StatusCommentsTableSeeder',
-		// 'StatusLikesTableSeeder',
-		// 'CommentLikesTableSeeder',
+		'StatusLikesTableSeeder',
+		// 'StatusCommentLikesTableSeeder',
 	];
 
 	/**

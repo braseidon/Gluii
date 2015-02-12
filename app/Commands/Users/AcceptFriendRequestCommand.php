@@ -1,8 +1,13 @@
 <?php namespace App\Commands\Users;
 
-use App\Commands\Command;
+use App\Repositories\UserRepository;
+use App\User;
+use Event;
 
-class AcceptFriendRequestCommand extends Command {
+use App\Commands\Command;
+use Illuminate\Contracts\Bus\SelfHandling;
+
+class AcceptFriendRequestCommand extends Command implements SelfHandling {
 
 	/**
 	 * The User sending the friend request
@@ -28,6 +33,33 @@ class AcceptFriendRequestCommand extends Command {
 	{
 		$this->fromId	= $fromId;
 		$this->toId		= $toId;
+	}
+
+	/**
+	 * Execute the command.
+	 *
+	 * @return void
+	 */
+	public function handle(UserRepository $userRepository)
+	{
+		// No friend requests to self!
+		if($this->fromId == $this->toId)
+			return false;
+
+		if(! $user = User::find($this->toId))
+			return false;
+
+		// if(! $friendship = $user->isFriendsWith($this->fromId))
+		// 	return false;
+
+		$userRepository->acceptRequest($this->fromId, $user);
+
+		Event::fire(new \App\Events\Users\FriendRequestAccepted(
+			$this->fromId,	// fromId
+			$this->toId		// toId
+		));
+
+		return true;
 	}
 
 }

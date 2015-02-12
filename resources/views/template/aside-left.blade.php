@@ -2,7 +2,7 @@
 	<div class="aside-wrap">
 		<div class="navi-wrap">
 			<!-- user menu -->
-			@include('template.partials.navigation-user-menu')
+			{{--@include('template.partials.navigation-user-menu')--}}
 
 			<!-- nav -->
 			@include('template.navigation')

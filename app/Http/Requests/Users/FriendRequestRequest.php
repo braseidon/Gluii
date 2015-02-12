@@ -26,8 +26,8 @@ class FriendRequestRequest extends Request {
 	public function rules()
 	{
 		return [
-			'toId'	=> 'required_without:fromId|integer',
 			'fromId'	=> 'required_without:toId|integer',
+			'toId'		=> 'required_without:fromId|integer',
 		];
 	}
 

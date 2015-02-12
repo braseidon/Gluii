@@ -88,7 +88,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 				'friendsfrom',
 				'statuses' => function($q)
 				{
-					$q->orderBy('created_at', 'DESC')
+					$q->orderBy('updated_at', 'DESC')
 						->addSelect('id', 'profile_user_id', 'author_id', 'body', 'created_at')
 						->limit(30);
 				},
@@ -100,6 +100,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 				{
 					$q->addSelect('id', 'first_name', 'last_name', 'email');
 				},
+				'statuses.likes',
 				'statuses.comments' => function($q)
 				{
 					$q->orderBy('id', 'DESC')
@@ -109,6 +110,7 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 				{
 					$q->addSelect('id', 'first_name', 'last_name', 'email');
 				},
+				'statuses.comments.likes',
 			])
 			->first();
 	}

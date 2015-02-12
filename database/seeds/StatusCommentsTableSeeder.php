@@ -23,7 +23,7 @@ class StatusCommentsTableSeeder extends Seeder {
 		$userIds = User::lists('id');
 		$statusIds = Status::lists('id');
 
-		foreach(range(1, 3000) as $index)
+		foreach(range(1, 1500) as $index)
 		{
 			Comment::create([
 				'user_id'			=> $faker->randomElement($userIds),

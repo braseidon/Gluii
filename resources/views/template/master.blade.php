@@ -28,7 +28,9 @@
 		</header>
 
 		<!-- aside - left -->
-		{{--@include('template.aside-left')--}}
+		@if (Sentinel::hasAccess('admin'))
+			@include('template.aside-left')
+		@endif
 
 		<!-- aside - right -->
 		{{--@include('template.aside-right')--}}
