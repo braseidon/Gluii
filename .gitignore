@@ -2,8 +2,9 @@
 /bootstrap/compiled.php
 /vendor
 .env
-.env.local.php
-.env.staging.php
+.env.local
+.env.staging
+.env.production
 .env.php
 
 # Assets

@@ -149,3 +149,5 @@ Route::group(['prefix' => 'img'], function()
 
 # Testing Event
 Route::get('test-event', ['as' => 'test-event', 'uses' => 'WelcomeController@getTestEvent']);
+# Testing Email
+Route::get('test-email', ['as' => 'test-email', 'uses' => 'HomeController@getTestEmail']);

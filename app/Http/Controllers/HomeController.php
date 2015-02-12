@@ -40,4 +40,22 @@ class HomeController extends BaseController {
 		return view('home');
 	}
 
+	/**
+	 * Test sending an email
+	 *
+	 * @return die()
+	 */
+	public function getTestEmail()
+	{
+		$user = new \App\User;
+		$code = '32k4j5325';
+
+		$sent = \Mail::send('emails.auth.activate', compact('user', 'code'), function($m) use ($user)
+		{
+			$m->to('bluejd910@gmail.com')->subject('Activate Your Account');
+		});
+
+		dd($sent);
+	}
+
 }
