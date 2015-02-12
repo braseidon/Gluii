@@ -3,6 +3,7 @@
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\User\Traits\FriendableTrait;
 use App\Gluii\User\Traits\LikeableTrait;
+use App\Gluii\User\Traits\NotificationsTrait;
 
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Auth\Authenticatable;
@@ -13,7 +14,12 @@ use Illuminate\Contracts\Events\Dispatcher;
 
 class User extends EloquentUser implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword, FriendableTrait, LikeableTrait, PresentableTrait;
+	use Authenticatable,
+		CanResetPassword,
+		FriendableTrait,
+		LikeableTrait,
+		NotificationsTrait,
+		PresentableTrait;
 
 	/**
 	 * The database table used by the model.

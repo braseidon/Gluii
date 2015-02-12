@@ -52,7 +52,7 @@ class StatusController extends BaseController {
 	{
 		$this->dispatch(new NewStatusCommand(
 				$request->input('profile_user_id'),		// profile_user_id
-				Auth::getUser()->id,						// author_id
+				Auth::getUser()->id,					// author_id
 				$request->input('status')				// status
 			));
 
@@ -68,11 +68,12 @@ class StatusController extends BaseController {
 	public function postLikeStatus(\App\Http\Requests\Status\LikeStatusRequest $request)
 	{
 		$this->dispatch(new LikeStatusCommand(
-				Auth::getUser()->id,						// userId
+				Auth::getUser()->id,					// userId
 				$request->input('status_id')			// statusId
 			));
 
-		return redirect()->back();
+		if(! $request->isAjax())
+			return redirect()->back();
 	}
 
 	/**
@@ -85,7 +86,8 @@ class StatusController extends BaseController {
 	{
 		$this->repository->unlikeStatus(Auth::getUser(), $request->input('status_id'));
 
-		return redirect()->back();
+		if(! $request->isAjax())
+			return redirect()->back();
 	}
 
 	/*
@@ -104,9 +106,9 @@ class StatusController extends BaseController {
 	public function postNewComment(\App\Http\Requests\Status\NewCommentRequest $request)
 	{
 		$this->dispatch(new NewCommentCommand(
-				$request->input('status_id'),	// statusId
-				Auth::getUser()->id,				// userId
-				$request->input('body')			// body
+				$request->input('status_id'),			// statusId
+				Auth::getUser()->id,					// userId
+				$request->input('body')					// body
 			));
 
 		return redirect()->back();
@@ -115,11 +117,12 @@ class StatusController extends BaseController {
 	public function postLikeComment(\App\Http\Requests\Status\LikeCommentRequest $request)
 	{
 		$this->dispatch(new LikeCommentCommand(
-				Auth::getUser()->id,				// userId
-				$request->input('comment_id')	// commentId
+				Auth::getUser()->id,					// userId
+				$request->input('comment_id')			// commentId
 			));
 
-		return redirect()->back();
+		if(! $request->isAjax())
+			return redirect()->back();
 	}
 
 	/**
@@ -132,6 +135,7 @@ class StatusController extends BaseController {
 	{
 		$this->repository->unlikeComment(Auth::getUser(), $request->input('comment_id'));
 
-		return redirect()->back();
+		if(! $request->isAjax())
+			return redirect()->back();
 	}
 }

@@ -1,6 +1,6 @@
 $(function() {
 	// Tooltips (live)
-	$('body').tooltip({
+	$('[data-toggle="tooltip"]').tooltip({
 		selector: '[data-toggle="tooltip"]',
 		html: true
 	});

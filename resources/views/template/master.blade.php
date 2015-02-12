@@ -28,7 +28,7 @@
 		</header>
 
 		<!-- aside - left -->
-		@if (Sentinel::hasAccess('admin'))
+		@if (Auth::check() && Auth::hasAccess('admin'))
 			@include('template.aside-left')
 		@endif
 

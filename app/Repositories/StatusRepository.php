@@ -100,7 +100,7 @@ class StatusRepository extends AbstractRepository {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Status Add/Edit/Delete
+	| Status Add/Edit/Delete & Like
 	|--------------------------------------------------------------------------
 	|
 	|
@@ -149,7 +149,7 @@ class StatusRepository extends AbstractRepository {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Comment Add/Edit/Delete
+	| Comment Add/Edit/Delete & Like
 	|--------------------------------------------------------------------------
 	|
 	|

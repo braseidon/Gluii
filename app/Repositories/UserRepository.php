@@ -123,38 +123,6 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 
 	/*
 	|--------------------------------------------------------------------------
-	| Get Friend Requests
-	|--------------------------------------------------------------------------
-	|
-	|
-	*/
-
-	/**
-	 * Get a User's pending received friend requets
-	 *
-	 * @return Collection
-	 */
-	public function requestsPending(User $user)
-	{
-		return $user->friendsfrom()
-			->wherePivot('accepted', '=', 0)
-			->get();
-	}
-
-	/**
-	 * Get a User's pending sent friend requets
-	 *
-	 * @return Collection
-	 */
-	public function requestsSent(User $user)
-	{
-		return $user->friends()
-			->wherePivot('accepted', '=', 0)
-			->get();
-	}
-
-	/*
-	|--------------------------------------------------------------------------
 	| Friend Request Actions
 	|--------------------------------------------------------------------------
 	|
