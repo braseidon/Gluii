@@ -1,7 +1,7 @@
 <ul class="list-inline m-t-sm m-b-none block">
 	<!-- like -->
 	<li>
-		@if($status->isLikedBy(Auth::user()))
+		@if($status->isLikedBy(Auth::getUser()))
 			<form action="{{ route('status/unlike') }}" method="POST">
 				{!! Form::hidden('status_id', $status->id) !!}
 				{!! Form::token() !!}
@@ -36,7 +36,7 @@
 			ID#{{ $status->id }}
 		</a>
 	</li>
-	@if(Auth::user()->id == $status->author->id)
+	@if(Auth::getUser()->id == $status->author->id)
 		<li class="pull-right">
 			<!-- edit -->
 			<a href="javascript:void(0);" class="btn btn-link btn-sm text-muted">Edit</a>

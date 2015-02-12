@@ -1,4 +1,4 @@
-<?php namespace App\Gluii\Installer\Commands;
+<?php namespace App\Console\Commands\Installer\Commands;
 /**
  * Part of the Sentinel Kickstart application.
  *
@@ -17,8 +17,8 @@
  * @link       http://cartalyst.com
  */
 
-use App\Installer\Installer;
-use App\Installer\Repository;
+use App\Console\Commands\Installer\Installer;
+use App\Console\Commands\Installer\Repository;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
 use Symfony\Component\Console\Question\Question;
@@ -124,9 +124,9 @@ WELCOME
 
 		return $this->askQuestion($message, null, false, function($answer) use ($drivers)
 		{
-			if (in_array($answer, $drivers)) return $answer;
+			if(in_array($answer, $drivers)) return $answer;
 
-			if ( ! $answer)
+			if(! $answer)
 			{
 				throw new \RuntimeException('Please enter one of the given drivers!');
 			}
@@ -172,7 +172,7 @@ STEP
 			$isHidden = ($field === 'password');
 
 			// Prepare the question message
-			if ($value = $config['value'])
+			if($value = $config['value'])
 			{
 				$question = sprintf(
 					'<fg=green>Please enter the database</fg=green> [%s] (enter for [%s]): ',
@@ -191,7 +191,7 @@ STEP
 			// Prepare the question validator
 			$validator = function($answer) use ($fieldName, $config)
 			{
-				if ( ! $answer && $config['rules'] === 'required')
+				if(! $answer && $config['rules'] === 'required')
 				{
 					throw new \RuntimeException("The database '{$fieldName}' field is required!");
 				}
@@ -228,23 +228,23 @@ STEP
 
 		$userData['email'] = $this->askQuestion('<fg=green>Please enter the user email</fg=green>: ', null, false, function($answer)
 		{
-			if ( ! $answer) throw new \RuntimeException('The email is required!');
+			if(! $answer) throw new \RuntimeException('The email is required!');
 
 			return $answer;
 		});
 
 		$userData['password'] = $this->askQuestion('<fg=green>Please enter the user password</fg=green>: ', null, true, function($answer)
 		{
-			if ( ! $answer) throw new \RuntimeException('The password is required!');
+			if(! $answer) throw new \RuntimeException('The password is required!');
 
 			return $answer;
 		});
 
 		$this->askQuestion('<fg=green>Please confirm the user password</fg=green>: ', null, true, function($answer) use ($userData)
 		{
-			if ( ! $answer) throw new \RuntimeException('The password confirmation is required!');
+			if(! $answer) throw new \RuntimeException('The password confirmation is required!');
 
-			if ($answer !== $userData['password']) throw new \RuntimeException('The passwords doesn\'t match!');
+			if($answer !== $userData['password']) throw new \RuntimeException('The passwords doesn\'t match!');
 
 			return $answer;
 		});
@@ -267,7 +267,7 @@ STEP
 
 		$q->setValidator($validator);
 
-		if ($hidden === true)
+		if($hidden === true)
 		{
 			$q->setHidden(true);
 

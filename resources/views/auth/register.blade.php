@@ -1,8 +1,6 @@
 @extends('template.master')
 
-@section('title')
-	Join the Family
-@endsection
+@section('title', 'Join the Family')
 
 @section('content')
 	<div class="row">

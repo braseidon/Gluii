@@ -83,7 +83,7 @@ trait FriendableTrait {
 	 */
 	public function loadFriends()
 	{
-		if (! array_key_exists('friends', $this->relations))
+		if(! array_key_exists('friends', $this->relations))
 		{
 			$friends = $this->mergeFriends();
 

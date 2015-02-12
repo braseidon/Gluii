@@ -1,25 +1,8 @@
 <?php namespace App\Http\Controllers\Admin\Users;
-/**
- * Part of the Sentinel Kickstart application.
- *
- * NOTICE OF LICENSE
- *
- * Licensed under the Cartalyst PSL License.
- *
- * This source file is subject to the Cartalyst PSL License that is
- * bundled with this package in the license.txt file.
- *
- * @package    Sentinel Kickstart
- * @version    1.0.0
- * @author     Cartalyst LLC
- * @license    Cartalyst PSL
- * @copyright  (c) 2011-2014, Cartalyst LLC
- * @link       http://cartalyst.com
- */
 
+use Auth;
 use View;
 use Input;
-use Sentinel;
 use Redirect;
 use Validator;
 use Activation;
@@ -43,9 +26,9 @@ class UsersController extends AuthorizedController {
 	{
 		parent::__construct();
 
-		$this->users = Sentinel::getUserRepository();
+		$this->users = Auth::getUserRepository();
 
-		$this->roles = Sentinel::getRoleRepository();
+		$this->roles = Auth::getRoleRepository();
 	}
 
 	/**
@@ -110,9 +93,9 @@ class UsersController extends AuthorizedController {
 	 */
 	public function delete($id)
 	{
-		if ($this->currentUser->id != $id)
+		if($this->currentUser->id != $id)
 		{
-			if ($user = $this->users->createModel()->find($id))
+			if($user = $this->users->createModel()->find($id))
 			{
 				$user->delete();
 
@@ -136,9 +119,9 @@ class UsersController extends AuthorizedController {
 	 */
 	protected function showForm($mode, $id = null)
 	{
-		if ($id)
+		if($id)
 		{
-			if ( ! $user = $this->users->createModel()->find($id))
+			if(! $user = $this->users->createModel()->find($id))
 			{
 				return Redirect::route('users.index')->withErrors(
 					trans('users/messages.not_found', compact('id'))
@@ -174,7 +157,7 @@ class UsersController extends AuthorizedController {
 			'password_confirm' => 'required_with:password|same:password',
 		];
 
-		if ($id)
+		if($id)
 		{
 			$user = $this->users->createModel()->find($id);
 
@@ -184,7 +167,7 @@ class UsersController extends AuthorizedController {
 
 			$messages = $this->validateUser($input, $rules);
 
-			if ($messages->isEmpty())
+			if($messages->isEmpty())
 			{
 				try
 				{
@@ -202,10 +185,10 @@ class UsersController extends AuthorizedController {
 					$toDel = array_diff($userRoles, $roles);
 
 					// Detach the user roles
-					if ( ! empty($toDel)) $user->roles()->detach($toDel);
+					if(! empty($toDel)) $user->roles()->detach($toDel);
 
 					// Attach the user roles
-					if ( ! empty($toAdd)) $user->roles()->attach($toAdd);
+					if(! empty($toAdd)) $user->roles()->attach($toAdd);
 				}
 				catch (NotUniquePasswordException $e)
 				{
@@ -221,7 +204,7 @@ class UsersController extends AuthorizedController {
 
 			$messages = $this->validateUser($input, $rules);
 
-			if ($messages->isEmpty())
+			if($messages->isEmpty())
 			{
 				$user = $this->users->create($input);
 
@@ -231,7 +214,7 @@ class UsersController extends AuthorizedController {
 			}
 		}
 
-		if ($messages->isEmpty())
+		if($messages->isEmpty())
 		{
 			return Redirect::route('users.index')->withSuccess(
 				trans("users/messages.success.{$mode}")
@@ -271,7 +254,7 @@ class UsersController extends AuthorizedController {
 		// is not required when updating a user.
 		return array_where($data, function($key, $value) use ($removePassword)
 		{
-			if (str_contains($key, 'password') && empty($value)) return false;
+			if(str_contains($key, 'password') && empty($value)) return false;
 
 			return true;
 		});

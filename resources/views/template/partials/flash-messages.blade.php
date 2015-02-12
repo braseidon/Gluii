@@ -19,15 +19,10 @@
 	</div>
 @endif
 {{-- Show Success --}}
-@if(isset($successes) && $successes->count() > 0)
+@if ($message = Session::get('success'))
 	<div class="padder-v">
-		<div class="alert alert-danger">
-			<strong>Whoops!</strong> There were some problems with your input.<br><br>
-			<ul>
-				@foreach ($successes->all() as $success)
-					<li>{{ $success }}</li>
-				@endforeach
-			</ul>
+		<div class="alert alert-success">
+			<p>{{ $message }}</p>
 		</div>
 	</div>
 @endif

@@ -1,4 +1,4 @@
-<?php namespace App\Gluii\Installer;
+<?php namespace App\Console\Commands\Installer;
 /**
  * Part of the Sentinel Kickstart application.
  *
@@ -223,7 +223,7 @@ class Installer {
 
 		$this->laravel['db.factory']->make(array_merge(compact('driver'), $config));
 
-		if ( ! $this->laravel['files']->exists($configFile = __DIR__."/stubs/database/{$driver}.php"))
+		if(! $this->laravel['files']->exists($configFile = __DIR__."/stubs/database/{$driver}.php"))
 		{
 			throw new \InvalidArgumentException("No config stub found for [{$driver}] database driver.");
 		}
@@ -243,7 +243,7 @@ class Installer {
 
 		// Just a triple check we can actually
 		// write the configuration.
-		if ($this->laravel['files']->put(($newConfigFile = $this->laravel->basePath()."/config/{$env}database.php"), $contents) === false)
+		if($this->laravel['files']->put(($newConfigFile = $this->laravel->basePath()."/config/{$env}database.php"), $contents) === false)
 		{
 			throw new \RuntimeException("Could not write database config file to [$newConfigFile].");
 		}
@@ -413,9 +413,9 @@ class Installer {
 		dd($configFile);
 
 		// If we haven't published our config
-		if ( ! $this->laravel['files']->isDirectory($configPath) or ! $this->laravel['files']->exists($configFile))
+		if(! $this->laravel['files']->isDirectory($configPath) or ! $this->laravel['files']->exists($configFile))
 		{
-			if ( ! isset($this->laravel['config.publisher']))
+			if(! isset($this->laravel['config.publisher']))
 			{
 				$this->laravel->register('Illuminate\Foundation\Providers\PublisherServiceProvider');
 			}
@@ -429,7 +429,7 @@ class Installer {
 
 		// Just a triple check we can actually
 		// write the configuration.
-		if ($this->laravel['files']->put($configFile, $contents) === false)
+		if($this->laravel['files']->put($configFile, $contents) === false)
 		{
 			throw new \RuntimeException("Could not write Platform config file to [$configFile].");
 		}
@@ -456,7 +456,7 @@ class Installer {
 		// When we do our replacements, we don't want to
 		// wrap keywords in values. All others, we'll add
 		// slashes to escape quotes
-		if (in_array($_value = strtolower(var_export($value, true)), $reserved))
+		if(in_array($_value = strtolower(var_export($value, true)), $reserved))
 		{
 			$value = $_value;
 		}

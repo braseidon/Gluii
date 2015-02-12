@@ -12,7 +12,7 @@
 				<!-- CSRF -->
 				{!! Form::token() !!}
 				<button type="submit" class="btn btn-primary">Sign In</button>
-				<a href="#" class="btn btn-link">
+				<a href="{{ route('auth/forgot-password') }}" class="btn btn-link">
 					Forgot Password?
 				</a>
 			</footer>

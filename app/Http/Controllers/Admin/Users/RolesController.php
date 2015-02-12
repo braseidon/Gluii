@@ -1,25 +1,8 @@
 <?php namespace App\Http\Controllers\Admin\Users;
-/**
- * Part of the Sentinel Kickstart application.
- *
- * NOTICE OF LICENSE
- *
- * Licensed under the Cartalyst PSL License.
- *
- * This source file is subject to the Cartalyst PSL License that is
- * bundled with this package in the license.txt file.
- *
- * @package    Sentinel Kickstart
- * @version    1.0.0
- * @author     Cartalyst LLC
- * @license    Cartalyst PSL
- * @copyright  (c) 2011-2014, Cartalyst LLC
- * @link       http://cartalyst.com
- */
 
+use Auth;
 use View;
 use Input;
-use Sentinel;
 use Redirect;
 use Validator;
 
@@ -41,7 +24,7 @@ class RolesController extends AuthorizedController {
 	{
 		parent::__construct();
 
-		$this->roles = Sentinel::getRoleRepository();
+		$this->roles = Auth::getRoleRepository();
 	}
 
 	/**
@@ -108,7 +91,7 @@ class RolesController extends AuthorizedController {
 	{
 		$role = $this->roles->createModel()->find($id);
 
-		if ($role && $role->users->count() === 0)
+		if($role && $role->users->count() === 0)
 		{
 			$role->delete();
 
@@ -131,9 +114,9 @@ class RolesController extends AuthorizedController {
 	 */
 	protected function showForm($mode, $id = null)
 	{
-		if ($id)
+		if($id)
 		{
-			if ( ! $role = $this->roles->createModel()->find($id))
+			if(! $role = $this->roles->createModel()->find($id))
 			{
 				return Redirect::route('roles.index')->withErrors(
 					trans('roles/messages.not_found', compact('id'))
@@ -164,7 +147,7 @@ class RolesController extends AuthorizedController {
 			'slug' => 'required|unique:roles'
 		];
 
-		if ($id)
+		if($id)
 		{
 			$role = $this->roles->createModel()->find($id);
 
@@ -172,7 +155,7 @@ class RolesController extends AuthorizedController {
 
 			$messages = $this->validateRole($input, $rules);
 
-			if ($messages->isEmpty())
+			if($messages->isEmpty())
 			{
 				$role->fill($input)->save();
 			}
@@ -181,13 +164,13 @@ class RolesController extends AuthorizedController {
 		{
 			$messages = $this->validateRole($input, $rules);
 
-			if ($messages->isEmpty())
+			if($messages->isEmpty())
 			{
 				$role = $this->roles->createModel()->create($input);
 			}
 		}
 
-		if ($messages->isEmpty())
+		if($messages->isEmpty())
 		{
 			return Redirect::route('roles.index')->withSuccess(
 				trans("roles/messages.success.{$mode}")

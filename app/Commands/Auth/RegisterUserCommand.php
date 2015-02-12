@@ -1,6 +1,6 @@
 <?php namespace App\Commands\Auth;
 
-use Sentinel;
+use Auth;
 
 use App\Commands\Command;
 use App\Events\Auth\UserRegistered;
@@ -42,7 +42,7 @@ class RegisterUserCommand extends Command implements SelfHandling {
 			'gender'		=> $this->input['gender'],
 		];
 
-		$user = Sentinel::register($attributes);
+		$user = Auth::register($attributes);
 
 		if($user)
 		{

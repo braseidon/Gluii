@@ -20,7 +20,7 @@ class FriendRequestController extends BaseController {
 	public function postSendFriendRequest(\App\Http\Requests\Users\FriendRequestRequest $request)
 	{
 		$this->dispatch(new SendFriendRequestCommand(
-				Auth::user()->id,		// fromId
+				Auth::getUser()->id,		// fromId
 				$request->input('toId') // toId
 			));
 
@@ -36,7 +36,7 @@ class FriendRequestController extends BaseController {
 	public function getRemoveFriend(\App\Http\Requests\Users\FriendRequestRequest $request)
 	{
 		$this->dispatch(new RemoveFriendRequestCommand(
-				Auth::user()->id,		// fromId
+				Auth::getUser()->id,		// fromId
 				$request->input('toId') // toId
 			));
 
@@ -53,7 +53,7 @@ class FriendRequestController extends BaseController {
 	{
 		$this->dispatch(new AcceptFriendRequestCommand(
 				$request->input('fromId'),	// fromId
-				Auth::user()->id 			// toId
+				Auth::getUser()->id 			// toId
 			));
 
 		return redirect()->route('user/view', $request->input('fromId'));
@@ -68,7 +68,7 @@ class FriendRequestController extends BaseController {
 	public function getDenyFriendRequest(\App\Http\Requests\Users\FriendRequestRequest $request)
 	{
 		$this->dispatch(new DenyFriendRequestCommand(
-				Auth::user()->id,		// fromId
+				Auth::getUser()->id,		// fromId
 				$request->input('toId') // toId
 			));
 

@@ -52,7 +52,7 @@ class StatusController extends BaseController {
 	{
 		$this->dispatch(new NewStatusCommand(
 				$request->input('profile_user_id'),		// profile_user_id
-				Auth::user()->id,						// author_id
+				Auth::getUser()->id,						// author_id
 				$request->input('status')				// status
 			));
 
@@ -68,7 +68,7 @@ class StatusController extends BaseController {
 	public function postLikeStatus(\App\Http\Requests\Status\LikeStatusRequest $request)
 	{
 		$this->dispatch(new LikeStatusCommand(
-				Auth::user()->id,						// userId
+				Auth::getUser()->id,						// userId
 				$request->input('status_id')			// statusId
 			));
 
@@ -83,7 +83,7 @@ class StatusController extends BaseController {
 	 */
 	public function postUnlikeStatus(\App\Http\Requests\Status\LikeStatusRequest $request)
 	{
-		$this->repository->unlikeStatus(Auth::user(), $request->input('status_id'));
+		$this->repository->unlikeStatus(Auth::getUser(), $request->input('status_id'));
 
 		return redirect()->back();
 	}
@@ -105,7 +105,7 @@ class StatusController extends BaseController {
 	{
 		$this->dispatch(new NewCommentCommand(
 				$request->input('status_id'),	// statusId
-				Auth::user()->id,				// userId
+				Auth::getUser()->id,				// userId
 				$request->input('body')			// body
 			));
 
@@ -115,7 +115,7 @@ class StatusController extends BaseController {
 	public function postLikeComment(\App\Http\Requests\Status\LikeCommentRequest $request)
 	{
 		$this->dispatch(new LikeCommentCommand(
-				Auth::user()->id,				// userId
+				Auth::getUser()->id,				// userId
 				$request->input('comment_id')	// commentId
 			));
 
@@ -130,7 +130,7 @@ class StatusController extends BaseController {
 	 */
 	public function postUnlikeComment(\App\Http\Requests\Status\LikeCommentRequest $request)
 	{
-		$this->repository->unlikeComment(Auth::user(), $request->input('comment_id'));
+		$this->repository->unlikeComment(Auth::getUser(), $request->input('comment_id'));
 
 		return redirect()->back();
 	}

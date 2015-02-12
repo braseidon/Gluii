@@ -36,6 +36,11 @@ class RouteServiceProvider extends ServiceProvider {
 		{
 			require app_path('Http/routes.php');
 		});
+
+		// Route patterns
+		$router->pattern('id', '[0-9]+');
+		$router->pattern('slug', '[a-z0-9-]+');
+		$router->pattern('username', '[a-zA-Z0-9]+');
 	}
 
 	/**

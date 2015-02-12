@@ -2,9 +2,9 @@
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 		<i class="icon icon-users fa-fw"></i>
 		<span class="visible-xs-inline">Friend Requests</span>
-		@if(1 == 2 && Auth::user()->requestsPending()->count() > 0)
+		@if(1 == 2 && Auth::getUser()->requestsPending()->count() > 0)
 			<span class="badge badge-sm up bg-danger pull-right-xs">
-				{{ Auth::user()->requestsPending()->count() }}
+				{{ Auth::getUser()->requestsPending()->count() }}
 			</span>
 		@endif
 	</a>
@@ -15,7 +15,7 @@
 			</div>
 			<div class="list-group">
 				@if(1 == 2)
-					@foreach(Auth::user()->requestsPending() as $pendingFriend)
+					@foreach(Auth::getUser()->requestsPending() as $pendingFriend)
 						<div class="media list-group-item">
 							<span class="pull-left thumb-sm">
 								{!! $pendingFriend->present()->photoThumb(60) !!}

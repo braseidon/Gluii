@@ -10,7 +10,7 @@
 				<a class="btn btn-link profile-link-btn fa fa-file text-underline-none" href="javascript:void(0);" {!! tooltip('Add File', 'bottom') !!}></a>
 
 				<!-- Profile User ID -->
-				<input type="hidden" name="profile_user_id" value="{{ ! isset($user) ? Auth::user()->id : $user->id }}">
+				<input type="hidden" name="profile_user_id" value="{{ ! isset($user) ? Auth::getUser()->id : $user->id }}">
 				<!-- CSRF -->
 				{!! Form::token() !!}
 				<button class="btn btn-sm btn-primary pull-right" type="submit">Post</button>

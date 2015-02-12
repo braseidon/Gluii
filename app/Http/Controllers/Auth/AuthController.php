@@ -1,15 +1,15 @@
 <?php namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\Commands\Auth\RegisterUserCommand;
-use App\Http\Controllers\BaseController;
 use App\Http\Requests\RegisterRequest;
 use App\User;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Illuminate\Http\Request;
-use Input;
-use Sentinel;
 use Validator;
+
+use App\Http\Controllers\BaseController;
 
 class AuthController extends BaseController {
 
@@ -37,38 +37,23 @@ class AuthController extends BaseController {
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function postLogin(Request $request)
+	public function postLogin(\App\Http\Requests\Auth\LoginRequest $request)
 	{
 		try
 		{
-			$input = Input::all();
+			$input		= $request->input();
+			$remember	= (bool) array_pull($input, 'remember', false);
 
-			$remember = (bool) array_pull($input, 'remember', false);
-
-			$rules = [
-				'email'    => 'required|email',
-				'password' => 'required',
-			];
-
-			$validator = Validator::make($input, $rules);
-
-			if ($validator->fails())
+			if($auth = Auth::authenticate($input, $remember))
 			{
-				return redirect()->back()->withInput()->withErrors($validator);
+				return redirect()->intended(route('home'))->withSuccess(trans('auth/messages.success.login'));
 			}
 
-			if ($auth = Sentinel::authenticate($input, $remember))
-			{
-				return redirect()->intended('account')->withSuccess(
-					'Successfully logged in.'
-				);
-			}
-
-			$errors = 'Invalid login or password.';
+			$errors = trans('auth/messages.error.login');
 		}
 		catch (NotActivatedException $e)
 		{
-			$errors = 'Account is not activated!';
+			$errors = trans('auth/messages.error.inactive');
 
 			return redirect()->to('reactivate')->with('user', $e->getUser());
 		}
@@ -97,7 +82,7 @@ class AuthController extends BaseController {
 	 */
 	public function getLogout()
 	{
-		$this->auth->logout();
+		Auth::logout();
 
 		return redirect()->route('auth/login')->with('success', 'You are now logged out.');
 	}

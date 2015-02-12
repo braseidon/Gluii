@@ -3,7 +3,7 @@
 	{{ $comment->created_at->diffForHumans() }}
 </span>
 <!-- like -->
-@if($comment->isLikedBy(Auth::user()))
+@if($comment->isLikedBy(Auth::getUser()))
 	<form class="inline" action="{{ route('status/comment/unlike') }}" method="POST">
 		{!! Form::hidden('comment_id', $comment->id) !!}
 		{!! Form::token() !!}

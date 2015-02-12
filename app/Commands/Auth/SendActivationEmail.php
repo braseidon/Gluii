@@ -46,7 +46,7 @@ class SendActivationEmail extends Command implements SelfHandling, ShouldBeQueue
 			$m->to($user->email)->subject('Activate Your Account');
 		});
 
-		if ($sent === 0)
+		if($sent === 0)
 			Log::error('Failed to send activation email to ' . $user->email);
 	}
 }

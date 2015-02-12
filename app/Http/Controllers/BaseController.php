@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Auth;
 use View;
-use Sentinel;
 
 class BaseController extends Controller {
 
@@ -22,7 +22,7 @@ class BaseController extends Controller {
 		$this->beforeFilter('csrf', [ 'on' => 'post' ]);
 
 		// Clockwork //
-		if (\App::environment('local'))
+		if(\App::environment('local'))
 		{
 			$this->beforeFilter(function()
 			{
@@ -35,7 +35,7 @@ class BaseController extends Controller {
 			});
 		}
 
-		$this->currentUser = Sentinel::getUser();
+		$this->currentUser = Auth::getUser();
 
 		View::share([ 'currentUser' => $this->currentUser ]);
 	}
@@ -47,7 +47,7 @@ class BaseController extends Controller {
 	 */
 	protected function setupLayout()
 	{
-		if ( ! is_null($this->layout))
+		if(! is_null($this->layout))
 		{
 			$this->layout = View::make($this->layout);
 		}

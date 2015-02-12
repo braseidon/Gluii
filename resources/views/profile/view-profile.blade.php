@@ -1,9 +1,6 @@
 @extends('template.master')
 
-{{-- Page title --}}
-@section('title')
-	{{ $user->username }}'s Profile
-@stop
+@section('title', "{$user->username}'s Profile")
 
 {{-- Page content --}}
 @section('content')

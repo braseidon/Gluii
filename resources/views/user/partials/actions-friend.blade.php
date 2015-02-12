@@ -1,8 +1,8 @@
-@if(Auth::user()->id !== $user->id)
+@if(Auth::getUser()->id !== $user->id)
 	{{-- is friends --}}
-	@if($user->friendshipWith(Auth::user()->id))
+	@if($user->friendshipWith(Auth::getUser()->id))
 		{{-- Accepted Request--}}
-		@if($user->friendshipWith(Auth::user()->id) == 'accepted')
+		@if($user->friendshipWith(Auth::getUser()->id) == 'accepted')
 			<div class="dropdown">
 				<button type="button" class="dropdown-toggle clear btn btn-primary btn-addon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<i class="icon icon-user-following"></i> Friends <b class="caret"></b>
@@ -15,7 +15,7 @@
 				</ul>
 			</div>
 		{{-- Sent Request--}}
-		@elseif($user->friendshipWith(Auth::user()->id) == 'sent')
+		@elseif($user->friendshipWith(Auth::getUser()->id) == 'sent')
 			<div class="dropdown">
 				<button type="button" class="dropdown-toggle clear btn btn-primary btn-addon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<i class="icon icon-user-following"></i> Friend Request Sent <b class="caret"></b>
@@ -25,7 +25,7 @@
 				</ul>
 			</div>
 		{{-- Pending Request--}}
-		@elseif($user->friendshipWith(Auth::user()->id) == 'pending')
+		@elseif($user->friendshipWith(Auth::getUser()->id) == 'pending')
 			<div class="dropdown">
 				<button type="button" class="dropdown-toggle clear btn btn-primary btn-addon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<i class="icon icon-user-following"></i> Respond to Friend Request <b class="caret"></b>

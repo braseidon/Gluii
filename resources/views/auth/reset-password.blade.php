@@ -1,6 +1,6 @@
 @extends('template.master')
 
-@section('title', 'Sign In')
+@section('title', 'Password Reset')
 
 @section('content')
 	<div class="row">
@@ -8,7 +8,7 @@
 
 		</div>
 		<div class="col-sm-12 col-md-6 col-lg-5">
-			@include('auth.partials.login')
+			@include('auth.partials.reset-password')
 		</div>
 	</div>
 @endsection

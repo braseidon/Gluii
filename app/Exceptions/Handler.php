@@ -36,7 +36,7 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
-		if ($this->isHttpException($e))
+		if($this->isHttpException($e))
 		{
 			return $this->renderHttpException($e);
 		}

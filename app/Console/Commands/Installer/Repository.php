@@ -1,4 +1,4 @@
-<?php namespace App\Gluii\Installer;
+<?php namespace App\Console\Commands\Installer;
 /**
  * Part of the Sentinel Kickstart application.
  *
@@ -175,7 +175,7 @@ class Repository {
 	 */
 	public function setDatabaseDriver($driver)
 	{
-		if ( ! isset($this->databaseData[$driver]))
+		if(! isset($this->databaseData[$driver]))
 		{
 			throw new \RuntimeException("Database configuration does not exist for driver [{$driver}].");
 		}
@@ -191,7 +191,7 @@ class Repository {
 	 */
 	public function getDatabaseData($driver = null)
 	{
-		if ( ! $driver) return $this->databaseData;
+		if(! $driver) return $this->databaseData;
 
 		return array_get($this->databaseData, $driver, []);
 	}
@@ -222,7 +222,7 @@ class Repository {
 	 */
 	public function getDatabaseRules($driver = null)
 	{
-		if ( ! $driver) return $this->databaseRules;
+		if(! $driver) return $this->databaseRules;
 
 		return array_get($this->databaseRules, $driver, []);
 	}

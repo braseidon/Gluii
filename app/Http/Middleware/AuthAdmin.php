@@ -32,7 +32,7 @@ class AuthAdmin {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if ($this->auth->check() && ! $this->auth->hasAccess('admin'))
+		if($this->auth->check() && ! $this->auth->hasAccess('admin'))
 		{
 			return redirect()->to('account')->withErrors(['Only admins can access this page.']);
 		}

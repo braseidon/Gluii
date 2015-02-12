@@ -1,38 +1,102 @@
 <?php namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\BaseController;
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\PasswordBroker;
-use Illuminate\Foundation\Auth\ResetsPasswords;
+use Auth;
+use Mail;
+use Reminder;
+use Cartalyst\Sentinel\Addons\UniquePasswords\Exceptions\NotUniquePasswordException;
 
 class PasswordController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
-	| Password Reset Controller
+	| Forgot Password
 	|--------------------------------------------------------------------------
 	|
-	| This controller is responsible for handling password reset requests
-	| and uses a simple trait to include this behavior. You're free to
-	| explore this trait and override any methods you wish to tweak.
 	|
 	*/
 
-	use ResetsPasswords;
+	/**
+	 * Show the form for the forgot password.
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getForgotPassword()
+	{
+		return view('auth.forgot-password');
+	}
 
 	/**
-	 * Create a new password controller instance.
+	 * Handle posting of the form for the forgot password.
 	 *
-	 * @param  \Illuminate\Contracts\Auth\Guard  $auth
-	 * @param  \Illuminate\Contracts\Auth\PasswordBroker  $passwords
-	 * @return void
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function __construct(Guard $auth, PasswordBroker $passwords)
+	public function postForgotPassword(\App\Http\Requests\Auth\ForgotPasswordRequest $request)
 	{
-		$this->auth = $auth;
-		$this->passwords = $passwords;
+		$email = $request->input('email');
 
-		$this->middleware('guest');
+		if($user = Auth::findByCredentials(compact('email')))
+		{
+			$reminder = Reminder::exists($user) ?: Reminder::create($user);
+
+			$code = $reminder->code;
+
+			$sent = Mail::send('emails.auth.reset-password', compact('user', 'code'), function($m) use ($user)
+			{
+				$m->to($user->email)->subject('Reset your account password.');
+			});
+		}
+
+		return redirect()->route('auth/forgot-password')->withSuccess(
+			'An email was sent with instructions on how to reset your password.'
+		);
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Reset Password
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+
+	/**
+	 * Show the form for the password reminder confirmation.
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getResetPassword($id, $code)
+	{
+		return view('auth.reset-password', ['userId' => $id, 'code' => $code]);
+	}
+
+	/**
+	 * Handle posting of the form for the password reminder confirmation.
+	 *
+	 * @param  int  $id
+	 * @param  string  $code
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postResetPassword(\App\Http\Requests\Auth\ResetPasswordRequest $request, $id, $code)
+	{
+		if(! $user = Auth::findById($id))
+		{
+			return redirect()->back()->withInput()->withErrors('The user no longer exists.');
+		}
+
+		try
+		{
+			if(! Reminder::complete($user, $code, $request->input('password')))
+			{
+				return redirect()->route('auth/login')->withErrors('Invalid or expired reset code.');
+			}
+
+			return redirect()->route('auth/login')->withSuccess('Password was successfully reset.');
+		}
+		catch (NotUniquePasswordException $e)
+		{
+			return redirect()->back()->withErrors($e->getMessage());
+		}
 	}
 
 }

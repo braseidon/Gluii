@@ -28,23 +28,26 @@ Route::group(['namespace' => 'Auth'], function()
 	Route::post('login', 'AuthController@postLogin');
 	# Log Out
 	Route::get('logout', ['as' => 'auth/logout', 'uses' => 'AuthController@getLogout']);
+
+	# Forgot Password
+	Route::get('forgot-password', ['as' => 'auth/forgot-password', 'uses' => 'PasswordController@getForgotPassword']);
+	Route::post('forgot-password', 'PasswordController@postForgotPassword');
+	# Reset Password
+	Route::get('reset-password/{id}/{code}', ['as' => 'auth/reset-password', 'uses' => 'PasswordController@getResetPassword']);
+	Route::post('reset-password/{id}/{code}', 'PasswordController@postResetPassword');
+
 	# Register
 	Route::get('register', ['as' => 'auth/register', 'uses' => 'AuthController@getRegister']);
 	Route::post('register', 'AuthController@postRegister');
-	# Forgot Password
-	Route::get('forgot-password', ['as' => 'auth/forgot-password', 'uses' => 'PasswordController@getEmail']);
-	Route::post('forgot-password', 'PasswordController@postEmail');
-	# Reset Password
-	Route::get('reset-password/{token}', ['as' => 'auth/reset-password', 'uses' => 'PasswordController@getResetPassword']);
+	# Activate Account
+	Route::get('activate/{id}/{code}', [ 'as' => 'auth/activate', 'uses' => 'ActivationsController@activate' ])->where('id', '\d+');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Users
-|--------------------------------------------------------------------------
-|
-|
-*/
+/**
+ * Users
+ *
+ * @namespace User
+ */
 Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
 {
 	# View Profile
@@ -68,13 +71,11 @@ Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
 	});
 });
 
-/*
-|--------------------------------------------------------------------------
-| Statuses
-|--------------------------------------------------------------------------
-|
-|
-*/
+/**
+ * Statuses
+ *
+ * @namespace User
+ */
 Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function()
 {
 	# View Single
@@ -102,25 +103,21 @@ Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function()
 	});
 });
 
-/*
-|--------------------------------------------------------------------------
-| Explore
-|--------------------------------------------------------------------------
-|
-|
-*/
+/**
+ * Explore
+ *
+ * @namespace Explore
+ */
 Route::group(['prefix' => 'explore'], function()
 {
 	Route::get('/', ['as' => 'explore', 'uses' => 'ExploreController@getIndex']);
 });
 
-/*
-|--------------------------------------------------------------------------
-| Festivals
-|--------------------------------------------------------------------------
-|
-|
-*/
+/**
+ * Festivals
+ *
+ * @namespace Festivals
+ */
 Route::group(['prefix' => 'festivals'], function()
 {
 	Route::get('/', ['as' => 'festivals', 'uses' => 'FestivalsController@getIndex']);
@@ -137,6 +134,18 @@ Route::group(['prefix' => 'img'], function()
 {
 	# Cover Images
 	Route::get('/cover/{path}', ['as' => 'image/cover', 'uses' => 'ImageController@getCoverPhoto']);
+});
+
+/*
+|-------------------------------------------------------------------------------------------------
+| Admin Section
+|-------------------------------------------------------------------------------------------------
+|
+|
+*/
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
+{
+
 });
 
 /*
