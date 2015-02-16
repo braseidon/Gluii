@@ -19,8 +19,7 @@
 
 </head>
 <body>
-
-	<div class="app app-header-fixed app-aside-fixed">
+	<div class="app app-header-fixed app-aside-fixed bg-light">
 
 		<!-- header -->
 		<header id="header" class="app-header navbar bg-primary" role="menu">
@@ -29,17 +28,23 @@
 
 		<!-- aside - left -->
 		@if (Auth::check() && Auth::hasAccess('admin'))
-			@include('template.aside-left')
+			<aside id="aside-left" class="app-aside app-aside-left hidden-xs bg-dark">
+				@include('template.aside-left')
+			</aside>
 		@endif
 
 		<!-- aside - right -->
-		{{--@include('template.aside-right')--}}
+		@if (Auth::check() && Auth::hasAccess('admin') && 1 == 2)
+			<aside id="aside-right" class="app-aside app-aside-right hidden-xs bg-dark">
+				@include('template.aside-right')
+			</aside>
+		@endif
 
 		<!-- content -->
-		<div class="app-content">
-			<div id="content" class="app-content-body app-content-full" role="main">
+		<div id="content" class="app-content" role="main">
+			<div class="app-content-body app-content-full">
 				<!-- hbox layout -->
-				<div class="hbox hbox-auto-xs bg-light">
+				<div class="hbox hbox-auto-xs">
 					<div class="vbox">
 						<!-- page title -->
 						{{--@if(! empty(trim($__env->yieldContent('title'))))
