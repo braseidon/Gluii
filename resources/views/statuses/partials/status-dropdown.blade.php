@@ -10,7 +10,10 @@
 			<li>
 				<a href="javascript:void(0);">
 					Hide this post
-					<span class="text-muted">({{ $status->profileuser->id }} !== {{ Auth::getUser()->id }})</span>
+					{{-- Dev - Check ID's --}}
+					@if (Auth::check() && Auth::hasAccess('admin'))
+						<span class="text-muted">({{ $status->profileuser->id }} !== {{ Auth::getUser()->id }})</span>
+					@endif
 				</a>
 			</li>
 			<li><a href="javascript:void(0);">Hide future posts from this user</a></li>

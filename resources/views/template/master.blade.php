@@ -17,6 +17,9 @@
 	<!-- assets - header -->
 	@include('template.assets.header')
 
+	<link rel="icon" type="image/png" href="/images/favicon.png" />
+	<link rel="shortcut icon" href="/images/favicon.png">
+
 </head>
 <body>
 	<div class="app app-header-fixed app-aside-fixed bg-light">
