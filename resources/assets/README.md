@@ -1,10 +1,13 @@
 ```
 | The local repo is not minified or anything.
 .
-├── source
+├── build
+│   ├── css
+|   └── js
+├── src
 │   ├── css
 │   ├── fonts
-│   └── js
+│   ├── js
 │   └── less
 └── vendor
 ```

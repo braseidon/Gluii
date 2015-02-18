@@ -7,14 +7,29 @@ use App\Repositories\StatusRepositoryInterface;
 class StatusSubscriber {
 
 	/**
+	 * @var StatusRepositoryInterface $repository
+	 */
+	protected $repository;
+
+	/**
+	 * Instantiate the Object
+	 *
+	 * @param StatusRepositoryInterface $this->repository
+	 */
+	public function __construct(StatusRepositoryInterface $repository)
+	{
+		$this->repository = $repository;
+	}
+
+	/**
 	 * Subscribe Users to a Status when it's posted
 	 *
 	 * @param  NewStatusPosted $event
 	 * @return void
 	 */
-	public function subscribeUsersToStatus(NewStatusPosted $event, StatusRepositoryInterface $repository)
+	public function subscribeUsersToStatus(NewStatusPosted $event)
 	{
-		$repository->subscribeNewStatus($event->status);
+		$this->repository->subscribeNewStatus($event->status);
 	}
 
 	/**
@@ -23,9 +38,9 @@ class StatusSubscriber {
 	 * @param  StatusReceivedNewComment $event
 	 * @return void
 	 */
-	public function whenStatusReceivedNewComment(StatusReceivedNewComment $event, StatusRepositoryInterface $repository)
+	public function whenStatusReceivedNewComment(StatusReceivedNewComment $event)
 	{
-		$repository->subscriberFirstOrNew($event->status, $event->fromId);
+		$this->repository->subscriberFirstOrNew($event->status, $event->fromId);
 	}
 
 	/**

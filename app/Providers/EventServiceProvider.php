@@ -7,18 +7,6 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 class EventServiceProvider extends ServiceProvider {
 
 	/**
-	 * The subscriber classes to register.
-	 *
-	 * @var array
-	 */
-	protected $subscribe = [
-		\App\Handlers\Events\Auth\UserJustRegistered::class,
-		\App\Handlers\Events\Users\UserSubscriber::class,
-		\App\Handlers\Events\Statuses\StatusSubscriber::class,
-		\App\Handlers\Events\NotificationSubscriber::class,
-	];
-
-	/**
 	 * The event handler mappings for the application.
 	 *
 	 * @var array
@@ -38,6 +26,11 @@ class EventServiceProvider extends ServiceProvider {
 	public function boot(DispatcherContract $events)
 	{
 		parent::boot($events);
+
+		$events->subscribe(\App\Handlers\Events\Auth\UserJustRegistered::class);
+		$events->subscribe(\App\Handlers\Events\Users\UserSubscriber::class);
+		$events->subscribe(\App\Handlers\Events\Statuses\StatusSubscriber::class);
+		$events->subscribe(\App\Handlers\Events\NotificationSubscriber::class);
 	}
 
 }
