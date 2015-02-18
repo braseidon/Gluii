@@ -2,27 +2,9 @@
 
 use App\Events\Statuses\StatusReceivedNewComment;
 use App\Events\Statuses\UserReceivedNewStatus;
-
 use App\Repositories\NotificationRepositoryInterface;
 
 class NotificationSubscriber {
-
-	/**
-	 * NotificationRepository
-	 *
-	 * @var NotificationRepository $repository
-	 */
-	protected $repository;
-
-	/**
-	 * Instantiate the Object
-	 *
-	 * @param NotificationRepositoryInterface $repository
-	 */
-	public function __construct(NotificationRepositoryInterface $repository)
-	{
-		$this->repository = $repository;
-	}
 
 	/**
 	 * Notify subscribed Users of a new Comment
@@ -30,14 +12,14 @@ class NotificationSubscriber {
 	 * @param  StatusReceivedNewComment $event
 	 * @return void
 	 */
-	public function whenStatusReceivedNewComment(StatusReceivedNewComment $event)
+	public function whenStatusReceivedNewComment(StatusReceivedNewComment $event, NotificationRepositoryInterface $repository)
 	{
 		$subscribers = $event->status->subscribers->lists('id');
 
 		// Remove the User that posted the Comment from being notified
 		$subscribers = array_diff($subscribers, [$event->fromId]);
 
-		$this->repository->pushMany($subscribers, 'status.comment', $event->fromId, ['id' => $event->status->id]);
+		$repository->pushMany($subscribers, 'status.comment', $event->fromId, ['id' => $event->status->id]);
 	}
 
 	/**
@@ -46,7 +28,7 @@ class NotificationSubscriber {
 	 * @param  UserReceivedNewStatus $event
 	 * @return void
 	 */
-	public function whenUserReceivedNewStatus(UserReceivedNewStatus $event)
+	public function whenUserReceivedNewStatus(UserReceivedNewStatus $event, NotificationRepositoryInterface $repository)
 	{
 		// dd($event);
 	}

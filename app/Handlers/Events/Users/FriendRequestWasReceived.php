@@ -8,16 +8,6 @@ use Illuminate\Contracts\Queue\ShouldBeQueued;
 class FriendRequestWasReceived {
 
 	/**
-	 * Create the event handler.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		//
-	}
-
-	/**
 	 * Handle the event.
 	 *
 	 * @param  UserRegistered  $event
