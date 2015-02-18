@@ -28,7 +28,7 @@ class HomeController extends BaseController {
 
 		$statuses = $repository->allStatuses();
 
-		return view('home', compact('statuses'));
+		return view('feeds.news', compact('statuses'));
 	}
 
 	/**

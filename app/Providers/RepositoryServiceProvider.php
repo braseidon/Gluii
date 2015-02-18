@@ -31,8 +31,10 @@ class RepositoryServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		// UserRepository
-		$this->app->bind('App\Repositories\UserRepositoryInterface',
-			'App\Repositories\UserRepository');
+		$this->app->bindShared('App\Repositories\UserRepositoryInterface', function($app)
+		{
+			return new \App\Repositories\UserRepository();
+		});
 		// StatusRepository
 		$this->app->bind('App\Repositories\StatusRepositoryInterface',
 			'App\Repositories\StatusRepository');

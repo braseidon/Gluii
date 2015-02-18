@@ -11,16 +11,24 @@
 |
 */
 
-# Index
+/**
+ * News Feeds
+ */
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@getIndex']);
 
-/*
-|--------------------------------------------------------------------------
-| Authentication
-|--------------------------------------------------------------------------
-|
-|
-*/
+Route::group(['prefix' => 'feed'], function()
+{
+	# Groups
+	Route::get('families', ['as' => 'feed/families', 'uses' => 'HomeController@getIndex']);
+	# Influencers
+	Route::get('influences', ['as' => 'feed/influences', 'uses' => 'HomeController@getIndex']);
+});
+
+/**
+ * Authentication
+ *
+ * @namespace Auth
+ */
 Route::group(['namespace' => 'Auth'], function()
 {
 	# Log In
@@ -140,6 +148,30 @@ Route::group(['namespace' => 'Explore', 'prefix' => 'explore'], function()
 Route::group(['namespace' => 'Festivals', 'prefix' => 'festivals'], function()
 {
 	Route::get('/', ['as' => 'festivals', 'uses' => 'FestivalsController@getIndex']);
+});
+
+/**
+ * Families
+ *
+ * @namespace Families
+ */
+Route::group(['namespace' => 'Families', 'prefix' => 'families'], function()
+{
+	Route::get('/', ['as' => 'families', 'uses' => 'FamiliesController@getIndex']);
+	# View Family
+	Route::get('{slug}', ['as' => 'families/view', 'uses' => 'FamiliesController@getIndex']);
+});
+
+/**
+ * Influencers
+ *
+ * @namespace Influences
+ */
+Route::group(['namespace' => 'Influences', 'prefix' => 'influences'], function()
+{
+	Route::get('/', ['as' => 'influences', 'uses' => 'InfluencesController@getIndex']);
+	# View Family
+	Route::get('{slug}', ['as' => 'influences/view', 'uses' => 'InfluencesController@getIndex']);
 });
 
 /*

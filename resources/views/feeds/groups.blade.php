@@ -1,11 +1,13 @@
 @extends('template.master')
 
-@section('title', 'Welcome to ' . Config::get('gluii.appname'))
+@section('title', 'News Feed')
 
 @section('sidebar-left')
-	asdasd
+	@include('template.sidebars.default')
 @endsection
 
 @section('content')
+	@include('feeds.partials.feedswitcher')
+
 	@include('statuses.view-timeline')
 @endsection
