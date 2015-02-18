@@ -1,7 +1,7 @@
 <?php namespace App\Commands\Status;
 
 use App\Commands\Command;
-use App\Events\Status\StatusReceivedNewComment;
+use App\Events\Statuses\StatusReceivedNewComment;
 use App\Repositories\StatusRepository;
 use Event;
 
@@ -54,16 +54,12 @@ class NewCommentCommand extends Command implements SelfHandling {
 	{
 		$repository->postNewComment($this->statusId, $this->userId, $this->body);
 
-		$status = $repository->findStatusById($this->statusId);
-
-		// If the status was posted on someone's wall...
-		if($status->profile_user_id == $this->userId)
-			return true;
+		$status = $repository->findStatusByIdWithSubscribers($this->statusId);
 
 		Event::fire(new StatusReceivedNewComment(
 			$this->userId,
 			$status->profile_user_id,
-			$status->id
+			$status
 		));
 
 		return true;

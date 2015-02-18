@@ -3,7 +3,48 @@
 use App\Comment;
 use App\Status;
 
-class StatusRepository extends AbstractRepository {
+class StatusRepository extends AbstractRepository implements StatusRepositoryInterface {
+
+	/**
+	 * Retrieve a Status by their unique identifier.
+	 *
+	 * @param  integer  $identifier
+	 * @return Status|null
+	 */
+	public function findStatusById($id)
+	{
+		return Status::find($id);
+	}
+
+	/**
+	 * Retrieve a Status by ID with Subscribers eager-loaded
+	 *
+	 * @param  integer $id
+	 * @return Status|null
+	 */
+	public function findStatusByIdWithSubscribers($id)
+	{
+		return Status::with('subscribers')->find($id);
+	}
+
+	/**
+	 * Retrieve a Comment by their unique identifier.
+	 *
+	 * @param  integer  $identifier
+	 * @return Comment\null
+	 */
+	public function findCommentById($id)
+	{
+		return Comment::find($id);
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Status Feeds
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
 
 	/**
 	 * Get all Statuses from all Users for home page
@@ -11,16 +52,16 @@ class StatusRepository extends AbstractRepository {
 	 * @param  integer $limit
 	 * @return Collection
 	 */
-	public function allStatuses($limit = 10)
+	public function allStatuses($limit = 15)
 	{
 		return Status::with([
 				'profileuser' => function($q)
 				{
-					$q->addSelect('id', 'first_name', 'last_name', 'email');
+					$q->selectForFeed();
 				},
 				'author' => function($q)
 				{
-					$q->addSelect('id', 'first_name', 'last_name', 'email');
+					$q->selectForFeed();
 				},
 				'likes' => function($q)
 				{
@@ -33,7 +74,7 @@ class StatusRepository extends AbstractRepository {
 				},
 				'comments.author' => function($q)
 				{
-					$q->addSelect('id', 'first_name', 'last_name', 'email');
+					$q->selectForFeed();
 				},
 				'comments.likes' => function($q)
 				{
@@ -42,7 +83,7 @@ class StatusRepository extends AbstractRepository {
 				},
 			])
 			->orderBy('statuses.updated_at', 'DESC')
-			->limit($limit);
+			->paginate($limit);
 	}
 
 	/**
@@ -74,28 +115,6 @@ class StatusRepository extends AbstractRepository {
 			->whereIn('user_id', $userIds)
 			->latest()
 			->get();
-	}
-
-	/**
-	 * Retrieve a Status by their unique identifier.
-	 *
-	 * @param  integer  $identifier
-	 * @return Status\null
-	 */
-	public function findStatusById($id)
-	{
-		return Status::find($id);
-	}
-
-	/**
-	 * Retrieve a Comment by their unique identifier.
-	 *
-	 * @param  integer  $identifier
-	 * @return Comment\null
-	 */
-	public function findCommentById($id)
-	{
-		return Comment::find($id);
 	}
 
 	/*
@@ -145,6 +164,83 @@ class StatusRepository extends AbstractRepository {
 	public function unlikeStatus(\App\User $user, $statusId)
 	{
 		return $user->likedstatuses()->detach($statusId);
+	}
+
+	/**
+	 * Deletes a Status including Subscriptions, CommentLikes, Comments, and StatusLikes
+	 *
+	 * @param  integer $id
+	 * @return bool
+	 */
+	public function deleteStatusById($id)
+	{
+		$status = Status::with([
+				'subscribers',
+				'likes',
+				'comments',
+				'comments.likes'
+			])
+			->find($id);
+
+		if(! $status)
+			return false;
+
+		// Delete the Subscriptions, CommentLikes, Comments, StatusLikes, then the Status
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Status Subscribers
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+
+	/**
+	 * Subscribe Users for a new Status
+	 *
+	 * @param  Status $status
+	 * @return Collection
+	 */
+	public function subscribeNewStatus(Status $status)
+	{
+		$subscribers = array_unique([$status->profile_user_id, $status->author_id]);
+
+		return $status->subscribers()->sync($subscribers);
+	}
+
+	/**
+	 * Return the first User subscribed to a Status or a new one
+	 *
+	 * @param  Status  $status
+	 * @param  integer $userId
+	 * @return User
+	 */
+	public function subscriberFirstOrNew(Status $status, $userId)
+	{
+		if($subscriber = $this->subscriberCheck($status, $userId))
+			return $subscriber;
+
+		return $status->subscribers()->attach($userId);
+	}
+
+	/**
+	 * Check if a User is subscribed to a Status
+	 *
+	 * @param  Status  $status
+	 * @param  integer $userId
+	 * @return bool|User
+	 */
+	public function subscriberCheck(Status $status, $userId)
+	{
+		$subscriber = $status->subscribers()
+			->wherePivot('user_id', '=', $userId)
+			->first();
+
+		if(! $subscriber)
+			return false;
+
+		return $subscriber;
 	}
 
 	/*

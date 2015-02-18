@@ -85,6 +85,17 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
 		return $this->hasMany('App\Notification', 'user_id', 'id');
 	}
 
+	/**
+	 * Relationship with Statuses through Subscriptions
+	 *
+	 * @return Collection
+	 */
+	public function subscribedstatuses()
+	{
+		return $this->belongsToMany('App\Status', 'status_subscribers', 'user_id', 'status_id')
+			->withPivot('user_id', 'status_id');
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Query Scopes
@@ -110,6 +121,17 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
 		// 		'statuses.author',
 		// 		'friends',
 		// 	]);
+	}
+
+	/**
+	 * Adds column selects to efficiently grab User data from the database
+	 *
+	 * @param  Builder $query
+	 * @return Builder
+	 */
+	public function scopeSelectForFeed($query)
+	{
+		return $query->addSelect('id', 'first_name', 'last_name', 'email');
 	}
 
 	/*

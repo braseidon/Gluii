@@ -2,6 +2,13 @@
 
 class AbstractRepository {
 
+	/**
+	 * Cache array for the Repository
+	 *
+	 * @var array $cache
+	 */
+	protected $cache = [];
+
 	/*
 	|--------------------------------------------------------------------------
 	| Repo Stuff

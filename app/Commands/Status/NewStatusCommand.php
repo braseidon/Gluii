@@ -2,6 +2,7 @@
 
 use App\Commands\Command;
 use App\Repositories\StatusRepository;
+use Event;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 
@@ -53,15 +54,9 @@ class NewStatusCommand extends Command implements SelfHandling {
 	{
 		$status = $repository->postStatus($this->profileUserId, $this->authorId, $this->status);
 
-		// If the status was posted on someone's wall...
-		if($this->profileUserId == $this->authorId)
-			return true;
-
-		\Event::fire(new \App\Events\Status\UserReceivedNewStatus(
-			$this->authorId,
-			$this->profileUserId,
-			$status->id
-		));
+		// Fire the Events
+		Event::fire(new \App\Events\Statuses\NewStatusPosted($status));
+		Event::fire(new \App\Events\Statuses\UserReceivedNewStatus($this->authorId, $this->profileUserId, $status));
 
 		return true;
 	}

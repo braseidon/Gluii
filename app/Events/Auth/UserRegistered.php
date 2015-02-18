@@ -1,7 +1,8 @@
 <?php namespace App\Events\Auth;
 
-use App\Events\Event;
 use App\User;
+
+use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
 class UserRegistered extends Event {

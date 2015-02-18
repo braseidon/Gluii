@@ -6,7 +6,7 @@
 				{!! Form::hidden('status_id', $status->id) !!}
 				{!! Form::token() !!}
 				<button type="submit" class="btn btn-link btn-sm">
-					<i class="icon icon-like"></i> Unlike
+					<i class="icon icon-dislike"></i> Unlike
 				</button>
 			</form>
 		@else

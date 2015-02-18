@@ -1,5 +1,5 @@
 <!-- time posted -->
-<span class="btn btn-link btn-xs text-muted no-padder">
+<span class="btn btn-link btn-xs text-muted no-padder" title="{{ $comment->present()->timeFormatted }}">
 	<i class="fa fa-fw fa-clock-o"></i> {{ $comment->created_at->diffForHumans() }}
 </span>
 <!-- like -->

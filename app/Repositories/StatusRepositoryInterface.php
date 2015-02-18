@@ -17,4 +17,12 @@ interface StatusRepositoryInterface {
 	 */
 	public function findStatusById($id);
 
+	/**
+	 * Delete a Status including its StatusLikes, Comments, and CommentLikes by ID
+	 *
+	 * @param  integer $id
+	 * @return bool
+	 */
+	public function deleteStatusById($id);
+
 }

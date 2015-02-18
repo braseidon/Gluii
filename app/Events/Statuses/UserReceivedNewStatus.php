@@ -1,37 +1,40 @@
-<?php namespace App\Events\Users;
+<?php namespace App\Events\Statuses;
+
+use App\Status;
 
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
-class FriendRequestAccepted extends Event {
+class UserReceivedNewStatus extends Event {
 
 	use SerializesModels;
 
 	/**
-	 * The User sending the friend request
-	 *
 	 * @var integer $fromId
 	 */
 	public $fromId;
 
 	/**
-	 * The User sending the friend request
-	 *
 	 * @var integer $toId
 	 */
 	public $toId;
+
+	/**
+	 * @var Status $status
+	 */
+	public $status;
 
 	/**
 	 * Create a new event instance.
 	 *
 	 * @param integer $fromId
 	 * @param integer $toId
-	 * @return void
+	 * @param Status  $status
 	 */
-	public function __construct($fromId, $toId)
+	public function __construct($fromId, $toId, Status $status)
 	{
 		$this->fromId	= $fromId;
 		$this->toId		= $toId;
+		$this->status	= $status;
 	}
-
 }

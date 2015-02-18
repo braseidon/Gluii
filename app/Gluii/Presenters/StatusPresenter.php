@@ -21,7 +21,7 @@ class StatusPresenter extends Presenter {
 	 */
 	public function timeFormatted()
 	{
-		return $this->entity->created_at->format('g:ia F jS, Y');
+		return $this->entity->created_at->format('F jS, Y @ g:ia');
 	}
 
 	/**

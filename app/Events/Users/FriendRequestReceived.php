@@ -1,7 +1,6 @@
 <?php namespace App\Events\Users;
 
 use App\Events\Event;
-
 use Illuminate\Queue\SerializesModels;
 
 class FriendRequestReceived extends Event {

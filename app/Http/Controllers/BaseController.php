@@ -53,4 +53,50 @@ class BaseController extends Controller {
 		}
 	}
 
+	/*
+	|--------------------------------------------------------------------------
+	| Responses
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+
+	/**
+	 * Return a JSON response, for Ajax
+	 *
+	 * @param  boolean $success
+	 * @param  string  $output
+	 * @return Response
+	 */
+	protected function returnAjax($success = true, $output = null, $message = null)
+	{
+		// if(! \Request::ajax())
+		// 	return false;
+
+		return \Response::json([
+			'success'	=> $success,
+			'output'	=> $output,
+			'message'	=> $message,
+		], 200);
+	}
+
+	/**
+	 * Return a JSON response, for Ajax, witha  Gritter message
+	 *
+	 * @param  boolean $success
+	 * @param  string  $output
+	 * @return Response
+	 */
+	protected function returnAjaxMessage($success = true, $message = null)
+	{
+		if(! \Request::ajax())
+			return false;
+
+		return \Response::json([
+			'success'	=> $success,
+			'isMessage'	=> true,
+			'message'	=> $message,
+		], 200);
+	}
+
 }

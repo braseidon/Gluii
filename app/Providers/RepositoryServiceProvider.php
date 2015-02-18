@@ -33,9 +33,12 @@ class RepositoryServiceProvider extends ServiceProvider {
 		// UserRepository
 		$this->app->bind('App\Repositories\UserRepositoryInterface',
 			'App\Repositories\UserRepository');
-
 		// StatusRepository
-		$this->app->bind('App\Repositories\StatusRepository');
+		$this->app->bind('App\Repositories\StatusRepositoryInterface',
+			'App\Repositories\StatusRepository');
+		// NotificationRepository
+		$this->app->bind('App\Repositories\NotificationRepositoryInterface',
+			'App\Repositories\NotificationRepository');
 	}
 
 	/**
@@ -47,7 +50,8 @@ class RepositoryServiceProvider extends ServiceProvider {
 	{
 		return [
 			'App\Repositories\UserRepositoryInterface',
-			'App\Repositories\StatusRepository',
+			'App\Repositories\StatusRepositoryInterface',
+			'App\Repositories\NotificationRepositoryInterface'
 		];
 	}
 

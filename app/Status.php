@@ -62,6 +62,18 @@ class Status extends Model {
 		return $this->hasMany('App\Comment', 'status_id');
 	}
 
+	/**
+	 * Relationship with Users through Subscriptions
+	 *
+	 * @return Collection
+	 */
+	public function subscribers()
+	{
+		return $this->belongsToMany('App\User', 'status_subscribers', 'status_id', 'user_id')
+			->wherePivot('notifications', '=', 1)
+			->withPivot('user_id', 'status_id', 'notifications');
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Query Scopes

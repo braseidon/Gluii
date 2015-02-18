@@ -1,7 +1,6 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\Comment\Traits\CommentLikeableTrait;
 

@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use Event;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -11,7 +12,10 @@ class EventServiceProvider extends ServiceProvider {
 	 * @var array
 	 */
 	protected $subscribe = [
-		\App\Handlers\Events\Status\StatusNotifications::class
+		\App\Handlers\Events\Auth\UserJustRegistered::class,
+		\App\Handlers\Events\Users\UserSubscriber::class,
+		\App\Handlers\Events\Statuses\StatusSubscriber::class,
+		\App\Handlers\Events\NotificationSubscriber::class,
 	];
 
 	/**
@@ -22,20 +26,6 @@ class EventServiceProvider extends ServiceProvider {
 	protected $listen = [
 		'event.name' => [
 			'EventListener',
-		],
-
-		// Users
-		\App\Events\Users\UserRegistered::class => [
-			\App\Handlers\Events\SendWelcomeEmail::class,
-		],
-		\App\Events\Users\FriendRequestReceived::class => [
-			\App\Handlers\Events\Users\FriendRequestWasReceived::class,
-		],
-		\App\Events\Users\FriendRequestAccepted::class => [
-			\App\Handlers\Events\Users\FriendRequestWasAccepted::class,
-		],
-		\App\Events\Users\FriendRequestCanceled::class => [
-			\App\Handlers\Events\Users\FriendRequestWasCanceled::class,
 		],
 	];
 
@@ -48,9 +38,6 @@ class EventServiceProvider extends ServiceProvider {
 	public function boot(DispatcherContract $events)
 	{
 		parent::boot($events);
-
-		\Event::subscribe(\App\Handlers\Events\Auth\UserJustRegistered::class);
-		\Event::subscribe(\App\Handlers\Events\Status\StatusNotifications::class);
 	}
 
 }

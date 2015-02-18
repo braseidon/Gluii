@@ -108,6 +108,21 @@ Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function()
 });
 
 /**
+ * Notifications
+ *
+ * @namespace User
+ */
+Route::group(['prefix' => 'notifications', 'namespace' => 'User'], function()
+{
+	# Friend Requests
+	Route::get('friend-requests', ['as' => 'notifications/friend-requests', 'uses' => 'NotificationController@getFriendRequests']);
+	# Messages
+	Route::get('messages', ['as' => 'notifications/messages', 'uses' => 'NotificationController@getMessages']);
+	# Notifications
+	Route::get('notifications', ['as' => 'notifications/notifications', 'uses' => 'NotificationController@getNotifications']);
+});
+
+/**
  * Explore
  *
  * @namespace Explore

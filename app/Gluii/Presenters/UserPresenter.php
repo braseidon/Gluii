@@ -5,6 +5,14 @@ use HTML;
 
 class UserPresenter extends Presenter {
 
+	/*
+	|--------------------------------------------------------------------------
+	| Name / Image / Title - Display
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+
 	/**
 	 * Return the User's full name
 	 *
@@ -13,20 +21,6 @@ class UserPresenter extends Presenter {
 	public function name()
 	{
 		return $this->entity->first_name . ' ' . $this->entity->last_name;
-	}
-
-	public function title()
-	{
-		$user = '<label class="label bg-success m-l-xs">User</label>';
-		$mod = '<label class="label bg-info m-l-xs">Editor</label>';
-		$admin = '<label class="label bg-primary m-l-xs">Admin</label>';
-	}
-
-	public function onlineStatus()
-	{
-		return $online = '<i class="on b-white"></i>';
-		$offline	= '<i class="busy b-white"></i>';
-		$away		= '<i class="away b-white"></i>';
 	}
 
 	/**
@@ -54,4 +48,42 @@ class UserPresenter extends Presenter {
 
 		return '<img src="'. $this->gravatar($size) . '" '. $attributes . ' alt="'. $this->name . '" />';
 	}
+
+	/**
+	 * Return the User's title, if special
+	 *
+	 * @return string
+	 */
+	public function title()
+	{
+		if($this->entity->hasAccess('admin'))
+			return ' <label class="label bg-primary m-l-xs">Admin</label>';
+
+		if($this->entity->hasAccess('mod'))
+			return ' <label class="label bg-info m-l-xs">Mod</label>';
+
+		return false;
+
+		$user = '<label class="label bg-success m-l-xs">User</label>';
+	}
+
+	/**
+	 * Return a User's online status
+	 *
+	 * @return string
+	 */
+	public function onlineStatus()
+	{
+		return $online = '<i class="on b-white"></i>';
+		$offline	= '<i class="busy b-white"></i>';
+		$away		= '<i class="away b-white"></i>';
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Other Stuff
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
 }

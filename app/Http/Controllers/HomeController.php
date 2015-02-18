@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use Auth;
+use App\Repositories\StatusRepositoryInterface;
 
 class HomeController extends BaseController {
 
@@ -20,12 +21,12 @@ class HomeController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function getIndex(\App\Repositories\StatusRepository $repository)
+	public function getIndex(StatusRepositoryInterface $repository)
 	{
 		if(! Auth::check())
 			return view('auth.register');
 
-		$statuses = $repository->allStatuses()->get();
+		$statuses = $repository->allStatuses();
 
 		return view('home', compact('statuses'));
 	}

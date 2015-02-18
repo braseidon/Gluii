@@ -10,24 +10,21 @@
 # Assets
 /public/error_log
 /public/images/upload
-
-# Composer
-composer.phar
+/resources/assets/vendor
+/resources/assets/build
 
 # OS
 .DS_Store
-.idea/
-vagrant
+/.idea
+/vagrant
 .vagrant
 Thumbs.db
 
 # Packages
 _ide_helpers.php
-rocketeer.phar
 /app/config/templates
 
-# Node.js & Gulp & Bower
-bower_components
-node_modules
+# Node.js / Gulp / Bower
+/bower_components
+/node_modules
 npm-debug.log
-resources/assets/vendor/
