@@ -16,8 +16,7 @@
  */
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@getIndex']);
 
-Route::group(['prefix' => 'feed'], function()
-{
+Route::group(['prefix' => 'feed'], function () {
 	# Groups
 	Route::get('families', ['as' => 'feed/families', 'uses' => 'HomeController@getIndex']);
 	# Influencers
@@ -29,8 +28,7 @@ Route::group(['prefix' => 'feed'], function()
  *
  * @namespace Auth
  */
-Route::group(['namespace' => 'Auth'], function()
-{
+Route::group(['namespace' => 'Auth'], function () {
 	# Log In
 	Route::get('login', ['as' => 'auth/login', 'uses' => 'AuthController@getLogin']);
 	Route::post('login', 'AuthController@postLogin');
@@ -56,8 +54,7 @@ Route::group(['namespace' => 'Auth'], function()
  *
  * @namespace User
  */
-Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
-{
+Route::group(['prefix' => 'user', 'namespace' => 'User'], function () {
 	/**
 	 * View Profile
 	 */
@@ -66,11 +63,9 @@ Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
 	/**
 	 * Friend & Friend Requests
 	 */
-	Route::group(['prefix' => 'friends'], function()
-	{
+	Route::group(['prefix' => 'friends'], function () {
 		# Friend Requests
-		Route::group(['prefix' => 'requests'], function()
-		{
+		Route::group(['prefix' => 'requests'], function () {
 			# Send Request
 			Route::post('addnew', ['as' => 'user/request/add', 'uses' => 'FriendRequestController@postSendFriendRequest']);
 			# Accept Request
@@ -88,8 +83,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'User'], function()
  *
  * @namespace User
  */
-Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function()
-{
+Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function () {
 	# View Single
 	Route::post('{id}/view', ['as' => 'status/view', 'uses' => 'StatusController@getViewStatus']);
 	# Post Status
@@ -102,8 +96,7 @@ Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function()
 	Route::post('delete', ['as' => 'status/delete', 'uses' => 'StatusController@postDeleteStatus']);
 
 	# Comments
-	Route::group(['prefix' => 'comments'], function()
-	{
+	Route::group(['prefix' => 'comments'], function () {
 		# Post Comment
 		Route::post('post-new', ['as' => 'status/comment/new', 'uses' => 'StatusController@postNewComment']);
 		# Like Comment
@@ -120,8 +113,7 @@ Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function()
  *
  * @namespace User
  */
-Route::group(['prefix' => 'notifications', 'namespace' => 'User'], function()
-{
+Route::group(['prefix' => 'notifications', 'namespace' => 'User'], function () {
 	# Friend Requests
 	Route::get('friend-requests', ['as' => 'notifications/friend-requests', 'uses' => 'NotificationController@getFriendRequests']);
 	# Messages
@@ -135,8 +127,7 @@ Route::group(['prefix' => 'notifications', 'namespace' => 'User'], function()
  *
  * @namespace Explore
  */
-Route::group(['namespace' => 'Explore', 'prefix' => 'explore'], function()
-{
+Route::group(['namespace' => 'Explore', 'prefix' => 'explore'], function () {
 	Route::get('/', ['as' => 'explore', 'uses' => 'ExploreController@getIndex']);
 });
 
@@ -145,8 +136,7 @@ Route::group(['namespace' => 'Explore', 'prefix' => 'explore'], function()
  *
  * @namespace Festivals
  */
-Route::group(['namespace' => 'Festivals', 'prefix' => 'festivals'], function()
-{
+Route::group(['namespace' => 'Festivals', 'prefix' => 'festivals'], function () {
 	Route::get('/', ['as' => 'festivals', 'uses' => 'FestivalsController@getIndex']);
 });
 
@@ -155,8 +145,7 @@ Route::group(['namespace' => 'Festivals', 'prefix' => 'festivals'], function()
  *
  * @namespace Families
  */
-Route::group(['namespace' => 'Families', 'prefix' => 'families'], function()
-{
+Route::group(['namespace' => 'Families', 'prefix' => 'families'], function () {
 	Route::get('/', ['as' => 'families', 'uses' => 'FamiliesController@getIndex']);
 	# View Family
 	Route::get('{slug}', ['as' => 'families/view', 'uses' => 'FamiliesController@getIndex']);
@@ -167,8 +156,7 @@ Route::group(['namespace' => 'Families', 'prefix' => 'families'], function()
  *
  * @namespace Influences
  */
-Route::group(['namespace' => 'Influences', 'prefix' => 'influences'], function()
-{
+Route::group(['namespace' => 'Influences', 'prefix' => 'influences'], function () {
 	Route::get('/', ['as' => 'influences', 'uses' => 'InfluencesController@getIndex']);
 	# View Family
 	Route::get('{slug}', ['as' => 'influences/view', 'uses' => 'InfluencesController@getIndex']);
@@ -181,22 +169,9 @@ Route::group(['namespace' => 'Influences', 'prefix' => 'influences'], function()
 |
 |
 */
-Route::group(['prefix' => 'img'], function()
-{
+Route::group(['prefix' => 'img'], function () {
 	# Cover Images
 	Route::get('/cover/{path}', ['as' => 'image/cover', 'uses' => 'ImageController@getCoverPhoto']);
-});
-
-/*
-|-------------------------------------------------------------------------------------------------
-| Admin Section
-|-------------------------------------------------------------------------------------------------
-|
-|
-*/
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
-{
-
 });
 
 /*

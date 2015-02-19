@@ -2,7 +2,7 @@
 	<span>Admin Panel</span>
 </li>
 <!-- Users -->
-<li>
+<li{!! ! Route::is('admin/users*') ? '' : ' class="active"' !!}>
 	<a href class="auto">
 		<span class="pull-right text-muted">
 			<i class="fa fa-fw fa-angle-right text"></i>
@@ -13,13 +13,13 @@
 	</a>
 	<ul class="nav nav-sub dk">
 		<li class="nav-sub-header"><a href><span>Users</span></a></li>
-		<li><a href="#"><span>All Users</span></a></li>
-		<li><a href="#"><span>Create User</span></a></li>
+		{!! HTML::liLinkRoute('admin/users', 'All Users') !!}
+		{!! HTML::liLinkRoute('admin/users/create', 'Create User') !!}
 	</ul>
 </li>
 
 <!-- Roles -->
-<li>
+<li{!! ! Route::is('admin/roles*') ? '' : ' class="active"' !!}>
 	<a href class="auto">
 		<span class="pull-right text-muted">
 			<i class="fa fa-fw fa-angle-right text"></i>
@@ -30,8 +30,8 @@
 	</a>
 	<ul class="nav nav-sub dk">
 		<li class="nav-sub-header"><a href><span>Roles</span></a></li>
-		<li><a href="#"><span>All Roles</span></a></li>
-		<li><a href="#"><span>Create Role</span></a></li>
+		<li><a href="#">All Roles</a></li>
+		<li><a href="#">Create Role</a></li>
 	</ul>
 </li>
 <!-- ./admin/settings/app -->

@@ -50,13 +50,10 @@
 				<div class="hbox hbox-auto-xs">
 					<div class="vbox">
 						<!-- page title -->
-						{{--@if(! empty(trim($__env->yieldContent('title'))))
-							<div class="bg-light lter b-b wrapper-md ng-scope">
-								<div class="container">
-									<h1 class="m-n font-thin h3">{{ trim($__env->yieldContent('title')) }}</h1>
-								</div>
-							</div>
-						@endif--}}
+						{{-- Admin Page Title --}}
+						@if(Route::is('admin/*'))
+							@include('template.partials.title')
+						@endif
 
 						<div class="container">
 							<!-- top content -->

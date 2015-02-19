@@ -238,4 +238,11 @@ $(function() {
 		return typeof ret !== 'undefined' ? ret : this;
 	};
 
+	// table select/deselect all
+	$(document).on('change', 'table thead [type="checkbox"]', function(e){
+		e && e.preventDefault();
+		var $table = $(e.target).closest('table'), $checked = $(e.target).is(':checked');
+		$('tbody [type="checkbox"]',$table).prop('checked', $checked);
+	});
+
 });

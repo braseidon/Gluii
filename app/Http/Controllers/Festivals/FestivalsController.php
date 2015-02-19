@@ -1,12 +1,11 @@
 <?php namespace App\Http\Controllers\Festivals;
 
-use App\Http\Requests;
-use App\Http\Controllers\BaseController;
-
-use Illuminate\Http\Request;
-
-use DB;
 use App\User;
+use DB;
+
+use App\Http\Controllers\BaseController;
+use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class FestivalsController extends BaseController {
 

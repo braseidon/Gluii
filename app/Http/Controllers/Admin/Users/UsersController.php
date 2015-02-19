@@ -1,14 +1,13 @@
 <?php namespace App\Http\Controllers\Admin\Users;
 
+use App\Repositories\UserRepositoryInterface;
 use Auth;
-use View;
-use Input;
-use Redirect;
-use Validator;
 use Activation;
 use Cartalyst\Sentinel\Addons\UniquePasswords\Exceptions\NotUniquePasswordException;
 
-class UsersController extends AuthorizedController {
+use App\Http\Controllers\Admin\AdminController;
+
+class UsersController extends AdminController {
 
 	/**
 	 * The Sentinel Users repository.
@@ -16,6 +15,13 @@ class UsersController extends AuthorizedController {
 	 * @var \Cartalyst\Sentinel\Users\UserRepositoryInterface
 	 */
 	protected $users;
+
+	/**
+	 * Placeholder for a form Request
+	 *
+	 * @var Request $request
+	 */
+	protected $request;
 
 	/**
 	 * Constructor.
@@ -36,19 +42,27 @@ class UsersController extends AuthorizedController {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function index()
+	public function getIndex(UserRepositoryInterface $repository)
 	{
-		$users = $this->users->createModel()->paginate();
+		$users = $repository->listUsers();
 
-		return View::make('sentinel.users.index', compact('users'));
+		return view()->make('admin.users.index', compact('users'));
 	}
+
+	/*
+	|-------------------------------------------------------------------------------------------------
+	| Create
+	|-------------------------------------------------------------------------------------------------
+	|
+	|
+	*/
 
 	/**
 	 * Shows the form for creating new user.
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function create()
+	public function getCreateUser()
 	{
 		return $this->showForm('create');
 	}
@@ -58,10 +72,18 @@ class UsersController extends AuthorizedController {
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function store()
+	public function postCreateUser()
 	{
 		return $this->processForm('create');
 	}
+
+	/*
+	|-------------------------------------------------------------------------------------------------
+	| Edit
+	|-------------------------------------------------------------------------------------------------
+	|
+	|
+	*/
 
 	/**
 	 * Shows the form for updating user.
@@ -69,7 +91,7 @@ class UsersController extends AuthorizedController {
 	 * @param  int  $id
 	 * @return mixed
 	 */
-	public function edit($id)
+	public function getEditUser($id)
 	{
 		return $this->showForm('update', $id);
 	}
@@ -80,10 +102,20 @@ class UsersController extends AuthorizedController {
 	 * @param  int  $id
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function update($id)
+	public function postEditUser(\App\Http\Requests\Admin\Users\EditUserRequest $request, $id)
 	{
+		$this->request = $request;
+
 		return $this->processForm('update', $id);
 	}
+
+	/*
+	|-------------------------------------------------------------------------------------------------
+	| Delete
+	|-------------------------------------------------------------------------------------------------
+	|
+	|
+	*/
 
 	/**
 	 * Removes the specified user.
@@ -99,16 +131,24 @@ class UsersController extends AuthorizedController {
 			{
 				$user->delete();
 
-				return Redirect::route('users.index')->withSuccess(
+				return redirect()->route('admin/users/index')->withSuccess(
 					trans('users/messages.success.delete')
 				);
 			}
 		}
 
-		return Redirect::route('users.index')->withErrors(
+		return redirect()->route('admin/users/index')->withErrors(
 			trans('users/messages.error.delete')
 		);
 	}
+
+	/*
+	|-------------------------------------------------------------------------------------------------
+	| Helpers
+	|-------------------------------------------------------------------------------------------------
+	|
+	|
+	*/
 
 	/**
 	 * Shows the form.
@@ -123,7 +163,7 @@ class UsersController extends AuthorizedController {
 		{
 			if(! $user = $this->users->createModel()->find($id))
 			{
-				return Redirect::route('users.index')->withErrors(
+				return redirect()->route('admin/users/index')->withErrors(
 					trans('users/messages.not_found', compact('id'))
 				);
 			}
@@ -139,7 +179,7 @@ class UsersController extends AuthorizedController {
 		// Get all the available roles
 		$roles = $this->roles->createModel()->all();
 
-		return View::make('sentinel.users.form', compact('mode', 'user', 'roles', 'userRoles'));
+		return view()->make('admin.users.edit', compact('mode', 'user', 'roles', 'userRoles'));
 	}
 
 	/**
@@ -151,93 +191,55 @@ class UsersController extends AuthorizedController {
 	 */
 	protected function processForm($mode, $id = null)
 	{
-		$rules = [
-			'email'            => 'required|unique:users',
-			'password'         => 'sometimes|required',
-			'password_confirm' => 'required_with:password|same:password',
-		];
+		$request = $this->request;
 
 		if($id)
 		{
-			$user = $this->users->createModel()->find($id);
-
-			$rules['email'] .= ",email,{$user->email},email";
-
-			$input = $this->prepareInput(Input::all(), $mode === 'update' ? true : false);
-
-			$messages = $this->validateUser($input, $rules);
-
-			if($messages->isEmpty())
-			{
-				try
-				{
-					// Update the user
-					$this->users->update($user, array_except($input, 'roles'));
-
-					// Get the new user roles
-					$roles = array_get($input, 'roles', []);
-
-					// Get the user roles
-					$userRoles = $user->roles->lists('id');
-
-					// Prepare the roles to be added and removed
-					$toAdd = array_diff($roles, $userRoles);
-					$toDel = array_diff($userRoles, $roles);
-
-					// Detach the user roles
-					if(! empty($toDel)) $user->roles()->detach($toDel);
-
-					// Attach the user roles
-					if(! empty($toAdd)) $user->roles()->attach($toAdd);
-				}
-				catch (NotUniquePasswordException $e)
-				{
-					return Redirect::back()->withInput()->withErrors(
-						'This password was used before. You must choose a unique password.'
-					);
-				}
-			}
+			$user  = $this->users->createModel()->find($id);
+			$input = $this->prepareInput($request->input(), $mode === 'update' ? true : false);
 		}
 		else
 		{
-			$input = $this->prepareInput(Input::all(), true);
+			$input      = $this->prepareInput($request->input(), true);
+			$user       = $this->users->create($input);
+			$activation = Activation::create($user);
 
-			$messages = $this->validateUser($input, $rules);
-
-			if($messages->isEmpty())
-			{
-				$user = $this->users->create($input);
-
-				$activation = Activation::create($user);
-
-				Activation::complete($user, $activation->code);
-			}
+			Activation::complete($user, $activation->code);
 		}
 
-		if($messages->isEmpty())
+		try
 		{
-			return Redirect::route('users.index')->withSuccess(
+			// Update the user
+			$this->users->update($user, array_except($input, 'roles'));
+
+			// Get the new user roles
+			$roles = array_get($input, 'roles', []);
+
+			// Get the user roles
+			$userRoles = $user->roles->lists('id');
+
+			// Prepare the roles to be added and removed
+			$toAdd = array_diff($roles, $userRoles);
+			$toDel = array_diff($userRoles, $roles);
+
+			// Detach the user roles
+			if(! empty($toDel)) $user->roles()->detach($toDel);
+
+			// Attach the user roles
+			if(! empty($toAdd)) $user->roles()->attach($toAdd);
+
+			return redirect()->route('admin/users')->withSuccess(
 				trans("users/messages.success.{$mode}")
 			);
 		}
+		catch (NotUniquePasswordException $e)
+		{
+			return redirect()->back()->withInput()->withErrors(
+				'This password was used before. You must choose a unique password.'
+			);
+		}
 
-		return Redirect::back()->withInput()->withErrors($messages);
-	}
-
-	/**
-	 * Validates a user.
-	 *
-	 * @param  array  $data
-	 * @param  array  $rules
-	 * @return \Illuminate\Support\MessageBag
-	 */
-	protected function validateUser(array $data, array $rules)
-	{
-		$validator = Validator::make($data, $rules);
-
-		$validator->passes();
-
-		return $validator->errors();
+		return redirect()->back()->withErrors();
 	}
 
 	/**

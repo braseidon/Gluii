@@ -1,12 +1,14 @@
-<?php namespace App\Http\Controllers\Admin\Users;
+<?php namespace app\Http\Controllers\Admin\Users;
 
 use Auth;
-use View;
 use Input;
 use Redirect;
 use Validator;
 
-class RolesController extends AuthorizedController {
+use App\Http\Controllers\Admin\AdminController;
+
+class RolesController extends AdminController
+{
 
 	/**
 	 * The Sentinel Roles repository.
@@ -36,7 +38,7 @@ class RolesController extends AuthorizedController {
 	{
 		$roles = $this->roles->createModel()->paginate();
 
-		return View::make('sentinel.roles.index', compact('roles'));
+		return view()->make('sentinel.roles.index', compact('roles'));
 	}
 
 	/**
@@ -91,16 +93,15 @@ class RolesController extends AuthorizedController {
 	{
 		$role = $this->roles->createModel()->find($id);
 
-		if($role && $role->users->count() === 0)
-		{
+		if ($role && $role->users->count() === 0) {
 			$role->delete();
 
-			return Redirect::route('roles.index')->withSuccess(
+			return redirect()->route('roles.index')->withSuccess(
 				trans('roles/messages.success.delete')
 			);
 		}
 
-		return Redirect::route('roles.index')->withErrors(
+		return redirect()->route('roles.index')->withErrors(
 			trans('roles/messages.error.delete')
 		);
 	}
@@ -114,21 +115,17 @@ class RolesController extends AuthorizedController {
 	 */
 	protected function showForm($mode, $id = null)
 	{
-		if($id)
-		{
-			if(! $role = $this->roles->createModel()->find($id))
-			{
-				return Redirect::route('roles.index')->withErrors(
+		if ($id) {
+			if (! $role = $this->roles->createModel()->find($id)) {
+				return redirect()->route('roles.index')->withErrors(
 					trans('roles/messages.not_found', compact('id'))
 				);
 			}
-		}
-		else
-		{
+		} else {
 			$role = $this->roles->createModel();
 		}
 
-		return View::make('sentinel.roles.form', compact('mode', 'role'));
+		return view()->make('sentinel.roles.form', compact('mode', 'role'));
 	}
 
 	/**
@@ -147,37 +144,31 @@ class RolesController extends AuthorizedController {
 			'slug' => 'required|unique:roles'
 		];
 
-		if($id)
-		{
+		if ($id) {
 			$role = $this->roles->createModel()->find($id);
 
 			$rules['slug'] .= ",slug,{$role->slug},slug";
 
 			$messages = $this->validateRole($input, $rules);
 
-			if($messages->isEmpty())
-			{
+			if ($messages->isEmpty()) {
 				$role->fill($input)->save();
 			}
-		}
-		else
-		{
+		} else {
 			$messages = $this->validateRole($input, $rules);
 
-			if($messages->isEmpty())
-			{
+			if ($messages->isEmpty()) {
 				$role = $this->roles->createModel()->create($input);
 			}
 		}
 
-		if($messages->isEmpty())
-		{
-			return Redirect::route('roles.index')->withSuccess(
+		if ($messages->isEmpty()) {
+			return redirect()->route('roles.index')->withSuccess(
 				trans("roles/messages.success.{$mode}")
 			);
 		}
 
-		return Redirect::back()->withInput()->withErrors($messages);
+		return redirect()->back()->withInput()->withErrors($messages);
 	}
 
 	/**
@@ -195,5 +186,4 @@ class RolesController extends AuthorizedController {
 
 		return $validator->errors();
 	}
-
 }

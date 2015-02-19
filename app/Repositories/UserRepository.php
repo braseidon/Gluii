@@ -121,6 +121,19 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 			->first();
 	}
 
+	/**
+	 * Returns a User list, paginated
+	 *
+	 * @param  integer $perPage
+	 * @return Collection
+	 */
+	public function listUsers($perPage = 20)
+	{
+		return User::with('friendcount')
+			->orderBy('id', 'DESC')
+			->paginate($perPage);
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Friend Request Actions

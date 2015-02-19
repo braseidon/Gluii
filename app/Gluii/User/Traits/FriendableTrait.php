@@ -31,23 +31,6 @@ trait FriendableTrait {
 			->withPivot('accepted', 'user_id', 'friend_id')
 			->wherePivot('accepted', '=', 1)
 			->withTimestamps();
-
-		// Original
-		// return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
-		// 	->withPivot('accepted')//, 'user_id', 'friend_id'
-		// 	->withTimestamps();
-
-		// Hack-ish
-		// return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
-		// 	->withPivot('accepted', 'user_id', 'friend_id')
-		// 	->wherePivot('accepted', '=', 1)
-		// 	->where(function($q)
-		// 	{
-		// 		$q->where('friend_id', '=', $this->id)
-		// 			->orWhere('user_id', '=', $this->id)
-		// 	})
-		// 	->join('users as users2', 'users2.id', '=', 'users_friends.friend_id')  // join users table to..
-		// 	->withTimestamps();
 	}
 
 	/**
@@ -74,6 +57,15 @@ trait FriendableTrait {
 			->withPivot('accepted', 'user_id', 'friend_id')
 			// ->wherePivot('accepted', 0) // to filter only pending
 			->withTimestamps();
+	}
+
+	public function friendcount()
+	{
+		return $this->belongsToMany(static::class, 'users_friends', 'user_id', 'friend_id')
+			->withPivot('accepted', 'user_id', 'friend_id')
+			->wherePivot('accepted', '=', 1)
+			->select( [\DB::raw("count(`users_friends`.`id`) as friend_count"), "user_id"] )
+						->groupBy("user_id");
 	}
 
 	/**
