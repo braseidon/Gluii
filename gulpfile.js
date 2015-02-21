@@ -6,10 +6,10 @@ var plugins			= require('gulp-load-plugins')();
 
 // Distribution aka the fishing line for all files
 var dir = {
-	build:		'./resources/assets/build/',
-	dist:		'./public/assets/dist/',
-	source:		'./resources/assets/',
-	vendor:		'./resources/assets/vendor/'
+	build:		'resources/assets/build/',
+	dist:		'public/assets/dist/',
+	source:		'resources/assets/',
+	vendor:		'resources/assets/vendor/'
 	};
 
 var config = {
@@ -19,7 +19,6 @@ var config = {
 		less: [
 			dir.vendor + 'bootstrap/less/bootstrap.less',
 			dir.source + 'less/app.less',
-			dir.vendor + 'ionicons/less/ionicons.less',
 		],
 
 		// Fonts
@@ -31,8 +30,12 @@ var config = {
 		// CSS
 		css: [
 				// Essentials
-				dir.vendor + 'animate.css/animate.css',
+				// dir.source + 'css/fonts.css',
+				// dir.vendor + 'simple-line-icons/css/simple-line-icons.css',
+				// dir.vendor + 'ionicons/css/ionicons.css',
+				dir.source + 'css/gluii.css',
 				// Plugins
+				dir.vendor + 'animate.css/animate.css',
 				dir.vendor + 'jcrop/css/jquery.Jcrop.css',
 				dir.vendor + 'chosen/chosen.css',
 		],
@@ -44,18 +47,21 @@ var config = {
 			dir.vendor + 'modernizr/modernizr.js',
 			dir.vendor + 'bootstrap/dist/js/bootstrap.js',
 			dir.source + 'js/gluii.js',
-			dir.vendor + 'jqueryui-touch-punch/jquery.ui.touch-punch.min.js',
+			dir.source + 'js/app/ui-load.js',
+			dir.source + 'js/app/ui-nav.js',
+			dir.source + 'js/app/ui-toggle.js',
 			// Plugins
+			dir.vendor + 'jqueryui-touch-punch/jquery.ui.touch-punch.min.js',
 			dir.vendor + 'jcrop/js/jquery.Jcrop.js',
 			dir.vendor + 'slimscroll/jquery.slimscroll.js',
 			dir.vendor + 'chosen/chosen.jquery.js',
 			dir.vendor + 'bootstrap-filestyle/src/bootstrap-filestyle.js',
+			dir.vendor + 'eldarion-ajax/js/eldarion-ajax.min.js',
 		],
 
 		build: {
 			css: [
 				dir.build + 'css/less.css',
-				dir.build + 'css/fonts.css',
 				dir.build + 'css/styles.css',
 			],
 			js: [
@@ -66,30 +72,21 @@ var config = {
 	autoPrefixBrowers: ['Android2.3','Android>=4','Chrome>=20','Firefox>=24','Explorer>=8','iOS>=6','Opera>=12','Safari>=6']
 };
 
-// Check files exist
-// gulp.task('filecheck', function(){
-// 	var files = glob.sync(mask);
-// 	if (!files || !files.length) {
-// 	  // handle empty list
-// 	}
-// });
-
 // Less
-gulp.task('less', ['clean'], function(){
-	return gulp.src(config.paths.less, {base: dir.build + 'css/'})
+gulp.task('less', function(){
+	return gulp.src(config.paths.less, {base: dir.vendor + './css'})
 		.pipe(plugins.expectFile(config.paths.less))
 		.pipe(plugins.less().on('error', gutil.log))
-		.pipe(plugins.concatCss('app1.css'))
+		.pipe(plugins.concatCss('less.css'))
 		.pipe(gulp.dest(dir.build + 'css/'))
-		.pipe(plugins.notify({ message: 'Less compiled' }))
-		.on('error', function (err) { gutil.log(err); });
+		.pipe(plugins.notify({ message: 'Less compiled' }));
 });
 
 // CSS Scripts
 gulp.task('css', ['less'], function(){
 	return gulp.src(config.paths.css)
 		.pipe(plugins.expectFile(config.paths.css))
-		.pipe(plugins.concatCss('app-2.css'))
+		.pipe(plugins.concatCss('styles.css'))
 		.pipe(gulp.dest(dir.build + 'css/'))
 		.pipe(plugins.notify({ message: 'CSS from source + vendors compiled' }));
 });
@@ -108,10 +105,10 @@ gulp.task('styles', ['less', 'css'], function(){
 });
 
 // Javascript
-gulp.task('js', function(){
-	return gulp.src(config.paths.js.src)
-		.pipe(plugins.expectFile(config.paths.js.src))
-		.pipe(plugins.concat('app.js'))
+gulp.task('scripts', function(){
+	return gulp.src(config.paths.js)
+		.pipe(plugins.expectFile(config.paths.js))
+		.pipe(plugins.concat('gluii.js'))
 		.pipe(gulp.dest(dir.dist + 'js/'))
 		.pipe(plugins.rename({ suffix: '.min' }))
 		.pipe(plugins.uglify())
@@ -128,4 +125,4 @@ gulp.task('clean', function(cb) {
 	], cb);
 });
 
-gulp.task('default', ['clean', 'less', 'js']); // 'scripts',
+gulp.task('default', ['clean', 'less', 'css', 'styles', 'scripts']); // 'scripts',

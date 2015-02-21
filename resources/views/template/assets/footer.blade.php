@@ -1,4 +1,4 @@
-<script src="/assets/src/js/gluii.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/assets/dist/js/gluii.min.js"></script>
 
 <!-- Google Analytics -->
 <script>
