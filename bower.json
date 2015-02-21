@@ -1,24 +1,67 @@
 {
-	"name": "Gluii",
-	"version": "1.0.0",
-	"homepage": "https://github.com/ShutteR9/Gluii",
-	"authors": [
-		"Brandon Johnson <bluejd910@gmail.com>"
-	],
-	"license": "MIT",
-	"ignore": [
-		"**/.*",
-		"node_modules",
-		"bower_components",
-		"test",
-		"tests"
-	],
-	"dependencies": {
-		"bootstrap": "~3.3.2",
-		"font-awesome": "~4.2.0",
-		"jquery": "1.10.2",
-		"animate.css": "~3.2.0",
-		"simple-line-icons": "~0.1.1"
-	},
-	"directory": "resources/assets/vendor"
+  "name": "Gluii",
+  "version": "1.0.0",
+  "homepage": "https://github.com/ShutteR9/Gluii",
+  "authors": [
+    "Brandon Johnson <bluejd910@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "directory": "resources/assets/vendor",
+  "suppliedDependenceis": [
+    "jquery"
+  ],
+  "devDependencies": {
+    "ajax-bootstrap-select": "~1.3.1",
+    "animate.css": "~3.2.0",
+    "bootbox": "~4.3.0",
+    "bootstrap": "~3.3.2",
+    "bootstrap-fileinput": "~4.1.7",
+    "bootstrap-select": "~1.6.4",
+    "bootstrap-touchspin": "~3.0.1",
+    "bootstrap-tour": "~0.10.2",
+    "bootstrap_calendar": "~1.0.1",
+    "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.3.0/chosen_v1.3.0.zip",
+    "ckeditor": "~4.4.7",
+    "devicons": "~1.7.0",
+    "eldarion-ajax": "~0.12.0",
+    "entypo": "*",
+    "flag-icon-css": "~0.6.4",
+    "flot": "~0.8.3",
+    "font-awesome": "~4.2.0",
+    "fuelux": "~3.6.2",
+    "google-code-prettify": "~1.0.3",
+    "gritter": "~1.8.1",
+    "html5sortable": "*",
+    "igrowl": "~3.0.1",
+    "intro.js": "~1.0.0",
+    "ionicons": "~2.0.1",
+    "jcrop": "~0.9.12",
+    "jquery": "~1.11.2",
+    "jquery-file-upload": "~9.9.3",
+    "jquery.ui": "~1.11.3",
+    "jvectormap": "~2.0.0",
+    "lazysizes": "~0.9.0",
+    "modernizr": "~2.8.3",
+    "nestable": "*",
+    "normalize.css": "~3.0.2",
+    "ouibounce": "~0.0.11",
+    "parsleyjs": "~2.0.7",
+    "seiyria-bootstrap-slider": "~4.4.2",
+    "simple-line-icons": "~0.1.1",
+    "slimscroll": "~1.3.3",
+    "Sortable": "~1.1.1",
+    "typicons": "~2.0.7",
+    "screenfull": "~2.0.0",
+    "jquery-placeholder": "~2.1.1",
+    "bootstrap-filestyle": "~1.1.2",
+    "jqueryui-touch-punch": "*"
+  }
 }
