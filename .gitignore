@@ -12,6 +12,8 @@
 /public/images/upload
 /resources/assets/vendor
 /resources/assets/build
+/public/assets/dist/css/gluii.css
+/public/assets/dist/js/gluii.js
 
 # OS
 .DS_Store
