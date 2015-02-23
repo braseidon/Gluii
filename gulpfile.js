@@ -17,14 +17,7 @@ var config = {
 
 		// Less
 		less: [
-			dir.vendor + 'bootstrap/less/bootstrap.less',
 			dir.source + 'less/app.less',
-		],
-
-		// Fonts
-		fontdirs: [
-			dir.vendor + 'bootstrap/fonts',
-			dir.vendor + 'ionicons/fonts/',
 		],
 
 		// CSS
@@ -38,6 +31,12 @@ var config = {
 				dir.vendor + 'animate.css/animate.css',
 				dir.vendor + 'jcrop/css/jquery.Jcrop.css',
 				dir.vendor + 'chosen/chosen.css',
+		],
+
+		// Fonts
+		fontdirs: [
+			dir.vendor + 'bootstrap/fonts',
+			dir.vendor + 'ionicons/fonts/',
 		],
 
 		// Javascripts

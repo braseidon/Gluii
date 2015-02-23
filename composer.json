@@ -20,13 +20,15 @@
 		"intervention/imagecache": "~2.1.1",
 		"cartalyst/sentinel": "dev-feature/laravel-5",
 		"cartalyst/sentinel-social": "dev-feature/laravel-5",
-		"cartalyst/sentinel-unique-passwords": "dev-feature/laravel-5"
+		"cartalyst/sentinel-unique-passwords": "dev-feature/laravel-5",
+		"barryvdh/laravel-ide-helper": "~2.0",
+		"intervention/image": "~2.1"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
 		"way/generators": "~3.0",
-		"itsgoingd/clockwork": "dev-master",
+		"itsgoingd/clockwork": "~1.7",
 		"fzaninotto/faker": "1.5.x-dev",
 		"league/flysystem-dropbox": "1.0.*@dev",
 		"league/flysystem-ziparchive": "1.0.*@dev",
@@ -56,6 +58,7 @@
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
+			"php artisan ide-helper:generate",
 			"php artisan optimize"
 		],
 		"post-create-project-cmd": [

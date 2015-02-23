@@ -149,12 +149,12 @@ return [
 		 * Package Service Providers
 		 */
 		'Illuminate\Html\HtmlServiceProvider',
+		'Clockwork\Support\Laravel\ClockworkServiceProvider',
 		// 'Way\Generators\GeneratorsServiceProvider',
 
 		/*
 		 * ShutteR Service Providers
 		 */
-		'Clockwork\Support\Laravel\ClockworkServiceProvider',
 		'App\Providers\GliderServiceProvider',
 		'App\Providers\MacroServiceProvider',
 		'App\Providers\RepositoryServiceProvider',
@@ -166,6 +166,10 @@ return [
 		'Cartalyst\Sentinel\Addons\Social\Laravel\SocialServiceProvider',
 		'Cartalyst\Sentinel\Addons\UniquePasswords\Laravel\UniquePasswordsServiceProvider',
 
+		/**
+		 * Development Only...?
+		 */
+		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 	],
 
 	/*
@@ -226,7 +230,6 @@ return [
 		'Reminder'			=> 'Cartalyst\Sentinel\Laravel\Facades\Reminder',
 		'Sentinel'			=> 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
 		'Social'			=> 'Cartalyst\Sentinel\Addons\Social\Laravel\Facades\Social',
-
 	],
 
 ];

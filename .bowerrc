@@ -1,3 +1,4 @@
 {
-	"directory": "/resources/assets/vendor"
+	"directory": "/resources/assets/vendor",
+	"interactive": false
 }

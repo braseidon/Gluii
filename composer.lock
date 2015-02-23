@@ -4,8 +4,71 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0cbab4f88c9828f3818e68b04f1c9216",
+    "hash": "ee4c07a93f96c2ec2c1c5c66e0c63139",
     "packages": [
+        {
+            "name": "barryvdh/laravel-ide-helper",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barryvdh/laravel-ide-helper.git",
+                "reference": "317ef794a579474e96eaec1d6c1c5e0f7ac6ee5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/317ef794a579474e96eaec1d6c1c5e0f7ac6ee5e",
+                "reference": "317ef794a579474e96eaec1d6c1c5e0f7ac6ee5e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "5.0.x",
+                "illuminate/filesystem": "5.0.x",
+                "illuminate/support": "5.0.x",
+                "php": ">=5.4.0",
+                "phpdocumentor/reflection-docblock": "2.0.x",
+                "symfony/class-loader": "~2.3"
+            },
+            "require-dev": {
+                "doctrine/dbal": "~2.3"
+            },
+            "suggest": {
+                "doctrine/dbal": "Load information from the database about models for phpdocs (~2.3)"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Barryvdh\\LaravelIdeHelper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
+                }
+            ],
+            "description": "Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion.",
+            "keywords": [
+                "autocomplete",
+                "codeintel",
+                "helper",
+                "ide",
+                "laravel",
+                "netbeans",
+                "phpdoc",
+                "phpstorm",
+                "sublime"
+            ],
+            "time": "2015-02-04 08:12:01"
+        },
         {
             "name": "cartalyst/sentinel",
             "version": "dev-feature/laravel-5",
@@ -1398,12 +1461,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "68571f07e6645ef49cbef9d0b20165a0fec472d5"
+                "reference": "0b16ba4edbc2f533ad3823e16f6537b331f433f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/68571f07e6645ef49cbef9d0b20165a0fec472d5",
-                "reference": "68571f07e6645ef49cbef9d0b20165a0fec472d5",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0b16ba4edbc2f533ad3823e16f6537b331f433f8",
+                "reference": "0b16ba4edbc2f533ad3823e16f6537b331f433f8",
                 "shasum": ""
             },
             "require": {
@@ -1420,7 +1483,7 @@
                 "mtdowling/cron-expression": "~1.0",
                 "nesbot/carbon": "~1.0",
                 "php": ">=5.4.0",
-                "psy/psysh": "0.3.*",
+                "psy/psysh": "0.4.*",
                 "swiftmailer/swiftmailer": "~5.1",
                 "symfony/console": "2.6.*",
                 "symfony/debug": "2.6.*",
@@ -1515,7 +1578,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-02-21 04:20:15"
+            "time": "2015-02-23 22:15:19"
         },
         {
             "name": "league/flysystem",
@@ -1986,6 +2049,55 @@
             "time": "2015-01-18 11:29:59"
         },
         {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "dflydev/markdown": "~1.0",
+                "erusev/parsedown": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "phpDocumentor": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "mike.vanriel@naenius.com"
+                }
+            ],
+            "time": "2015-02-03 12:10:50"
+        },
+        {
             "name": "predis/predis",
             "version": "v1.0.1",
             "source": {
@@ -2075,16 +2187,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.3.5",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "2ce0e8f3020fd292c2ad2a496c5d83939823f642"
+                "reference": "eee16e9525405b32646b5a0f8a12fb84d566905d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/2ce0e8f3020fd292c2ad2a496c5d83939823f642",
-                "reference": "2ce0e8f3020fd292c2ad2a496c5d83939823f642",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/eee16e9525405b32646b5a0f8a12fb84d566905d",
+                "reference": "eee16e9525405b32646b5a0f8a12fb84d566905d",
                 "shasum": ""
             },
             "require": {
@@ -2102,6 +2214,7 @@
             },
             "suggest": {
                 "ext-pcntl": "Enabling the PCNTL extension makes PsySH a lot happier :)",
+                "ext-pdo-sqlite": "The doc command requires SQLite to work.",
                 "ext-posix": "If you have PCNTL, you'll want the POSIX extension as well.",
                 "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history."
             },
@@ -2141,7 +2254,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2015-02-12 19:35:52"
+            "time": "2015-02-23 21:21:17"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2194,6 +2307,56 @@
                 "mailer"
             ],
             "time": "2014-12-05 14:17:14"
+        },
+        {
+            "name": "symfony/class-loader",
+            "version": "v2.6.4",
+            "target-dir": "Symfony/Component/ClassLoader",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ClassLoader.git",
+                "reference": "deac802f76910708ab50d039806cfd1866895b52"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/deac802f76910708ab50d039806cfd1866895b52",
+                "reference": "deac802f76910708ab50d039806cfd1866895b52",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/finder": "~2.0,>=2.0.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\ClassLoader\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony ClassLoader Component",
+            "homepage": "http://symfony.com",
+            "time": "2015-01-05 14:28:40"
         },
         {
             "name": "symfony/console",
@@ -3071,16 +3234,16 @@
         },
         {
             "name": "dropbox/dropbox-sdk",
-            "version": "v1.1.4",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dropbox/dropbox-sdk-php.git",
-                "reference": "73e5add2f6d5d0355fa04e758f895e10c08d240a"
+                "reference": "138bfec02f042fa6a4b384c0ae7ebe92ad122bbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dropbox/dropbox-sdk-php/zipball/73e5add2f6d5d0355fa04e758f895e10c08d240a",
-                "reference": "73e5add2f6d5d0355fa04e758f895e10c08d240a",
+                "url": "https://api.github.com/repos/dropbox/dropbox-sdk-php/zipball/138bfec02f042fa6a4b384c0ae7ebe92ad122bbd",
+                "reference": "138bfec02f042fa6a4b384c0ae7ebe92ad122bbd",
                 "shasum": ""
             },
             "require": {
@@ -3106,7 +3269,7 @@
             "keywords": [
                 "dropbox"
             ],
-            "time": "2014-10-21 21:09:01"
+            "time": "2015-02-23 20:51:29"
         },
         {
             "name": "fzaninotto/faker",
@@ -3114,12 +3277,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "74f58bbda974d0820183d228f120c2f3258bf7f6"
+                "reference": "2495d3361ac1e9fc15608a1b33ec2dd41c56b2dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/74f58bbda974d0820183d228f120c2f3258bf7f6",
-                "reference": "74f58bbda974d0820183d228f120c2f3258bf7f6",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/2495d3361ac1e9fc15608a1b33ec2dd41c56b2dc",
+                "reference": "2495d3361ac1e9fc15608a1b33ec2dd41c56b2dc",
                 "shasum": ""
             },
             "require": {
@@ -3158,20 +3321,20 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-02-19 08:29:00"
+            "time": "2015-02-23 10:49:44"
         },
         {
             "name": "itsgoingd/clockwork",
-            "version": "dev-master",
+            "version": "v1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itsgoingd/clockwork.git",
-                "reference": "ec53eb1e926a3b6a658f69b351e437ef07826446"
+                "reference": "c483e72515039a1a2b00a7d63ea6426bb676e2ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itsgoingd/clockwork/zipball/ec53eb1e926a3b6a658f69b351e437ef07826446",
-                "reference": "ec53eb1e926a3b6a658f69b351e437ef07826446",
+                "url": "https://api.github.com/repos/itsgoingd/clockwork/zipball/c483e72515039a1a2b00a7d63ea6426bb676e2ea",
+                "reference": "c483e72515039a1a2b00a7d63ea6426bb676e2ea",
                 "shasum": ""
             },
             "require": {
@@ -3203,7 +3366,7 @@
                 "logging",
                 "profiling"
             ],
-            "time": "2015-02-02 15:08:41"
+            "time": "2015-02-04 22:35:57"
         },
         {
             "name": "league/flysystem-cached-adapter",
@@ -3341,55 +3504,6 @@
             ],
             "description": "Flysystem adapter for ZipArchive's",
             "time": "2015-01-19 08:17:38"
-        },
-        {
-            "name": "phpdocumentor/reflection-docblock",
-            "version": "2.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "dflydev/markdown": "~1.0",
-                "erusev/parsedown": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "phpDocumentor": [
-                        "src/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mike van Riel",
-                    "email": "mike.vanriel@naenius.com"
-                }
-            ],
-            "time": "2015-02-03 12:10:50"
         },
         {
             "name": "phpspec/php-diff",
@@ -4403,7 +4517,6 @@
         "cartalyst/sentinel": 20,
         "cartalyst/sentinel-social": 20,
         "cartalyst/sentinel-unique-passwords": 20,
-        "itsgoingd/clockwork": 20,
         "fzaninotto/faker": 20,
         "league/flysystem-dropbox": 20,
         "league/flysystem-ziparchive": 20,

@@ -15,35 +15,6 @@ body.app-header-fixed {padding-top: 0;}
 	z-index: 2000;
 }
 
-@media (min-width: 768px) {
-	/* Aside - Left */
-	.app-aside-left {
-		position: absolute;
-		top: 50px;
-		bottom: 0;
-		left: 0;
-		z-index: 3000;
-	}
-	/* Aside - Right */
-	.app-aside-right {
-		z-index: 2000;
-	}
-	.app-aside-fixed .app-aside-right .aside-wrap {
-		right: 0;
-		left: auto;
-	}
-	.app-content,
-	.app-footer {
-		margin-left: auto;
-		margin-right: auto;
-	}
-	.app-aside-fixed .app-header .navbar-header {
-		position: relative;
-	}
-	.navbar>.container .navbar-brand,
-	.navbar>.container-fluid .navbar-brand {margin-left: 0;}
-}
-
 /* -----------------------------------
 | Directly Modifying Theme
 ----------------------------------- */
@@ -59,16 +30,12 @@ body.app-header-fixed {padding-top: 0;}
 /* -----------------------------------
 | Text & Colors
 ----------------------------------- */
-a {
-	color: #428bca;
-}
+a {color: #428bca;}
+/* Nav Links */
+.nav > li > a {color: #363f44;}
 
-.text-underline-none {
-	text-decoration: none;
-}
-.text-underline-none:hover {
-	text-decoration: none;
-}
+.text-underline-none {text-decoration: none;}
+.text-underline-none:hover {text-decoration: none;}
 
 /* -----------------------------------
 | Icons
@@ -187,29 +154,6 @@ time.icon strong {position: absolute;top: 0;padding: 2px 0;color: #fff;backgroun
 time.icon span {width: 100%;font-size: 15px;letter-spacing: -.05em;padding-top: 21px;color: #2f2f2f;}
 time.icon * {display: block;width: 100%;font-size: 10px;font-weight: 700;font-style: normal;text-align: center;}
 
-/* Media Queries */
-@media (max-width:979px) {
-	.profile-pic > img {width:110px}
-	.profile-pic {float:left}
-	.profile-pic > img {margin-right:10px}
-	.profile-pic + div,
-	.profile-pic + div + div {padding-left:30px;padding-right:30px}
-}
-@media (max-width:767px) {
-	.profile-pic > img {width:100px}
-}
-@media only screen and (min-width:320px) and (max-width:479px) {
-	.page-title {display:none}
-	.profile-pic {text-align:left}
-	.profile-pic > img {width:90px;margin-left:0;top:-25px;margin-right:0}
-	.profile-pic + div > h1 {font-size:20px}
-	.profile-pic + div > h1 small {font-size:16px}
-	.profile-carousel .carousel-indicators {top:10px}
-}
-@media only screen and (min-width:0) and (max-width:679px) {
-	.profile-pic > img {width:90px}
-}
-
 /* -----------------------------------
 | User Profile - Timeline
 ----------------------------------- */
@@ -232,7 +176,9 @@ time.icon * {display: block;width: 100%;font-size: 10px;font-weight: 700;font-st
 	margin-right: 5px;
 }
 
-/* Statuses & Comments */
+/* -----------------------------------
+| Statuses & Comments
+----------------------------------- */
 .panel.panel-status > .panel-body {padding-bottom:0;}
 .panel.panel-status .panel-footer {background-color: #f8f8f8;}
 .status-reply {overflow:hidden;word-wrap:break-word;padding-left: 5px;position:relative;}
@@ -245,4 +191,57 @@ time.icon * {display: block;width: 100%;font-size: 10px;font-weight: 700;font-st
 }
 .panel.panel-status ul.list-group > li.list-group-item:first-child {
 	border-top: 1px solid #edf1f2;
+}
+
+/* -----------------------------------
+| Media Queries
+----------------------------------- */
+@media (max-width:979px) {
+	.profile-pic > img {width:110px}
+	.profile-pic {float:left}
+	.profile-pic > img {margin-right:10px}
+	.profile-pic + div,
+	.profile-pic + div + div {padding-left:30px;padding-right:30px}
+}
+@media (max-width:767px) {
+	.profile-pic > img {width:100px}
+}
+@media (min-width: 768px) {
+	/* Aside - Left */
+	.app-aside-left {
+		position: absolute;
+		top: 50px;
+		bottom: 0;
+		left: 0;
+		z-index: 3000;
+	}
+	/* Aside - Right */
+	.app-aside-right {
+		z-index: 2000;
+	}
+	.app-aside-fixed .app-aside-right .aside-wrap {
+		right: 0;
+		left: auto;
+	}
+	.app-content,
+	.app-footer {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.app-aside-fixed .app-header .navbar-header {
+		position: relative;
+	}
+	.navbar>.container .navbar-brand,
+	.navbar>.container-fluid .navbar-brand {margin-left: 0;}
+}
+@media only screen and (min-width:320px) and (max-width:479px) {
+	.page-title {display:none}
+	.profile-pic {text-align:left}
+	.profile-pic > img {width:90px;margin-left:0;top:-25px;margin-right:0}
+	.profile-pic + div > h1 {font-size:20px}
+	.profile-pic + div > h1 small {font-size:16px}
+	.profile-carousel .carousel-indicators {top:10px}
+}
+@media only screen and (min-width:0) and (max-width:679px) {
+	.profile-pic > img {width:90px}
 }
