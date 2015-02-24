@@ -17,7 +17,7 @@
 		"doctrine/dbal": "~2.5",
 		"predis/predis": "~1.0",
 		"league/glide": "~0.3.0",
-		"intervention/imagecache": "~2.1.1",
+		"intervention/imagecache": "~2.1",
 		"cartalyst/sentinel": "dev-feature/laravel-5",
 		"cartalyst/sentinel-social": "dev-feature/laravel-5",
 		"cartalyst/sentinel-unique-passwords": "dev-feature/laravel-5",

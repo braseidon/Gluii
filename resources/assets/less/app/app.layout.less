@@ -305,6 +305,9 @@ body{
 				&::-webkit-scrollbar:vertical {
 				  width: @scroll-bar-width;
 				}
+				> *{
+					width: @app-aside-width;
+				}
 			}
 			.smart & .navi-wrap{
 				width: @app-aside-width;
@@ -321,6 +324,9 @@ body{
 				width: @app-aside-folded-width - 1;
 				.navi-wrap{
 					width: @app-aside-folded-width + @scroll-bar-width;
+					> *{
+						width: @app-aside-folded-width;
+					}
 				}
 				.smart & .navi-wrap{
 					width: @app-aside-folded-width;

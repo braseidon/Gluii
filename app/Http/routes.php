@@ -17,10 +17,12 @@
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@getIndex']);
 
 Route::group(['prefix' => 'feed'], function () {
-	# Groups
+	# Families
 	Route::get('families', ['as' => 'feed/families', 'uses' => 'HomeController@getIndex']);
+	# Areas
+	Route::get('areas', ['as' => 'feed/areas', 'uses' => 'HomeController@getIndex']);
 	# Influencers
-	Route::get('influences', ['as' => 'feed/influences', 'uses' => 'HomeController@getIndex']);
+	Route::get('influencers', ['as' => 'feed/influencers', 'uses' => 'HomeController@getIndex']);
 });
 
 /**
@@ -123,6 +125,17 @@ Route::group(['prefix' => 'notifications', 'namespace' => 'User'], function () {
 });
 
 /**
+ * Photos
+ *
+ * @namespace User\Photo
+ */
+Route::group(['namespace' => 'User\Photo', 'prefix' => 'photos'], function () {
+	# Photo Manager
+	Route::get('/', ['as' => 'photos', 'uses' => 'NotificationController@getMessages']);
+
+});
+
+/**
  * Explore
  *
  * @namespace Explore
@@ -154,12 +167,12 @@ Route::group(['namespace' => 'Families', 'prefix' => 'families'], function () {
 /**
  * Influencers
  *
- * @namespace Influences
+ * @namespace Influencers
  */
-Route::group(['namespace' => 'Influences', 'prefix' => 'influences'], function () {
-	Route::get('/', ['as' => 'influences', 'uses' => 'InfluencesController@getIndex']);
+Route::group(['namespace' => 'Influencers', 'prefix' => 'influencers'], function () {
+	Route::get('/', ['as' => 'influencers', 'uses' => 'InfluencersController@getIndex']);
 	# View Family
-	Route::get('{slug}', ['as' => 'influences/view', 'uses' => 'InfluencesController@getIndex']);
+	Route::get('{slug}', ['as' => 'influencers/view', 'uses' => 'InfluencersController@getIndex']);
 });
 
 /*

@@ -148,8 +148,9 @@ return [
 		/*
 		 * Package Service Providers
 		 */
-		'Illuminate\Html\HtmlServiceProvider',
 		'Clockwork\Support\Laravel\ClockworkServiceProvider',
+		'Illuminate\Html\HtmlServiceProvider',
+		'Intervention\Image\ImageServiceProvider',
 		// 'Way\Generators\GeneratorsServiceProvider',
 
 		/*
@@ -216,11 +217,13 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 
 		/**
-		 * Facades not Originally Included
+		 * Packages
 		 */
 		'Form'				=> 'Illuminate\Html\FormFacade',
 		'HTML'				=> 'Illuminate\Html\HtmlFacade',
 		'Clockwork'			=> 'Clockwork\Support\Laravel\Facade',
+		'Image'				=> 'Intervention\Image\Facades\Image',
+
 
 		/*
 		 * Cartalyst Packages

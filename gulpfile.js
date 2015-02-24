@@ -34,7 +34,7 @@ var config = {
 		],
 
 		// Fonts
-		fontdirs: [
+		fonts: [
 			dir.vendor + 'bootstrap/fonts/',
 			dir.vendor + 'ionicons/fonts/',
 		],
@@ -76,7 +76,7 @@ gulp.task('less', function(){
 	return gulp.src(config.paths.less, {base: dir.vendor + './css'})
 		.pipe(plugins.expectFile(config.paths.less))
 		.pipe(plugins.less().on('error', gutil.log))
-		.pipe(plugins.concatCss('less.css'))
+		.pipe(plugins.concat('less.css'))
 		.pipe(gulp.dest(dir.build + 'css/'))
 		.pipe(plugins.notify({ message: 'Less compiled' }));
 });
@@ -85,7 +85,7 @@ gulp.task('less', function(){
 gulp.task('css', ['less'], function(){
 	return gulp.src(config.paths.css)
 		.pipe(plugins.expectFile(config.paths.css))
-		.pipe(plugins.concatCss('styles.css'))
+		.pipe(plugins.concat('styles.css'))
 		.pipe(gulp.dest(dir.build + 'css/'))
 		.pipe(plugins.notify({ message: 'CSS from source + vendors compiled' }));
 });
@@ -94,7 +94,7 @@ gulp.task('css', ['less'], function(){
 gulp.task('styles', ['less', 'css'], function(){
 	return gulp.src(config.paths.build.css)
 		.pipe(plugins.expectFile(config.paths.build.css))
-		.pipe(plugins.concatCss('gluii.css'))
+		.pipe(plugins.concat('gluii.css'))
 		.pipe(plugins.autoprefixer(config.autoPrefixBrowers))
 		.pipe(gulp.dest(dir.dist + 'css/'))
 		.pipe(plugins.rename({ suffix: '.min' }))

@@ -9,7 +9,7 @@
 
 # Assets
 /public/error_log
-/public/images/upload
+/public/images/uploads
 /resources/assets/vendor
 /resources/assets/build
 /public/assets/dist/css/gluii.css
