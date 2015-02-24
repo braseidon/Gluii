@@ -49,11 +49,13 @@
 				<!-- hbox layout -->
 				<div class="hbox hbox-auto-xs">
 					<div class="vbox">
-						<!-- page title -->
-						{{-- Admin Page Title --}}
+						{{-- Page Title --}}
 						@if(Route::is('admin/*'))
 							@include('template.partials.title')
 						@endif
+
+						{{-- Full-Width Content --}}
+						@yield('content_full')
 
 						<div class="container">
 							<!-- top content -->

@@ -35,7 +35,7 @@ var config = {
 
 		// Fonts
 		fontdirs: [
-			dir.vendor + 'bootstrap/fonts',
+			dir.vendor + 'bootstrap/fonts/',
 			dir.vendor + 'ionicons/fonts/',
 		],
 

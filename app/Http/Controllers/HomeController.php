@@ -24,7 +24,7 @@ class HomeController extends BaseController {
 	public function getIndex(StatusRepositoryInterface $repository)
 	{
 		if(! Auth::check())
-			return view('auth.register');
+			return view('home.comingsoon');
 
 		$statuses = $repository->allStatuses();
 

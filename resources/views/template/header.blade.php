@@ -6,7 +6,7 @@
 			<i class="glyphicon glyphicon-cog"></i>
 		</button>
 		<button class="pull-right visible-xs" ui-toggle="off-screen" target=".app-aside" ui-scroll="app">
-			<i class="glyphicon glyphicon-align-justify"></i>
+			<i class="icon icon-music-tone-alt"></i>
 		</button>
 
 		<!-- brand -->
@@ -20,12 +20,16 @@
 	<!-- navbar collapse -->
 	<div class="collapse pos-rlt navbar-collapse">
 		<!-- top navigation -->
-		@include('template.header.nav-left')
+		@if(Auth::check())
+			@include('template.header.nav-left')
+		@endif
 
 		<!-- search form -->
 		{{--@include('template.header.search')--}}
 
 		<!-- navbar right -->
-		@include('template.header.nav-right')
+		@if(Auth::check())
+			@include('template.header.nav-right')
+		@endif
 	</div>
 </div>

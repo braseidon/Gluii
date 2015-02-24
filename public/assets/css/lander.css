@@ -1,0 +1,16 @@
+/* Landing Page Header & Lander */
+.app-lander header.app-header {
+	display: block;
+	background: url('/images/lander/tomorrow_world_orange.jpg') no-repeat center top fixed;
+	z-index: 110 !important;
+	/*max-height: 470px;*/
+}
+.app-lander header.app-header .intro {
+	display: table;
+	width: 100%;
+	height: auto;
+	padding: 17% 0 15%;
+	text-align: center;
+	color: #fff;
+	z-index: 111 !important;
+}

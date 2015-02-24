@@ -31,7 +31,7 @@
 			@yield('sidebar-right')
 		</div>
 	</div>
-{{-- Full-Width Content --}}
+{{-- Wrapped Content --}}
 @else
 	<div class="row">
 		<div class="col-lg-12">
