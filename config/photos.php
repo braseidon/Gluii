@@ -12,7 +12,8 @@ return [
 	*/
 
 	'options' => [
-
+		'source_dir'			=> env('IMAGE_SRC_DIR', storage_path('img/')),
+		'cache_dir'				=> env('IMAGE_CACHE_DIR', storage_path('img/.cache/')),
 	],
 
 	/*
@@ -29,14 +30,9 @@ return [
 	*/
 
 	'limits' => [
-
-		'dimensions' => [
-			'w'					=> 1920,
-			'h'					=> 1080,
-		],
-
-		'size'					=> '1MB',
-
+		'width'					=> 1920,
+		'height'				=> 1200,
+		'size'					=> '2MB',
 	],
 
 	/*
@@ -44,13 +40,24 @@ return [
 	| Directories
 	|--------------------------------------------------------------------------
 	|
-	| There's really no reason to change these, but here's the options.
+	| There's really no reason to change these, but here's the options. The
+	| base folder is Laravel's storage folder.
 	|
 	*/
 
-	'dir' => [
+	'dirs' => [
 
-		''
+		// Image source and cache paths
+		'source_path_prefix'	=> 'images',
+		'cache_path_prefix'		=> 'images/.cache',
+		'base_url'				=> 'img',
+
+		// The categories of images to store
+		'types' => [
+			'profile'			=> 'user/{id}',
+			'photo'				=> 'photo/{id}',
+			'event'				=> 'event/{id}',
+		],
 
 	],
 

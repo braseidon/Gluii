@@ -4,83 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6c00c0cab4c6f695c0b7dd6e49f22ef1",
+    "hash": "3e6d6fb0b5b82b50003a2dc083687665",
     "packages": [
         {
-            "name": "barryvdh/laravel-ide-helper",
+            "name": "cartalyst/sentinel",
             "version": "v2.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "317ef794a579474e96eaec1d6c1c5e0f7ac6ee5e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/317ef794a579474e96eaec1d6c1c5e0f7ac6ee5e",
-                "reference": "317ef794a579474e96eaec1d6c1c5e0f7ac6ee5e",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "5.0.x",
-                "illuminate/filesystem": "5.0.x",
-                "illuminate/support": "5.0.x",
-                "php": ">=5.4.0",
-                "phpdocumentor/reflection-docblock": "2.0.x",
-                "symfony/class-loader": "~2.3"
-            },
-            "require-dev": {
-                "doctrine/dbal": "~2.3"
-            },
-            "suggest": {
-                "doctrine/dbal": "Load information from the database about models for phpdocs (~2.3)"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Barryvdh\\LaravelIdeHelper\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                }
-            ],
-            "description": "Laravel IDE Helper, generates correct PHPDocs for all Facade classes, to improve auto-completion.",
-            "keywords": [
-                "autocomplete",
-                "codeintel",
-                "helper",
-                "ide",
-                "laravel",
-                "netbeans",
-                "phpdoc",
-                "phpstorm",
-                "sublime"
-            ],
-            "time": "2015-02-04 08:12:01"
-        },
-        {
-            "name": "cartalyst/sentinel",
-            "version": "dev-feature/laravel-5",
-            "source": {
-                "type": "git",
                 "url": "git@github.com:cartalyst/sentinel.git",
-                "reference": "ea2e3cad53e051cad97f9cf46aff15efef26709d"
+                "reference": "fdd64195490088e96172d5e5d24edfdbc485e086"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/sentinel/zipball/ea2e3cad53e051cad97f9cf46aff15efef26709d",
-                "reference": "ea2e3cad53e051cad97f9cf46aff15efef26709d",
+                "url": "https://api.github.com/repos/cartalyst/sentinel/zipball/fdd64195490088e96172d5e5d24edfdbc485e086",
+                "reference": "fdd64195490088e96172d5e5d24edfdbc485e086",
                 "shasum": ""
             },
             "require": {
@@ -157,30 +94,30 @@
                 "security"
             ],
             "support": {
-                "source": "https://github.com/cartalyst/sentinel/tree/feature/laravel-5",
+                "source": "https://github.com/cartalyst/sentinel/tree/v2.0.0",
                 "issues": "https://github.com/cartalyst/sentinel/issues"
             },
-            "time": "2015-02-20 00:08:21"
+            "time": "2015-02-24 19:37:49"
         },
         {
             "name": "cartalyst/sentinel-social",
-            "version": "dev-feature/laravel-5",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:cartalyst/sentinel-social.git",
-                "reference": "df11bd8a63dfc4879e319369b51605a57d5b4d33"
+                "reference": "ce10c6663765f660135740644db2b03a3bd831e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/sentinel-social/zipball/df11bd8a63dfc4879e319369b51605a57d5b4d33",
-                "reference": "df11bd8a63dfc4879e319369b51605a57d5b4d33",
+                "url": "https://api.github.com/repos/cartalyst/sentinel-social/zipball/ce10c6663765f660135740644db2b03a3bd831e3",
+                "reference": "ce10c6663765f660135740644db2b03a3bd831e3",
                 "shasum": ""
             },
             "require": {
-                "cartalyst/sentinel": "dev-feature/laravel-5",
+                "cartalyst/sentinel": "~2.0",
                 "cartalyst/support": "~1.0",
-                "league/oauth1-client": "1.0.*",
-                "league/oauth2-client": "0.7.*",
+                "league/oauth1-client": "1.2.*",
+                "league/oauth2-client": "0.9.*",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -193,7 +130,7 @@
             "extra": {
                 "component": "package",
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -244,27 +181,27 @@
                 "security"
             ],
             "support": {
-                "source": "https://github.com/cartalyst/sentinel-social/tree/feature/laravel-5",
+                "source": "https://github.com/cartalyst/sentinel-social/tree/v2.0.0",
                 "issues": "https://github.com/cartalyst/sentinel-social/issues"
             },
-            "time": "2015-02-01 20:37:47"
+            "time": "2015-02-25 02:54:29"
         },
         {
             "name": "cartalyst/sentinel-unique-passwords",
-            "version": "dev-feature/laravel-5",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:cartalyst/sentinel-unique-passwords.git",
-                "reference": "e6a248a7f166661a75381d59994a2934416ea9c5"
+                "reference": "5f331d375f6b02be2903c270055a3e4d579ab2bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/sentinel-unique-passwords/zipball/e6a248a7f166661a75381d59994a2934416ea9c5",
-                "reference": "e6a248a7f166661a75381d59994a2934416ea9c5",
+                "url": "https://api.github.com/repos/cartalyst/sentinel-unique-passwords/zipball/5f331d375f6b02be2903c270055a3e4d579ab2bf",
+                "reference": "5f331d375f6b02be2903c270055a3e4d579ab2bf",
                 "shasum": ""
             },
             "require": {
-                "cartalyst/sentinel": "dev-feature/laravel-5",
+                "cartalyst/sentinel": "~2.0",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -320,10 +257,10 @@
                 "security"
             ],
             "support": {
-                "source": "https://github.com/cartalyst/sentinel-unique-passwords/tree/feature/laravel-5",
+                "source": "https://github.com/cartalyst/sentinel-unique-passwords/tree/2.0",
                 "issues": "https://github.com/cartalyst/sentinel-unique-passwords/issues"
             },
-            "time": "2015-02-01 22:57:47"
+            "time": "2015-02-25 03:14:44"
         },
         {
             "name": "cartalyst/support",
@@ -1461,12 +1398,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "a0ccd0b20bf4a6835cecbe3fb21f49985a48ad7f"
+                "reference": "1131ff4b0baa684b6e52f04a14bc7aded3af0691"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a0ccd0b20bf4a6835cecbe3fb21f49985a48ad7f",
-                "reference": "a0ccd0b20bf4a6835cecbe3fb21f49985a48ad7f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/1131ff4b0baa684b6e52f04a14bc7aded3af0691",
+                "reference": "1131ff4b0baa684b6e52f04a14bc7aded3af0691",
                 "shasum": ""
             },
             "require": {
@@ -1578,7 +1515,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-02-24 02:06:17"
+            "time": "2015-03-01 21:00:54"
         },
         {
             "name": "league/flysystem",
@@ -1665,16 +1602,16 @@
         },
         {
             "name": "league/glide",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/glide.git",
-                "reference": "0e7519dd2254cdca17d98981b1e6bd9e9677311c"
+                "reference": "abf28640728038ca2d9f31c69ae3f158c73406ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/glide/zipball/0e7519dd2254cdca17d98981b1e6bd9e9677311c",
-                "reference": "0e7519dd2254cdca17d98981b1e6bd9e9677311c",
+                "url": "https://api.github.com/repos/thephpleague/glide/zipball/abf28640728038ca2d9f31c69ae3f158c73406ce",
+                "reference": "abf28640728038ca2d9f31c69ae3f158c73406ce",
                 "shasum": ""
             },
             "require": {
@@ -1722,20 +1659,20 @@
                 "manipulation",
                 "processing"
             ],
-            "time": "2015-02-02 14:15:23"
+            "time": "2015-02-26 23:03:26"
         },
         {
             "name": "league/oauth1-client",
-            "version": "1.0.2",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth1-client.git",
-                "reference": "0d20bc4613cb1e87f5e32d94f9327811b2cb959c"
+                "reference": "2bcdde3df4e59ebefd2be902102ac185ade844b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/0d20bc4613cb1e87f5e32d94f9327811b2cb959c",
-                "reference": "0d20bc4613cb1e87f5e32d94f9327811b2cb959c",
+                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/2bcdde3df4e59ebefd2be902102ac185ade844b7",
+                "reference": "2bcdde3df4e59ebefd2be902102ac185ade844b7",
                 "shasum": ""
             },
             "require": {
@@ -1744,7 +1681,8 @@
             },
             "require-dev": {
                 "mockery/mockery": "0.7.2",
-                "phpunit/phpunit": "*"
+                "phpunit/phpunit": "*",
+                "satooshi/php-coveralls": "dev-master"
             },
             "type": "library",
             "extra": {
@@ -1774,26 +1712,30 @@
                 "Authentication",
                 "SSO",
                 "authorization",
+                "bitbucket",
                 "identity",
                 "idp",
                 "oauth",
                 "oauth1",
-                "single sign on"
+                "single sign on",
+                "trello",
+                "tumblr",
+                "twitter"
             ],
-            "time": "2015-01-11 08:51:52"
+            "time": "2015-02-01 23:22:54"
         },
         {
             "name": "league/oauth2-client",
-            "version": "0.7.2",
+            "version": "0.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth2-client.git",
-                "reference": "428a28efb15e70fda89eca717b557a68c2035d4d"
+                "reference": "a86dbd4e582acb2e6fb78cec68923dc27c26f86c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/428a28efb15e70fda89eca717b557a68c2035d4d",
-                "reference": "428a28efb15e70fda89eca717b557a68c2035d4d",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/a86dbd4e582acb2e6fb78cec68923dc27c26f86c",
+                "reference": "a86dbd4e582acb2e6fb78cec68923dc27c26f86c",
                 "shasum": ""
             },
             "require": {
@@ -1808,7 +1750,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.7.x-dev"
+                    "dev-master": "0.8.x-dev"
                 }
             },
             "autoload": {
@@ -1839,7 +1781,7 @@
                 "oauth2",
                 "single sign on"
             ],
-            "time": "2015-02-03 15:27:33"
+            "time": "2015-02-24 16:34:58"
         },
         {
             "name": "monolog/monolog",
@@ -2049,55 +1991,6 @@
             "time": "2015-01-18 11:29:59"
         },
         {
-            "name": "phpdocumentor/reflection-docblock",
-            "version": "2.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "dflydev/markdown": "~1.0",
-                "erusev/parsedown": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "phpDocumentor": [
-                        "src/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mike van Riel",
-                    "email": "mike.vanriel@naenius.com"
-                }
-            ],
-            "time": "2015-02-03 12:10:50"
-        },
-        {
             "name": "predis/predis",
             "version": "v1.0.1",
             "source": {
@@ -2187,16 +2080,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.4.0",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "eee16e9525405b32646b5a0f8a12fb84d566905d"
+                "reference": "3787f3436f4fd898e0ac1eb6f5abd2ab6b24085b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/eee16e9525405b32646b5a0f8a12fb84d566905d",
-                "reference": "eee16e9525405b32646b5a0f8a12fb84d566905d",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/3787f3436f4fd898e0ac1eb6f5abd2ab6b24085b",
+                "reference": "3787f3436f4fd898e0ac1eb6f5abd2ab6b24085b",
                 "shasum": ""
             },
             "require": {
@@ -2254,7 +2147,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2015-02-23 21:21:17"
+            "time": "2015-02-25 20:35:54"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2307,56 +2200,6 @@
                 "mailer"
             ],
             "time": "2014-12-05 14:17:14"
-        },
-        {
-            "name": "symfony/class-loader",
-            "version": "v2.6.4",
-            "target-dir": "Symfony/Component/ClassLoader",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/ClassLoader.git",
-                "reference": "deac802f76910708ab50d039806cfd1866895b52"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/deac802f76910708ab50d039806cfd1866895b52",
-                "reference": "deac802f76910708ab50d039806cfd1866895b52",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "symfony/finder": "~2.0,>=2.0.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.6-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\ClassLoader\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Symfony ClassLoader Component",
-            "homepage": "http://symfony.com",
-            "time": "2015-01-05 14:28:40"
         },
         {
             "name": "symfony/console",
@@ -3277,12 +3120,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "2495d3361ac1e9fc15608a1b33ec2dd41c56b2dc"
+                "reference": "40426f77f030b6fb45951be920ff1036b2f423d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/2495d3361ac1e9fc15608a1b33ec2dd41c56b2dc",
-                "reference": "2495d3361ac1e9fc15608a1b33ec2dd41c56b2dc",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/40426f77f030b6fb45951be920ff1036b2f423d2",
+                "reference": "40426f77f030b6fb45951be920ff1036b2f423d2",
                 "shasum": ""
             },
             "require": {
@@ -3321,7 +3164,120 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-02-23 10:49:44"
+            "time": "2015-02-27 08:30:07"
+        },
+        {
+            "name": "graham-campbell/markdown",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GrahamCampbell/Laravel-Markdown.git",
+                "reference": "dfc7e1525a55c6851fb85723a421bce819fd3c2a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Markdown/zipball/dfc7e1525a55c6851fb85723a421bce819fd3c2a",
+                "reference": "dfc7e1525a55c6851fb85723a421bce819fd3c2a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.0.*",
+                "illuminate/support": "5.0.*",
+                "illuminate/view": "5.0.*",
+                "league/commonmark": "0.7.*",
+                "php": ">=5.4.7"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GrahamCampbell\\Markdown\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "graham@mineuk.com"
+                }
+            ],
+            "description": "Markdown Is A CommonMark Wrapper For Laravel 5",
+            "keywords": [
+                "Graham Campbell",
+                "GrahamCampbell",
+                "Laravel Markdown",
+                "Laravel-Markdown",
+                "common mark",
+                "commonmark",
+                "framework",
+                "laravel",
+                "markdown"
+            ],
+            "time": "2015-02-18 11:41:14"
+        },
+        {
+            "name": "graham-campbell/testbench",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GrahamCampbell/Laravel-TestBench.git",
+                "reference": "9bb6d0c478669df0d944032d4425e33d5fcaa6b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-TestBench/zipball/9bb6d0c478669df0d944032d4425e33d5fcaa6b7",
+                "reference": "9bb6d0c478669df0d944032d4425e33d5fcaa6b7",
+                "shasum": ""
+            },
+            "require": {
+                "mockery/mockery": "~0.9.3",
+                "orchestra/testbench": "3.0.*",
+                "php": ">=5.4.7",
+                "phpunit/phpunit": "~4.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GrahamCampbell\\TestBench\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "graham@mineuk.com"
+                }
+            ],
+            "description": "TestBench Provides Some Testing Functionality For Laravel 5",
+            "keywords": [
+                "Graham Campbell",
+                "GrahamCampbell",
+                "Laravel TestBench",
+                "Laravel-TestBench",
+                "TestBench",
+                "framework",
+                "laravel",
+                "testing"
+            ],
+            "time": "2015-02-12 19:18:14"
         },
         {
             "name": "itsgoingd/clockwork",
@@ -3367,6 +3323,109 @@
                 "profiling"
             ],
             "time": "2015-02-04 22:35:57"
+        },
+        {
+            "name": "laracasts/generators",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/Laravel-5-Generators-Extended.git",
+                "reference": "d83213c6aacc925996457dddfb5f00988df57d17"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracasts/Laravel-5-Generators-Extended/zipball/d83213c6aacc925996457dddfb5f00988df57d17",
+                "reference": "d83213c6aacc925996457dddfb5f00988df57d17",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Laracasts\\Generators\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                }
+            ],
+            "description": "Extend Laravel 5's generators.",
+            "keywords": [
+                "generators",
+                "laravel"
+            ],
+            "time": "2015-02-28 14:43:38"
+        },
+        {
+            "name": "league/commonmark",
+            "version": "0.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/commonmark.git",
+                "reference": "7b428e962fb83a13715e057c65c88873d3165df0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/7b428e962fb83a13715e057c65c88873d3165df0",
+                "reference": "7b428e962fb83a13715e057c65c88873d3165df0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.3"
+            },
+            "replace": {
+                "colinodell/commonmark-php": "*"
+            },
+            "require-dev": {
+                "erusev/parsedown": "~1.0",
+                "jgm/commonmark": "0.17",
+                "michelf/php-markdown": "~1.4",
+                "phpunit/phpunit": "~4.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\CommonMark\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Colin O'Dell",
+                    "email": "colinodell@gmail.com",
+                    "homepage": "http://www.colinodell.com",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "Markdown parser for PHP based on the CommonMark spec",
+            "homepage": "https://github.com/thephpleague/commonmark",
+            "keywords": [
+                "commonmark",
+                "markdown",
+                "parser"
+            ],
+            "time": "2015-03-01 21:29:05"
         },
         {
             "name": "league/flysystem-cached-adapter",
@@ -3504,6 +3563,232 @@
             ],
             "description": "Flysystem adapter for ZipArchive's",
             "time": "2015-01-19 08:17:38"
+        },
+        {
+            "name": "mockery/mockery",
+            "version": "0.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/padraic/mockery.git",
+                "reference": "686f85fa5b3b079cc0157d7cd3e9adb97f0b41e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/686f85fa5b3b079cc0157d7cd3e9adb97f0b41e1",
+                "reference": "686f85fa5b3b079cc0157d7cd3e9adb97f0b41e1",
+                "shasum": ""
+            },
+            "require": {
+                "lib-pcre": ">=7.0",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "hamcrest/hamcrest-php": "~1.1",
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "~0.7@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.9.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Mockery": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Pádraic Brady",
+                    "email": "padraic.brady@gmail.com",
+                    "homepage": "http://blog.astrumfutura.com"
+                },
+                {
+                    "name": "Dave Marshall",
+                    "email": "dave.marshall@atstsolutions.co.uk",
+                    "homepage": "http://davedevelopment.co.uk"
+                }
+            ],
+            "description": "Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succint API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). Designed as a drop in alternative to PHPUnit's phpunit-mock-objects library, Mockery is easy to integrate with PHPUnit and can operate alongside phpunit-mock-objects without the World ending.",
+            "homepage": "http://github.com/padraic/mockery",
+            "keywords": [
+                "BDD",
+                "TDD",
+                "library",
+                "mock",
+                "mock objects",
+                "mockery",
+                "stub",
+                "test",
+                "test double",
+                "testing"
+            ],
+            "time": "2014-12-22 10:06:19"
+        },
+        {
+            "name": "orchestra/database",
+            "version": "v3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchestral/database.git",
+                "reference": "53a888207ea12e2295f916020ac58eea05c9182e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchestral/database/zipball/53a888207ea12e2295f916020ac58eea05c9182e",
+                "reference": "53a888207ea12e2295f916020ac58eea05c9182e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.0.*",
+                "illuminate/database": "5.0.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orchestra\\Database\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com",
+                    "homepage": "https://github.com/crynobone"
+                },
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com",
+                    "homepage": "https://github.com/taylorotwell"
+                }
+            ],
+            "description": "Database Component for Orchestra Platform",
+            "time": "2015-02-13 16:01:38"
+        },
+        {
+            "name": "orchestra/testbench",
+            "version": "v3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orchestral/testbench.git",
+                "reference": "8d0927a7f9b522d2af1e3d228f2f002eb2c122f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/orchestral/testbench/zipball/8d0927a7f9b522d2af1e3d228f2f002eb2c122f2",
+                "reference": "8d0927a7f9b522d2af1e3d228f2f002eb2c122f2",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.0.*",
+                "orchestra/database": "3.0.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "behat/behat": "~2.5",
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "behat/behat": "Allow to use Behat for testing your Laravel Application/Package",
+                "phpunit/phpunit": "Allow to use PHPUnit for testing your Laravel Application/Package"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Orchestra\\Testbench\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mior Muhammad Zaki",
+                    "email": "crynobone@gmail.com",
+                    "homepage": "https://github.com/crynobone"
+                }
+            ],
+            "description": "Laravel Package Unit Testing Helper",
+            "homepage": "http://orchestraplatform.com/docs/latest/components/testbench/",
+            "keywords": [
+                "BDD",
+                "TDD",
+                "laravel",
+                "orchestra-platform",
+                "orchestral",
+                "testing"
+            ],
+            "time": "2015-02-26 16:29:51"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "dflydev/markdown": "~1.0",
+                "erusev/parsedown": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "phpDocumentor": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "mike.vanriel@naenius.com"
+                }
+            ],
+            "time": "2015-02-03 12:10:50"
         },
         {
             "name": "phpspec/php-diff",
@@ -4462,65 +4747,16 @@
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
             "time": "2015-01-25 04:39:26"
-        },
-        {
-            "name": "way/generators",
-            "version": "3.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/JeffreyWay/Laravel-4-Generators.git",
-                "reference": "4a215769643507326192a739058a0c7105d932b5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/JeffreyWay/Laravel-4-Generators/zipball/4a215769643507326192a739058a0c7105d932b5",
-                "reference": "4a215769643507326192a739058a0c7105d932b5",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "behat/behat": "~2.5.1",
-                "behat/mink": "~1.5.0",
-                "behat/mink-extension": "~1.2.0",
-                "behat/mink-goutte-driver": "~1.0.9",
-                "behat/mink-selenium2-driver": "~1.1.1",
-                "phpspec/phpspec": "~2.0",
-                "phpunit/phpunit": "~3.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Way\\Generators": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jeffrey Way",
-                    "email": "jeffrey@jeffrey-way.com"
-                }
-            ],
-            "description": "Rapidly generate resources, migrations, models, and much more.",
-            "time": "2014-10-01 04:00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "laravel/framework": 20,
-        "cartalyst/sentinel": 20,
-        "cartalyst/sentinel-social": 20,
-        "cartalyst/sentinel-unique-passwords": 20,
         "fzaninotto/faker": 20,
+        "league/flysystem-cached-adapter": 20,
         "league/flysystem-dropbox": 20,
-        "league/flysystem-ziparchive": 20,
-        "league/flysystem-cached-adapter": 20
+        "league/flysystem-ziparchive": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

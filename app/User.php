@@ -76,6 +76,16 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
 	}
 
 	/**
+	 * Relationship with Profile Photo
+	 *
+	 * @return Photo
+	 */
+	public function profilepic()
+	{
+		return $this->belongsTo('App\Photo', 'profile_photo_id');
+	}
+
+	/**
 	 * Relationship with Notification
 	 *
 	 * @return Collection

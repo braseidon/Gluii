@@ -14,8 +14,10 @@
 	<meta name="keywords" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-	<!-- assets - header -->
+	{{-- Assets --}}
 	@include('template.assets.header')
+	{{-- Stats Tracking --}}
+	@include('template.assets.analytics')
 
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<link rel="shortcut icon" href="/images/favicon.png">

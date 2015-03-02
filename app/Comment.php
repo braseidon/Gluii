@@ -13,6 +13,13 @@ class Comment extends Model {
 	 */
 	protected $fillable = ['user_id', 'status_id', 'body'];
 
+	/**
+	 * The database table used by this model
+	 *
+	 * @var string
+	 */
+	protected $table = 'comments';
+
 	/*
 	|--------------------------------------------------------------------------
 	| Relationships

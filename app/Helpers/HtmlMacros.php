@@ -23,18 +23,14 @@ HTML::macro('liLinkNav', function ($name, $title = null, $parameters = [], $attr
  * @return string
  * @uses  HTML::liIconLink
  */
-HTML::macro('liIconLink', function ($name, $title = null, $icon = null, $iconRight = false, $parameters = [], $attributes = []) {
-    $active = (URL::current() == URL::route($name)) ? ' class="active"':'';
+HTML::macro('liIconLink', function ($name, $title = null, $icon = null, $parameters = [], $attributes = []) {
+    $active = (URL::current() == URL::route($name, $parameters)) ? ' class="active"':'';
 
     if ($icon !== null) {
         $icon = '<i class="' . $icon . ' fa-fw m-r-xs"></i> ';
     }
 
-    if ($iconRight !== false) {
-        $iconRight = '<i class="fa fa-angle-right pull-right m-t-xs text-xs icon-muted"></i> ';
-    }
-
-    return '<li' . $active . '>' . htmlspecialchars_decode(HTML::linkRoute($name, $iconRight . $icon . $title, $parameters, $attributes)) . '</li>';
+    return '<li' . $active . '>' . htmlspecialchars_decode(HTML::linkRoute($name, $icon . $title, $parameters, $attributes)) . '</li>';
 });
 
 /**
@@ -45,7 +41,7 @@ HTML::macro('liIconLink', function ($name, $title = null, $icon = null, $iconRig
  * @uses  HTML::liLinkSubNav
  */
 HTML::macro('liLinkSubNav', function ($name, $title = null, $icon = null, $parameters = [], $attributes = []) {
-    $active = (URL::current() == URL::route($name)) ? ' class="active"':'';
+    $active = (URL::current() == URL::route($name, $parameters)) ? ' class="active"':'';
 
     if ($icon !== null) {
         $icon = '<i class="' . $icon . ' fa-fw m-r-xs"></i> ';

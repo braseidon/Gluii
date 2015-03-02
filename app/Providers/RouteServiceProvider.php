@@ -1,6 +1,7 @@
 <?php namespace App\Providers;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+
 class RouteServiceProvider extends ServiceProvider {
 
 	/**
@@ -34,14 +35,10 @@ class RouteServiceProvider extends ServiceProvider {
 	{
 		$router->group(['namespace' => $this->namespace], function($router)
 		{
-			require app_path('Http/routes.php');
-			require app_path('Http/routesAdmin.php');
+			require app_path('Http/Routes/RoutesUser.php');
+			require app_path('Http/Routes/RoutesAdmin.php');
+			require app_path('Http/Routes/RoutesAsset.php');
 		});
-
-		// Route patterns
-		$router->pattern('id', '[0-9]+');
-		$router->pattern('slug', '[a-z0-9-]+');
-		$router->pattern('username', '[a-zA-Z0-9]+');
 	}
 
 	/**
@@ -52,8 +49,11 @@ class RouteServiceProvider extends ServiceProvider {
 	 */
 	public function before(Router $router)
 	{
+		// Route patterns
 		$router->pattern('id', '[0-9]+');
+		$router->pattern('userId', '[0-9]+');
 		$router->pattern('slug', '[a-z0-9-]+');
+		$router->pattern('path', '.+');
 		$router->pattern('username', '[a-zA-Z0-9]+');
 	}
 }

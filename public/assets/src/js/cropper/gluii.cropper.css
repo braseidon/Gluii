@@ -1,0 +1,28 @@
+/* File Input */
+.gcrop-input {
+
+}
+
+/* Main Image Wrapper */
+.gcrop-wrapper {
+	height: 364px;
+	width: 100%;
+	margin-top: 15px;
+	box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+	background-color: #fcfcfc;
+	overflow: hidden;
+}
+
+/* The Preview */
+.gcrop-preview {
+	float: none;
+	height: 184px;
+	width: 184px;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	background-color: #fff;
+	overflow: hidden;
+}
+.gcrop-preview img {
+	width: 100%;
+}

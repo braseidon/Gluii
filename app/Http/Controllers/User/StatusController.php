@@ -26,6 +26,8 @@ class StatusController extends BaseController {
 	 */
 	public function __construct(StatusRepository $repository)
 	{
+		parent::__construct();
+
 		$this->repository = $repository;
 	}
 

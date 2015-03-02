@@ -41,6 +41,12 @@ class RepositoryServiceProvider extends ServiceProvider {
 		// NotificationRepository
 		$this->app->bind('App\Repositories\NotificationRepositoryInterface',
 			'App\Repositories\NotificationRepository');
+		// PhotoRepository
+		$this->app->bind('App\Repositories\PhotoRepositoryInterface',
+			'App\Repositories\PhotoRepository');
+		// PhotoAlbumRepository
+		$this->app->bind('App\Repositories\PhotoAlbumRepositoryInterface',
+			'App\Repositories\PhotoAlbumRepository');
 	}
 
 	/**
@@ -53,7 +59,9 @@ class RepositoryServiceProvider extends ServiceProvider {
 		return [
 			'App\Repositories\UserRepositoryInterface',
 			'App\Repositories\StatusRepositoryInterface',
-			'App\Repositories\NotificationRepositoryInterface'
+			'App\Repositories\NotificationRepositoryInterface',
+			'App\Repositories\PhotoRepositoryInterface',
+			'App\Repositories\PhotoAlbumRepositoryInterface',
 		];
 	}
 

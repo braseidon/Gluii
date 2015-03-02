@@ -1,6 +1,6 @@
 <!-- reply photo -->
 <a href="{{ route('user/view', $status->author->id) }}" class="pull-left avatar thumb-xs">
-	{!! $comment->author->present()->photoThumb(40, ['class' => 'no-radius']) !!}
+	{!! $comment->author->present()->photoThumb(40) !!}
 	{!! $comment->author->present()->onlineStatus !!}
 </a>
 <div class="block">

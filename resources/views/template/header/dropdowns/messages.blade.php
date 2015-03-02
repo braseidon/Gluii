@@ -4,7 +4,7 @@
 		<span class="visible-xs-inline">Messages</span>
 		<!-- <span class="badge badge-sm up bg-danger pull-right-xs">2</span> -->
 	</a>
-	<div class="dropdown-menu w-xxl animated flipInX">
+	<div class="dropdown-menu w-xxl">
 		<div class="panel bg-white">
 			<div class="panel-heading b-light bg-light">
 				<strong>You have <span>0</span> messages</strong>

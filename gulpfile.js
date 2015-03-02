@@ -17,20 +17,21 @@ var config = {
 
 		// Less
 		less: [
+			dir.source + 'less/bootstrap/bootstrap.less',
 			dir.source + 'less/app.less',
 		],
 
 		// CSS
 		css: [
 				// Essentials
-				// dir.source + 'css/fonts.css',
-				// dir.vendor + 'simple-line-icons/css/simple-line-icons.css',
+				dir.source + 'css/fonts.css',
+				dir.vendor + 'font-awesome/css/font-awesome.css',
+				dir.vendor + 'simple-line-icons/css/simple-line-icons.css',
 				// dir.vendor + 'ionicons/css/ionicons.css',
 				dir.source + 'css/gluii.css',
 				// Plugins
 				dir.vendor + 'animate.css/animate.css',
 				dir.vendor + 'jcrop/css/jquery.Jcrop.css',
-				dir.vendor + 'chosen/chosen.css',
 		],
 
 		// Fonts
@@ -46,6 +47,7 @@ var config = {
 			dir.vendor + 'modernizr/modernizr.js',
 			dir.vendor + 'bootstrap/dist/js/bootstrap.js',
 			dir.source + 'js/gluii.js',
+			dir.source + 'js/gluii.plugins.js',
 			dir.source + 'js/app/ui-load.js',
 			dir.source + 'js/app/ui-nav.js',
 			dir.source + 'js/app/ui-toggle.js',
@@ -53,9 +55,7 @@ var config = {
 			dir.vendor + 'jqueryui-touch-punch/jquery.ui.touch-punch.min.js',
 			dir.vendor + 'jcrop/js/jquery.Jcrop.js',
 			dir.vendor + 'slimscroll/jquery.slimscroll.js',
-			dir.vendor + 'chosen/chosen.jquery.js',
 			dir.vendor + 'bootstrap-filestyle/src/bootstrap-filestyle.js',
-			dir.vendor + 'eldarion-ajax/js/eldarion-ajax.min.js',
 		],
 
 		build: {

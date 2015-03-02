@@ -1,27 +1,32 @@
 <?php namespace App;
 
-use Image;
+use App\Gluii\Presenters\Setup\PresentableTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model {
 
-	use PresentableTrait;
+	use PresentableTrait, SoftDeletes;
 
 	/**
 	 * @var array
 	 */
-	protected $fillable = [];
+	protected $fillable = ['user_id', 'album_id', 'path', 'filename', 'filesize'];
 
 	/**
-	 * The attributes that should be casted to native types.
+	 * The database table used by this model
 	 *
-	 * @var array
+	 * @var string
 	 */
-	protected $casts = [
-		'is_read'					=> 'boolean',
-		'notification_route_params'	=> 'array',
-	];
+	protected $table = 'photos';
+
+	/**
+	 * Indicates if the model should soft delete.
+	 *
+	 * @var bool
+	 */
+    protected $dates = ['deleted_at'];
 
 	/*
 	|--------------------------------------------------------------------------
@@ -36,19 +41,19 @@ class Photo extends Model {
 	 *
 	 * @return User
 	 */
-	public function user()
+	public function owner()
 	{
 		return $this->belongsTo('App\User', 'user_id');
 	}
 
 	/**
-	 * Relationship with Friend
+	 * Relationship with PhotoAlbum
 	 *
-	 * @return User
+	 * @return PhotoAlbum
 	 */
-	public function friend()
+	public function album()
 	{
-		return $this->belongsTo('App\User', 'friend_id');
+		return $this->belongsTo('App\PhotoAlbum', 'album_id');
 	}
 
 	/*
@@ -58,16 +63,5 @@ class Photo extends Model {
 	|
 	|
 	*/
-
-	/**
-	 * Attribute for notification_route_params
-	 *
-	 * @param  string $value
-	 * @return stdClass
-	 */
-	public function getNotificationRouteParamsAttribute($value)
-	{
-		return json_decode($value);
-	}
 
 }

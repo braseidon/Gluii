@@ -25,7 +25,7 @@
 		@endif
 
 		<!-- search form -->
-		{{--@include('template.header.search')--}}
+		@include('template.header.search')
 
 		<!-- navbar right -->
 		@if(Auth::check())

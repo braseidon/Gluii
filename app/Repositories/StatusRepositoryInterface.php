@@ -13,7 +13,7 @@ interface StatusRepositoryInterface {
 	 * Retrieve a Status by their unique identifier.
 	 *
 	 * @param  integer  $identifier
-	 * @return Status\null
+	 * @return Status|null
 	 */
 	public function findStatusById($id);
 

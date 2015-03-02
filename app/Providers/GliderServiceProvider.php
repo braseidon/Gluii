@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use Config;
 use Illuminate\Support\ServiceProvider;
 
 class GliderServiceProvider extends ServiceProvider {
@@ -32,9 +33,10 @@ class GliderServiceProvider extends ServiceProvider {
 			return \League\Glide\ServerFactory::create([
 				'source'				=> $filesystem->getDriver(),
 				'cache'					=> $filesystem->getDriver(),
-				'source_path_prefix'	=> 'images',
-				'cache_path_prefix'		=> 'images/.cache',
-				'base_url'				=> 'img',
+				'source_path_prefix'	=> Config::get('photos.dirs.source_path_prefix', 'images'),
+				'cache_path_prefix'		=> Config::get('photos.dirs.cache_path_prefix', 'images/.cache'),
+				'base_url'				=> Config::get('photos.dirs.base_url', 'img'),
+				'max_image_size'		=> 2000*2000,
 			]);
 		});
 	}

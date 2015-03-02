@@ -55,29 +55,23 @@ class StatusRepository extends AbstractRepository implements StatusRepositoryInt
 	public function allStatuses($limit = 15)
 	{
 		return Status::with([
-				'profileuser' => function($q)
-				{
+				'profileuser' => function($q) {
 					$q->selectForFeed();
 				},
-				'author' => function($q)
-				{
+				'author' => function($q) {
 					$q->selectForFeed();
 				},
-				'likes' => function($q)
-				{
+				'likes' => function($q) {
 					$q->select('users.id', 'first_name', 'last_name')
 						->withPivot('user_id');
 				},
-				'comments' => function($q)
-				{
+				'comments' => function($q) {
 					$q->orderBy('id', 'ASC');
 				},
-				'comments.author' => function($q)
-				{
+				'comments.author' => function($q) {
 					$q->selectForFeed();
 				},
-				'comments.likes' => function($q)
-				{
+				'comments.likes' => function($q) {
 					$q->select('users.id', 'first_name', 'last_name')
 						->withPivot('user_id');
 				},

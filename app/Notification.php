@@ -14,6 +14,13 @@ class Notification extends Model {
 	protected $fillable = ['user_id', 'notification_type', 'friend_id', 'notification_route_params'];
 
 	/**
+	 * The database table used by this model
+	 *
+	 * @var string
+	 */
+	protected $table = 'notifications';
+
+	/**
 	 * The attributes that should be casted to native types.
 	 *
 	 * @var array

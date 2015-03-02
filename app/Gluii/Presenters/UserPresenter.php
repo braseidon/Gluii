@@ -24,32 +24,6 @@ class UserPresenter extends Presenter {
 	}
 
 	/**
-	 * Returns the user Gravatar image url.
-	 *
-	 * @return string
-	 */
-	public function gravatar($size = 30)
-	{
-		$email = md5($this->entity->email);
-
-		return "//www.gravatar.com/avatar/{$email}?s={$size}";
-	}
-
-	/**
-	 * Show a User's profile photo at a certain size
-	 *
-	 * @param  integer $size
-	 * @param  array $attributes
-	 * @return string
-	 */
-	public function photoThumb($size = 100, $attributes = [])
-	{
-		$attributes = HTML::attributes($attributes);
-
-		return '<img src="'. $this->gravatar($size) . '" '. $attributes . ' alt="'. $this->name . '" />';
-	}
-
-	/**
 	 * Return the User's title, if special
 	 *
 	 * @return string
@@ -77,6 +51,49 @@ class UserPresenter extends Presenter {
 		return $online = '<i class="on b-white"></i>';
 		$offline	= '<i class="busy b-white"></i>';
 		$away		= '<i class="away b-white"></i>';
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| Avatar & Stuff
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+
+	/**
+	 * Returns the user Gravatar image url.
+	 *
+	 * @return string
+	 */
+	public function gravatar($size = 30)
+	{
+		$email = md5($this->entity->email);
+
+		return "//www.gravatar.com/avatar/{$email}?s={$size}";
+	}
+
+	/**
+	 * Show a User's profile photo at a certain size
+	 *
+	 * @param  integer $size
+	 * @param  array $attributes
+	 * @return string
+	 */
+	public function photoThumb($size = 100, $attributes = [])
+	{
+		$attributes = HTML::attributes($attributes);
+
+		if(! $this->entity->profile_photo_id)
+		{
+			if($this->entity->gender == 'male')
+				return '<img src="/images/avatars/male-silhouette.png" '. $attributes . ' alt="'. $this->name . '" />';
+
+			if($this->entity->gender == 'female')
+				return '<img src="/images/avatars/female-silhouette.png" '. $attributes . ' alt="'. $this->name . '" />';
+		}
+
+		return '<img src="'. $this->gravatar($size) . '" '. $attributes . ' alt="'. $this->name . '" />';
 	}
 
 	/*

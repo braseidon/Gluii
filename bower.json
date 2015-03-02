@@ -43,10 +43,8 @@
     "igrowl": "~3.0.1",
     "intro.js": "~1.0.0",
     "ionicons": "~2.0.1",
-    "jcrop": "~0.9.12",
     "jquery": "~1.11.2",
     "jquery-file-upload": "~9.9.3",
-    "jquery.ui": "~1.11.3",
     "jvectormap": "~2.0.0",
     "lazysizes": "~0.9.0",
     "modernizr": "~2.8.3",
@@ -62,6 +60,8 @@
     "screenfull": "~2.0.0",
     "jquery-placeholder": "~2.1.1",
     "bootstrap-filestyle": "~1.1.2",
-    "jqueryui-touch-punch": "*"
+    "jqueryui-touch-punch": "*",
+    "cropper": "~0.8.0",
+    "x-editable": "~1.5.1"
   }
 }

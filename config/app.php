@@ -148,10 +148,8 @@ return [
 		/*
 		 * Package Service Providers
 		 */
-		'Clockwork\Support\Laravel\ClockworkServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
-		// 'Way\Generators\GeneratorsServiceProvider',
 
 		/*
 		 * ShutteR Service Providers
@@ -159,6 +157,7 @@ return [
 		'App\Providers\GliderServiceProvider',
 		'App\Providers\MacroServiceProvider',
 		'App\Providers\RepositoryServiceProvider',
+		'App\Providers\ImageServiceProvider',
 
 		/*
 		 * Cartalyst Packages
@@ -166,11 +165,6 @@ return [
 		'Cartalyst\Sentinel\Laravel\SentinelServiceProvider',
 		'Cartalyst\Sentinel\Addons\Social\Laravel\SocialServiceProvider',
 		'Cartalyst\Sentinel\Addons\UniquePasswords\Laravel\UniquePasswordsServiceProvider',
-
-		/**
-		 * Development Only...?
-		 */
-		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 	],
 
 	/*
@@ -223,7 +217,7 @@ return [
 		'HTML'				=> 'Illuminate\Html\HtmlFacade',
 		'Clockwork'			=> 'Clockwork\Support\Laravel\Facade',
 		'Image'				=> 'Intervention\Image\Facades\Image',
-
+		'Server'			=> 'App\Gluii\Support\Facades\ServerFactory',
 
 		/*
 		 * Cartalyst Packages

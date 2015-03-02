@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs m-b" role="menu">
+<ul class="nav nav-tabs nav-content" role="menu">
 	{!! HTML::liIconLink('home', 'News Feed', 'icon icon-globe') !!}
 	{!! HTML::liIconLink('feed/families', 'Families', 'icon icon-share') !!}
 	{!! HTML::liIconLink('feed/areas', 'Areas', 'icon icon-map') !!}

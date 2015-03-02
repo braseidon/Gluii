@@ -1,10 +1,10 @@
 <li class="dropdown">
 	<a href class="dropdown-toggle clear" data-toggle="dropdown">
-		<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+		<span class="thumb-sm avatar m-t-n-sm m-b-n-sm m-l-sm">
 			<img src="{{ Auth::getUser()->present()->gravatar(40) }}" width="40" height="40" alt="...">
 			<i class="on md b-white bottom"></i>
 		</span>
-		<span class="hidden-sm hidden-md">{{ Auth::getUser()->present()->name }}</span> <b class="caret"></b>
+		<b class="caret"></b>
 	</a>
 	<ul class="dropdown-menu w" role="menu">
 		{{-- Main --}}

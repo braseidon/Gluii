@@ -15,8 +15,26 @@ $errors = Session::get('errors', new MessageBag);
  *
  * @var boolean
  */
-Form::macro('group', function($name, $label = false, $cols = [3, 9], callable $callback) use ($errors)
-{
+Form::macro('group', function($name, $label = false, $why = false, callable $callback) use ($errors) {
+	$output = '<div class="form-group' . ($errors->has($name) ? ' has-error' : '') . '">';
+	$output .= '<label class="control-label">' . $label . '</label>';
+	$output .= $callback($name);
+	$output .= $errors->first($name, '<span class="help-block">:message</span>');
+	$output .= '</div>';
+
+	return $output;
+});
+
+/**
+ * Wrap a return value in a form-group
+ * Form::group('key', 'Label', $cols = true, function($name)
+ * {
+ *  	return Form::something();
+ * })
+ *
+ * @var boolean
+ */
+Form::macro('groupHorizontal', function($name, $label = false, $cols = [3, 9], callable $callback) use ($errors) {
 	if(is_array($cols) && count($cols) == 2)
 	{
 		$cols		= array_values($cols);
@@ -41,8 +59,7 @@ Form::macro('group', function($name, $label = false, $cols = [3, 9], callable $c
  *
  * @var integer
  */
-Form::macro('iCheckbox', function($name, $label, $value = 1, $checked = false, $options = array())
-{
+Form::macro('iCheckbox', function($name, $label, $value = 1, $checked = false, $options = array()) {
 	$output = '<div class="checkbox">';
 	$output .= '<label class="i-checks">';
 	$output .= Form::checkbox($name, 1, $checked);

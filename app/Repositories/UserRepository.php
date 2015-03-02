@@ -74,54 +74,6 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 	}
 
 	/**
-	 * Get User's profile for viewing
-	 *
-	 * @param  integer $userId
-	 * @return User
-	 */
-	public function loadUserProfile($userId)
-	{
-		$user = User::whereId($userId);
-
-		return $user->with([
-				'friendsto',
-				'friendsfrom',
-				'statuses' => function($q)
-				{
-					$q->orderBy('updated_at', 'DESC')
-						->addSelect('id', 'profile_user_id', 'author_id', 'body', 'created_at')
-						->limit(5);
-				},
-				'statuses.profileuser' => function($q)
-				{
-					$q->addSelect('id', 'first_name', 'last_name', 'email');
-				},
-				'statuses.author' => function($q)
-				{
-					$q->addSelect('id', 'first_name', 'last_name', 'email');
-				},
-				'statuses.likes' => function($q)
-				{
-					$q->addSelect('users.id', 'first_name', 'last_name');
-				},
-				'statuses.comments' => function($q)
-				{
-					$q->orderBy('id', 'DESC')
-						->limit(10);
-				},
-				'statuses.comments.author' => function($q)
-				{
-					$q->addSelect('id', 'first_name', 'last_name', 'email');
-				},
-				'statuses.comments.likes' => function($q)
-				{
-					$q->addSelect('users.id', 'first_name', 'last_name');
-				},
-			])
-			->first();
-	}
-
-	/**
 	 * Returns a User list, paginated
 	 *
 	 * @param  integer $perPage
@@ -187,6 +139,55 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
 	{
 		$friend = User::find($userId);
 		$friend->friendsto()->detach($user->id);
+	}
+
+	/*
+	|--------------------------------------------------------------------------
+	| User Profile Loading
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+
+	/**
+	 * Get User's profile for viewing
+	 *
+	 * @param  integer $userId
+	 * @return User
+	 */
+	public function loadUserTimeline($userId)
+	{
+		$user = User::whereId($userId);
+
+		return $user->with([
+				'friendsto',
+				'friendsfrom',
+				'statuses' => function($q) {
+					$q->orderBy('updated_at', 'DESC')
+						->addSelect('id', 'profile_user_id', 'author_id', 'body', 'created_at')
+						->limit(5);
+				},
+				'statuses.profileuser' => function($q) {
+					$q->addSelect('id', 'first_name', 'last_name', 'email');
+				},
+				'statuses.author' => function($q) {
+					$q->addSelect('id', 'first_name', 'last_name', 'email');
+				},
+				'statuses.likes' => function($q) {
+					$q->addSelect('users.id', 'first_name', 'last_name');
+				},
+				'statuses.comments' => function($q) {
+					$q->orderBy('id', 'DESC')
+						->limit(10);
+				},
+				'statuses.comments.author' => function($q) {
+					$q->addSelect('id', 'first_name', 'last_name', 'email');
+				},
+				'statuses.comments.likes' => function($q) {
+					$q->addSelect('users.id', 'first_name', 'last_name');
+				},
+			])
+			->first();
 	}
 
 
