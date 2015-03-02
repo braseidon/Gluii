@@ -36,11 +36,12 @@ class UserProfileController extends BaseController {
 	public function getViewTimeline($id)
 	{
 		$user = $this->userRepository->loadUserTimeline($id);
+		$statuses = $user->statuses;
 
 		if(! $user)
 			return redirect()->route('home')->withErrors(['User Error' => 'User not found!']);
 
-		return view()->make('profile.feed', compact('user'));
+		return view()->make('profile.feed', compact('user', 'statuses'));
 	}
 
 	/**
