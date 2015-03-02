@@ -148,6 +148,7 @@ return [
 		/*
 		 * Package Service Providers
 		 */
+		'Clockwork\Support\Laravel\ClockworkServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
 		'Intervention\Image\ImageServiceProvider',
 
@@ -213,6 +214,7 @@ return [
 		/**
 		 * Packages
 		 */
+		'Clockwork'			=> 'Clockwork\Support\Laravel\Facade',
 		'Form'				=> 'Illuminate\Html\FormFacade',
 		'HTML'				=> 'Illuminate\Html\HtmlFacade',
 		'Image'				=> 'Intervention\Image\Facades\Image',
