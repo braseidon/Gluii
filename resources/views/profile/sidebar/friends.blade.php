@@ -9,7 +9,7 @@
 				@foreach($user->friends->take(12) as $friend)
 					<div class="col-md-4 col-lg-3">
 						<a href="{{ route('user/view', $friend->id) }}">
-							{!! $friend->present()->photoThumb(120, ['class' => 'userprofile-sidebar-list-item']) !!}
+							{!! $friend->present()->photoThumb('thumb-sm', ['class' => 'userprofile-sidebar-list-item']) !!}
 							<div>
 								<span class="text-sm">{!! $friend->present()->name !!}</span>
 							</div>

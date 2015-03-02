@@ -1,6 +1,7 @@
 <?php namespace App\Gluii\Presenters;
 
 use App\Gluii\Presenters\Setup\Presenter;
+use Config;
 use HTML;
 
 class UserPresenter extends Presenter {
@@ -80,20 +81,24 @@ class UserPresenter extends Presenter {
 	 * @param  array $attributes
 	 * @return string
 	 */
-	public function photoThumb($size = 100, $attributes = [])
+	public function photoThumb($size = 'thumb-sm', $attributes = [])
 	{
 		$attributes = HTML::attributes($attributes);
 
-		if(! $this->entity->profile_photo_id)
+		if($this->entity->profile_photo)
 		{
-			if($this->entity->gender == 'male')
-				return '<img src="/images/avatars/male-silhouette.png" '. $attributes . ' alt="'. $this->name . '" />';
+			$url = '/' . Config::get('photos.dirs.base_url') . '/' . $size . '/user/' . $this->entity->id . '/' . $this->entity->profile_photo;
 
-			if($this->entity->gender == 'female')
-				return '<img src="/images/avatars/female-silhouette.png" '. $attributes . ' alt="'. $this->name . '" />';
+			return '<img src="'. $url . '" '. $attributes . ' alt="'. $this->name . '" />';
 		}
 
-		return '<img src="'. $this->gravatar($size) . '" '. $attributes . ' alt="'. $this->name . '" />';
+		if($this->entity->gender == 'male')
+			return '<img src="/images/avatars/male-silhouette.png" '. $attributes . ' alt="'. $this->name . '" />';
+
+		if($this->entity->gender == 'female')
+			return '<img src="/images/avatars/female-silhouette.png" '. $attributes . ' alt="'. $this->name . '" />';
+
+		return '<img src="/images/avatars/male-silhouette.png" '. $attributes . ' alt="'. $this->name . '" />';
 	}
 
 	/*

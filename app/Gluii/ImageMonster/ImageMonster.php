@@ -125,7 +125,7 @@ class ImageMonster implements PhotoGuardInterface {
 	 */
 	public function generatePath($type, $userid)
 	{
-		return storage_path() . '\\img\\' . $type . '\\' . $userid . '\\';
+		return storage_path() . '\\' . Config::get('photos.options.source_dir') . '\\' . $type . '\\' . $userid . '\\';
 	}
 
 	/**

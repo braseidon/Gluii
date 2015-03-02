@@ -21,4 +21,4 @@
 /**
  * Image Cache
  */
-Route::get('img/{path}', ['as' => 'asset/img', 'uses' => 'AssetController@getImage'])->where('path', '.+');
+Route::get('img/{size}/{path}', ['as' => 'asset/img', 'uses' => 'AssetController@getUserPhoto'])->where('path', '.+');

@@ -1,7 +1,7 @@
 <li class="dropdown">
 	<a href class="dropdown-toggle clear" data-toggle="dropdown">
 		<span class="thumb-sm avatar m-t-n-sm m-b-n-sm m-l-sm">
-			<img src="{{ Auth::getUser()->present()->gravatar(40) }}" width="40" height="40" alt="...">
+			{!! Auth::getUser()->present()->photoThumb('thumb-sm', ['width' => 40, 'height' => 40]) !!}
 			<i class="on md b-white bottom"></i>
 		</span>
 		<b class="caret"></b>

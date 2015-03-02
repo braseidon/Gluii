@@ -28,7 +28,6 @@ return [
 	|
 	*/
 
-	// 'model' => 'App\User',
 	'model' => 'Sentinel',
 
 	/*

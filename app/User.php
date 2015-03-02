@@ -141,7 +141,7 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
 	 */
 	public function scopeSelectForFeed($query)
 	{
-		return $query->addSelect('id', 'first_name', 'last_name', 'email');
+		return $query->addSelect('id', 'first_name', 'last_name', 'email', 'profile_photo');
 	}
 
 	/*

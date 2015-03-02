@@ -9,7 +9,7 @@
 		@endif
 	</a>
 	<div class="dropdown-menu w-xxl">
-		<div class="panel bg-white">
+		<div class="panel bg-white dropdown-persist">
 			<div class="panel-heading b-light bg-light">
 				<strong>You have <span>{{ Auth::getUser()->getRequestsPending()->count() }}</span> friend {{ str_plural('request', Auth::getUser()->getRequestsPending()->count()) }}</strong>
 			</div>

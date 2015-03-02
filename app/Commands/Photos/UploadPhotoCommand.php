@@ -73,7 +73,8 @@ class UploadPhotoCommand extends Command implements SelfHandling {
 			if(! $user = User::find($this->userId))
 				return false;
 
-			$user->profile_photo_id = $photo->id;
+			$user->profile_photo_id	= $photo->id;
+			$user->profile_photo	= $photo->filename;
 			$user->save();
 		}
 

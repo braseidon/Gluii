@@ -5,7 +5,7 @@
 		<!-- <span class="badge badge-sm up bg-danger pull-right-xs">2</span> -->
 	</a>
 	<div class="dropdown-menu w-xxl">
-		<div class="panel bg-white">
+		<div class="panel bg-white dropdown-persist">
 			<div class="panel-heading b-light bg-light">
 				<strong>You have <span>0</span> messages</strong>
 			</div>

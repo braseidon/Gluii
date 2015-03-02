@@ -8,7 +8,7 @@
 			@for($x = 0;$x < 12;$x++)
 				<div class="col-md-4 col-lg-3">
 					<a href="#">
-						{!! $user->present()->photoThumb(120, ['class' => 'userprofile-sidebar-list-item']) !!}
+						{!! $user->present()->photoThumb('thumb-sm', ['class' => 'userprofile-sidebar-list-item']) !!}
 					</a>
 				</div>
 			@endfor

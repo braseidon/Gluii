@@ -1,7 +1,7 @@
 <div class="block">
 	<!-- reply photo -->
 	<div class="pull-left block avatar thumb-xs">
-		{!! Auth::getUser()->present()->photoThumb(40, ['class' => 'no-radius']) !!}
+		{!! Auth::getUser()->present()->photoThumb('thumb-sm', ['class' => 'no-radius']) !!}
 		{!! Auth::getUser()->present()->onlineStatus !!}
 	</div>
 	<div class="block pos-rlt">

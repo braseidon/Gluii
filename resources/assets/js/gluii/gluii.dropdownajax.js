@@ -6,7 +6,7 @@
    *
    * @return {string}
    */
-  $.fn.shutterDropdownLoad = function()
+  $.fn.shutterDropdownAjax = function()
   {
     var $this       = $(this),
       $dataContent    = $this.find('.ajax-content[data-ajax-url]'),
@@ -34,7 +34,7 @@
 
   // APPLY TO THE ELEMENTS
   // ===================================
-  $(document).on('show.bs.dropdown', '[data-toggle="ajax-dropdown"]', shutterDropdownLoad)
+  $(document).on('show.bs.dropdown', '[data-toggle="ajax-dropdown"]', shutterDropdownAjax)
 
 
 }(jQuery);

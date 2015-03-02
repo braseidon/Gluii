@@ -12,8 +12,47 @@ return [
 	*/
 
 	'options' => [
-		'source_dir'			=> env('IMAGE_SRC_DIR', storage_path('img/')),
-		'cache_dir'				=> env('IMAGE_CACHE_DIR', storage_path('img/.cache/')),
+		'source_dir'			=> 'app\\' . env('IMAGE_SRC_DIR', storage_path('images')),
+		'cache_dir'				=> 'app\\' . env('IMAGE_CACHE_DIR', storage_path('images/.cache')),
+	],
+
+	/*
+	|--------------------------------------------------------------------------
+	| Image Templates
+	|--------------------------------------------------------------------------
+	|
+	| Pre-defined templates for image sizes, e.g. 'thumb', 'small', 'large', etc
+	|
+	*/
+
+	'templates' => [
+
+		'thumb-sm' => [
+			'w'					=> 65,
+			'h'					=> 65,
+			'q'					=> 40,
+			'fit'				=> 'crop',
+		],
+		'thumb-md' => [
+			'w'					=> 120,
+			'h'					=> 120,
+			'q'					=> 50,
+			'fit'				=> 'crop',
+		],
+		'thumb-lg' => [
+			'w'					=> 160,
+			'h'					=> 160,
+			'q'					=> 60,
+			'fit'				=> 'crop',
+		],
+
+		'large' => [
+			'w'					=> 1920,
+			'h'					=> 1080,
+			'q'					=> 90,
+			'fit'				=> 'max',
+		],
+
 	],
 
 	/*
@@ -48,8 +87,8 @@ return [
 	'dirs' => [
 
 		// Image source and cache paths
-		'source_path_prefix'	=> 'images',
-		'cache_path_prefix'		=> 'images/.cache',
+		'source_path_prefix'	=> env('IMAGE_SRC_DIR', storage_path('images')),
+		'cache_path_prefix'		=> env('IMAGE_CACHE_DIR', storage_path('images/.cache')),
 		'base_url'				=> 'img',
 
 		// The categories of images to store

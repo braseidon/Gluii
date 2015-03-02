@@ -1,7 +1,10 @@
 <?php namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App;
+use Config;
 use League\Glide\Server;
+
+use Illuminate\Http\Request;
 
 class AssetController extends BaseController {
 
@@ -30,16 +33,10 @@ class AssetController extends BaseController {
 	 * @param  string $path
 	 * @return Image
 	 */
-	public function getUserPhoto($path)
+	public function getUserPhoto(Request $request, $size, $path)
 	{
-		// Set source image path prefix
-		$this->server->setSourcePathPrefix('images/covers');
-
-		$arr = [
-			'w'		=> Config::get('photos.limits.width'),
-			'h'		=> Config::get('photos.limits.height'),
-			'fit'	=> 'max'
-		]
+		if(! $arr = Config::get('photos.templates.' . $size, false))
+			App::abort(404);
 
 		return $this->server->outputImage($path, $arr);
 	}
