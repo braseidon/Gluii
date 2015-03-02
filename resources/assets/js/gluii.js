@@ -131,7 +131,7 @@ $(function() {
 	 *
 	 * @return {string}
 	 */
-	$.fn.shutterDropdownLoad = function()
+	$.fn.shutterDropdownAjax = function()
 	{
 		var $this				= $(this),
 			$dataContent		= $this.find('.ajax-content[data-ajax-url]'),
@@ -160,8 +160,32 @@ $(function() {
 	// On Bootstrap dropdown event, load the Ajax
 	$('[data-toggle="ajax-dropdown"]').on('show.bs.dropdown', function(e)
 	{
-		$(this).shutterDropdownLoad();
+		$(this).shutterDropdownAjax();
 	});
+
+	/*
+	|--------------------------------------------------------------------------
+	| Dropdown Perist
+	|--------------------------------------------------------------------------
+	|
+	|
+	*/
+
+	$('.dropdown-menu .dropdown-persist').click(function(event) {
+		event.stopPropagation();
+	});
+
+	$('.dropdown-menu .nav-tabs li a').click(function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		$(this).tab('show')
+	});
+
+	if ($('.btn-states').length) {
+		$('.btn-states').click(function() {
+			$(this).addClass('active').siblings().removeClass('active');
+		});
+	}
 
 	/*
 	|--------------------------------------------------------------------------

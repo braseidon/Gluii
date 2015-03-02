@@ -5,14 +5,15 @@ body{color:#333;}
 .app:before {background-color: #fff;}
 
 /* Header */
+.app-header {
+	z-index: 3000;
+	box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .5);
+}
 body.app-header-fixed {
 	padding-top: 0;
 }
 .app-header-fixed {
 	padding-top: 50px;
-}
-.app-header {
-	z-index: 3000;
 }
 
 /* Content Container */
@@ -114,6 +115,7 @@ ul > li i.icon {
 /* -----------------------------------
 | User Profile - Profile Picture
 ----------------------------------- */
+
 /* Profile Picture */
 .profile-pic-container {
 	position: absolute;
@@ -130,6 +132,8 @@ ul > li i.icon {
 .profile-pic {position: relative;display: block;z-index: 3;width: 100%;height: 100%;}
 .profile-pic > img {width: 100%;height: 100%;}
 .profile-name {margin-left: 200px;margin-top: 10px;}
+
+/* Change Photo Button */
 .profile-pic > .btn-change-photo {
 	position: absolute;
 	margin: 0 auto;
