@@ -12,8 +12,8 @@ return [
 	*/
 
 	'options' => [
-		'source_dir'			=> 'app\\' . env('IMAGE_SRC_DIR', 'images'),
-		'cache_dir'				=> 'app\\' . env('IMAGE_CACHE_DIR', 'images/.cache'),
+		'source_dir'			=> 'app/' . env('IMAGE_SRC_DIR', 'images'),
+		'cache_dir'				=> 'app/' . env('IMAGE_CACHE_DIR', 'images/.cache'),
 	],
 
 	/*
@@ -88,14 +88,14 @@ return [
 
 		// Image source and cache paths
 		'source_path_prefix'	=> env('IMAGE_SRC_DIR', storage_path('images')),
-		'cache_path_prefix'		=> env('IMAGE_CACHE_DIR', storage_path('images\\.cache')),
+		'cache_path_prefix'		=> env('IMAGE_CACHE_DIR', storage_path('images/.cache')),
 		'base_url'				=> 'img',
 
 		// The categories of images to store
 		'types' => [
-			'profile'			=> 'user\\{id}',
-			'photo'				=> 'photo\\{id}',
-			'event'				=> 'event\\{id}',
+			'profile'			=> 'user/{id}',
+			'photo'				=> 'photo/{id}',
+			'event'				=> 'event/{id}',
 		],
 
 	],

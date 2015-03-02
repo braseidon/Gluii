@@ -110,7 +110,7 @@ class ImageMonster implements PhotoGuardInterface {
 	{
 		if(! File::isDirectory($path))
 		{
-			return File::makeDirectory($path, 0777, true);
+			return File::makeDirectory($path, 0775, true);
 		}
 
 		return File::isDirectory($path);
@@ -125,7 +125,7 @@ class ImageMonster implements PhotoGuardInterface {
 	 */
 	public function generatePath($type, $userid)
 	{
-		return storage_path() . '\\' . Config::get('photos.options.source_dir') . '\\' . $type . '\\' . $userid . '\\';
+		return storage_path() . '/' . Config::get('photos.options.source_dir') . '/' . $type . '/' . $userid . '/';
 	}
 
 	/**
