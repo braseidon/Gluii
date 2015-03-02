@@ -110,7 +110,7 @@ class ImageMonster implements PhotoGuardInterface {
 	{
 		if(! File::isDirectory($path))
 		{
-			return File::makeDirectory($path, 0775, true);
+			return File::makeDirectory($path, 0777, true);
 		}
 
 		return File::isDirectory($path);
