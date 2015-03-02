@@ -215,7 +215,6 @@ return [
 		 */
 		'Form'				=> 'Illuminate\Html\FormFacade',
 		'HTML'				=> 'Illuminate\Html\HtmlFacade',
-		'Clockwork'			=> 'Clockwork\Support\Laravel\Facade',
 		'Image'				=> 'Intervention\Image\Facades\Image',
 		'Server'			=> 'App\Gluii\Support\Facades\ServerFactory',
 
