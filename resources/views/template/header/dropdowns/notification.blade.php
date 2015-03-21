@@ -1,5 +1,5 @@
 <div class="media list-group-item">
-	<span class="pull-left thumb-sm">
+	<span class="pull-left thumb">
 		{!! $notification->present()->image() !!}
 	</span>
 	<span class="media-body m-b-none">

@@ -1,6 +1,6 @@
 <div class="media list-group-item">
-	<span class="pull-left thumb-sm">
-		{!! $pendingFriend->present()->photoThumb(60, ['class' => 'img-circle']) !!}
+	<span class="pull-left thumb">
+		{!! $pendingFriend->present()->photoThumb('thumb-sm', ['class' => 'img-circle']) !!}
 	</span>
 	<span class="media-body m-b-none">
 		<!-- user's name -->
