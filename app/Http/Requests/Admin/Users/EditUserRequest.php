@@ -3,29 +3,30 @@
 use Auth;
 use App\Http\Requests\Request;
 
-class EditUserRequest extends Request {
+class EditUserRequest extends Request
+{
 
-	/**
-	 * Determine if the user is authorized to make this request.
-	 *
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return Auth::check();
-	}
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return Auth::check();
+    }
 
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			'email'            => 'required|unique:users,email',
-			'password'         => 'min:6',
-			'password_confirm' => 'required_with:password|same:password',
-		];
-	}
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'email'            => 'required|unique:users,email',
+            'password'         => 'min:6',
+            'password_confirm' => 'required_with:password|same:password',
+        ];
+    }
 }

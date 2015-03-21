@@ -1,4 +1,5 @@
 <?php namespace App\Console\Commands\Installer\Commands;
+
 /**
  * Part of the Sentinel Kickstart application.
  *
@@ -25,71 +26,72 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class Install extends Command {
+class Install extends Command
+{
 
-	/**
-	 * The console command name.
-	 *
-	 * @var string
-	 */
-	protected $name = 'install';
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'install';
 
-	/**
-	 * The console command description.
-	 *
-	 * @var string
-	 */
-	protected $description = 'Install Sentinel Kickstart.';
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Install Sentinel Kickstart.';
 
-	/**
-	 * Constructor.
-	 *
-	 * @param  \Illuminate\Container\Container  $laravel
-	 * @param  \Installer  $installer
-	 * @return void
-	 */
-	public function __construct(Container $laravel, Installer $installer)
-	{
-		parent::__construct();
+    /**
+     * Constructor.
+     *
+     * @param  \Illuminate\Container\Container  $laravel
+     * @param  \Installer  $installer
+     * @return void
+     */
+    public function __construct(Container $laravel, Installer $installer)
+    {
+        parent::__construct();
 
-		$this->laravel = $laravel;
-		$this->installer = $installer;
+        $this->laravel = $laravel;
+        $this->installer = $installer;
 
-		// Set the migrations table incase no database
-		// file exists yet.
-		$this->laravel['config']->set('database.migrations', 'migrations');
-	}
+        // Set the migrations table incase no database
+        // file exists yet.
+        $this->laravel['config']->set('database.migrations', 'migrations');
+    }
 
-	/**
-	 * Execute the console command.
-	 *
-	 * @return mixed
-	 */
-	public function fire()
-	{
-		// Show the welcome message
-		$this->showWelcomeMessage();
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function fire()
+    {
+        // Show the welcome message
+        $this->showWelcomeMessage();
 
-		// Ask for the database details
-		$this->askDatabaseDetails();
+        // Ask for the database details
+        $this->askDatabaseDetails();
 
-		// Ask for the default user details
-		$this->askDefaultUserDetails();
+        // Ask for the default user details
+        $this->askDefaultUserDetails();
 
-		// Install Platform :)
-		$this->installer->install();
+        // Install Platform :)
+        $this->installer->install();
 
-		$this->comment('Installation complete :)');
-	}
+        $this->comment('Installation complete :)');
+    }
 
-	/**
-	 * Shows the welcome message.
-	 *
-	 * @return void
-	 */
-	protected function showWelcomeMessage()
-	{
-		$this->output->writeln(<<<WELCOME
+    /**
+     * Shows the welcome message.
+     *
+     * @return void
+     */
+    protected function showWelcomeMessage()
+    {
+        $this->output->writeln(<<<WELCOME
 <fg=white>
 *-----------------------------------------------*
 |                                               |
@@ -105,44 +107,44 @@ class Install extends Command {
 *-----------------------------------------------*
 </fg=white>
 WELCOME
-		);
-	}
+        );
+    }
 
-	/**
-	 * Prompts the user for the database driver.
-	 *
-	 * @param  array  $drivers
-	 * @return string
-	 */
-	protected function askDatabaseDriver(array $drivers)
-	{
-		// Get only the database drivers keys
-		$drivers = array_keys($drivers);
+    /**
+     * Prompts the user for the database driver.
+     *
+     * @param  array  $drivers
+     * @return string
+     */
+    protected function askDatabaseDriver(array $drivers)
+    {
+        // Get only the database drivers keys
+        $drivers = array_keys($drivers);
 
-		// Ask for the database driver
-		$message = sprintf('<fg=green>Please enter the database</fg=green> [driver] (available: %s): ', implode(', ', $drivers));
+        // Ask for the database driver
+        $message = sprintf('<fg=green>Please enter the database</fg=green> [driver] (available: %s): ', implode(', ', $drivers));
 
-		return $this->askQuestion($message, null, false, function($answer) use ($drivers)
-		{
-			if(in_array($answer, $drivers)) return $answer;
+        return $this->askQuestion($message, null, false, function ($answer) use ($drivers) {
+            if (in_array($answer, $drivers)) {
+                return $answer;
+            }
 
-			if(! $answer)
-			{
-				throw new \RuntimeException('Please enter one of the given drivers!');
-			}
+            if (! $answer) {
+                throw new \RuntimeException('Please enter one of the given drivers!');
+            }
 
-			throw new \RuntimeException("Driver '{$answer}' is not a valid driver! Please try again.");
-		});
-	}
+            throw new \RuntimeException("Driver '{$answer}' is not a valid driver! Please try again.");
+        });
+    }
 
-	/**
-	 * Prompts the user for the database credentials.
-	 *
-	 * @return void
-	 */
-	protected function askDatabaseDetails()
-	{
-		$this->output->writeln(<<<STEP
+    /**
+     * Prompts the user for the database credentials.
+     *
+     * @return void
+     */
+    protected function askDatabaseDetails()
+    {
+        $this->output->writeln(<<<STEP
 <fg=yellow>
 *-----------------------------------------------*
 |                                               |
@@ -151,69 +153,63 @@ WELCOME
 *-----------------------------------------------*
 </fg=yellow>
 STEP
-		);
+        );
 
-		// Get all the available database drivers
-		$drivers = $this->installer->getDatabaseDrivers();
+        // Get all the available database drivers
+        $drivers = $this->installer->getDatabaseDrivers();
 
-		// Ask the user to select the database driver
-		$driver = $this->askDatabaseDriver($drivers);
+        // Ask the user to select the database driver
+        $driver = $this->askDatabaseDriver($drivers);
 
-		// Hold the database details
-		$databaseData = [];
+        // Hold the database details
+        $databaseData = [];
 
-		// Loop through the selected driver fields
-		foreach ($drivers[$driver] as $field => $config)
-		{
-			// Prepare the field name to avoid confusion
-			$fieldName = $field === 'database' ? 'name' : $field;
+        // Loop through the selected driver fields
+        foreach ($drivers[$driver] as $field => $config) {
+            // Prepare the field name to avoid confusion
+            $fieldName = $field === 'database' ? 'name' : $field;
 
-			// Determine if the field output should be hidden
-			$isHidden = ($field === 'password');
+            // Determine if the field output should be hidden
+            $isHidden = ($field === 'password');
 
-			// Prepare the question message
-			if($value = $config['value'])
-			{
-				$question = sprintf(
-					'<fg=green>Please enter the database</fg=green> [%s] (enter for [%s]): ',
-					$fieldName,
-					$config['value']
-				);
-			}
-			else
-			{
-				$question = sprintf(
-					'<fg=green>Please enter the database</fg=green> [%s]: ',
-					$fieldName
-				);
-			}
+            // Prepare the question message
+            if ($value = $config['value']) {
+                $question = sprintf(
+                    '<fg=green>Please enter the database</fg=green> [%s] (enter for [%s]): ',
+                    $fieldName,
+                    $config['value']
+                );
+            } else {
+                $question = sprintf(
+                    '<fg=green>Please enter the database</fg=green> [%s]: ',
+                    $fieldName
+                );
+            }
 
-			// Prepare the question validator
-			$validator = function($answer) use ($fieldName, $config)
-			{
-				if(! $answer && $config['rules'] === 'required')
-				{
-					throw new \RuntimeException("The database '{$fieldName}' field is required!");
-				}
+            // Prepare the question validator
+            $validator = function ($answer) use ($fieldName, $config) {
+                if (! $answer && $config['rules'] === 'required') {
+                    throw new \RuntimeException("The database '{$fieldName}' field is required!");
+                }
 
-				return $answer;
-			};
+                return $answer;
+            };
 
-			// Ask the question to the user and store the answer
-			$databaseData[$field] = $this->askQuestion($question, $config['value'], $isHidden, $validator);
-		}
+            // Ask the question to the user and store the answer
+            $databaseData[$field] = $this->askQuestion($question, $config['value'], $isHidden, $validator);
+        }
 
-		$this->installer->setDatabaseData($driver, $databaseData);
-	}
+        $this->installer->setDatabaseData($driver, $databaseData);
+    }
 
-	/**
-	 * Prompts the user for the user credentials.
-	 *
-	 * @return void
-	 */
-	protected function askDefaultUserDetails()
-	{
-		$this->output->writeln(<<<STEP
+    /**
+     * Prompts the user for the user credentials.
+     *
+     * @return void
+     */
+    protected function askDefaultUserDetails()
+    {
+        $this->output->writeln(<<<STEP
 <fg=yellow>
 *-----------------------------------------------*
 |                                               |
@@ -222,59 +218,62 @@ STEP
 *-----------------------------------------------*
 </fg=yellow>
 STEP
-		);
+        );
 
-		$userData = [];
+        $userData = [];
 
-		$userData['email'] = $this->askQuestion('<fg=green>Please enter the user email</fg=green>: ', null, false, function($answer)
-		{
-			if(! $answer) throw new \RuntimeException('The email is required!');
+        $userData['email'] = $this->askQuestion('<fg=green>Please enter the user email</fg=green>: ', null, false, function ($answer) {
+            if (! $answer) {
+                throw new \RuntimeException('The email is required!');
+            }
 
-			return $answer;
-		});
+            return $answer;
+        });
 
-		$userData['password'] = $this->askQuestion('<fg=green>Please enter the user password</fg=green>: ', null, true, function($answer)
-		{
-			if(! $answer) throw new \RuntimeException('The password is required!');
+        $userData['password'] = $this->askQuestion('<fg=green>Please enter the user password</fg=green>: ', null, true, function ($answer) {
+            if (! $answer) {
+                throw new \RuntimeException('The password is required!');
+            }
 
-			return $answer;
-		});
+            return $answer;
+        });
 
-		$this->askQuestion('<fg=green>Please confirm the user password</fg=green>: ', null, true, function($answer) use ($userData)
-		{
-			if(! $answer) throw new \RuntimeException('The password confirmation is required!');
+        $this->askQuestion('<fg=green>Please confirm the user password</fg=green>: ', null, true, function ($answer) use ($userData) {
+            if (! $answer) {
+                throw new \RuntimeException('The password confirmation is required!');
+            }
 
-			if($answer !== $userData['password']) throw new \RuntimeException('The passwords doesn\'t match!');
+            if ($answer !== $userData['password']) {
+                throw new \RuntimeException('The passwords doesn\'t match!');
+            }
 
-			return $answer;
-		});
+            return $answer;
+        });
 
-		$this->installer->setUserData($userData);
-	}
+        $this->installer->setUserData($userData);
+    }
 
-	/**
-	 * Asks the user the given question.
-	 *
-	 * @param  string  $question
-	 * @param  mixed  $default
-	 * @param  bool  $hidden
-	 * @param  \Closure  $validator
-	 * @return string
-	 */
-	protected function askQuestion($question, $default = null, $hidden = false, \Closure $validator = null)
-	{
-		$q = new Question($question, $default);
+    /**
+     * Asks the user the given question.
+     *
+     * @param  string  $question
+     * @param  mixed  $default
+     * @param  bool  $hidden
+     * @param  \Closure  $validator
+     * @return string
+     */
+    protected function askQuestion($question, $default = null, $hidden = false, \Closure $validator = null)
+    {
+        $q = new Question($question, $default);
 
-		$q->setValidator($validator);
+        $q->setValidator($validator);
 
-		if($hidden === true)
-		{
-			$q->setHidden(true);
+        if ($hidden === true) {
+            $q->setHidden(true);
 
-			$q->setHiddenFallback(false);
-		}
+            $q->setHiddenFallback(false);
+        }
 
-		return $this->getHelper('question')->ask($this->input, $this->output, $q);
-	}
-
+        return $this->getHelper('question')->ask($this->input, $this->output, $q);
+    }
 }

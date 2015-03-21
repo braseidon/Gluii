@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\BaseController;
 
-class AdminController extends BaseController {
+class AdminController extends BaseController
+{
 
-	//
+    //
 }

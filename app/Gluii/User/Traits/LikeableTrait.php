@@ -2,37 +2,38 @@
 
 use App\User;
 
-trait LikeableTrait {
+trait LikeableTrait
+{
 
-	/**
-	 * Relationship to Status by Likes
-	 *
-	 * @return Collection
-	 */
-	public function likedstatuses()
-	{
-		return $this->belongsToMany('App\Status', 'status_likes', 'user_id', 'status_id')
-			->withPivot('user_id', 'status_id');
-	}
+    /**
+     * Relationship to Status by Likes
+     *
+     * @return Collection
+     */
+    public function likedstatuses()
+    {
+        return $this->belongsToMany('App\Status', 'status_likes', 'user_id', 'status_id')
+            ->withPivot('user_id', 'status_id');
+    }
 
-	/**
-	 * Relationship to Comment by Likes
-	 *
-	 * @return Collection
-	 */
-	public function likedcomments()
-	{
-		return $this->belongsToMany('App\Comment', 'comment_likes', 'user_id', 'comment_id')
-			->withPivot('user_id', 'comment_id');
-	}
+    /**
+     * Relationship to Comment by Likes
+     *
+     * @return Collection
+     */
+    public function likedcomments()
+    {
+        return $this->belongsToMany('App\Comment', 'comment_likes', 'user_id', 'comment_id')
+            ->withPivot('user_id', 'comment_id');
+    }
 
-	/*
-	|--------------------------------------------------------------------------
-	| Attaching & Detaching
-	|--------------------------------------------------------------------------
-	|
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Attaching & Detaching
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
 
     /**
      * Like a Status as a User
@@ -54,5 +55,4 @@ trait LikeableTrait {
     {
         return $this->statusesliked()->detach($statusId);
     }
-
 }

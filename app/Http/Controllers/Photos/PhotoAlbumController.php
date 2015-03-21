@@ -3,7 +3,8 @@
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
-class PhotoAlbumController extends BaseController {
+class PhotoAlbumController extends BaseController
+{
 
-	//
+    //
 }

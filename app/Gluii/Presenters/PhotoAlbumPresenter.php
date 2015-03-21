@@ -2,7 +2,8 @@
 
 use App\Gluii\Presenters\Presenter;
 
-class PhotoAlbumPresenter extends Presenter {
+class PhotoAlbumPresenter extends Presenter
+{
 
-	//
+    //
 }

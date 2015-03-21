@@ -1,4 +1,5 @@
 <?php namespace App\Console\Commands\Installer;
+
 /**
  * Part of the Sentinel Kickstart application.
  *
@@ -17,214 +18,217 @@
  * @link       http://cartalyst.com
  */
 
-class Repository {
+class Repository
+{
 
-	/**
-	 * The user configuration data.
-	 *
-	 * @var array
-	 */
-	protected $userData = [
-		'email'            => null,
-		'password'         => null,
-		'password_confirm' => null,
-	];
+    /**
+     * The user configuration data.
+     *
+     * @var array
+     */
+    protected $userData = [
+        'email'            => null,
+        'password'         => null,
+        'password_confirm' => null,
+    ];
 
-	/**
-	 * The user validation rules.
-	 *
-	 * @var array
-	 */
-	protected $userRules = [
-		'email'            => 'required|email',
-		'password'         => 'required|min:6',
-		'password_confirm' => 'required|same:password',
-	];
+    /**
+     * The user validation rules.
+     *
+     * @var array
+     */
+    protected $userRules = [
+        'email'            => 'required|email',
+        'password'         => 'required|min:6',
+        'password_confirm' => 'required|same:password',
+    ];
 
-	/**
-	 * The selected database driver.
-	 *
-	 * @var string
-	 */
-	protected $databaseDriver;
+    /**
+     * The selected database driver.
+     *
+     * @var string
+     */
+    protected $databaseDriver;
 
-	/**
-	 * The database configuration data.
-	 *
-	 * @var array
-	 */
-	protected $databaseData = [
+    /**
+     * The database configuration data.
+     *
+     * @var array
+     */
+    protected $databaseData = [
 
-		'sqlite' => [
-			'database' => null,
-			'prefix'   => null,
-		],
+        'sqlite' => [
+            'database' => null,
+            'prefix'   => null,
+        ],
 
-		'mysql' => [
-			'host'      => 'localhost',
-			'database'  => null,
-			'username'  => null,
-			'password'  => null,
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => null,
-		],
+        'mysql' => [
+            'host'      => 'localhost',
+            'database'  => null,
+            'username'  => null,
+            'password'  => null,
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => null,
+        ],
 
-		'pgsql' => [
-			'host'     => 'localhost',
-			'database' => null,
-			'username' => null,
-			'password' => null,
-			'charset'  => 'utf8',
-			'prefix'   => null,
-			'schema'   => 'public',
-		],
+        'pgsql' => [
+            'host'     => 'localhost',
+            'database' => null,
+            'username' => null,
+            'password' => null,
+            'charset'  => 'utf8',
+            'prefix'   => null,
+            'schema'   => 'public',
+        ],
 
-		'sqlsrv' => [
-			'host'     => 'localhost',
-			'database' => null,
-			'username' => null,
-			'password' => null,
-			'prefix'   => null,
-		],
+        'sqlsrv' => [
+            'host'     => 'localhost',
+            'database' => null,
+            'username' => null,
+            'password' => null,
+            'prefix'   => null,
+        ],
 
-	];
+    ];
 
-	/**
-	 * The database validation rules.
-	 *
-	 * @var array
-	 */
-	protected $databaseRules = [
+    /**
+     * The database validation rules.
+     *
+     * @var array
+     */
+    protected $databaseRules = [
 
-		'sqlite' => [
-			'database' => 'required',
-		],
+        'sqlite' => [
+            'database' => 'required',
+        ],
 
-		'mysql' => [
-			'host'      => 'required',
-			'database'  => 'required',
-			'username'  => 'required',
-			'charset'   => 'required',
-			'collation' => 'required',
-		],
+        'mysql' => [
+            'host'      => 'required',
+            'database'  => 'required',
+            'username'  => 'required',
+            'charset'   => 'required',
+            'collation' => 'required',
+        ],
 
-		'pgsql' => [
-			'host'     => 'required',
-			'database' => 'required',
-			'username' => 'required',
-		],
+        'pgsql' => [
+            'host'     => 'required',
+            'database' => 'required',
+            'username' => 'required',
+        ],
 
-		'sqlsrv' => [
-			'host'     => 'required',
-			'database' => 'required',
-			'username' => 'required',
-		],
+        'sqlsrv' => [
+            'host'     => 'required',
+            'database' => 'required',
+            'username' => 'required',
+        ],
 
-	];
+    ];
 
-	/**
-	 * Returns the user configuration data.
-	 *
-	 * @return array
-	 */
-	public function getUserData()
-	{
-		return $this->userData;
-	}
+    /**
+     * Returns the user configuration data.
+     *
+     * @return array
+     */
+    public function getUserData()
+    {
+        return $this->userData;
+    }
 
-	/**
-	 * Sets the user configuration data.
-	 *
-	 * @param  array  $data
-	 * @return $this
-	 */
-	public function setUserData(array $data = [])
-	{
-		$this->userData = array_merge($this->userData, $data);
+    /**
+     * Sets the user configuration data.
+     *
+     * @param  array  $data
+     * @return $this
+     */
+    public function setUserData(array $data = [])
+    {
+        $this->userData = array_merge($this->userData, $data);
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Returns the user rules.
-	 *
-	 * @return array
-	 */
-	public function getUserRules()
-	{
-		return $this->userRules;
-	}
+    /**
+     * Returns the user rules.
+     *
+     * @return array
+     */
+    public function getUserRules()
+    {
+        return $this->userRules;
+    }
 
-	/**
-	 * Returns the database driver.
-	 *
-	 * @return string
-	 */
-	public function getDatabaseDriver()
-	{
-		return $this->databaseDriver;
-	}
+    /**
+     * Returns the database driver.
+     *
+     * @return string
+     */
+    public function getDatabaseDriver()
+    {
+        return $this->databaseDriver;
+    }
 
-	/**
-	 * Sets the selected database driver.
-	 *
-	 * @param  string  $driver
-	 * @return void
-	 * @throws \RuntimeException
-	 */
-	public function setDatabaseDriver($driver)
-	{
-		if(! isset($this->databaseData[$driver]))
-		{
-			throw new \RuntimeException("Database configuration does not exist for driver [{$driver}].");
-		}
+    /**
+     * Sets the selected database driver.
+     *
+     * @param  string  $driver
+     * @return void
+     * @throws \RuntimeException
+     */
+    public function setDatabaseDriver($driver)
+    {
+        if (! isset($this->databaseData[$driver])) {
+            throw new \RuntimeException("Database configuration does not exist for driver [{$driver}].");
+        }
 
-		$this->databaseDriver = $driver;
-	}
+        $this->databaseDriver = $driver;
+    }
 
-	/**
-	 * Returns the database configuration data.
-	 *
-	 * @param  string  $driver
-	 * @return array
-	 */
-	public function getDatabaseData($driver = null)
-	{
-		if(! $driver) return $this->databaseData;
+    /**
+     * Returns the database configuration data.
+     *
+     * @param  string  $driver
+     * @return array
+     */
+    public function getDatabaseData($driver = null)
+    {
+        if (! $driver) {
+            return $this->databaseData;
+        }
 
-		return array_get($this->databaseData, $driver, []);
-	}
+        return array_get($this->databaseData, $driver, []);
+    }
 
-	/**
-	 * Sets the database configuration data.
-	 *
-	 * @param  string  $driver
-	 * @param  array  $data
-	 * @return $this
-	 */
-	public function setDatabaseData($driver, array $data = [])
-	{
-		$this->setDatabaseDriver($driver);
+    /**
+     * Sets the database configuration data.
+     *
+     * @param  string  $driver
+     * @param  array  $data
+     * @return $this
+     */
+    public function setDatabaseData($driver, array $data = [])
+    {
+        $this->setDatabaseDriver($driver);
 
-		$this->databaseData[$driver] = array_merge(
-			$this->databaseData[$driver], $data
-		);
+        $this->databaseData[$driver] = array_merge(
+            $this->databaseData[$driver], $data
+        );
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Returns the given database driver rules.
-	 *
-	 * @param  string  $driver
-	 * @return array
-	 */
-	public function getDatabaseRules($driver = null)
-	{
-		if(! $driver) return $this->databaseRules;
+    /**
+     * Returns the given database driver rules.
+     *
+     * @param  string  $driver
+     * @return array
+     */
+    public function getDatabaseRules($driver = null)
+    {
+        if (! $driver) {
+            return $this->databaseRules;
+        }
 
-		return array_get($this->databaseRules, $driver, []);
-	}
-
+        return array_get($this->databaseRules, $driver, []);
+    }
 }

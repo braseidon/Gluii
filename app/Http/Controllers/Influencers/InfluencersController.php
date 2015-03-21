@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\BaseController;
 
-class InfluencersControler extends BaseController {
+class InfluencersController extends BaseController
+{
 
-	//
+    //
 }
