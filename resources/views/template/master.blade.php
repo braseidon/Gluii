@@ -32,18 +32,18 @@
 		</header>
 
 		<!-- aside - left -->
-		@if (Auth::check() && Auth::hasAccess('admin'))
+		{{-- @if (Auth::check() && Auth::hasAccess('admin'))
 			<aside id="aside-left" class="app-aside app-aside-left hidden-xs bg-dark">
 				@include('template.aside-left')
 			</aside>
-		@endif
+		@endif --}}
 
 		<!-- aside - right -->
-		@if (Auth::check() && Auth::hasAccess('admin') && 1 == 2)
+		{{-- @if (Auth::check() && Auth::hasAccess('admin') && 1 == 2)
 			<aside id="aside-right" class="app-aside app-aside-right hidden-xs bg-dark">
 				@include('template.aside-right')
 			</aside>
-		@endif
+		@endif --}}
 
 		<!-- content -->
 		<div id="content" class="app-content" role="main">

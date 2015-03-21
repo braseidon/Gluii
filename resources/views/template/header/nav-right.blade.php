@@ -1,12 +1,16 @@
 @if(Auth::check())
 	<ul class="nav navbar-nav navbar-right">
-		<!-- friend requets -->
+		{{-- friend requets --}}
 		@include('template.header.dropdowns.friendrequests')
-		<!-- messages -->
+		{{-- messages --}}
 		@include('template.header.dropdowns.messages')
-		<!-- notifications -->
+		{{-- notifications --}}
 		@include('template.header.dropdowns.notifications')
-		<!-- user dropdown -->
+		{{-- admin menu --}}
+		@if (Auth::check() && Auth::hasAccess('admin'))
+			@include('template.admin-navigation')
+		@endif
+		{{-- user dropdown --}}
 		@include('template.header.dropdowns.user-menu')
 	</ul>
 @else
