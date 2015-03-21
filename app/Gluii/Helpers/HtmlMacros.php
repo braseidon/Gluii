@@ -3,6 +3,7 @@
 use HTML;
 use URL;
 
+tooltip('asdas');
 /**
  * Sidebar Navigation Menu Links
  * {{ HTML::liLinkNav('routeName', 'Link Text') }}

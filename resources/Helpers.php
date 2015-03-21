@@ -29,7 +29,7 @@ function tooltip($text, $position = null)
 	if(! is_null($position) && in_array($position, ['top', 'right', 'bottom', 'left']))
 		$position = 'data-placement="' . $position . '"';
 
-	return 'data-toggle="tooltip" ' . $position . ' data-original-title="' . e($text) . '" title="' . e($text) . '"';
+	return 'rel="tooltip" ' . $position . ' data-original-title="' . e($text) . '" title="' . e($text) . '"';
 }
 
 /**

@@ -7,13 +7,15 @@ $(function() {
 
 	// Tooltips (live)
 	$('body').tooltip({
-		selector: '[data-toggle="tooltip"]',
+		selector: '[rel="tooltip"]',
+		container: 'body',
 		html: true
 	});
 
 	// Popovers (live)
 	$('body').popover({
-		selector: '[data-toggle="popover"]'
+		selector: '[data-toggle="popover"]',
+		container: 'body'
 	});
 
 });
