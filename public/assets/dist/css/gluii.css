@@ -10068,6 +10068,10 @@ a.text-black:hover {
 .panel.panel-status ul.list-group > li.list-group-item:first-child {
   border-top: 1px solid #edf1f2;
 }
+.nav > li.active > a {
+  text-decoration: none;
+  background-color: #fff;
+}
 .tooltip {
   z-index: 5000;
 }

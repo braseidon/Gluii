@@ -5,11 +5,11 @@
 		</div>
 		<form method="POST" action="{{ route('auth/login') }}" role="form">
 			<div class="panel-body">
-				<!-- Login Form -->
+				{{-- Login Form --}}
 				@include('auth.forms.login')
 			</div>
 			<footer class="panel-footer">
-				<!-- CSRF -->
+				{{-- CSRF --}}
 				{!! Form::token() !!}
 				<button type="submit" class="btn btn-primary">Sign In</button>
 				<a href="{{ route('auth/forgot-password') }}" class="btn btn-link">

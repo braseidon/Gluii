@@ -14,8 +14,8 @@
 		<li><a href="{{ route('user/view', Auth::getUser()->id) }}">My Calendar</a></li>
 		<li class="divider"></li>
 		{{-- Account --}}
-		<li><a href="#">Settings</a></li>
-		<li><a href="#">Security</a></li>
+		<li><a href="{{ route('account/settings') }}">Settings</a></li>
+		<li><a href="{{ route('account/security') }}">Security</a></li>
 		<li><a href="#">Help</a></li>
 		<li class="divider"></li>
 		{{-- Logout --}}
