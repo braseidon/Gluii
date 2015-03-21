@@ -1,10 +1,10 @@
-<?php namespace App;
+<?php namespace app;
 
+use Auth;
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\User\Traits\FriendableTrait;
 use App\Gluii\User\Traits\LikeableTrait;
 use App\Gluii\User\Traits\NotificationsTrait;
-
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -12,160 +12,186 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Events\Dispatcher;
 
-class User extends EloquentUser implements AuthenticatableContract, CanResetPasswordContract {
+class User extends EloquentUser implements AuthenticatableContract, CanResetPasswordContract
+{
 
-	use Authenticatable,
-		CanResetPassword,
-		FriendableTrait,
-		LikeableTrait,
-		NotificationsTrait,
-		PresentableTrait;
+    use Authenticatable,
+        CanResetPassword,
+        FriendableTrait,
+        LikeableTrait,
+        NotificationsTrait,
+        PresentableTrait;
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
 
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
-	 */
-	protected $fillable = ['email', 'password', 'first_name','last_name', 'birthday', 'gender'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['email', 'password', 'first_name','last_name', 'birthday', 'gender'];
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = ['password', 'remember_token'];
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['password', 'remember_token'];
 
-	/*
-	|--------------------------------------------------------------------------
-	| Relationships
-	|--------------------------------------------------------------------------
-	|
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
 
-	/**
-	 * Relationship with Status
-	 *
-	 * @return Collection
-	 */
-	public function statuses()
-	{
-		return $this->hasMany('App\Status', 'profile_user_id', 'id');
-	}
+    /**
+     * Relationship with Status
+     *
+     * @return Collection
+     */
+    public function statuses()
+    {
+        return $this->hasMany('App\Status', 'profile_user_id', 'id');
+    }
 
-	public function comments()
-	{
-		return $this->hasMany('App\Comment', 'user_id', 'id');
-	}
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'user_id', 'id');
+    }
 
-	/**
-	 * Relationship with Photo
-	 *
-	 * @return Collection
-	 */
-	public function photos()
-	{
-		return $this->hasMany('App\Photo', 'user_id', 'id');
-	}
+    /**
+     * Relationship with Photo
+     *
+     * @return Collection
+     */
+    public function photos()
+    {
+        return $this->hasMany('App\Photo', 'user_id', 'id');
+    }
 
-	/**
-	 * Relationship with Profile Photo
-	 *
-	 * @return Photo
-	 */
-	public function profilepic()
-	{
-		return $this->belongsTo('App\Photo', 'profile_photo_id');
-	}
+    /**
+     * Relationship with Profile Photo
+     *
+     * @return Photo
+     */
+    public function profilepic()
+    {
+        return $this->belongsTo('App\Photo', 'profile_photo_id');
+    }
 
-	/**
-	 * Relationship with Notification
-	 *
-	 * @return Collection
-	 */
-	public function notifications()
-	{
-		return $this->hasMany('App\Notification', 'user_id', 'id');
-	}
+    /**
+     * Relationship with Notification
+     *
+     * @return Collection
+     */
+    public function notifications()
+    {
+        return $this->hasMany('App\Notification', 'user_id', 'id');
+    }
 
-	/**
-	 * Relationship with Statuses through Subscriptions
-	 *
-	 * @return Collection
-	 */
-	public function subscribedstatuses()
-	{
-		return $this->belongsToMany('App\Status', 'status_subscribers', 'user_id', 'status_id')
-			->withPivot('user_id', 'status_id');
-	}
+    /**
+     * Relationship with Statuses through Subscriptions
+     *
+     * @return Collection
+     */
+    public function subscribedstatuses()
+    {
+        return $this->belongsToMany('App\Status', 'status_subscribers', 'user_id', 'status_id')
+            ->withPivot('user_id', 'status_id');
+    }
 
-	/*
-	|--------------------------------------------------------------------------
-	| Query Scopes
-	|--------------------------------------------------------------------------
-	|
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Query Scopes
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
 
-	/**
-	 * Load a User's Profile
-	 *
-	 * @param  Builder $query
-	 * @return Builder
-	 */
-	public function scopeLoadProfile($query)
-	{
-		// return $query->with([
-		// 		'statuses' => function($q)
-		// 		{
-		// 			$q->orderBy('id', 'DESC');
-		// 		},
-		// 		'statuses.profileuser',
-		// 		'statuses.author',
-		// 		'friends',
-		// 	]);
-	}
+    /**
+     * Load a User's Profile
+     *
+     * @param  Builder $query
+     * @return Builder
+     */
+    public function scopeLoadProfile($query)
+    {
+        // return $query->with([
+        // 		'statuses' => function($q)
+        // 		{
+        // 			$q->orderBy('id', 'DESC');
+        // 		},
+        // 		'statuses.profileuser',
+        // 		'statuses.author',
+        // 		'friends',
+        // 	]);
+    }
 
-	/**
-	 * Adds column selects to efficiently grab User data from the database
-	 *
-	 * @param  Builder $query
-	 * @return Builder
-	 */
-	public function scopeSelectForFeed($query)
-	{
-		return $query->addSelect('id', 'first_name', 'last_name', 'email', 'profile_photo');
-	}
+    /**
+     * Adds column selects to efficiently grab User data from the database
+     *
+     * @param  Builder $query
+     * @return Builder
+     */
+    public function scopeSelectForFeed($query)
+    {
+        return $query->addSelect('id', 'first_name', 'last_name', 'email', 'profile_photo');
+    }
 
-	/*
-	|--------------------------------------------------------------------------
-	| Model Events
-	|--------------------------------------------------------------------------
-	|
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
 
-	/**
-	 * Register any other events for your application.
-	 *
-	 * @param  \Illuminate\Contracts\Events\Dispatcher  $events
-	 * @return void
-	 */
-	public static function boot()
-	{
-		parent::boot();
+    /**
+     * Returns true if User is the current Authenticated User
+     *
+     * @return boolean
+     */
+    public function isMe()
+    {
+        if (! Auth::check()) {
+            return false;
+        }
 
-		// parent::created(function($user)
-		// {
-		// 	//
-		// });
-	}
+        if (Auth::getUser()->id == $this->id) {
+            return true;
+        }
 
+        return false;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model Events
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+    /**
+     * Register any other events for your application.
+     *
+     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        // parent::created(function($user)
+        // {
+        // 	//
+        // });
+    }
 }

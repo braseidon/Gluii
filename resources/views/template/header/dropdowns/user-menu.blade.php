@@ -11,6 +11,7 @@
 		<li><a href="{{ route('user/view', Auth::getUser()->id) }}">My Profile</a></li>
 		<li><a href="{{ route('user/view', Auth::getUser()->id) }}">My Photos</a></li>
 		<li><a href="{{ route('user/view', Auth::getUser()->id) }}">My Videos</a></li>
+		<li><a href="{{ route('user/view', Auth::getUser()->id) }}">My Calendar</a></li>
 		<li class="divider"></li>
 		{{-- Account --}}
 		<li><a href="#">Settings</a></li>

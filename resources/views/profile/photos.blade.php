@@ -9,9 +9,11 @@
 	<section class="panel panel-default">
 		<div class="panel-body">
 			{{-- Upload Photo --}}
-			<a href="{{ route('user/manage/photos/upload') }}" class="btn btn-success btn-addon pull-right">
-				<i class="icon icon-cloud-upload"></i> Upload a Photo
-			</a>
+			@if($user->isMe())
+				<a href="{{ route('user/manage/photos/upload') }}" class="btn btn-success btn-addon pull-right">
+					<i class="icon icon-cloud-upload"></i> Upload a Photo
+				</a>
+			@endif
 
 			<p>Insert imaginary photo gallery here.</p>
 		</div>

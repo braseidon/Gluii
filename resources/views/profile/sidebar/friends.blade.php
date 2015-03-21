@@ -7,9 +7,9 @@
 		<div class="row userprofile-sidebar-list no-gutter">
 			@if(! $user->friends->isEmpty())
 				@foreach($user->friends->take(12) as $friend)
-					<div class="col-md-4 col-lg-3">
+					<div class="col-lg-4">
 						<a href="{{ route('user/view', $friend->id) }}">
-							{!! $friend->present()->photoThumb('thumb-sm', ['class' => 'userprofile-sidebar-list-item']) !!}
+							{!! $friend->present()->photoThumb('thumb-md', ['class' => 'userprofile-sidebar-list-item']) !!}
 							<div>
 								<span class="text-sm">{!! $friend->present()->name !!}</span>
 							</div>

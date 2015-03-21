@@ -1,6 +1,6 @@
 @extends('profile.template.profile')
 
-@section('title', $user->present()->name . ' - Timeline')
+@section('title', $user->present()->name)
 
 @section('content')
 	@parent

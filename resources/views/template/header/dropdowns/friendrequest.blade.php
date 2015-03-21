@@ -2,7 +2,7 @@
 	<span class="pull-left thumb-sm">
 		{!! $pendingFriend->present()->photoThumb(60, ['class' => 'img-circle']) !!}
 	</span>
-	<span class="media-body block m-b-none">
+	<span class="media-body m-b-none">
 		<!-- user's name -->
 		<a href="{{ route('user/view', $pendingFriend->id) }}">
 			{{ $pendingFriend->present()->name }}
