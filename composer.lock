@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3e6d6fb0b5b82b50003a2dc083687665",
+    "hash": "dd936b7eae9442617efe1836ef743433",
     "packages": [
         {
             "name": "cartalyst/sentinel",
@@ -1398,12 +1398,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b21be29a1fb12c84ab4e0b723e9c11492d0b25fe"
+                "reference": "6411465910ac79ec32040913f40c2cc19b1a6fc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b21be29a1fb12c84ab4e0b723e9c11492d0b25fe",
-                "reference": "b21be29a1fb12c84ab4e0b723e9c11492d0b25fe",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/6411465910ac79ec32040913f40c2cc19b1a6fc2",
+                "reference": "6411465910ac79ec32040913f40c2cc19b1a6fc2",
                 "shasum": ""
             },
             "require": {
@@ -1516,7 +1516,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-03-21 16:10:01"
+            "time": "2015-03-22 03:30:22"
         },
         {
             "name": "league/flysystem",
@@ -1950,16 +1950,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "ac05ef6f95bf8361549604b6031c115f92f39528"
+                "reference": "edbf162e4cf116102d95eb635608b7d310cc01c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ac05ef6f95bf8361549604b6031c115f92f39528",
-                "reference": "ac05ef6f95bf8361549604b6031c115f92f39528",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/edbf162e4cf116102d95eb635608b7d310cc01c6",
+                "reference": "edbf162e4cf116102d95eb635608b7d310cc01c6",
                 "shasum": ""
             },
             "require": {
@@ -1969,7 +1969,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -1991,7 +1991,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2015-01-18 11:29:59"
+            "time": "2015-03-22 16:17:25"
         },
         {
             "name": "predis/predis",
@@ -4352,6 +4352,49 @@
                 "xunit"
             ],
             "time": "2014-10-03 05:12:11"
+        },
+        {
+            "name": "rap2hpoutre/laravel-log-viewer",
+            "version": "v0.1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rap2hpoutre/laravel-log-viewer.git",
+                "reference": "2cfcb7c9d3ec6e8c7269eb15206ce256d1472349"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rap2hpoutre/laravel-log-viewer/zipball/2cfcb7c9d3ec6e8c7269eb15206ce256d1472349",
+                "reference": "2cfcb7c9d3ec6e8c7269eb15206ce256d1472349",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.2.*|5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/controllers"
+                ],
+                "psr-0": {
+                    "Rap2hpoutre\\LaravelLogViewer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "rap2hpoutre",
+                    "email": "raphael@ornikar.com"
+                }
+            ],
+            "description": "A Laravel log reader",
+            "keywords": [
+                "log",
+                "log-reader",
+                "log-viewer",
+                "logging"
+            ],
+            "time": "2015-02-27 13:37:12"
         },
         {
             "name": "sebastian/comparator",

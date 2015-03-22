@@ -34,7 +34,8 @@
 		"league/flysystem-ziparchive": "1.0.*@dev",
 		"phpspec/phpspec": "~2.1",
 		"phpunit/phpunit": "~4.0",
-		"laracasts/generators": "~1.0"
+		"laracasts/generators": "~1.0",
+		"rap2hpoutre/laravel-log-viewer": "~0.1.10"
 	},
 	"autoload": {
 		"classmap": [
