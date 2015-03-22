@@ -158,13 +158,12 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
      */
     public function loadUserTimeline($userId)
     {
-        $user = User::whereId($userId);
-
-        return $user->with([
+        return User::whereId($userId)
+            ->with([
                 'friendsto',
                 'friendsfrom',
                 'statuses' => function ($q) {
-                    $q->orderBy('updated_at', 'DESC')
+                    $q->orderBy('id', 'DESC')
                         ->addSelect('id', 'profile_user_id', 'author_id', 'body', 'created_at')
                         ->limit(5);
                 },
@@ -172,17 +171,17 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
                     $q->addSelect('id', 'first_name', 'last_name', 'email');
                 },
                 'statuses.author' => function ($q) {
-                    $q->addSelect('id', 'first_name', 'last_name', 'email');
+                    $q->selectForFeed();
                 },
                 'statuses.likes' => function ($q) {
                     $q->addSelect('users.id', 'first_name', 'last_name');
                 },
                 'statuses.comments' => function ($q) {
-                    $q->orderBy('id', 'DESC')
-                        ->limit(10);
+                    $q->orderBy('id', 'ASC');
+                        // ->limit(10);
                 },
                 'statuses.comments.author' => function ($q) {
-                    $q->addSelect('id', 'first_name', 'last_name', 'email');
+                    $q->selectForFeed();
                 },
                 'statuses.comments.likes' => function ($q) {
                     $q->addSelect('users.id', 'first_name', 'last_name');
