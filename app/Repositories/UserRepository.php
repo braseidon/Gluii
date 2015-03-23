@@ -153,13 +153,18 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
     /**
      * Get User's profile for viewing
      *
-     * @param  integer $userId
+     * @param  string $username
      * @return User
      */
-    public function loadUserTimeline($userId)
+    public function loadUserTimeline($username)
     {
-        return User::whereId($userId)
-            ->with([
+        if (is_numeric($username)) {
+            $user = User::where('id', $username);
+        } else {
+            $user = User::where('username', $username);
+        }
+
+        return $user->with([
                 'friendsto',
                 'friendsfrom',
                 'statuses' => function ($q) {

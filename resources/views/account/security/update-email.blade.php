@@ -12,13 +12,18 @@
 			</div>
 
 			<form action="{{ route('account/security/update-email') }}" method="POST">
+				{{-- Current Email --}}
+				{!! Form::groupOpen('', 'Current Email Address') !!}
+					{!! Form::text('', Auth::getUser()->email, ['class' => 'form-control disabled', 'disabled']) !!}
+				{!! Form::groupClose('') !!}
 				{{-- New Email --}}
-				{!! Form::group('email', 'New Email Address', false, function($name)
-				{ return Form::text($name, old('email'), ['class' => 'form-control', 'autocomplete' => 'false']); }) !!}
-
+				{!! Form::groupOpen('email', 'New Email Address') !!}
+					{!! Form::text('email', old('email'), ['class' => 'form-control', 'autocomplete' => 'false']) !!}
+				{!! Form::groupClose('email') !!}
 				{{-- Confirm New Email --}}
-				{!! Form::group('email-confirm', 'Confirm Email Address', false, function($name)
-				{ return Form::text($name, old('email-confirm'), ['class' => 'form-control', 'autocomplete' => 'false']); }) !!}
+				{!! Form::groupOpen('email_confirm', 'Confirm New Email Address') !!}
+					{!! Form::text('email_confirm', old('email_confirm'), ['class' => 'form-control', 'autocomplete' => 'false']) !!}
+				{!! Form::groupClose('email_confirm') !!}
 
 				{!! Form::token() !!}
 				<button type="submit" class="btn btn-primary">Update Email Address</button>

@@ -1,8 +1,9 @@
-<?php namespace app\Http\Controllers\User;
+<?php namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\BaseController;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\PhotoRepositoryInterface;
+
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
 class UserProfileController extends BaseController
@@ -30,12 +31,17 @@ class UserProfileController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string    $username
      * @return Response
      */
-    public function getViewTimeline($id)
+    public function getViewTimeline($username)
     {
-        $user = $this->userRepository->loadUserTimeline($id);
+        $user = $this->userRepository->loadUserTimeline($username);
+
+        if (is_numeric($username) && ! is_numeric($user->username)) {
+            return redirect()->route(\Route::currentRouteName(), $user->username);
+        }
+
         $statuses = $user->statuses;
 
         if (! $user) {
@@ -48,13 +54,13 @@ class UserProfileController extends BaseController
     /**
      * Display a User's photos
      *
-     * @param  int  $id
+     * @param  string    $username
      * @return Response
      */
-    public function getViewPhotos(PhotoRepositoryInterface $photoRepository, $id)
+    public function getViewPhotos(PhotoRepositoryInterface $photoRepository, $username)
     {
-        $user   = $this->userRepository->loadUserTimeline($id);
-        $photos = $photoRepository->loadUserPhotos($id);
+        $user   = $this->userRepository->loadUserTimeline($username);
+        $photos = $photoRepository->loadUserPhotos($username);
 
         if (! $photos) {
             return redirect()->route('home')->withErrors(['Photo Error' => 'User has no photos!']);
@@ -66,12 +72,12 @@ class UserProfileController extends BaseController
     /**
      * Display a User's Videos
      *
-     * @param  integer $id
+     * @param  string    $username
      * @return Response
      */
-    public function getViewVideos($id)
+    public function getViewVideos($username)
     {
-        $user   = $this->userRepository->loadUserTimeline($id);
+        $user   = $this->userRepository->loadUserTimeline($username);
         $videos = [];
 
         return view()->make('profile.videos', compact('user', 'videos'));
@@ -80,12 +86,12 @@ class UserProfileController extends BaseController
     /**
      * Display a User's Calendar
      *
-     * @param  integer $id
+     * @param  string    $username
      * @return Response
      */
-    public function getViewCalendar($id)
+    public function getViewCalendar($username)
     {
-        $user       = $this->userRepository->loadUserTimeline($id);
+        $user       = $this->userRepository->loadUserTimeline($username);
         $calendar   = [];
 
         return view()->make('profile.calendar', compact('user', 'calendar'));

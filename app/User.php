@@ -1,4 +1,4 @@
-<?php namespace app;
+<?php namespace App;
 
 use Auth;
 use App\Gluii\Presenters\Setup\PresentableTrait;
@@ -142,7 +142,30 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
      */
     public function scopeSelectForFeed($query)
     {
-        return $query->addSelect('id', 'first_name', 'last_name', 'email', 'profile_photo');
+        return $query->addSelect('id', 'username', 'first_name', 'last_name', 'email', 'profile_photo');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attributes
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+    /**
+     * If Username isn't set, use the User's ID instead (for routing)
+     *
+     * @param  mixed $value
+     * @return mixed
+     */
+    public function getUsernameAttribute($value)
+    {
+        if ($value == null) {
+            return $this->id;
+        }
+
+        return $value;
     }
 
     /*

@@ -9,15 +9,15 @@
 
 			<form action="{{ route('account/security/update-password') }}" method="POST">
 				{{-- New Password --}}
-				{!! Form::group('password', 'New Password Address', false, function($name)
-				{ return Form::text($name, old('password'), ['class' => 'form-control', 'autocomplete' => 'false']); }) !!}
+				{!! Form::group('password', 'New Password', false, function($name)
+				{ return Form::password($name, ['class' => 'form-control', 'autocomplete' => 'false']); }) !!}
 
 				{{-- Confirm New Password --}}
-				{!! Form::group('password-confirm', 'Confirm Password Address', false, function($name)
-				{ return Form::text($name, old('password-confirm'), ['class' => 'form-control', 'autocomplete' => 'false']); }) !!}
+				{!! Form::group('password_confirm', 'Confirm Password', false, function($name)
+				{ return Form::password($name, ['class' => 'form-control', 'autocomplete' => 'false']); }) !!}
 
 				{!! Form::token() !!}
-				<button type="submit" class="btn btn-primary">Update Password Address</button>
+				<button type="submit" class="btn btn-primary">Update Password</button>
 			</form>
 		</div>
 	</section>

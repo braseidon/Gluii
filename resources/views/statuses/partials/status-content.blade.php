@@ -1,19 +1,19 @@
 <div class="block m-b-sm clear">
 	<!-- author photo -->
-	<a href="{{ route('user/view', $status->author->id) }}" class="pull-left avatar thumb-sm">
+	<a href="{{ route('user/view', $status->author->username) }}" class="pull-left avatar thumb-sm">
 		{!! $status->author->present()->photoThumb('thumb-sm', ['class' => '']) !!}
 		{!! $status->author->present()->onlineStatus !!}
 	</a>
 	<div class="m-l-xxl">
 		<!-- author name -->
 		<span class="block">
-			<a href="{{ route('user/view', $status->author->id) }}" class="username font-semibold text-md">
+			<a href="{{ route('user/view', $status->author->username) }}" class="username font-semibold text-md">
 				{{ $status->author->present()->name }}
 			</a>
 			{{-- If Status author didn't post to his own wall --}}
 			@if($status->author_id !== $status->profile_user_id)
 				wrote on
-				<a href="{{ route('user/view', $status->profileuser->id) }}" class="username font-semibold text-md">
+				<a href="{{ route('user/view', $status->profileuser->username) }}" class="username font-semibold text-md">
 					{{ $status->profileuser->present()->name }}'s
 				</a> wall
 			</a>

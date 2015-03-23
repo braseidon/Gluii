@@ -13,19 +13,19 @@
 		</div>
 		<div class="panel-body">
 			<div class="list-group">
-				@foreach ($currentUser->persistences as $index => $p)
+				@foreach ($persistences as $index => $p)
 					@if ($p->code === $persistence->check())
-					<a href="{{ route('account/security/sessions/flush-code', $p->code) }}" class="list-group-item active">
-						{{ $p->created_at->format('F d, Y - h:ia') }}
-						<span class="label label-info">{{ $p->browser }}</span>
-						<span class="badge">{{ $p->last_used }}</span>
-						<span class="badge">You</span>
-					</a>
+						<a href="{{ route('account/security/sessions/flush-code', $p->code) }}" class="list-group-item active">
+							{{ $p->created_at->format('F d, Y - h:ia') }}
+							<span class="label label-info">{{ $p->browser }}</span>
+							<span class="badge">{{ $p->last_used }}</span>
+							<span class="badge">You</span>
+						</a>
 					@else
-					<a href="{{ URL::to("account/flush/{$p->code}") }}" class="list-group-item">
-						{{ $p->created_at->format('F d, Y - h:ia') }}
-						<span class="label label-default">End Session</span>
-					</a>
+						<a href="{{ route('account/security/sessions/flush-code', $p->code) }}" class="list-group-item">
+							{{ $p->created_at->format('F d, Y - h:ia') }}
+							<span class="label label-default">End Session</span>
+						</a>
 					@endif
 				@endforeach
 			</div>

@@ -1,4 +1,4 @@
-<?php namespace app\Http\Controllers\Admin\Users;
+<?php namespace App\Http\Controllers\Admin\Users;
 
 use Auth;
 use Input;

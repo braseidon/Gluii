@@ -1,4 +1,4 @@
-<?php namespace app\Gluii\Presenters;
+<?php namespace App\Gluii\Presenters;
 
 use App\Gluii\Presenters\Setup\Presenter;
 

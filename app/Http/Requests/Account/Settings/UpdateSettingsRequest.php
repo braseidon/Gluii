@@ -1,9 +1,9 @@
-<?php namespace App\Http\Requests\Admin\Users;
+<?php namespace App\Http\Requests\Account\Settings;
 
 use Auth;
 use App\Http\Requests\Request;
 
-class EditUserRequest extends Request
+class UpdateSettingsRequest extends Request
 {
 
     /**
@@ -24,9 +24,7 @@ class EditUserRequest extends Request
     public function rules()
     {
         return [
-            'email'            => 'required|unique:users,email,' . $this->route()->parameter('id'),
-            'password'         => 'min:6',
-            'password_confirm' => 'required_with:password|same:password',
+            'username'  => 'alpha|min:4|max:20|unique:users,username,' . Auth::getUser()->id
         ];
     }
 }

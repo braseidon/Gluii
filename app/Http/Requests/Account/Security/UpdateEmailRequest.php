@@ -1,9 +1,9 @@
-<?php namespace App\Http\Requests\Admin\Users;
+<?php namespace App\Http\Requests\Account\Security;
 
 use Auth;
 use App\Http\Requests\Request;
 
-class EditUserRequest extends Request
+class UpdateEmailRequest extends Request
 {
 
     /**
@@ -24,9 +24,8 @@ class EditUserRequest extends Request
     public function rules()
     {
         return [
-            'email'            => 'required|unique:users,email,' . $this->route()->parameter('id'),
-            'password'         => 'min:6',
-            'password_confirm' => 'required_with:password|same:password',
+            'email'         => 'required|email|unique:users,email,' . Auth::getUser()->id,
+            'email_confirm' => 'required|same:email'
         ];
     }
 }

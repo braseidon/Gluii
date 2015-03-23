@@ -9877,6 +9877,12 @@ a.text-black:hover {
     background-color: #7266ba;
   }
 }
+.help-block {
+  color: #888;
+}
+label {
+  font-weight: 600;
+}
 /* Panel Title - Icon */
 .panel-title > .fa,
 .panel-title > .glyphicon,

@@ -52,11 +52,11 @@ Route::group(['namespace' => 'Auth'], function () {
 });
 
 /**
- * User Profile Viewing
+ * User Timeline/Photos/Videos/Calendar
  *
  * @namespace User
  */
-Route::group(['prefix' => 'u/{id}', 'namespace' => 'User'], function () {
+Route::group(['prefix' => 'u/{username}', 'namespace' => 'User'], function () {
     # View Timeline
     Route::get('/', ['as' => 'user/view', 'uses' => 'UserProfileController@getViewTimeline']);
     # Photos Index
@@ -68,9 +68,9 @@ Route::group(['prefix' => 'u/{id}', 'namespace' => 'User'], function () {
 });
 
 /**
- * Friend & Friend Requests
+ * Friendship Actions
  */
-Route::group(['prefix' => 'friends', 'namespace' => 'User'], function () {
+Route::group(['prefix' => 'friends', 'middleware' => 'auth', 'namespace' => 'User'], function () {
 
     # Friend Requests
     Route::group(['prefix' => 'requests'], function () {
@@ -120,7 +120,7 @@ Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function () {
  *
  * @namespace User
  */
-Route::group(['prefix' => 'notifications', 'namespace' => 'User'], function () {
+Route::group(['prefix' => 'notifications', 'middleware' => 'auth', 'namespace' => 'User'], function () {
     # Friend Requests
     Route::get('friend-requests', ['as' => 'notifications/friend-requests', 'uses' => 'NotificationController@getFriendRequests']);
     # Messages
@@ -134,7 +134,7 @@ Route::group(['prefix' => 'notifications', 'namespace' => 'User'], function () {
  *
  * @namespace Photos
  */
-Route::group(['prefix' => 'photos', 'namespace' => 'Photos'], function () {
+Route::group(['prefix' => 'photos', 'middleware' => 'auth', 'namespace' => 'Photos'], function () {
     # Photo Manager
     Route::get('photos', ['as' => 'user/manage/photos', 'uses' => 'PhotoUploadController@getIndex']);
     # Upload Pictures

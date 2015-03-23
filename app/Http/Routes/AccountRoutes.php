@@ -17,6 +17,7 @@
 Route::group(['prefix' => 'account/settings', 'namespace' => 'Account\\Settings'], function () {
     // Settings
     Route::get('/', ['as' => 'account/settings', 'uses' => 'SettingsController@getSettings']);
+    Route::post('/', 'SettingsController@postUpdateSettings');
     // Notifications
     Route::get('notifications', ['as' => 'account/settings/notifications', 'uses' => 'SettingsController@getNotifications']);
 });
@@ -24,12 +25,14 @@ Route::group(['prefix' => 'account/settings', 'namespace' => 'Account\\Settings'
 /**
  * Security
  */
-Route::group(['prefix' => 'account/security', 'namespace' => 'Account\\Security'], function () {
+Route::group(['prefix' => 'account/security', 'middleware' => 'auth', 'namespace' => 'Account\\Security'], function () {
     // Security Dashboard
     Route::get('/', ['as' => 'account/security', 'uses' => 'SecurityController@getSecurityDashboard']);
     // Update Email
     Route::get('update-email', ['as' => 'account/security/update-email', 'uses' => 'SecurityController@getUpdateEmail']);
     Route::post('update-email', 'SecurityController@postUpdateEmail');
+    // Update Email - Confirm
+    Route::get('confirm-email/{code}', ['as' => 'account/security/update-email/confirm', 'uses' => 'SecurityController@getConfirmNewEmail']);
     // Update Password
     Route::get('update-password', ['as' => 'account/security/update-password', 'uses' => 'SecurityController@getUpdatePassword']);
     Route::post('update-password', 'SecurityController@postUpdatePassword');

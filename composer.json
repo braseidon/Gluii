@@ -10,16 +10,16 @@
 		}
 	],
 	"require": {
+		"laravel/framework": "5.0.*@dev",
+		"illuminate/filesystem": "5.0.*",
+		"illuminate/html": "5.0.*",
+		"illuminate/support": "5.0.*",
 		"cartalyst/sentinel": "~2.0",
 		"cartalyst/sentinel-social": "~2.0",
 		"cartalyst/sentinel-unique-passwords": "~2.0",
 		"doctrine/dbal": "~2.5",
-		"illuminate/filesystem": "5.0.*",
-		"illuminate/html": "5.0.*",
-		"illuminate/support": "5.0.*",
 		"intervention/image": "~2.1",
 		"intervention/imagecache": "~2.1",
-		"laravel/framework": "5.0.*@dev",
 		"league/glide": "~0.3.1",
 		"predis/predis": "~1.0"
 	},
@@ -45,7 +45,7 @@
 			"App\\": "app/"
 		},
 		"files": [
-			"resources/Helpers.php"
+			"app/Gluii/Helpers/Helpers.php"
 		]
 	},
 	"autoload-dev": {

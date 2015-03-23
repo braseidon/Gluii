@@ -3,7 +3,7 @@
 		<ul class="profile-navigation nav nav-tabs nav-content" role="menu">
 			{{-- Timeline --}}
 			<li{!! ! Route::is('user/view') ? '' : ' class="active"' !!}>
-				<a href="{{ route('user/view', $user->id) }}">
+				<a href="{{ route('user/view', $user->username) }}">
 					<i class="icon icon-camera fa-fw m-r-xs"></i> Timeline
 				</a>
 			</li>

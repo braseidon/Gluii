@@ -10,7 +10,7 @@ $errors = Session::get('errors', new MessageBag);
  * Wrap a return value in a form-group
  * Form::group('key', 'Label', $cols = true, function($name)
  * {
- *  	return Form::something();
+ *      return Form::something();
  * })
  *
  * @var boolean
@@ -26,10 +26,42 @@ Form::macro('group', function ($name, $label = false, $why = false, callable $ca
 });
 
 /**
+ * Open a Form-Group
+ * Form::groupOpen('form_key', 'Label')
+ *
+ * @var boolean
+ */
+Form::macro('groupOpen', function ($name, $label = null) use ($errors) {
+    $output = '<div class="form-group' . ($errors->has($name) ? ' has-error' : '') . '">';
+    if ($label !== null) {
+        $output .= '<label class="control-label">' . $label . '</label>';
+    }
+
+    return $output;
+});
+
+/**
+ * Close a Form-Group
+ * Form::groupClose('form_key' 'help-block txt')
+ *
+ * @var boolean
+ */
+Form::macro('groupClose', function ($name, $helpblock = null) use ($errors) {
+    $output = '';
+    if ($helpblock !== null) {
+        $output .= '<span class="help-block">' . $helpblock . '</span>';
+    }
+    $output .= $errors->first($name, '<span class="help-block">:message</span>');
+    $output .= '</div>';
+
+    return $output;
+});
+
+/**
  * Wrap a return value in a form-group
  * Form::group('key', 'Label', $cols = true, function($name)
  * {
- *  	return Form::something();
+ *      return Form::something();
  * })
  *
  * @var boolean
