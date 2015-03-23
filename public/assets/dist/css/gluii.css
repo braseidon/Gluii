@@ -9883,6 +9883,35 @@ a.text-black:hover {
 label {
   font-weight: 600;
 }
+.modal-image .modal-content {
+  border: none;
+}
+.modal-image .modal-header {
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 3;
+}
+.modal-image .modal-body {
+  padding: 0;
+}
+.modal-image .modal-footer {
+  bottom: 0;
+  color: #E9E9E9;
+  font-size: 16px;
+  left: 0;
+  padding-bottom: 0;
+  position: absolute;
+  text-align: right;
+  width: 100%;
+  z-index: 2;
+}
+.modal-image .modal-footer p {
+  font-family: 'Lato', arial;
+  font-weight: 100;
+  font-size: 16px;
+}
 /* Panel Title - Icon */
 .panel-title > .fa,
 .panel-title > .glyphicon,
@@ -10077,6 +10106,10 @@ label {
 .nav > li.active > a {
   text-decoration: none;
   background-color: #fff;
+}
+.dropdown-menu.messages .list-group .list-group-item,
+.dropdown-menu.notifications .list-group .list-group-item {
+  padding-right: 30px;
 }
 .dropdown-menu.messages .list-group .list-group-item.unread,
 .dropdown-menu.notifications .list-group .list-group-item.unread {

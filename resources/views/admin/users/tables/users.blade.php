@@ -13,24 +13,33 @@
 <tbody>
 	@foreach ($users as $user)
 	<tr>
-		<!-- checkbox -->
+		{{-- Checkbox --}}
 		<td class="text-center">
 			<label class="i-checks m-b-none">
 				<input type="checkbox" name="post[]"><i></i>
 			</label>
 		</td>
-		<!-- ID -->
+		{{-- ID --}}
 		<td>{{ $user->id }}</td>
-		<!-- name -->
+		{{-- User's Name & Role --}}
 		<td>
-			<div class="pull-left thumb-xs">
-				{!! $user->present()->photoThumb('thumb-sm', ) !!}
+			<div class="pull-left thumb-sm inline">
+				{!! $user->present()->photoThumb('thumb-sm') !!}
 			</div>
-			<a href="{{ route('admin/users/edit', $user->id) }}" class="text-md m-l m-t-xs inline">
-				{{ $user->present()->name }}
-			</a>
+			<div class="m-l inline">
+				<a href="{{ route('admin/users/edit', $user->id) }}" class="block">
+					{{ $user->present()->name }}
+				</a>
+				@if($user->hasAccess('admin'))
+					<span class="text-primary">
+						Admin
+					</span>
+				@endif
+			</div>
 		</td>
+		{{-- Email Address --}}
 		<td>{{ $user->email }}</td>
+		{{-- Friend Count --}}
 		<td class="text-center">
 			@if(! $user->friendcount->isEmpty())
 				{{ $user->friendcount->first()->friend_count }}
@@ -38,6 +47,7 @@
 				0
 			@endif
 		</td>
+		{{-- Actions --}}
 		<td class="actions text-right">
 			@include('admin.users.partials.actions')
 		</td>

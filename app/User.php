@@ -4,7 +4,7 @@ use Auth;
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\User\Traits\FriendableTrait;
 use App\Gluii\User\Traits\LikeableTrait;
-use App\Gluii\User\Traits\NotificationsTrait;
+use App\Gluii\User\Traits\UserNotifications;
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -19,7 +19,7 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
         CanResetPassword,
         FriendableTrait,
         LikeableTrait,
-        NotificationsTrait,
+        UserNotifications,
         PresentableTrait;
 
     /**

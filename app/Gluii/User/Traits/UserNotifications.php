@@ -3,7 +3,7 @@
 use App\User;
 use App\Notification;
 
-trait NotificationsTrait
+trait UserNotifications
 {
 
     /**
@@ -42,6 +42,8 @@ trait NotificationsTrait
         $this->cacheNotifications['requestsPending'] = $this->friendsfrom()
             ->wherePivot('accepted', '=', 0)
             ->get(['users.id', 'first_name', 'last_name', 'email']);
+
+
 
         return $this->cacheNotifications['requestsPending'];
     }
@@ -83,15 +85,18 @@ trait NotificationsTrait
             return $this->cacheNotifications['notifications'];
         }
 
-        $this->cacheNotifications['notifications'] = Notification::with([
+        $notifications = Notification::with([
                 'friend' => function ($q) {
                     $q->selectForFeed();
                 }
             ])
             ->where('user_id', '=', $this->id)
-            ->where('is_read', '=', 0)
             ->orderBy('id', 'DESC')
-            ->get();
+            ->limit(10);
+
+        $this->cacheNotifications['notifications'] = $notifications->get();
+
+        $notifications->update(['is_read' => true]);
 
         return $this->cacheNotifications['notifications'];
     }

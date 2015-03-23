@@ -1,4 +1,4 @@
-<?php namespace App\Repositories;
+<?php namespace app\Repositories;
 
 use App\User;
 
@@ -80,10 +80,10 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
      * @param  integer $perPage
      * @return Collection
      */
-    public function listUsers($perPage = 20)
+    public function listUsers($perPage = 30)
     {
         return User::with('friendcount')
-            ->orderBy('id', 'DESC')
+            ->orderBy('id', 'ASC')
             ->paginate($perPage);
     }
 

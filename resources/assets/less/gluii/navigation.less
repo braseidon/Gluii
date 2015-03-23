@@ -5,16 +5,18 @@
 }
 
 // Message / Notification Dropdowns
+.dropdown-menu.messages .list-group .list-group-item,
+.dropdown-menu.notifications .list-group .list-group-item {
+	padding-right: 30px;
+}
 .dropdown-menu.messages .list-group .list-group-item.unread,
 .dropdown-menu.notifications .list-group .list-group-item.unread {
 	background-color: #FFFFE0;
 }
-
 .dropdown-menu.messages .list-group .list-group-item.unread:after,
 .dropdown-menu.notifications .list-group .list-group-item.unread:after {
 	background-color: #8dc63f;
 }
-
 .dropdown-menu.messages .list-group .list-group-item:after,
 .dropdown-menu.notifications .list-group .list-group-item:after {
 	content: '';
