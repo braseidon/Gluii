@@ -3,3 +3,29 @@
 	text-decoration: none;
 	background-color: #fff;
 }
+
+// Message / Notification Dropdowns
+.dropdown-menu.messages .list-group .list-group-item.unread,
+.dropdown-menu.notifications .list-group .list-group-item.unread {
+	background-color: #FFFFE0;
+}
+
+.dropdown-menu.messages .list-group .list-group-item.unread:after,
+.dropdown-menu.notifications .list-group .list-group-item.unread:after {
+	background-color: #8dc63f;
+}
+
+.dropdown-menu.messages .list-group .list-group-item:after,
+.dropdown-menu.notifications .list-group .list-group-item:after {
+	content: '';
+	display: block;
+	position: absolute;
+	background-color: #ccc;
+	top: 50%;
+	margin-top: -5px;
+	right: 15px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-clip: padding-box;
+}

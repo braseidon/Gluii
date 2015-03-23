@@ -1,6 +1,7 @@
 <?php namespace App\Gluii\Presenters;
 
 use App\Gluii\Presenters\Setup\Presenter;
+use Config;
 
 class NotificationPresenter extends Presenter
 {
@@ -79,20 +80,9 @@ class NotificationPresenter extends Presenter
      */
     public function icon()
     {
-        switch ($this->entity->notification_type) {
-            case 'status.like' or 'comment.like':
-                return '<i class="icon icon-like"></i>';
-                break;
-            case 'status.comment':
-                return '<i class="icon icon-bubble"></i>';
-                break;
-            case 'friendrequest.accept':
-                return '<i class="icon icon-user-follow"></i>';
-                break;
-            default:
-                return '<i class="icon icon-globe"></i>';
-                break;
-        }
+        $type = 'icons.notifications.' . $this->entity->notification_type;
+
+        return '<i class="icon ' . Config::get($type, 'icon-globe') . '"></i>';
     }
 
     /**

@@ -13,7 +13,7 @@ return [
 
     'options' => [
         'source_dir'            => 'app/' . env('IMAGE_SRC_DIR', 'images'),
-        'cache_dir'                => 'app/' . env('IMAGE_CACHE_DIR', 'images/.cache'),
+        'cache_dir'             => 'app/' . env('IMAGE_CACHE_DIR', 'images/.cache'),
     ],
 
     /*
@@ -28,29 +28,29 @@ return [
     'templates' => [
 
         'thumb-sm' => [
-            'w'                    => 65,
-            'h'                    => 65,
-            'q'                    => 80,
-            'fit'                => 'crop',
+            'w'                     => 65,
+            'h'                     => 65,
+            'q'                     => 80,
+            'fit'                   => 'crop',
         ],
         'thumb-md' => [
-            'w'                    => 120,
-            'h'                    => 120,
-            'q'                    => 80,
-            'fit'                => 'crop',
+            'w'                     => 120,
+            'h'                     => 120,
+            'q'                     => 80,
+            'fit'                   => 'crop',
         ],
         'thumb-lg' => [
-            'w'                    => 160,
-            'h'                    => 160,
-            'q'                    => 90,
-            'fit'                => 'crop',
+            'w'                     => 160,
+            'h'                     => 160,
+            'q'                     => 90,
+            'fit'                   => 'crop',
         ],
 
         'large' => [
-            'w'                    => 1920,
-            'h'                    => 1080,
-            'q'                    => 90,
-            'fit'                => 'max',
+            'w'                     => 1920,
+            'h'                     => 1080,
+            'q'                     => 90,
+            'fit'                   => 'max',
         ],
 
     ],

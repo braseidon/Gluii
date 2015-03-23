@@ -1,7 +1,8 @@
-<?php namespace App\Handlers\Events;
+<?php namespace app\Handlers\Events;
 
 use App\Events\Statuses\StatusReceivedNewComment;
 use App\Events\Statuses\UserReceivedNewStatus;
+use App\Events\Users\FriendRequestAccepted;
 use App\Repositories\NotificationRepositoryInterface;
 
 class NotificationSubscriber
@@ -35,7 +36,7 @@ class NotificationSubscriber
         // Remove the User that posted the Comment from being notified
         $subscribers = array_diff($subscribers, [$event->fromId]);
 
-        $this->repository->pushMany($subscribers, 'status.comment', $event->fromId, ['id' => $event->status->id]);
+        $this->repository->pushMany('status.comment', $subscribers, $event->fromId, ['id' => $event->status->id]);
     }
 
     /**
@@ -46,7 +47,18 @@ class NotificationSubscriber
      */
     public function whenUserReceivedNewStatus(UserReceivedNewStatus $event)
     {
-        // dd($event);
+        $this->repository->push($event->toId, 'status.received', $event->toId, ['id' => $event->toId]);
+    }
+
+    /**
+     * When a User accepts a friend request
+     *
+     * @param  FriendRequestAccepted $event
+     * @return void
+     */
+    public function whenUserAcceptsFriendRequest(FriendRequestAccepted $event)
+    {
+        $this->repository->push($event->fromId, 'friendrequest.accepted', $event->toId, ['id' => $event->toId]);
     }
 
     /**
@@ -61,5 +73,7 @@ class NotificationSubscriber
             'App\Handlers\Events\NotificationSubscriber@whenStatusReceivedNewComment');
         $events->listen(\App\Events\Statuses\UserReceivedNewStatus::class,
             'App\Handlers\Events\NotificationSubscriber@whenUserReceivedNewStatus');
+        $events->listen(\App\Events\Users\FriendRequestAccepted::class,
+            'App\Handlers\Events\NotificationSubscriber@whenUserAcceptsFriendRequest');
     }
 }

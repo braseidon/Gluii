@@ -8,7 +8,7 @@
 			</span>
 		@endif
 	</a>
-	<div class="dropdown-menu w-xxl" role="menu">
+	<div class="dropdown-menu notifications w-xxl" role="menu">
 		<div class="panel bg-white dropdown-persist">
 			<div class="panel-heading b-light bg-light">
 				<strong>You have <span>{{ Auth::getUser()->getNotifications()->count() }}</span> {{ str_plural('notification', Auth::getUser()->getNotifications()->count()) }}</strong>

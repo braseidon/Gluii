@@ -1,4 +1,4 @@
-<div class="media list-group-item">
+<div class="media list-group-item{{ ! $notification->is_read ? ' unread' : '' }}">
 	<span class="pull-left thumb">
 		{!! $notification->present()->image() !!}
 	</span>

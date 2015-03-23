@@ -10,11 +10,15 @@ class UserReceivedNewStatus extends Event
     use SerializesModels;
 
     /**
+     * The User writing the Status
+     *
      * @var integer $fromId
      */
     public $fromId;
 
     /**
+     * The User receiving the Status
+     *
      * @var integer $toId
      */
     public $toId;

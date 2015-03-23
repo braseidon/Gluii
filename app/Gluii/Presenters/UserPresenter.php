@@ -89,6 +89,10 @@ class UserPresenter extends Presenter
         $attributes = HTML::attributes($attributes);
 
         if ($this->entity->profile_photo) {
+            // if (! Config::get('photos.templates.' . $size, false)) {
+            //     $size = 'thumb-sm';
+            // }
+
             $url = '/' . Config::get('photos.dirs.base_url') . '/' . $size . '/user/' . $this->entity->id . '/' . $this->entity->profile_photo;
 
             return '<img src="'. $url . '" '. $attributes . ' alt="'. $this->name . '" />';

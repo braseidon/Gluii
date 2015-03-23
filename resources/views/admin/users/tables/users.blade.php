@@ -24,7 +24,7 @@
 		<!-- name -->
 		<td>
 			<div class="pull-left thumb-xs">
-				{!! $user->present()->photoThumb() !!}
+				{!! $user->present()->photoThumb('thumb-sm', ) !!}
 			</div>
 			<a href="{{ route('admin/users/edit', $user->id) }}" class="text-md m-l m-t-xs inline">
 				{{ $user->present()->name }}

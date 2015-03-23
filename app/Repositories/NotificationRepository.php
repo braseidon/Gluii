@@ -34,7 +34,7 @@ class NotificationRepository extends AbstractRepository implements NotificationR
      * @param  array   $routeParams
      * @return void
      */
-    public function pushMany($userIdList = [], $type, $friendId = null, $routeParams = [])
+    public function pushMany($type, $userIdList = [], $friendId = null, $routeParams = [])
     {
         if (count($userIdList) < 1) {
             return false;
