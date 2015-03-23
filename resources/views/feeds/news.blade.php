@@ -9,5 +9,5 @@
 @section('content')
 	@include('feeds.partials.feedswitcher')
 
-	@include('statuses.view-timeline')
+	@include('activity.view-feed')
 @endsection

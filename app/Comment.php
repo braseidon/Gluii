@@ -1,13 +1,15 @@
 <?php namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\Comment\Traits\CommentLikeableTrait;
+use App\Gluii\Presenters\Setup\PresentableTrait;
+use App\Gluii\Support\Traits\PublishesActivity;
+
+use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
 
-    use CommentLikeableTrait, PresentableTrait;
+    use CommentLikeableTrait, PresentableTrait, PublishesActivity;
 
     /**
      * @var array

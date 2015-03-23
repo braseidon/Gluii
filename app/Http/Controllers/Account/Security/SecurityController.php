@@ -6,7 +6,6 @@ use App\Commands\Account\Security\SendEmailConfirmEmailCommand;
 use App\Commands\Account\Security\UpdateEmailCommand;
 use App\Commands\Account\Security\UpdatePasswordCommand;
 use Session;
-
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
@@ -110,7 +109,6 @@ class SecurityController extends BaseController
             );
 
             return redirect()->route('account/security/update-password')->withSuccess('Your password was successfully updated.');
-
         } catch (NotUniquePasswordException $e) {
             return redirect()->back()->withInput()->withErrors('This password was used before. You must choose a unique password.');
         }

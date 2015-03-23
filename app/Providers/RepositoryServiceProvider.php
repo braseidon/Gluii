@@ -1,7 +1,6 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\StatusRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -46,6 +45,9 @@ class RepositoryServiceProvider extends ServiceProvider
         // PhotoAlbumRepository
         $this->app->bind('App\Repositories\PhotoAlbumRepositoryInterface',
             'App\Repositories\PhotoAlbumRepository');
+        // ActivityRepository
+        $this->app->bind('App\Repositories\ActivityRepositoryInterface',
+            'App\Repositories\ActivityRepository');
     }
 
     /**
@@ -61,6 +63,7 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\NotificationRepositoryInterface',
             'App\Repositories\PhotoRepositoryInterface',
             'App\Repositories\PhotoAlbumRepositoryInterface',
+            'App\Repositories\ActivityRepositoryInterface'
         ];
     }
 }

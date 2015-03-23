@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use Auth;
-use App\Repositories\StatusRepositoryInterface;
+use App\Repositories\ActivityRepositoryInterface;
 
 class HomeController extends BaseController
 {
@@ -22,15 +22,17 @@ class HomeController extends BaseController
      *
      * @return Response
      */
-    public function getIndex(StatusRepositoryInterface $repository)
+    public function getIndex(ActivityRepositoryInterface $repository)
     {
         if (! Auth::check()) {
             return view('home.leadpages');
         }
 
-        $statuses = $repository->allStatuses();
+        $activities = $repository->all()->with('user', 'subject')->get();
 
-        return view('feeds.news', compact('statuses'));
+        // dd($activities);
+
+        return view('feeds.news', compact('activities'));
     }
 
     /**

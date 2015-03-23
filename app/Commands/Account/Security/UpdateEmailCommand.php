@@ -1,4 +1,4 @@
-<?php namespace app\Commands\Account\Security;
+<?php namespace App\Commands\Account\Security;
 
 use App\Events\Account\Security\UserUpdatedEmail;
 use App\User;

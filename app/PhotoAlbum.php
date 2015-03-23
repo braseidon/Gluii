@@ -1,12 +1,14 @@
 <?php namespace App;
 
+use App\Gluii\Support\Traits\PublishesActivity;
 use Image;
+
 use Illuminate\Database\Eloquent\Model;
 
 class PhotoAlbum extends Model
 {
 
-    use PresentableTrait;
+    use PresentableTrait, PublishesActivity;
 
     /**
      * @var array

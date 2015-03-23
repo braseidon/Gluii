@@ -2,7 +2,6 @@
 
 use Auth;
 use App\Commands\Account\Settings\UpdateSettingsCommand;
-
 use App\Http\Controllers\BaseController;
 use App\Http\Requests;
 use Illuminate\Http\Request;

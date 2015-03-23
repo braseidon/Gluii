@@ -1,4 +1,4 @@
-<?php namespace app\Repositories;
+<?php namespace App\Repositories;
 
 use App\User;
 

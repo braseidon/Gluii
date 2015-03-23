@@ -1,4 +1,4 @@
-<?php namespace app\Events\Account\Settings;
+<?php namespace App\Events\Account\Settings;
 
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;

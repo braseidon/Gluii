@@ -1,14 +1,17 @@
 <?php namespace App;
 
+use App\Activity;
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\Status\Traits\StatusLikeableTrait;
+use App\Gluii\Support\Traits\PublishesActivity;
+use Auth;
 use Gluii\Presenters\StatusPresenter;
 use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
 {
 
-    use PresentableTrait, StatusLikeableTrait;
+    use PresentableTrait, PublishesActivity, StatusLikeableTrait;
 
     /**
      * The database table used by the model.
@@ -82,6 +85,13 @@ class Status extends Model
     |
     */
 
+    /**
+     * Query scope for all friend updates?
+     *
+     * @param  Builder  $query
+     * @param  integer  $limit
+     * @return Builder
+     */
     public function scopeAllFriendUpdates($query, $limit = 20)
     {
         return $query->with([

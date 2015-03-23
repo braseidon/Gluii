@@ -2,7 +2,6 @@
 
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\PhotoRepositoryInterface;
-
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 

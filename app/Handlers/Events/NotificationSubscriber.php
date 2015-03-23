@@ -1,4 +1,4 @@
-<?php namespace app\Handlers\Events;
+<?php namespace App\Handlers\Events;
 
 use App\Events\Statuses\StatusReceivedNewComment;
 use App\Events\Statuses\UserReceivedNewStatus;
