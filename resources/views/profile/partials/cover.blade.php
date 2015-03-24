@@ -7,7 +7,9 @@
 		{{-- Profile Picture --}}
 		@include('profile.partials.profilepic')
 		{{-- Friend Fequest / Friend Options --}}
-		@include('profile.partials.actions-friend')
+		@if(Auth::check())
+			@include('profile.partials.actions-friend')
+		@endif
 	</div>
 </div>
 <div class="row">
