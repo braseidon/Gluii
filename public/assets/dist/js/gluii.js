@@ -7069,16 +7069,10 @@ $(function() {
         function(e) {
             $('#ajaxModal').remove();
             e.preventDefault();
-<<<<<<< HEAD
-            var $this = $(this)
-                , $remote = $this.data('remote') || $this.attr('href')
-                , $modal = $('<div class="modal fade" id="ajaxModal"><div class="modal-body"></div></div>');
-=======
             var $this = $(this),
                 $remote = $this.data('remote') || $this.attr('href'),
                 $type   = $this.data('type') || '',
                 $modal  = $('<div class="modal fade ' + $type + '" id="ajaxModal"><div class="modal-body"></div></div>');
->>>>>>> updates
             $('body').append($modal);
             $modal.modal();
             $modal.load($remote);
