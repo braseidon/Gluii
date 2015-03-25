@@ -1,6 +1,6 @@
 <?php namespace App\Events\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
@@ -10,14 +10,14 @@ class UserRegistered extends Event
     use SerializesModels;
 
     /**
-     * @var App\User $user
+     * @var App\Models\User $user
      */
     public $user;
 
     /**
      * Construct the Event
      *
-     * @param App\User $user
+     * @param App\Models\User $user
      */
     public function __construct(User $user)
     {

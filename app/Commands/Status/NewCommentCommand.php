@@ -61,7 +61,5 @@ class NewCommentCommand extends Command implements SelfHandling
             $status->profile_user_id,
             $status
         ));
-
-        return true;
     }
 }

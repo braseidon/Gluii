@@ -1,11 +1,10 @@
 <?php namespace App\Commands\Account\Security;
 
 use App\Events\Account\Security\UserUpdatedEmail;
-use App\User;
+use App\Models\User;
 use Auth;
 use Event;
 use Session;
-
 use App\Commands\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Queue\SerializesModels;

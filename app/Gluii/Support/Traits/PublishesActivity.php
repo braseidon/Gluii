@@ -1,6 +1,6 @@
 <?php namespace App\Gluii\Support\Traits;
 
-use App\Activity;
+use App\Models\Activity;
 use Auth;
 use ReflectionClass;
 
@@ -13,11 +13,9 @@ trait PublishesActivity
      * @param  Model $model
      * @return string
      */
-    protected function getActivityName($model, $action)
+    protected function getActivityName($model)
     {
-        $name = strtolower((new ReflectionClass($model))->getShortName());
-
-        return "{$action}_{$name}";
+        return strtolower((new ReflectionClass($model))->getShortName());
     }
 
     /**
@@ -25,7 +23,7 @@ trait PublishesActivity
      *
      * @return void
      */
-    protected static function bootPublishActivity()
+    protected static function bootPublishesActivity()
     {
         foreach (static::getModelEvents() as $event) {
             static::$event(function ($model) use ($event) {
@@ -37,15 +35,16 @@ trait PublishesActivity
     /**
      * Publish activity for the given event
      *
-     * @param  string $event
+     * @param  string $action
      * @return void
      */
-    public function publishActivity($event)
+    public function publishActivity($action)
     {
         Activity::create([
             'subject_id'    => $this->id,
             'subject_type'  => get_class($this),
-            'name'          => $this->getActivityName($this, $event),
+            'action'        => $action,
+            'name'          => $this->getActivityName($this),
             'user_id'       => Auth::getUser()->id,
         ]);
     }

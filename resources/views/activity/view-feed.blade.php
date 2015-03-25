@@ -1,5 +1,6 @@
-<section class="panel panel-default">
-	<div class="panel-body">
-		<p>"Activity Feed" ;)</p>
-	</div>
-</section>
+{{-- New Status Form --}}
+@include('statuses.forms.new-status')
+
+@foreach($activities->items() as $activity)
+	@include ("activity.types.{$activity->name}")
+@endforeach

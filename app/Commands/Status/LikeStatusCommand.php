@@ -39,8 +39,8 @@ class LikeStatusCommand extends Command implements SelfHandling
      */
     public function handle(StatusRepository $repository)
     {
-        $user = \App\User::find($this->userId);
+        $user = \App\Models\User::find($this->userId);
 
-        return $repository->likeStatus($user, $this->statusId);
+        $repository->likeStatus($user, $this->statusId);
     }
 }

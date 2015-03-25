@@ -1,9 +1,8 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use App\Gluii\Comment\Traits\CommentLikeableTrait;
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\Support\Traits\PublishesActivity;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -12,16 +11,18 @@ class Comment extends Model
     use CommentLikeableTrait, PresentableTrait, PublishesActivity;
 
     /**
-     * @var array
-     */
-    protected $fillable = ['user_id', 'status_id', 'body'];
-
-    /**
      * The database table used by this model
      *
      * @var string
      */
     protected $table = 'comments';
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['user_id', 'status_id', 'body'];
+
+    // protected $with = ['author'];
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +39,7 @@ class Comment extends Model
      */
     public function status()
     {
-        return $this->belongsTo('App\Status', 'status_id');
+        return $this->belongsTo('App\Models\Status', 'status_id');
     }
 
     /**
@@ -48,7 +49,7 @@ class Comment extends Model
      */
     public function author()
     {
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     /**
@@ -58,7 +59,7 @@ class Comment extends Model
      */
     public function likes()
     {
-        return $this->belongsToMany('App\User', 'comment_likes', 'comment_id', 'user_id');
+        return $this->belongsToMany('App\Models\User', 'comment_likes', 'comment_id', 'user_id');
     }
 
     /*

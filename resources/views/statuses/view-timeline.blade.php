@@ -1,5 +1,5 @@
-<!-- write on timeline -->
+{{-- write on timeline --}}
 @include('statuses.forms.new-status')
 
-<!-- status updates -->
+{{-- status updates --}}
 @include('statuses.statuses')

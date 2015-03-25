@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\Festivals;
 
-use App\User;
+use App\Models\User;
 use DB;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests;

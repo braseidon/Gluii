@@ -6,8 +6,7 @@
 	{!! Form::group('password', 'Password', false, function($name)
 	{ return Form::password($name, ['class' => 'form-control']); }) !!}
 
-	<hr>
-
 	{{-- Remember Me --}}
-	{!! Form::group('remember', null, false, function($name)
-	{ return Form::iCheckbox('remember', 'Remember me'); }) !!}
+	{!! Form::groupOpen('remember') !!}
+		{!! Form::iCheckbox('remember', 'Remember me') !!}
+	{!! Form::groupClose('remember') !!}

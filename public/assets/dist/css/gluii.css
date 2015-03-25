@@ -10134,6 +10134,9 @@ label {
           border-radius: 50%;
   background-clip: padding-box;
 }
+.notifications .slimscroll {
+  max-height: 250px;
+}
 .tooltip {
   z-index: 5000;
 }

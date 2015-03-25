@@ -1,6 +1,6 @@
 <?php namespace App\Repositories;
 
-use App\PhotoAlbum;
+use App\Models\PhotoAlbum;
 
 class PhotoAlbumRepository extends AbstractRepository implements PhotoAlbumRepositoryInterface
 {
@@ -9,7 +9,7 @@ class PhotoAlbumRepository extends AbstractRepository implements PhotoAlbumRepos
      * Find a PhotoAlbum by it's ID
      *
      * @param  integer $id
-     * @return App\PhotoAlbum
+     * @return App\Models\PhotoAlbum
      */
     public function findPhotoAlbumById($id)
     {

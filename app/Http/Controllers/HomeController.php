@@ -28,9 +28,8 @@ class HomeController extends BaseController
             return view('home.leadpages');
         }
 
-        $activities = $repository->all()->with('user', 'subject')->get();
-
-        // dd($activities);
+        $activities = $repository->getAllUsersFeeds(['status']);
+        // dd($activities->items());
 
         return view('feeds.news', compact('activities'));
     }
@@ -52,7 +51,7 @@ class HomeController extends BaseController
      */
     public function getTestEmail()
     {
-        $user = new \App\User;
+        $user = new \App\Models\User;
         $code = '32k4j5325';
 
         $sent = \Mail::send('emails.auth.activate', compact('user', 'code'), function ($m) use ($user) {

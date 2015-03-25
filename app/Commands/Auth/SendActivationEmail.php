@@ -1,7 +1,7 @@
 <?php namespace App\Commands\Auth;
 
 use Activation;
-use App\User;
+use App\Models\User;
 use Log;
 use Mail;
 use App\Commands\Command;

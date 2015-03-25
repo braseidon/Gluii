@@ -47,7 +47,9 @@ class NotificationSubscriber
      */
     public function whenUserReceivedNewStatus(UserReceivedNewStatus $event)
     {
-        $this->repository->push($event->toId, 'status.received', $event->toId, ['id' => $event->toId]);
+        if ($event->fromId !== $event->toId) {
+            $this->repository->push($event->toId, 'status.received', $event->toId, ['id' => $event->toId]);
+        }
     }
 
     /**

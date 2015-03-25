@@ -1,7 +1,7 @@
 <?php namespace App\Repositories;
 
-use App\Comment;
-use App\Status;
+use App\Models\Comment;
+use App\Models\Status;
 
 class StatusRepository extends AbstractRepository implements StatusRepositoryInterface
 {
@@ -55,28 +55,7 @@ class StatusRepository extends AbstractRepository implements StatusRepositoryInt
      */
     public function allStatuses($limit = 15)
     {
-        return Status::with([
-                'profileuser' => function ($q) {
-                    $q->selectForFeed();
-                },
-                'author' => function ($q) {
-                    $q->selectForFeed();
-                },
-                'likes' => function ($q) {
-                    $q->select('users.id', 'first_name', 'last_name')
-                        ->withPivot('user_id');
-                },
-                'comments' => function ($q) {
-                    $q->orderBy('id', 'ASC');
-                },
-                'comments.author' => function ($q) {
-                    $q->selectForFeed();
-                },
-                'comments.likes' => function ($q) {
-                    $q->select('users.id', 'first_name', 'last_name')
-                        ->withPivot('user_id');
-                },
-            ])
+        return Status::loadRelationships()
             ->orderBy('statuses.updated_at', 'DESC')
             ->paginate($limit);
     }
@@ -144,7 +123,7 @@ class StatusRepository extends AbstractRepository implements StatusRepositoryInt
      * @param  integer  $statusId
      * @return bool
      */
-    public function likeStatus(\App\User $user, $statusId)
+    public function likeStatus(\App\Models\User $user, $statusId)
     {
         return $user->likedstatuses()->attach($statusId);
     }
@@ -156,7 +135,7 @@ class StatusRepository extends AbstractRepository implements StatusRepositoryInt
      * @param User $user
      * @return mixed
      */
-    public function unlikeStatus(\App\User $user, $statusId)
+    public function unlikeStatus(\App\Models\User $user, $statusId)
     {
         return $user->likedstatuses()->detach($statusId);
     }
@@ -273,7 +252,7 @@ class StatusRepository extends AbstractRepository implements StatusRepositoryInt
      * @param  integer $commentId
      * @return mixed
      */
-    public function likeComment(\App\User $user, $commentId)
+    public function likeComment(\App\Models\User $user, $commentId)
     {
         return $user->likedcomments()->attach($commentId);
     }
@@ -285,7 +264,7 @@ class StatusRepository extends AbstractRepository implements StatusRepositoryInt
      * @param integer $commentId
      * @return mixed
      */
-    public function unlikeComment(\App\User $user, $commentId)
+    public function unlikeComment(\App\Models\User $user, $commentId)
     {
         return $user->likedcomments()->detach($commentId);
     }

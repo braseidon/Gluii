@@ -1,6 +1,6 @@
 <?php namespace App\Gluii\Comment\Traits;
 
-use App\Comment;
+use App\Models\Comment;
 
 trait CommentLikeableTrait
 {
@@ -12,7 +12,7 @@ trait CommentLikeableTrait
      */
     public function likes()
     {
-        return $this->belongsToMany('App\User', 'comment_likes', 'comment_id', 'user_id')
+        return $this->belongsToMany('App\Models\User', 'comment_likes', 'comment_id', 'user_id')
             ->withPivot('comment_id', 'user_id');
     }
 
@@ -22,7 +22,7 @@ trait CommentLikeableTrait
      * @param User $otherUser
      * @return bool
      */
-    public function isLikedBy(\App\User $user)
+    public function isLikedBy(\App\Models\User $user)
     {
         $userCommentList = $this->likes->lists('id');
 

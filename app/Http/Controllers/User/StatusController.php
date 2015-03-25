@@ -51,11 +51,13 @@ class StatusController extends BaseController
      */
     public function postNewStatus(\App\Http\Requests\Status\NewStatusRequest $request)
     {
-        $this->dispatch(new NewStatusCommand(
-                $request->input('profile_user_id'),        // profile_user_id
-                Auth::getUser()->id,                    // author_id
-                $request->input('status')                // status
-            ));
+        $this->dispatch(
+            new NewStatusCommand(
+                intval($request->input('profile_user_id')),
+                Auth::getUser()->id,
+                $request->input('status')
+            )
+        );
 
         return redirect()->back();
     }
@@ -68,10 +70,12 @@ class StatusController extends BaseController
      */
     public function postLikeStatus(\App\Http\Requests\Status\LikeStatusRequest $request)
     {
-        $this->dispatch(new LikeStatusCommand(
-                Auth::getUser()->id,                    // userId
-                $request->input('status_id')            // statusId
-            ));
+        $this->dispatch(
+            new LikeStatusCommand(
+                Auth::getUser()->id,
+                $request->input('status_id')
+            )
+        );
 
         if (! $request->ajax()) {
             return redirect()->back();
@@ -108,21 +112,31 @@ class StatusController extends BaseController
      */
     public function postNewComment(\App\Http\Requests\Status\NewCommentRequest $request)
     {
-        $this->dispatch(new NewCommentCommand(
-                $request->input('status_id'),            // statusId
-                Auth::getUser()->id,                    // userId
-                $request->input('body')                    // body
-            ));
+        $this->dispatch(
+            new NewCommentCommand(
+                $request->input('status_id'),
+                Auth::getUser()->id,
+                $request->input('body')
+            )
+        );
 
         return redirect()->back();
     }
 
+    /**
+     * Process liking a Comment
+     *
+     * @param   $request
+     * @return Response
+     */
     public function postLikeComment(\App\Http\Requests\Status\LikeCommentRequest $request)
     {
-        $this->dispatch(new LikeCommentCommand(
-                Auth::getUser()->id,                    // userId
-                $request->input('comment_id')            // commentId
-            ));
+        $this->dispatch(
+            new LikeCommentCommand(
+                Auth::getUser()->id,
+                $request->input('comment_id')
+            )
+        );
 
         if (! $request->ajax()) {
             return redirect()->back();

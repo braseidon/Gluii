@@ -1,7 +1,7 @@
 <?php namespace App\Gluii\User\Traits;
 
-use App\User;
-use App\Notification;
+use App\Models\User;
+use App\Models\Notification;
 
 trait UserNotifications
 {
@@ -96,7 +96,7 @@ trait UserNotifications
 
         $this->cacheNotifications['notifications'] = $notifications->get();
 
-        $notifications->update(['is_read' => true]);
+        // $notifications->update(['is_read' => true]);
 
         return $this->cacheNotifications['notifications'];
     }

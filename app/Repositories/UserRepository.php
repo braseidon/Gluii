@@ -1,6 +1,6 @@
 <?php namespace App\Repositories;
 
-use App\User;
+use App\Models\User;
 
 class UserRepository extends AbstractRepository implements UserRepositoryInterface
 {
@@ -164,34 +164,6 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
             $user = User::where('username', $username);
         }
 
-        return $user->with([
-                'friendsto',
-                'friendsfrom',
-                'statuses' => function ($q) {
-                    $q->orderBy('id', 'DESC')
-                        ->addSelect('id', 'profile_user_id', 'author_id', 'body', 'created_at')
-                        ->limit(5);
-                },
-                'statuses.profileuser' => function ($q) {
-                    $q->addSelect('id', 'first_name', 'last_name', 'email');
-                },
-                'statuses.author' => function ($q) {
-                    $q->selectForFeed();
-                },
-                'statuses.likes' => function ($q) {
-                    $q->addSelect('users.id', 'first_name', 'last_name');
-                },
-                'statuses.comments' => function ($q) {
-                    $q->orderBy('id', 'ASC');
-                        // ->limit(10);
-                },
-                'statuses.comments.author' => function ($q) {
-                    $q->selectForFeed();
-                },
-                'statuses.comments.likes' => function ($q) {
-                    $q->addSelect('users.id', 'first_name', 'last_name');
-                },
-            ])
-            ->first();
+        return $user->loadProfile()->first();
     }
 }

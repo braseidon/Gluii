@@ -15,7 +15,7 @@
  */
 function btnLoading()
 {
-	return 'data-loading-text="Loading..."';
+    return 'data-loading-text="Loading..."';
 }
 
 /**
@@ -26,10 +26,11 @@ function btnLoading()
  */
 function tooltip($text, $position = null)
 {
-	if(! is_null($position) && in_array($position, ['top', 'right', 'bottom', 'left']))
-		$position = 'data-placement="' . $position . '"';
+    if (! is_null($position) && in_array($position, ['top', 'right', 'bottom', 'left'])) {
+        $position = 'data-placement="' . $position . '"';
+    }
 
-	return 'rel="tooltip" ' . $position . ' data-original-title="' . e($text) . '" title="' . e($text) . '"';
+    return 'rel="tooltip" ' . $position . ' data-original-title="' . e($text) . '" title="' . e($text) . '"';
 }
 
 /**
@@ -41,7 +42,7 @@ function tooltip($text, $position = null)
  */
 function popover($content, $placement = 'top')
 {
-	return 'data-container="body" data-toggle="popover" data-html="true" data-placement="' . $placement . '" data-content="' . str_replace('"', '\'', $content) . '"';
+    return 'data-container="body" data-toggle="popover" data-html="true" data-placement="' . $placement . '" data-content="' . str_replace('"', '\'', $content) . '"';
 }
 
 /**
@@ -53,7 +54,7 @@ function popover($content, $placement = 'top')
  */
 function helpIcon($content, $position = 'top')
 {
-	return '<a href="javascript:void(0);" class="fa fa-info-circle text-muted" ' . tooltip($content, $position) . '></a>';
+    return '<a href="javascript:void(0);" class="fa fa-info-circle text-muted" ' . tooltip($content, $position) . '></a>';
 }
 
 /*
@@ -72,25 +73,28 @@ function helpIcon($content, $position = 'top')
  */
 function formFill($type)
 {
-	if($type == 'years')
-		return array_combine(range(2015, 1905), range(2015, 1905));
+    if ($type == 'years') {
+        return array_combine(range(2015, 1905), range(2015, 1905));
+    }
 
-	if($type == 'months')
-		return [
-			'01'	=> 'January',
-			'02'	=> 'February',
-			'03'	=> 'March',
-			'04'	=> 'April',
-			'05'	=> 'May',
-			'06'	=> 'June',
-			'07'	=> 'July',
-			'08'	=> 'August',
-			'09'	=> 'September',
-			'10'	=> 'October',
-			'11'	=> 'November',
-			'12'	=> 'December',
-		];
+    if ($type == 'months') {
+        return [
+            '01'    => 'January',
+            '02'    => 'February',
+            '03'    => 'March',
+            '04'    => 'April',
+            '05'    => 'May',
+            '06'    => 'June',
+            '07'    => 'July',
+            '08'    => 'August',
+            '09'    => 'September',
+            '10'    => 'October',
+            '11'    => 'November',
+            '12'    => 'December',
+        ];
+    }
 
-	if($type == 'days')
-		return array_combine(range(1, 31), range(1, 31));
+    if ($type == 'days') {
+        return array_combine(range(1, 31), range(1, 31));
+    }
 }

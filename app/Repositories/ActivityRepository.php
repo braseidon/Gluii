@@ -1,6 +1,6 @@
 <?php namespace App\Repositories;
 
-use App\Activity;
+use App\Models\Activity;
 
 class ActivityRepository extends AbstractRepository implements ActivityRepositoryInterface
 {
@@ -50,6 +50,7 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
     */
 
     /**
+<<<<<<< HEAD
      * Returns a User's activity feed, based on an array of User ID's
      *
      * @param  array   $userIds
@@ -66,5 +67,62 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
             ->whereIn('user_id', $userIds)
             ->limit($limit)
             ->get();
+=======
+     * Returns single User's Activity feed
+     *
+     * @param  integer    $userId
+     * @param  array      $subjectTypes
+     * @param  integer    $perPage
+     * @return Collection
+     */
+    public function getFeedByUserId($userId, $subjectTypes = [], $perPage = 20)
+    {
+        $activities = Activity::latest()->with(['user', 'subject'])
+            ->where('user_id', $userId);
+
+        if ($subjectTypes !== []) {
+            $activities = $activities->whereIn('name', $subjectTypes);
+        }
+
+        return $activities->paginate($perPage);
+    }
+
+    /**
+     * Returns multiple Users' Activity feeds
+     *
+     * @param  array      $userIds
+     * @param  array      $subjectTypes
+     * @param  integer    $perPage
+     * @return Collection
+     */
+    public function getFeedByUserIds(array $userIds, $subjectTypes = [], $perPage = 20)
+    {
+        $activities = Activity::latest()->with(['user', 'subject'])
+            ->whereIn('user_id', $userIds);
+
+        if ($subjectTypes !== []) {
+            $activities = $activities->whereIn('name', $subjectTypes);
+        }
+
+        return $activities->paginate($perPage);
+    }
+
+    /**
+     * Returns all Users' feeds
+     *
+     * @param  array      $subjectTypes
+     * @param  integer    $perPage
+     * @return Collection
+     */
+    public function getAllUsersFeeds($subjectTypes = [], $perPage = 20)
+    {
+        $activities = Activity::with(['user', 'subject']);
+
+        if ($subjectTypes !== []) {
+            $activities = $activities->whereIn('name', $subjectTypes);
+        }
+
+        return $activities->latest()->paginate($perPage);
+>>>>>>> updates
     }
 }

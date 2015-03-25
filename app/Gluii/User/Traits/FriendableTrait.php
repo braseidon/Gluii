@@ -1,6 +1,6 @@
 <?php namespace App\Gluii\User\Traits;
 
-use App\User;
+use App\Models\User;
 
 trait FriendableTrait
 {

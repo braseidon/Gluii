@@ -1,0 +1,1 @@
+@include('statuses.status', ['status' => $activity->subject])

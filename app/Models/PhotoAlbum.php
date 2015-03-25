@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use App\Gluii\Support\Traits\PublishesActivity;
 use Image;
@@ -11,16 +11,16 @@ class PhotoAlbum extends Model
     use PresentableTrait, PublishesActivity;
 
     /**
-     * @var array
-     */
-    protected $fillable = [];
-
-    /**
      * The database table used by this model
      *
      * @var string
      */
-    protected $table = 'photos';
+    protected $table = 'photo_albums';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [];
 
     /*
     |--------------------------------------------------------------------------
@@ -37,7 +37,7 @@ class PhotoAlbum extends Model
      */
     public function owner()
     {
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     /**
@@ -47,7 +47,7 @@ class PhotoAlbum extends Model
      */
     public function photos()
     {
-        return $this->hasMany('App\Photo', 'album_id');
+        return $this->hasMany('App\Models\Photo', 'album_id');
     }
 
     /*

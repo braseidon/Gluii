@@ -1,6 +1,6 @@
 <?php namespace App\Providers;
 
-use App\Status;
+use App\Models\Status;
 use Event;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;

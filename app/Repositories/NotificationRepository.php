@@ -1,7 +1,7 @@
 <?php namespace App\Repositories;
 
-use App\Notification;
-use App\User;
+use App\Models\Notification;
+use App\Models\User;
 
 class NotificationRepository extends AbstractRepository implements NotificationRepositoryInterface
 {

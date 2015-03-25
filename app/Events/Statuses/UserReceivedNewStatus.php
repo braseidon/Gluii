@@ -1,6 +1,6 @@
 <?php namespace App\Events\Statuses;
 
-use App\Status;
+use App\Models\Status;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
@@ -37,8 +37,8 @@ class UserReceivedNewStatus extends Event
      */
     public function __construct($fromId, $toId, Status $status)
     {
-        $this->fromId    = $fromId;
-        $this->toId        = $toId;
-        $this->status    = $status;
+        $this->fromId   = $fromId;
+        $this->toId     = $toId;
+        $this->status   = $status;
     }
 }

@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -9,16 +9,16 @@ class Notification extends Model
     use PresentableTrait;
 
     /**
-     * @var array
-     */
-    protected $fillable = ['user_id', 'notification_type', 'friend_id', 'notification_route_params'];
-
-    /**
      * The database table used by this model
      *
      * @var string
      */
     protected $table = 'notifications';
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['user_id', 'notification_type', 'friend_id', 'notification_route_params'];
 
     /**
      * The attributes that should be casted to native types.
@@ -45,7 +45,7 @@ class Notification extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     /**
@@ -55,7 +55,7 @@ class Notification extends Model
      */
     public function friend()
     {
-        return $this->belongsTo('App\User', 'friend_id');
+        return $this->belongsTo('App\Models\User', 'friend_id');
     }
 
     /*

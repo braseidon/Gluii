@@ -1,11 +1,10 @@
 <?php namespace App\Commands\Account\Security;
 
 use App\Events\Account\Security\UserUpdatedPassword;
-use App\User;
+use App\Models\User;
 use Auth;
 use Cartalyst\Sentinel\Addons\UniquePasswords\Exceptions\NotUniquePasswordException;
 use Event;
-
 use App\Commands\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 

@@ -4,7 +4,7 @@ use App\Commands\Users\AcceptFriendRequestCommand;
 use App\Commands\Users\RemoveFriendRequestCommand;
 use App\Commands\Users\SendFriendRequestCommand;
 use App\Http\Controllers\BaseController;
-use App\User;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 

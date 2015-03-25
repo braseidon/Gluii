@@ -40,8 +40,8 @@ class LikeCommentCommand extends Command implements SelfHandling
      */
     public function handle(StatusRepository $repository)
     {
-        $user = \App\User::find($this->userId);
+        $user = \App\Models\User::find($this->userId);
 
-        return $repository->likeComment($user, $this->commentId);
+        $repository->likeComment($user, $this->commentId);
     }
 }

@@ -3,7 +3,7 @@
 use Auth;
 use App\Commands\Auth\RegisterUserCommand;
 use App\Http\Requests\RegisterRequest;
-use App\User;
+use App\Models\User;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Illuminate\Http\Request;

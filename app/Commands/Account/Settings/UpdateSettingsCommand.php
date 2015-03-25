@@ -2,9 +2,8 @@
 
 use Auth;
 use App\Events\Account\Settings\UserUpdatedSettings;
-use App\User;
+use App\Models\User;
 use Event;
-
 use App\Commands\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 

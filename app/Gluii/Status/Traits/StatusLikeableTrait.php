@@ -1,6 +1,6 @@
 <?php namespace App\Gluii\Status\Traits;
 
-use App\Status;
+use App\Models\Status;
 
 trait StatusLikeableTrait
 {
@@ -12,7 +12,7 @@ trait StatusLikeableTrait
      */
     public function likes()
     {
-        return $this->belongsToMany('App\User', 'status_likes', 'status_id', 'user_id')
+        return $this->belongsToMany('App\Models\User', 'status_likes', 'status_id', 'user_id')
             ->withPivot('status_id', 'user_id');
     }
 
@@ -32,7 +32,7 @@ trait StatusLikeableTrait
      * @param User $otherUser
      * @return bool
      */
-    public function isLikedBy(\App\User $user)
+    public function isLikedBy(\App\Models\User $user)
     {
         $userStatusList = $this->likes->lists('id');
 

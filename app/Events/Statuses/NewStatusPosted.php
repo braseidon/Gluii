@@ -1,6 +1,6 @@
 <?php namespace App\Events\Statuses;
 
-use App\Status;
+use App\Models\Status;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 

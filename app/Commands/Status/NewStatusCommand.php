@@ -40,8 +40,8 @@ class NewStatusCommand extends Command implements SelfHandling
     public function __construct($profileUserId, $authorId, $status)
     {
         $this->profileUserId    = $profileUserId;
-        $this->authorId            = $authorId;
-        $this->status            = $status;
+        $this->authorId         = $authorId;
+        $this->status           = $status;
     }
 
     /**
@@ -57,7 +57,5 @@ class NewStatusCommand extends Command implements SelfHandling
         // Fire the Events
         Event::fire(new \App\Events\Statuses\NewStatusPosted($status));
         Event::fire(new \App\Events\Statuses\UserReceivedNewStatus($this->authorId, $this->profileUserId, $status));
-
-        return true;
     }
 }

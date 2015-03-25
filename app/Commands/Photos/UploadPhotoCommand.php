@@ -2,7 +2,7 @@
 
 use App\Gluii\ImageMonster\PhotoGuardInterface as ImageMonster;
 use App\Repositories\PhotoRepositoryInterface as Repository;
-use App\User;
+use App\Models\User;
 use App\Commands\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 

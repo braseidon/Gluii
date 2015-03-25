@@ -1,0 +1,1 @@
+@include ("activity.types.{$activity->name}")

@@ -1,7 +1,7 @@
 <?php namespace App\Commands\Users;
 
 use App\Repositories\UserRepository;
-use App\User;
+use App\Models\User;
 use Event;
 use App\Commands\Command;
 use Illuminate\Contracts\Bus\SelfHandling;

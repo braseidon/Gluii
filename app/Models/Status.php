@@ -1,6 +1,6 @@
-<?php namespace App;
+<?php namespace App\Models;
 
-use App\Activity;
+use App\Models\Activity;
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\Status\Traits\StatusLikeableTrait;
 use App\Gluii\Support\Traits\PublishesActivity;
@@ -27,6 +27,8 @@ class Status extends Model
      */
     protected $fillable = ['profile_user_id', 'author_id', 'body'];
 
+    // protected $with = ['profileuser', 'author'];
+
     /*
     |--------------------------------------------------------------------------
     | Relationships
@@ -42,7 +44,7 @@ class Status extends Model
      */
     public function profileuser()
     {
-        return $this->belongsTo('App\User', 'profile_user_id');
+        return $this->belongsTo('App\Models\User', 'profile_user_id');
     }
 
     /**
@@ -52,7 +54,7 @@ class Status extends Model
      */
     public function author()
     {
-        return $this->belongsTo('App\User', 'author_id');
+        return $this->belongsTo('App\Models\User', 'author_id');
     }
 
     /**
@@ -62,7 +64,7 @@ class Status extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\Comment', 'status_id');
+        return $this->hasMany('App\Models\Comment', 'status_id');
     }
 
     /**
@@ -72,7 +74,7 @@ class Status extends Model
      */
     public function subscribers()
     {
-        return $this->belongsToMany('App\User', 'status_subscribers', 'status_id', 'user_id')
+        return $this->belongsToMany('App\Models\User', 'status_subscribers', 'status_id', 'user_id')
             ->wherePivot('notifications', '=', 1)
             ->withPivot('user_id', 'status_id', 'notifications');
     }
@@ -86,6 +88,7 @@ class Status extends Model
     */
 
     /**
+<<<<<<< HEAD:app/Status.php
      * Query scope for all friend updates?
      *
      * @param  Builder  $query
@@ -93,22 +96,36 @@ class Status extends Model
      * @return Builder
      */
     public function scopeAllFriendUpdates($query, $limit = 20)
+=======
+     * Loads all relationships for displaying the status
+     *
+     * @param  Builder  $query
+     * @return Builder
+     */
+    public function scopeLoadRelationships($query)
+>>>>>>> updates:app/Models/Status.php
     {
         return $query->with([
-            'profileuser',
-            'author',
-            'likes' => function ($q) {
-                $q->select('users.id', 'first_name', 'last_name')
-                    ->withPivot('user_id');
-            },
-            'comments' => function ($q) {
-                $q->orderBy('id', 'ASC');
-            },
-            'comments.author',
-            'comments.likes' => function ($q) {
-                $q->select('users.id', 'first_name', 'last_name')
-                    ->withPivot('user_id');
-            },
-        ]);
+                'profileuser' => function ($q) {
+                    $q->selectForFeed();
+                },
+                'author' => function ($q) {
+                    $q->selectForFeed();
+                },
+                'likes' => function ($q) {
+                    $q->addSelect('users.id', 'first_name', 'last_name')
+                        ->withPivot('user_id');
+                },
+                'comments' => function ($q) {
+                    $q->orderBy('id', 'ASC');
+                },
+                'comments.author' => function ($q) {
+                    $q->selectForFeed();
+                },
+                'comments.likes' => function ($q) {
+                    $q->addSelect('users.id', 'first_name', 'last_name')
+                        ->withPivot('user_id');
+                },
+            ]);
     }
 }

@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Auth;
 use App\Gluii\Presenters\Setup\PresentableTrait;
@@ -15,12 +15,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 class User extends EloquentUser implements AuthenticatableContract, CanResetPasswordContract
 {
 
-    use Authenticatable,
-        CanResetPassword,
-        FriendableTrait,
-        LikeableTrait,
-        UserNotifications,
-        PresentableTrait;
+    use Authenticatable, CanResetPassword, FriendableTrait, LikeableTrait, UserNotifications, PresentableTrait;
 
     /**
      * The database table used by the model.
@@ -58,12 +53,12 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
      */
     public function statuses()
     {
-        return $this->hasMany('App\Status', 'profile_user_id', 'id');
+        return $this->hasMany('App\Models\Status', 'profile_user_id', 'id');
     }
 
     public function comments()
     {
-        return $this->hasMany('App\Comment', 'user_id', 'id');
+        return $this->hasMany('App\Models\Comment', 'user_id', 'id');
     }
 
     /**
@@ -73,7 +68,7 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
      */
     public function photos()
     {
-        return $this->hasMany('App\Photo', 'user_id', 'id');
+        return $this->hasMany('App\Models\Photo', 'user_id', 'id');
     }
 
     /**
@@ -83,7 +78,7 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
      */
     public function profilepic()
     {
-        return $this->belongsTo('App\Photo', 'profile_photo_id');
+        return $this->belongsTo('App\Models\Photo', 'profile_photo_id');
     }
 
     /**
@@ -93,7 +88,7 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
      */
     public function notifications()
     {
-        return $this->hasMany('App\Notification', 'user_id', 'id');
+        return $this->hasMany('App\Models\Notification', 'user_id', 'id');
     }
 
     /**
@@ -103,7 +98,7 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
      */
     public function subscribedstatuses()
     {
-        return $this->belongsToMany('App\Status', 'status_subscribers', 'user_id', 'status_id')
+        return $this->belongsToMany('App\Models\Status', 'status_subscribers', 'user_id', 'status_id')
             ->withPivot('user_id', 'status_id');
     }
 
@@ -118,20 +113,22 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
     /**
      * Load a User's Profile
      *
-     * @param  Builder $query
+     * @param  Builder  $query
+     * @param  integer  $statusPerPage
      * @return Builder
      */
-    public function scopeLoadProfile($query)
+    public function scopeLoadProfile($query, $statusPerPage = 10)
     {
-        // return $query->with([
-        // 		'statuses' => function($q)
-        // 		{
-        // 			$q->orderBy('id', 'DESC');
-        // 		},
-        // 		'statuses.profileuser',
-        // 		'statuses.author',
-        // 		'friends',
-        // 	]);
+        return $query->with([
+                'friendsto',
+                'friendsfrom',
+                'statuses' => function ($q) use ($statusPerPage) {
+                    $q->loadRelationships()
+                        ->orderBy('id', 'DESC')
+                        ->addSelect('id', 'profile_user_id', 'author_id', 'body', 'created_at')
+                        ->paginate($statusPerPage);
+                },
+            ]);
     }
 
     /**
