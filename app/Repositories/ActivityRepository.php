@@ -50,24 +50,6 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
     */
 
     /**
-<<<<<<< HEAD
-     * Returns a User's activity feed, based on an array of User ID's
-     *
-     * @param  array   $userIds
-     * @param  integer $limit
-     * @return Collection
-     */
-    public function getFeedByUserIds(array $userIds, $limit = 20)
-    {
-        return Activity::with([
-                'status',
-                'photo',
-                'photoalbum',
-            ])
-            ->whereIn('user_id', $userIds)
-            ->limit($limit)
-            ->get();
-=======
      * Returns single User's Activity feed
      *
      * @param  integer    $userId
@@ -123,6 +105,5 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
         }
 
         return $activities->latest()->paginate($perPage);
->>>>>>> updates
     }
 }

@@ -88,22 +88,12 @@ class Status extends Model
     */
 
     /**
-<<<<<<< HEAD:app/Status.php
-     * Query scope for all friend updates?
-     *
-     * @param  Builder  $query
-     * @param  integer  $limit
-     * @return Builder
-     */
-    public function scopeAllFriendUpdates($query, $limit = 20)
-=======
      * Loads all relationships for displaying the status
      *
      * @param  Builder  $query
      * @return Builder
      */
     public function scopeLoadRelationships($query)
->>>>>>> updates:app/Models/Status.php
     {
         return $query->with([
                 'profileuser' => function ($q) {
