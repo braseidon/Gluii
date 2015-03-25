@@ -84,29 +84,58 @@ class UserPresenter extends Presenter
      * @param  array $attributes
      * @return string
      */
-    public function photoThumb($size = 'thumb-sm', $attributes = [])
+    public function photoThumb($size = 'thumb-sm', $attributes = [], $link = false)
+    {
+        if ($link === true) {
+            $output = '<a href="' . route('user/view', $this->entity->username) . '">';
+        } else {
+            $output = '';
+        }
+
+        $output .= $this->getUserImage($size, $attributes);
+
+        if ($link === true) {
+            $output .= '</a>';
+        }
+
+        return $output;
+    }
+
+    /**
+     * Generate the image HTML for a User's profile photo
+     *
+     * @param  string  $size
+     * @param  array   $attributes
+     * @return string
+     */
+    public function getUserImage($size = 'thumb-sm', $attributes = [])
     {
         $attributes = HTML::attributes($attributes);
 
+        $url = $this->getProfilePicUrl($size);
+
+        return '<img src="'. $url . '" '. $attributes . ' alt="'. $this->name . '" />';
+    }
+
+    /**
+     * Generate the URL to a User's profile photo
+     *
+     * @param  string $size
+     * @return string
+     */
+    public function getProfilePicUrl($size = 'thumb-sm')
+    {
         if ($this->entity->profile_photo) {
-            // if (! Config::get('photos.templates.' . $size, false)) {
-            //     $size = 'thumb-sm';
-            // }
-
-            $url = '/' . Config::get('photos.dirs.base_url') . '/' . $size . '/user/' . $this->entity->id . '/' . $this->entity->profile_photo;
-
-            return '<img src="'. $url . '" '. $attributes . ' alt="'. $this->name . '" />';
+            return '/' . Config::get('photos.dirs.base_url') . '/' . $size . '/user/' . $this->entity->id . '/' . $this->entity->profile_photo;
         }
 
         if ($this->entity->gender == 'male') {
-            return '<img src="/images/avatars/male-silhouette.png" '. $attributes . ' alt="'. $this->name . '" />';
+            return '/images/avatars/male-silhouette.png';
+        } elseif ($this->entity->gender == 'female') {
+            return '/images/avatars/female-silhouette.png';
         }
 
-        if ($this->entity->gender == 'female') {
-            return '<img src="/images/avatars/female-silhouette.png" '. $attributes . ' alt="'. $this->name . '" />';
-        }
-
-        return '<img src="/images/avatars/male-silhouette.png" '. $attributes . ' alt="'. $this->name . '" />';
+        return '/images/avatars/male-silhouette.png';
     }
 
     /*

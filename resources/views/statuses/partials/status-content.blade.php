@@ -1,7 +1,7 @@
 <div class="block m-b-sm clear">
 	<!-- author photo -->
 	<a href="{{ route('user/view', $status->author->username) }}" class="pull-left avatar thumb-sm">
-		{!! $status->author->present()->photoThumb('thumb-sm', ['class' => 'no-radius']) !!}
+		{!! $status->author->present()->photoThumb('thumb-sm', ['class' => 'img-round']) !!}
 		{!! $status->author->present()->onlineStatus !!}
 	</a>
 	<div class="m-l-xxl">

@@ -6,7 +6,7 @@ body{color:#333;}
 
 /* Header */
 .app-header {
-	z-index: 3000;
+	/*z-index: 3000;*/
 	box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .5);
 }
 body.app-header-fixed {
@@ -21,11 +21,11 @@ body.app-header-fixed {
 	background: #e9eaed;
 }
 .app-content-body {
-	z-index: 2000;
+	/*z-index: 2000;*/
 }
 /* Footer */
 .app-footer {
-	z-index: 4000;
+	/*z-index: 4000;*/
 }
 
 /* -----------------------------------
@@ -37,7 +37,7 @@ body.app-header-fixed {
 | Navigation
 ----------------------------------- */
 .container>.navbar-header {
-	z-index: 2;
+	/*z-index: 2;*/
 }
 /* Top of Content Navs */
 .nav-content {
@@ -134,11 +134,11 @@ time.icon * {display: block;width: 100%;font-size: 10px;font-weight: 700;font-st
 		top: 50px;
 		bottom: 0;
 		left: 0;
-		z-index: 3000;
+		/*z-index: 3000;*/
 	}
 	/* Aside - Right */
 	.app-aside-right {
-		z-index: 2000;
+		/*z-index: 2000;*/
 	}
 	.app-aside-fixed .app-aside-right .aside-wrap {
 		right: 0;

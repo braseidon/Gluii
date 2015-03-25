@@ -47,7 +47,6 @@ var config = {
 			dir.vendor + 'modernizr/modernizr.js',
 			dir.vendor + 'bootstrap/dist/js/bootstrap.js',
 			dir.source + 'js/gluii.js',
-			dir.source + 'js/gluii.plugins.js',
 			dir.source + 'js/app/ui-load.js',
 			dir.source + 'js/app/ui-nav.js',
 			dir.source + 'js/app/ui-toggle.js',
@@ -56,6 +55,9 @@ var config = {
 			dir.vendor + 'jcrop/js/jquery.Jcrop.js',
 			dir.vendor + 'slimscroll/jquery.slimscroll.js',
 			dir.vendor + 'bootstrap-filestyle/src/bootstrap-filestyle.js',
+			dir.vendor + 'ekko-lightbox/dist/ekko-lightbox.js',
+			// Enable Plugins
+			dir.source + 'js/gluii.plugins.js',
 		],
 
 		build: {

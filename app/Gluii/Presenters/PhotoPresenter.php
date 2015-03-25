@@ -16,4 +16,17 @@ class PhotoPresenter extends Presenter
     {
         return '/' . Config::get('photos.dirs.base_url') . '/' . $size . '/' . $this->entity->path . '/' . $this->entity->user_id . '/' . $this->entity->filename;
     }
+
+    /**
+     * Output a Photo
+     *
+     * @param  string $size
+     * @return string
+     */
+    public function output($size = 'medium', $attributes = [])
+    {
+        $attributes = HTML::attributes($attributes);
+
+        return '<img src="' . $this->url($size) . '" alt="" />';
+    }
 }

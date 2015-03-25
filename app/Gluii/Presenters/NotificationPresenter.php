@@ -14,7 +14,7 @@ class NotificationPresenter extends Presenter
     public function image($size = 'thumb-sm', $attributes = ['class' => 'img-circle'])
     {
         if ($this->entity->friend) {
-            return $this->entity->friend->present()->photoThumb($size, $attributes);
+            return $this->entity->friend->present()->photoThumb($size, $attributes, true);
         }
 
         $attributes = HTML::attributes($attributes);

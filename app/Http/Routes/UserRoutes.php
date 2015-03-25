@@ -130,6 +130,16 @@ Route::group(['prefix' => 'notifications', 'middleware' => 'auth', 'namespace' =
 });
 
 /**
+ * Photos + Photo Albums
+ *
+ * @namespace Photos
+ */
+Route::group(['prefix' => 'photos', 'namespace' => 'Photos'], function () {
+    # View Photo
+    Route::get('{id}/view', ['as' => 'user/photo/view', 'uses' => 'UserPhotoController@getViewPhoto']);
+});
+
+/**
  * Manage Photos
  *
  * @namespace Photos
