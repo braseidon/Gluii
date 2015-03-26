@@ -27,17 +27,13 @@ $(function() {
     $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
         event.preventDefault();
         return $(this).ekkoLightbox({
-          always_show_close: true
+            always_show_close: true,
+            left_arrow_class: '.icon .icon-arrow-left',
+            right_arrow_class: '.icon .icon-arrow-right'
         });
     });
 
-});
-
-$(function() {
-
-    /**
-     * Ajax Modal
-     */
+    // Modal - Ajax
     $(document).on('click', '[data-toggle="ajaxModal"]',
         function(e) {
             $('#ajaxModal').remove();
@@ -52,13 +48,11 @@ $(function() {
         }
     );
 
-    /**
-     * Button Loading
-     */
+    // Button Loading Text
     $(document).on('click.button.data-api', '[data-loading-text]', function (e) {
-            var $this = $(e.target);
-            $this.is('i') && ($this = $this.parent());
-            $this.button('loading');
+        var $this = $(e.target);
+        $this.is('i') && ($this = $this.parent());
+        $this.button('loading');
     });
 
 });

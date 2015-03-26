@@ -1,5 +1,5 @@
 <div class="profile-pic">
-	<a href="{{ $user->present()->getProfilePicUrl('large') }}" data-toggle="lightbox" data-title="{{ $user->present()->name }}" class="profile-pic-img">
+	<a href="{{ $user->present()->getProfilePicUrl('medium') }}" data-toggle="lightbox" data-title="{{ $user->present()->name }}" class="profile-pic-img">
 		{!! $user->present()->photoThumb('thumb-lg') !!}
 	</a>
 	@if(Auth::check() && $user->id == Auth::getUser()->id)

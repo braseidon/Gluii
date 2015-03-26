@@ -46,6 +46,18 @@ return [
             'fit'                   => 'crop',
         ],
 
+        'small' => [
+            'w'                     => 400,
+            'h'                     => 300,
+            'q'                     => 100,
+            'fit'                   => 'max',
+        ],
+        'medium' => [
+            'w'                     => 800,
+            'h'                     => 600,
+            'q'                     => 100,
+            'fit'                   => 'max',
+        ],
         'large' => [
             'w'                     => 1920,
             'h'                     => 1080,
@@ -69,9 +81,9 @@ return [
     */
 
     'limits' => [
-        'width'                    => 1920,
-        'height'                => 1200,
-        'size'                    => '2MB',
+        'width'                     => 1920,
+        'height'                    => 1200,
+        'size'                      => '2MB',
     ],
 
     /*

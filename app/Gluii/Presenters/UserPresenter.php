@@ -45,6 +45,14 @@ class UserPresenter extends Presenter
         $user = '<label class="label bg-success m-l-xs">User</label>';
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Online Status
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
     /**
      * Return a User's online status
      *
@@ -59,14 +67,14 @@ class UserPresenter extends Presenter
 
     /*
     |--------------------------------------------------------------------------
-    | Avatar & Stuff
+    | Profile Photo
     |--------------------------------------------------------------------------
     |
     |
     */
 
     /**
-     * Returns the user Gravatar image url.
+     * Returns the user Gravatar image url
      *
      * @return string
      */
@@ -125,8 +133,10 @@ class UserPresenter extends Presenter
      */
     public function getProfilePicUrl($size = 'thumb-sm')
     {
-        if ($this->entity->profile_photo) {
-            return '/' . Config::get('photos.dirs.base_url') . '/' . $size . '/user/' . $this->entity->id . '/' . $this->entity->profile_photo;
+        if ($this->entity->profile_photo !== null) {
+            $path = 'user/' . $this->entity->id . '/' . $this->entity->profile_photo;
+
+            return route('asset/img', [$size, $path]);
         }
 
         if ($this->entity->gender == 'male') {

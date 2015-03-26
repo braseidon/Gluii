@@ -151,6 +151,7 @@ return [
         'Clockwork\Support\Laravel\ClockworkServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
         'Intervention\Image\ImageServiceProvider',
+        'GrahamCampbell\HTMLMin\HTMLMinServiceProvider',
 
         /*
          * ShutteR Service Providers
@@ -214,19 +215,24 @@ return [
         /**
          * Packages
          */
-        'Clockwork'            => 'Clockwork\Support\Laravel\Facade',
-        'Form'                => 'Illuminate\Html\FormFacade',
-        'HTML'                => 'Illuminate\Html\HtmlFacade',
-        'Image'                => 'Intervention\Image\Facades\Image',
+        'Clockwork'         => 'Clockwork\Support\Laravel\Facade',
+        'Form'              => 'Illuminate\Html\FormFacade',
+        'HTML'              => 'Illuminate\Html\HtmlFacade',
+        'HTMLMin'           => 'GrahamCampbell\HTMLMin\Facades\HTMLMin',
+        'Image'             => 'Intervention\Image\Facades\Image',
+
+        /**
+         * ShutteR Facades
+         */
         'Server'            => 'App\Gluii\Support\Facades\ServerFactory',
 
         /*
          * Cartalyst Packages
          */
         'Activation'        => 'Cartalyst\Sentinel\Laravel\Facades\Activation',
-        'Auth'                => 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
-        'Reminder'            => 'Cartalyst\Sentinel\Laravel\Facades\Reminder',
-        'Sentinel'            => 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
+        'Auth'              => 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
+        'Reminder'          => 'Cartalyst\Sentinel\Laravel\Facades\Reminder',
+        'Sentinel'          => 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
         'Social'            => 'Cartalyst\Sentinel\Addons\Social\Laravel\Facades\Social',
     ],
 
