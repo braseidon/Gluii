@@ -28,7 +28,7 @@ class HomeController extends BaseController
             return view('home.leadpages');
         }
 
-        $activities = $repository->getAllUsersFeeds(['status']);
+        $activities = $repository->getAllUsersFeeds(['status', 'photo']);
         // dd($activities->items());
 
         return view('feeds.news', compact('activities'));

@@ -2,7 +2,6 @@
 
 use App\Gluii\Support\Traits\PublishesActivity;
 use App\Gluii\Presenters\Setup\PresentableTrait;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 

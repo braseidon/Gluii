@@ -101,10 +101,12 @@ gulp.task('styles', ['less', 'css'], function(){
         .pipe(plugins.expectFile(config.paths.build.css))
         .pipe(plugins.concat('gluii.css'))
         .pipe(plugins.autoprefixer(config.autoPrefixBrowers))
+        .pipe(plugins.combineMediaQueries({log: true}))
         .pipe(gulp.dest(dir.dist + 'css/'))
         .pipe(plugins.rename({ suffix: '.min' }))
         .pipe(plugins.minifyCss())
         .pipe(gulp.dest(dir.dist + 'css/'))
+        .pipe(plugins.size())
         .pipe(plugins.notify({ message: 'All CSS in build folder compiled & minified' }));
 });
 
@@ -117,6 +119,7 @@ gulp.task('scripts', function(){
         .pipe(plugins.rename({ suffix: '.min' }))
         .pipe(plugins.uglify())
         .pipe(gulp.dest(dir.dist + 'js/'))
+        .pipe(plugins.size())
         .pipe(plugins.notify({ message: 'Javascripts compiled and minified' }));
 });
 

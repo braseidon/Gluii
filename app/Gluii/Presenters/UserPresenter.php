@@ -26,6 +26,16 @@ class UserPresenter extends Presenter
     }
 
     /**
+     * Create a link to the User's profile using their full name
+     *
+     * @return string
+     */
+    public function nameLink()
+    {
+        return '<a href="' . route('user/view', $this->entity->username) . '">' . $this->entity->first_name . ' ' . $this->entity->last_name . '</a>';
+    }
+
+    /**
      * Return the User's title, if special
      *
      * @return string
@@ -86,21 +96,21 @@ class UserPresenter extends Presenter
     }
 
     /**
-     * Show a User's profile photo at a certain size
+     * Show a User's thumbnail linking to their profile
      *
      * @param  integer $size
-     * @param  array $attributes
+     * @param  array   $attributes
      * @return string
      */
     public function photoThumb($size = 'thumb-sm', $attributes = [], $link = false)
     {
+        $output = '';
+
         if ($link === true) {
             $output = '<a href="' . route('user/view', $this->entity->username) . '">';
-        } else {
-            $output = '';
         }
 
-        $output .= $this->getUserImage($size, $attributes);
+        $output .= $this->getProfilePic($size, $attributes);
 
         if ($link === true) {
             $output .= '</a>';
@@ -116,7 +126,7 @@ class UserPresenter extends Presenter
      * @param  array   $attributes
      * @return string
      */
-    public function getUserImage($size = 'thumb-sm', $attributes = [])
+    public function getProfilePic($size = 'thumb-sm', $attributes = [])
     {
         $attributes = HTML::attributes($attributes);
 
@@ -139,9 +149,7 @@ class UserPresenter extends Presenter
             return route('asset/img', [$size, $path]);
         }
 
-        if ($this->entity->gender == 'male') {
-            return '/images/avatars/male-silhouette.png';
-        } elseif ($this->entity->gender == 'female') {
+        if ($this->entity->gender == 'female') {
             return '/images/avatars/female-silhouette.png';
         }
 

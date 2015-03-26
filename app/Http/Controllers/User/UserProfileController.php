@@ -47,7 +47,7 @@ class UserProfileController extends BaseController
             return redirect()->route('home')->withErrors(['User Error' => 'User not found!']);
         }
 
-        return view()->make('profile.feed', compact('user', 'statuses'));
+        return view()->make('profile.feed', compact('user'));
     }
 
     /**

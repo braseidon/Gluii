@@ -37,7 +37,8 @@ body.app-header-fixed {
 | Navigation
 ----------------------------------- */
 .container>.navbar-header {
-	/*z-index: 2;*/
+	z-index: 2;
+	margin-left: -15px;
 }
 /* Top of Content Navs */
 .nav-content {

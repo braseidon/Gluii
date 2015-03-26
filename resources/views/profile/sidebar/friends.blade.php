@@ -10,8 +10,8 @@
 					<div class="col-lg-4">
 						<a href="{{ route('user/view', $friend->username) }}">
 							{!! $friend->present()->photoThumb('thumb-md', ['class' => 'userprofile-sidebar-list-item']) !!}
-							<div>
-								<span class="text-sm">{!! $friend->present()->name !!}</span>
+							<div class="sidebar-friend">
+								<div class="friend-name">{!! $friend->present()->name !!}</div>
 							</div>
 						</a>
 					</div>

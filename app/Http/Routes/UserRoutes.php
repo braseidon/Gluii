@@ -86,7 +86,7 @@ Route::group(['prefix' => 'friends', 'middleware' => 'auth', 'namespace' => 'Use
 });
 
 /**
- * Statuses
+ * Statuses - Actions
  *
  * @namespace User
  */
@@ -130,7 +130,7 @@ Route::group(['prefix' => 'notifications', 'middleware' => 'auth', 'namespace' =
 });
 
 /**
- * Photos + Photo Albums
+ * Photos - View
  *
  * @namespace Photos
  */
@@ -140,7 +140,7 @@ Route::group(['prefix' => 'photos', 'namespace' => 'Photos'], function () {
 });
 
 /**
- * Manage Photos
+ * Photos - Actions
  *
  * @namespace Photos
  */
@@ -150,6 +150,9 @@ Route::group(['prefix' => 'photos', 'middleware' => 'auth', 'namespace' => 'Phot
     # Upload Pictures
     Route::get('upload', ['as' => 'user/manage/photos/upload', 'uses' => 'PhotoUploadController@getUploadPhoto']);
     Route::post('upload', 'PhotoUploadController@postUploadPhoto');
+    # Crop Photo
+    Route::get('{id}/crop', ['as' => 'user/manage/photos/crop', 'uses' => 'PhotoUploadController@getPhotoCropper']);
+    Route::post('{id}/crop-process', ['as' => 'user/manage/photos/crop-process', 'uses' => 'PhotoUploadController@postPhotoCropperProcess']);
 });
 
 /*

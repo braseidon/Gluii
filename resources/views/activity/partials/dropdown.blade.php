@@ -5,6 +5,8 @@
 	<ul class="dropdown-menu text-left animated flipInX">
 		{{-- If status is on User's wall, or User owns post --}}
 		@if($status->profileuser->id == Auth::getUser()->id or $status->author->id == Auth::getUser()->id)
+			<li><a href="javascript:void(0);">Edit post</a></li>
+			<li><a href="javascript:void(0);">Hide from timeline</a></li>
 			<li><a href="javascript:void(0);">Delete post</a></li>
 		@else
 			<li>

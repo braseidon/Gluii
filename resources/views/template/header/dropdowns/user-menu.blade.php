@@ -9,11 +9,12 @@
 	<ul class="dropdown-menu w" role="menu">
 		{{-- Main --}}
 		<li><a href="{{ route('user/view', Auth::getUser()->username) }}">My Profile</a></li>
-		<li><a href="{{ route('user/view', Auth::getUser()->username) }}">My Photos</a></li>
-		<li><a href="{{ route('user/view', Auth::getUser()->username) }}">My Videos</a></li>
-		<li><a href="{{ route('user/view', Auth::getUser()->username) }}">My Calendar</a></li>
+		<li><a href="{{ route('user/photos', Auth::getUser()->username) }}">My Photos</a></li>
+		<li><a href="{{ route('user/videos', Auth::getUser()->username) }}">My Videos</a></li>
+		<li><a href="{{ route('user/calendar', Auth::getUser()->username) }}">My Calendar</a></li>
 		<li class="divider"></li>
 		{{-- Account --}}
+		<li><a href="#">Activity Log</a></li>
 		<li><a href="{{ route('account/settings') }}">Settings</a></li>
 		<li><a href="{{ route('account/security') }}">Security</a></li>
 		<li><a href="#">Help</a></li>

@@ -2,25 +2,35 @@
 
 use App\Http\Requests\Photos\UploadPhotoRequest;
 use App\Commands\Photos\UploadPhotoCommand;
+use App\Repositories\PhotoRepositoryInterface;
 use Auth;
 use League\Glide\Server;
 use Redirect;
 use Str;
 use View;
+
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
 class PhotoUploadController extends BaseController
 {
+    /**
+     * The Photo repository
+     *
+     * @var PhotoRepository
+     */
+    protected $repository;
 
     /**
      * Instantiate the Object
      *
      * @param PhotoRepository $repository
      */
-    public function __construct()
+    public function __construct(PhotoRepositoryInterface $repository)
     {
         parent::__construct();
+
+        $this->repository = $repository;
 
         $user = Auth::getUser()->load('friends');
 
@@ -51,9 +61,9 @@ class PhotoUploadController extends BaseController
         // Dispatch the command to upload the photo
         $photo = $this->dispatch(
             new UploadPhotoCommand(
-                Auth::getUser()->id,                        // userId
-                $request->file('image')->getRealPath(),    // imagePath
-                true                                        // isProfilePicture
+                Auth::getUser()->id,
+                $request->file('image')->getRealPath(),
+                true
             )
         );
 
@@ -61,6 +71,36 @@ class PhotoUploadController extends BaseController
             return Redirect::back()->withErrors('Photo', 'Something went wrong.');
         }
 
-        return View::make('photos.crop-photo');
+        return Redirect::route('user/manage/photos/crop', $photo->id);
+    }
+
+    /**
+     * Crop the Photo
+     *
+     * @param  integer  $photoId
+     * @return Response
+     */
+    public function getPhotoCropper($photoId)
+    {
+        if (! $photo = $this->repository->findPhotoById($photoId)) {
+            return Redirect::back()->withErrors('Photo', 'Something went wrong.');
+        }
+
+        return View::make('photos.crop-photo', compact('photo'));
+    }
+
+    /**
+     * Process the cropping of a Photo
+     *
+     * @param  integer   $photoId
+     * @return Response
+     */
+    public function postPhotoCropperProcess($photoId)
+    {
+        if (! $photo = $this->repository->findPhotoById($photoId)) {
+            return Redirect::back()->withErrors('Photo', 'Something went wrong.');
+        }
+
+        return View::make('photos.crop-photo', compact('photo'));
     }
 }

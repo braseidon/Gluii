@@ -1,5 +1,6 @@
 <?php namespace App\Models;
 
+use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\Support\Traits\PublishesActivity;
 use Image;
 

@@ -3,8 +3,18 @@
 class StatusActivity extends Status
 {
 
+    /**
+     * Always autoload the specified related models
+     *
+     * @var array
+     */
     protected $with = ['profileuser', 'author', 'likes', 'comments', 'comments.author', 'comments.likes'];
 
+    /**
+     * Make sure the correct presenter is loaded
+     *
+     * @var string
+     */
     protected $presenter = 'App\\Gluii\\Presenters\\StatusPresenter';
 
     /**
