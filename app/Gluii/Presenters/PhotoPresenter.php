@@ -2,7 +2,6 @@
 
 use Config;
 use HTML;
-
 use App\Gluii\Presenters\Setup\Presenter;
 
 class PhotoPresenter extends Presenter
@@ -17,7 +16,7 @@ class PhotoPresenter extends Presenter
      */
     public function thumbLink($thumbSize = 'thumb-md', $attributes = [])
     {
-        $link = route('asset/img', ['medium', $this->routePath()]);
+        $link = route('asset/img', ['large', $this->routePath()]);
 
         return '<a href="' . $link . '" data-toggle="lightbox">' . $this->image() . '</a>';
     }

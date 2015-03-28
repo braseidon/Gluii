@@ -1461,12 +1461,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "cd97d0de22c088fca568037e1cd6fdb9ca9b084c"
+                "reference": "f868261433cb06b3f8cdddd4a6263a63bd38d727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/cd97d0de22c088fca568037e1cd6fdb9ca9b084c",
-                "reference": "cd97d0de22c088fca568037e1cd6fdb9ca9b084c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f868261433cb06b3f8cdddd4a6263a63bd38d727",
+                "reference": "f868261433cb06b3f8cdddd4a6263a63bd38d727",
                 "shasum": ""
             },
             "require": {
@@ -1579,7 +1579,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-03-25 16:45:51"
+            "time": "2015-03-27 19:54:24"
         },
         {
             "name": "league/flysystem",
@@ -2192,16 +2192,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.4.3",
+            "version": "v0.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "b5dd7660c0ef38e96cd8cd8fa924b6be0e53906a"
+                "reference": "489816db71649bd95b416e3ed9062d40528ab0ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/b5dd7660c0ef38e96cd8cd8fa924b6be0e53906a",
-                "reference": "b5dd7660c0ef38e96cd8cd8fa924b6be0e53906a",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/489816db71649bd95b416e3ed9062d40528ab0ac",
+                "reference": "489816db71649bd95b416e3ed9062d40528ab0ac",
                 "shasum": ""
             },
             "require": {
@@ -2259,7 +2259,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2015-03-17 15:17:33"
+            "time": "2015-03-26 18:43:54"
         },
         {
             "name": "swiftmailer/swiftmailer",

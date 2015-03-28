@@ -3,8 +3,8 @@
 		<span class="caret single"></span>
 	</button>
 	<ul class="dropdown-menu text-left animated flipInX">
-		{{-- If status is on User's wall, or User owns post --}}
-		@if($status->profileuser->id == Auth::getUser()->id or $status->author->id == Auth::getUser()->id)
+		{{-- If activity is on User's wall, or User owns post --}}
+		@if($activity->user->id == Auth::getUser()->id)
 			<li><a href="javascript:void(0);">Edit post</a></li>
 			<li><a href="javascript:void(0);">Hide from timeline</a></li>
 			<li><a href="javascript:void(0);">Delete post</a></li>
@@ -14,7 +14,7 @@
 					Hide this post
 					{{-- Dev - Check ID's --}}
 					@if (Auth::check() && Auth::hasAccess('admin'))
-						<span class="text-muted">({{ $status->profileuser->id }} !== {{ Auth::getUser()->id }})</span>
+						<span class="text-muted">({{ $activity->user->id }} !== {{ Auth::getUser()->id }})</span>
 					@endif
 				</a>
 			</li>

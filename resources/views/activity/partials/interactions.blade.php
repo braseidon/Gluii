@@ -1,18 +1,18 @@
 <ul class="list-inline m-t-sm m-b-none block">
-	{{-- like --}}
+	{{-- Like / Unlike --}}
 	@if(Auth::check())
 		<li>
-			@if($status->isLikedBy(Auth::getUser()))
-				<form action="{{ route('status/unlike') }}" method="POST">
-					{!! Form::hidden('status_id', $status->id) !!}
+			@if($activity->isLikedBy(Auth::getUser()))
+				<form action="{{ route('activity/unlike') }}" method="POST">
+					{!! Form::hidden('activity_id', $activity->id) !!}
 					{!! Form::token() !!}
 					<button type="submit" class="btn btn-link btn-sm">
 						<i class="icon icon-dislike"></i> Unlike
 					</button>
 				</form>
 			@else
-				<form action="{{ route('status/like') }}" method="POST">
-					{!! Form::hidden('status_id', $status->id) !!}
+				<form action="{{ route('activity/like') }}" method="POST">
+					{!! Form::hidden('activity_id', $activity->id) !!}
 					{!! Form::token() !!}
 					<button type="submit" class="btn btn-link btn-sm">
 						<i class="icon icon-like"></i> Like
@@ -21,24 +21,25 @@
 			@endif
 		</li>
 	@endif
-	{{-- comment --}}
+	{{-- Comment --}}
 	<li>
 		<a href="javascript:void(0);" class="btn btn-link btn-sm">
 			<i class="icon icon-bubble"></i> Comment
 		</a>
 	</li>
-	{{-- show comments --}}
+	{{-- Show Comments --}}
 	<li>
 		<a href="javascript:void(0);" class="btn btn-link btn-sm">
-			Show All Comments ({{ $status->present()->replyCount }})
+			Show All Comments ({{ $activity->present()->replyCount }})
 		</a>
 	</li>
 	<li>
 		<a href="javascript:void(0);" class="btn btn-link btn-sm">
-			ID#{{ $status->id }}
+			ID#{{ $activity->id }}
 		</a>
 	</li>
-	@if(Auth::check() && Auth::getUser()->id == $status->author->id)
+	{{-- Edit --}}
+	@if(Auth::check() && $activity->user->id == Auth::getUser()->id)
 		<li class="pull-right">
 			<!-- edit -->
 			<a href="javascript:void(0);" class="btn btn-link btn-sm text-muted">Edit</a>

@@ -32,7 +32,7 @@ class UserPresenter extends Presenter
      */
     public function nameLink()
     {
-        return '<a href="' . route('user/view', $this->entity->username) . '">' . $this->entity->first_name . ' ' . $this->entity->last_name . '</a>';
+        return '<a href="' . route('user/view', $this->entity->username) . '">' . $this->name() . '</a>';
     }
 
     /**

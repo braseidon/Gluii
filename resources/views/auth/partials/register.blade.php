@@ -9,7 +9,7 @@
 				@include('auth.forms.register')
 			</div>
 			<footer class="panel-footer">
-				<!-- CSRF -->
+				{{-- CSRF --}}
 				{!! Form::token() !!}
 				<button type="submit" class="btn btn-primary">Create Account</button>
 			</footer>

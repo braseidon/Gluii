@@ -51,7 +51,7 @@
 				<button type="submit" class="btn btn-primary btn-addon">
 					<i class="icon icon-user-follow"></i> Send Friend Request
 				</button>
-				<!-- CSRF -->
+				{{-- CSRF --}}
 				{!! Form::token() !!}
 			</form>
 		@endif

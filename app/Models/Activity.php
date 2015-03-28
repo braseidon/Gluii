@@ -1,9 +1,12 @@
 <?php namespace App\Models;
 
+use App\Gluii\Presenters\Setup\PresentableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
+
+    use PresentableTrait;
 
     /**
      * The database table used by the model.
@@ -36,6 +39,7 @@ class Activity extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
     /**
      * Get the subject of the activity.
      *
@@ -54,6 +58,12 @@ class Activity extends Model
     |
     */
 
+    /**
+     * Return SubjectType for selecting the model
+     *
+     * @param  string $value
+     * @return string
+     */
     public function getSubjectTypeAttribute($value)
     {
         if (is_null($value)) {

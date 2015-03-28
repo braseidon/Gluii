@@ -3,7 +3,6 @@
 use App\Gluii\Presenters\Setup\PresentableTrait;
 use App\Gluii\Support\Traits\PublishesActivity;
 use Image;
-
 use Illuminate\Database\Eloquent\Model;
 
 class PhotoAlbum extends Model

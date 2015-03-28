@@ -8,7 +8,6 @@ use League\Glide\Server;
 use Redirect;
 use Str;
 use View;
-
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 

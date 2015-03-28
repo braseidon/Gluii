@@ -104,6 +104,8 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
             $activities = $activities->whereIn('name', $subjectTypes);
         }
 
-        return $activities->latest()->paginate($perPage);
+        $activities = $activities->latest()->paginate($perPage);
+
+        return $activities;
     }
 }

@@ -1,7 +1,8 @@
 @extends('activity.activity')
 
 @section('activity-title')
-	{{ $activity->user->present()->name }} uploaded a new photo {{ $activity->created_at->diffForHumans() }}.
+	{!! $activity->user->present()->nameLink !!}
+	uploaded a new photo {{ $activity->created_at->diffForHumans() }}.
 @overwrite
 
 @section('activity-content')

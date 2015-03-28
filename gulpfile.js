@@ -26,7 +26,7 @@ var config = {
         css: [
                 // Essentials
                 dir.source + 'css/fonts.css',
-                dir.vendor + 'font-awesome/css/font-awesome.css',
+                // dir.vendor + 'font-awesome/css/font-awesome.css',
                 dir.vendor + 'simple-line-icons/css/simple-line-icons.css',
                 // dir.vendor + 'ionicons/css/ionicons.css',
                 dir.source + 'css/gluii.css',

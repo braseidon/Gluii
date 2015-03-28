@@ -1,26 +1,23 @@
 <section class="panel panel-default panel-activity">
-	@if(trim($__env->yieldContent('activity-title')))
-		<header class="panel-heading">
-			{!! trim($__env->yieldContent('activity-title')) !!}
-		</header>
-	@endif
 	<div class="panel-body">
-		{{-- Activity Author --}}
-		{{-- @include('activity.partials.author') --}}
-		{{-- Dropdown --}}
-		@if(Auth::check())
-			{{-- @include('activity.partials.dropdown') --}}
-		@endif
+		<div class="block m-b-sm">
+			{{-- Dropdown --}}
+			@if(Auth::check())
+				@include('activity.partials.dropdown')
+			@endif
+			{{-- Activity Author --}}
+			@include('activity.partials.author')
+		</div>
 
 		{{-- Activity Content --}}
 		{!! trim($__env->yieldContent('activity-content')) !!}
 
 	</div>
-	<footer class="panel-footer">
-		<ul class="list-group no-borders no-radius no-bg m-b-none auto">
+	<footer class="panel-footer no-padder">
+		<ul class="list-group no-borders no-radius m-b-none auto">
 
 			{{-- Activity Stats --}}
-			<li class="list-group-item clear">
+			<li class="list-group-item bg-light clear">
 				@include('activity.partials.likecount')
 			</li>
 

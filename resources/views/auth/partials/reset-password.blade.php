@@ -17,7 +17,7 @@
 				{ return Form::password($name, ['class' => 'form-control']); }) !!}
 			</div>
 			<footer class="panel-footer">
-				<!-- CSRF -->
+				{{-- CSRF --}}
 				{!! Form::token() !!}
 				<button type="submit" class="btn btn-primary">Reset Password</button>
 			</footer>
