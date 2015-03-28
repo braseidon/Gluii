@@ -1,7 +1,7 @@
 <div class="app-header-container container">
-	<!-- navbar header -->
+	{{-- Navbar Header --}}
 	<div class="navbar-header w-auto">
-		<!-- mobile navigation -->
+		{{-- Mobile Navigation --}}
 		<button class="pull-right visible-xs dk" ui-toggle="show" target=".navbar-collapse">
 			<i class="glyphicon glyphicon-cog"></i>
 		</button>
@@ -9,7 +9,7 @@
 			<i class="icon icon-music-tone-alt"></i>
 		</button>
 
-		<!-- brand -->
+		{{-- Brand --}}
 		<a href="{{ route('home') }}" class="navbar-brand text-lt m-r" title="{{ Config::get('gluii.appname') }}">
 			<i class="icon icon-music-tone"></i>
 			<img src="/assets/img/logo.png" alt="{{ Config::get('gluii.appname') }}" class="hide">
@@ -17,17 +17,17 @@
 		</a>
 	</div>
 
-	<!-- navbar collapse -->
+	{{-- Navbar Collapse --}}
 	<div class="collapse pos-rlt navbar-collapse">
-		<!-- top navigation -->
+		{{-- Top Navigation --}}
 		@if(Auth::check())
 			@include('template.header.nav-left')
 		@endif
 
-		<!-- search form -->
+		{{-- Search Form --}}
 		@include('template.header.search')
 
-		<!-- navbar right -->
+		{{-- Navbar Right --}}
 		@if(Auth::check())
 			@include('template.header.nav-right')
 		@endif

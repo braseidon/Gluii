@@ -1,9 +1,6 @@
 # Gluii
 
-[![Author](http://img.shields.io/badge/author-@BraSeidon-blue.svg?style=flat-square)](https://twitter.com/reinink)
-[![Latest Version](https://img.shields.io/github/release/braseidon/mole.svg?style=flat-square)](https://github.com/braseidon/mole/releases)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/braseidon/mole/blob/master/LICENSE)
-[![Total Downloads](https://img.shields.io/packagist/dt/braseidon/mole.svg?style=flat-square)](https://packagist.org/packages/braseidon/mole)
+[![Author](http://img.shields.io/badge/author-@BraSeidon-blue.svg?style=flat-square)](https://twitter.com/BraSeidon)
 
 Gluii is a white-labeled social network built on the Laravel 5 framework. It is feature-rich, easy to run, and is easily extendible. This implementation of Gluii is a social network for electronic music fans to reconnect.
 

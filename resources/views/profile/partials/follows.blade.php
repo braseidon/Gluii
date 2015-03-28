@@ -1,7 +1,7 @@
 @if($user->id !== Auth::getUser()->id)
 	<!-- Follow Button -->
 	<form action="{{ route('user/follows', $user->id) }}" method="post" data-follows>
-		<!-- Form Token -->
+		{{-- CSRF --}}
 		{{ Form::token() }}
 
 		<!-- Button -->

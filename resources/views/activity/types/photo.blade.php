@@ -2,7 +2,7 @@
 
 @section('activity-title')
 	{!! $activity->user->present()->nameLink !!}
-	uploaded a new photo {{ $activity->created_at->diffForHumans() }}.
+	uploaded a new photo.
 @overwrite
 
 @section('activity-content')

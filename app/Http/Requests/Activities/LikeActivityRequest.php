@@ -1,9 +1,9 @@
-<?php namespace App\Http\Requests\Status;
+<?php namespace App\Http\Requests\Activities;
 
 use Auth;
 use App\Http\Requests\Request;
 
-class NewCommentRequest extends Request
+class LikeActivityRequest extends Request
 {
 
     /**
@@ -14,8 +14,8 @@ class NewCommentRequest extends Request
     public function authorize()
     {
         // Check permissions:
-        // - Make sure the author_id is friends with the Status's profile_user_id
-        // - OR check if the Status's profile_user_id's permissions are free
+        // - Make sure the author_id is friends with the Activity's profile_user_id
+        // - OR check if the Activity's profile_user_id's permissions are free
 
         return Auth::check();
     }
@@ -28,8 +28,7 @@ class NewCommentRequest extends Request
     public function rules()
     {
         return [
-            'status_id'    => 'required|integer|exists:statuses,id',
-            'body'        => 'required|min:3'
+            'activity_id'    => 'required|integer'
         ];
     }
 }

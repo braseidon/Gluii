@@ -1,9 +1,9 @@
-<?php namespace App\Http\Requests\Status;
+<?php namespace App\Http\Requests\Activities;
 
 use Auth;
 use App\Http\Requests\Request;
 
-class LikeCommentRequest extends Request
+class NewCommentRequest extends Request
 {
 
     /**
@@ -28,7 +28,8 @@ class LikeCommentRequest extends Request
     public function rules()
     {
         return [
-            'comment_id'    => 'required|integer|exists:comments,id'
+            'status_id'    => 'required|integer|exists:statuses,id',
+            'body'        => 'required|min:3'
         ];
     }
 }

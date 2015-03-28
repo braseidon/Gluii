@@ -13,7 +13,7 @@ class PhotoAlbumRepository extends AbstractRepository implements PhotoAlbumRepos
      */
     public function findPhotoAlbumById($id)
     {
-        return PhotoAlbum::find($id);
+        return PhotoAlbum::findOrFail($id);
     }
 
     /**

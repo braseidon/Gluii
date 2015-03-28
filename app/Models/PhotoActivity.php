@@ -8,7 +8,7 @@ class PhotoActivity extends Photo
      *
      * @var array
      */
-    protected $with = ['owner', 'album'];
+    protected $with = ['user', 'album'];
 
     /**
      * Make sure the correct presenter is loaded
@@ -16,4 +16,11 @@ class PhotoActivity extends Photo
      * @var string
      */
     protected $presenter = 'App\\Gluii\\Presenters\\PhotoPresenter';
+
+    /**
+     * Manually set the morph class
+     *
+     * @var string
+     */
+    // public $morphClass = 'App\Models\Photo';
 }

@@ -5,6 +5,6 @@
 @section('content')
 	@parent
 
-	{{-- timeline --}}
+	{{-- Timeline --}}
 	@include('statuses.view-timeline')
 @stop

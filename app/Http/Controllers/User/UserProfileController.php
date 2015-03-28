@@ -2,6 +2,7 @@
 
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\PhotoRepositoryInterface;
+use App\Repositories\ActivityRepositoryInterface;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
@@ -16,15 +17,23 @@ class UserProfileController extends BaseController
     protected $userRepository;
 
     /**
+     * Activity Repository
+     *
+     * @var ActivityRepository $activityRepository
+     */
+    protected $activityRepository;
+
+    /**
      * Instantiate the Object
      *
      * @param UserRepository $userRepository
      */
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository, ActivityRepositoryInterface $activityRepository)
     {
         parent::__construct();
 
-        $this->userRepository = $userRepository;
+        $this->userRepository       = $userRepository;
+        $this->activityRepository   = $activityRepository;
     }
 
     /**
@@ -41,13 +50,15 @@ class UserProfileController extends BaseController
             return redirect()->route(\Route::currentRouteName(), $user->username);
         }
 
-        $statuses = $user->statuses;
+        $activities = $this->activityRepository->getFeedByUserId($user->id);
+        // dd($activities);
+        // $activities = $user->activities;
 
         if (! $user) {
             return redirect()->route('home')->withErrors(['User Error' => 'User not found!']);
         }
 
-        return view()->make('profile.feed', compact('user'));
+        return view()->make('profile.feed', compact('user', 'activities'));
     }
 
     /**

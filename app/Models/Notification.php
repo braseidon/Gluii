@@ -16,6 +16,8 @@ class Notification extends Model
     protected $table = 'notifications';
 
     /**
+     * The attributes that are mass assignable.
+     *
      * @var array
      */
     protected $fillable = ['user_id', 'notification_type', 'friend_id', 'notification_route_params'];

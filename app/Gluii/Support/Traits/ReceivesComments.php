@@ -2,25 +2,40 @@
 
 trait ReceivesComments
 {
+
     /**
-     * Get the comment relation.
+     * Relationship to User by Comments
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOneOrMany
+     * @return Collection
      */
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->morphMany('\App\Models\Comment', 'commentable');
+    }
+
+    // Idk
+    // public function commentscount()
+    // {
+    //  return $this->with(['comments' => function($q)
+    //  {
+    //      $q->select( [\DB::raw("count(*) as like_count"), "user_id"] )
+    //          ->groupBy("user_id");
+    //  }]);
+    // }
+
+    public function addComment(User $user)
+    {
+        //
     }
 
     /**
-     * Delete all comments.
+     * Use ReflectionClass to get the class name
      *
-     * @return void
+     * @param  Model $model
+     * @return string
      */
-    public function deleteComments()
+    protected function getModelName($model)
     {
-        foreach ($this->comments()->get(['id']) as $comment) {
-            $comment->delete();
-        }
+        return strtolower((new ReflectionClass($model))->getShortName());
     }
 }

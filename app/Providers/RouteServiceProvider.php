@@ -24,7 +24,16 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         parent::boot($router);
-        //
+
+        // $router->bind('activityType', function ($activityType) {
+        //     $model = 'App\\Models\\' . ucwords($activityType);
+
+        //     if (! class_exists($model) or ! in_array('App\Gluii\Support\Traits\PublishesActivity', class_uses($model))) {
+        //         \App::abort(404);
+        //     }
+
+        //     dd(new $model());
+        // });
     }
 
     /**

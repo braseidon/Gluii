@@ -5,7 +5,7 @@ use Auth;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
-class UserPhotoController extends BaseController
+class PhotoController extends BaseController
 {
 
     /**
@@ -63,5 +63,40 @@ class UserPhotoController extends BaseController
         }
 
         return view()->make('profile.photos', compact('user'));
+    }
+
+    /**
+     * Like a Photo
+     *
+     * @param  \App\Http\Requests\Photo\LikePhotoRequest $request
+     * @return Response
+     */
+    public function postLikePhoto(\App\Http\Requests\Photo\LikePhotoRequest $request)
+    {
+        $this->dispatch(
+            new LikePhotoCommand(
+                Auth::getUser()->id,
+                $request->input('photo_id')
+            )
+        );
+
+        if (! $request->ajax()) {
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Unlike a Photo
+     *
+     * @param  \App\Http\Requests\Photo\LikePhotoRequest $request
+     * @return Response
+     */
+    public function postUnlikePhoto(\App\Http\Requests\Photo\LikePhotoRequest $request)
+    {
+        $this->repository->unlikePhoto(Auth::getUser(), $request->input('photo_id'));
+
+        if (! $request->ajax()) {
+            return redirect()->back();
+        }
     }
 }

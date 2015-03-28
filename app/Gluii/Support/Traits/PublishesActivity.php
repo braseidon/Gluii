@@ -8,6 +8,16 @@ trait PublishesActivity
 {
 
     /**
+     * Activities belong to a User
+     *
+     * @return User
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
+
+    /**
      * Use ReflectionClass to get the class name
      *
      * @param  Model $model
@@ -61,5 +71,15 @@ trait PublishesActivity
         }
 
         return ['created']; //, 'updated'
+    }
+
+    /**
+     * Returns the class without "Activity" on the end
+     *
+     * @return string
+     */
+    public function getMorphClass()
+    {
+        return rtrim(get_class($this), 'Activity');
     }
 }

@@ -8,7 +8,7 @@ class StatusActivity extends Status
      *
      * @var array
      */
-    protected $with = ['profileuser', 'author', 'likes', 'comments', 'comments.author', 'comments.likes'];
+    protected $with = ['profileuser', 'user', 'likes', 'comments', 'comments.author', 'comments.likes'];
 
     /**
      * Make sure the correct presenter is loaded
@@ -16,6 +16,13 @@ class StatusActivity extends Status
      * @var string
      */
     protected $presenter = 'App\\Gluii\\Presenters\\StatusPresenter';
+
+    /**
+     * Manually set the morph class
+     *
+     * @var string
+     */
+    // public $morphClass = 'App\Models\Status';
 
     /**
      * Loads all relationships for displaying the status

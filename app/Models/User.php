@@ -56,6 +56,11 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
         return $this->hasMany('App\Models\Status', 'profile_user_id', 'id');
     }
 
+    /**
+     * Relationship with Comment
+     *
+     * @return Collection
+     */
     public function comments()
     {
         return $this->hasMany('App\Models\Comment', 'user_id', 'id');
@@ -102,6 +107,18 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
             ->withPivot('user_id', 'status_id');
     }
 
+    /**
+     * Get the activity timeline for the user.
+     *
+     * @return mixed
+     */
+    public function activities()
+    {
+        return $this->hasMany('App\Models\Activity')
+            ->with(['user', 'subject'])
+            ->latest();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Query Scopes
@@ -114,19 +131,24 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
      * Load a User's Profile
      *
      * @param  Builder  $query
-     * @param  integer  $statusPerPage
+     * @param  integer  $activitiesPerPage
      * @return Builder
      */
-    public function scopeLoadProfile($query, $statusPerPage = 10)
+    public function scopeLoadProfile($query, $subjectTypes = ['status', 'photo'], $activitiesPerPage = 10)
     {
         return $query->with([
-                'friendsto',
-                'friendsfrom',
-                'statuses' => function ($q) use ($statusPerPage) {
-                    $q->loadRelationships()
-                        ->orderBy('id', 'DESC')
-                        ->addSelect('id', 'profile_user_id', 'author_id', 'body', 'created_at')
-                        ->paginate($statusPerPage);
+                // 'activities' => function ($q) use ($subjectTypes, $activitiesPerPage) {
+                //     $q->whereIn('subject_type', $subjectTypes)
+                //         ->limit($activitiesPerPage);
+                // },
+                // 'activities.likes',
+                'friends' => function ($q) {
+                    $q->limit(9)
+                        ->latest();
+                },
+                'photos' => function ($q) {
+                    $q->limit(12)
+                        ->latest();
                 },
             ]);
     }

@@ -2,7 +2,8 @@
 
 use App\Models\Activity;
 use App\Gluii\Presenters\Setup\PresentableTrait;
-use App\Gluii\Status\Traits\StatusLikeableTrait;
+use App\Gluii\Support\Traits\ReceivesComments;
+use App\Gluii\Support\Traits\ReceivesLikes;
 use App\Gluii\Support\Traits\PublishesActivity;
 use Auth;
 use Gluii\Presenters\StatusPresenter;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
 
-    use PresentableTrait, PublishesActivity, StatusLikeableTrait;
+    use PresentableTrait, PublishesActivity, ReceivesComments, ReceivesLikes;
 
     /**
      * The database table used by the model.
@@ -21,13 +22,20 @@ class Status extends Model
     protected $table = 'statuses';
 
     /**
-     * Fillable fields for a new status.
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['profile_user_id', 'author_id', 'body'];
+    protected $fillable = ['profile_user_id', 'user_id', 'body'];
 
-    // protected $with = ['profileuser', 'author'];
+    // protected $with = ['profileuser', 'user'];
+
+    /**
+     * Helper column used for likes/comments
+     *
+     * @var string
+     */
+    public $shortName = 'status';
 
     /*
     |--------------------------------------------------------------------------
@@ -45,26 +53,6 @@ class Status extends Model
     public function profileuser()
     {
         return $this->belongsTo('App\Models\User', 'profile_user_id');
-    }
-
-    /**
-     * A status belongs to the User author
-     *
-     * @return User
-     */
-    public function author()
-    {
-        return $this->belongsTo('App\Models\User', 'author_id');
-    }
-
-    /**
-     * Statuses have many Comments
-     *
-     * @return Collection
-     */
-    public function comments()
-    {
-        return $this->hasMany('App\Models\Comment', 'status_id');
     }
 
     /**
@@ -93,29 +81,23 @@ class Status extends Model
      * @param  Builder  $query
      * @return Builder
      */
-    public function scopeLoadRelationships($query)
+    public function scopeLoadActivityRelationships($query)
     {
         return $query->with([
                 'profileuser' => function ($q) {
                     $q->selectForFeed();
                 },
-                'author' => function ($q) {
+                'user' => function ($q) {
                     $q->selectForFeed();
                 },
-                'likes' => function ($q) {
-                    $q->addSelect('users.id', 'first_name', 'last_name')
-                        ->withPivot('user_id');
-                },
+                'likes',
                 'comments' => function ($q) {
                     $q->orderBy('id', 'ASC');
                 },
-                'comments.author' => function ($q) {
+                'comments.user' => function ($q) {
                     $q->selectForFeed();
                 },
-                'comments.likes' => function ($q) {
-                    $q->addSelect('users.id', 'first_name', 'last_name')
-                        ->withPivot('user_id');
-                },
+                'comments.likes',
             ]);
     }
 }

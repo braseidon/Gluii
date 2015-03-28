@@ -14,7 +14,7 @@ class StatusRepository extends AbstractRepository implements StatusRepositoryInt
      */
     public function findStatusById($id)
     {
-        return Status::find($id);
+        return Status::findOrFail($id);
     }
 
     /**
@@ -103,41 +103,17 @@ class StatusRepository extends AbstractRepository implements StatusRepositoryInt
      * Post a new Status on a User's profile
      *
      * @param  integer $profileUserId
-     * @param  integer $authorId
+     * @param  integer $userId
      * @param  string $status
      * @return Status
      */
-    public function postStatus($profileUserId, $authorId, $status)
+    public function postStatus($profileUserId, $userId, $status)
     {
         return Status::create([
             'profile_user_id'    => $profileUserId,
-            'author_id'            => $authorId,
+            'user_id'            => $userId,
             'body'                => $status,
         ]);
-    }
-
-    /**
-     * Like a Status
-     *
-     * @param  User    $user
-     * @param  integer  $statusId
-     * @return bool
-     */
-    public function likeStatus(\App\Models\User $user, $statusId)
-    {
-        return $user->likedstatuses()->attach($statusId);
-    }
-
-    /**
-     * Unfollow a Status
-     *
-     * @param $userIdToUnfollow
-     * @param User $user
-     * @return mixed
-     */
-    public function unlikeStatus(\App\Models\User $user, $statusId)
-    {
-        return $user->likedstatuses()->detach($statusId);
     }
 
     /**
@@ -179,7 +155,7 @@ class StatusRepository extends AbstractRepository implements StatusRepositoryInt
      */
     public function subscribeNewStatus(Status $status)
     {
-        $subscribers = array_unique([$status->profile_user_id, $status->author_id]);
+        $subscribers = array_unique([$status->profile_user_id, $status->user_id]);
 
         return $status->subscribers()->sync($subscribers);
     }

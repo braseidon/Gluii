@@ -1,0 +1,1 @@
+<p class="block">{{ $status->body }}</p>

@@ -57,16 +57,16 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
      * @param  integer    $perPage
      * @return Collection
      */
-    public function getFeedByUserId($userId, $subjectTypes = [], $perPage = 20)
+    public function getFeedByUserId($userId, $subjectTypes = ['status', 'photo'], $perPage = 20)
     {
-        $activities = Activity::latest()->with(['user', 'subject'])
+        $activities = Activity::with(['user', 'subject'])
             ->where('user_id', $userId);
 
         if ($subjectTypes !== []) {
             $activities = $activities->whereIn('name', $subjectTypes);
         }
 
-        return $activities->paginate($perPage);
+        return $activities->latest()->paginate($perPage);
     }
 
     /**
@@ -77,13 +77,13 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
      * @param  integer    $perPage
      * @return Collection
      */
-    public function getFeedByUserIds(array $userIds, $subjectTypes = [], $perPage = 20)
+    public function getFeedByUserIds(array $userIds, $subjectTypes = ['status', 'photo'], $perPage = 20)
     {
-        $activities = Activity::latest()->with(['user', 'subject'])
+        $activities = Activity::with(['user', 'subject'])
             ->whereIn('user_id', $userIds);
 
         if ($subjectTypes !== []) {
-            $activities = $activities->whereIn('name', $subjectTypes);
+            $activities = $activities->latest()->whereIn('name', $subjectTypes);
         }
 
         return $activities->paginate($perPage);
@@ -107,5 +107,75 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
         $activities = $activities->latest()->paginate($perPage);
 
         return $activities;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Likes
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+    /**
+     * Like a Activity
+     *
+     * @param  Model   $activity
+     * @param  integer $userId
+     * @return void
+     */
+    public function likeActivity($activityType, $activityId, $userId)
+    {
+        $activity = $this->getActivityModel($activityType, $activityId);
+
+        return $activity->like($userId);
+    }
+
+    /**
+     * Unfollow a Activity
+     *
+     * @param $userIdToUnfollow
+     * @param User $user
+     * @return mixed
+     */
+    public function unlikeActivity($activityType, $activityId, $userId)
+    {
+        $activity = $this->getActivityModel($activityType, $activityId);
+
+        return $activity->unlike($userId);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Comments
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+    /**
+     * Check if a given Activity is an existing Model
+     *
+     * @param  string  $activityType
+     * @param  integer $activityId
+     * @return Model
+     */
+    public function getActivityModel($activityType, $activityId)
+    {
+        $model = 'App\\Models\\' . ucwords($activityType);
+
+        if (! class_exists($model) or ! in_array('App\Gluii\Support\Traits\PublishesActivity', class_uses($model, false))) {
+            \App::abort(404);
+        }
+
+        return (new $model())->findOrFail($activityId);
     }
 }

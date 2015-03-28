@@ -5,7 +5,7 @@
 @section('content')
 	@parent
 
-	{{-- timeline --}}
+	{{-- Timeline --}}
 	<section class="panel panel-default">
 		<div class="panel-body">
 			<p>Insert imaginary video gallery here.</p>

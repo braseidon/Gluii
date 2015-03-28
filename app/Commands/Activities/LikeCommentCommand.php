@@ -1,4 +1,4 @@
-<?php namespace App\Commands\Status;
+<?php namespace App\Commands\Activities;
 
 use App\Commands\Command;
 use App\Repositories\StatusRepository;

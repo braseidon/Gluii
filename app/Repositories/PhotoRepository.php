@@ -13,7 +13,7 @@ class PhotoRepository extends AbstractRepository implements PhotoRepositoryInter
      */
     public function findPhotoById($id)
     {
-        return Photo::find($id);
+        return Photo::findOrFail($id);
     }
 
     /**

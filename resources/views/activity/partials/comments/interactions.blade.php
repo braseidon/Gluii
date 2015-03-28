@@ -5,7 +5,7 @@
 {{-- like --}}
 @if(Auth::check())
 	@if($comment->isLikedBy(Auth::getUser()))
-		<form class="inline" action="{{ route('status/comment/unlike') }}" method="POST">
+		<form class="inline" action="{{ route('activity/comment/unlike', $activityType) }}" method="POST">
 			{!! Form::hidden('comment_id', $comment->id) !!}
 			{!! Form::token() !!}
 			<button type="submit" class="btn btn-link btn-xs text-primary no-padder m-l-sm">
@@ -13,7 +13,7 @@
 			</button>
 		</form>
 	@else
-		<form class="inline" action="{{ route('status/comment/like') }}" method="POST">
+		<form class="inline" action="{{ route('activity/comment/like', $activityType) }}" method="POST">
 			{!! Form::hidden('comment_id', $comment->id) !!}
 			{!! Form::token() !!}
 			<button type="submit" class="btn btn-link btn-xs text-primary no-padder m-l-sm">

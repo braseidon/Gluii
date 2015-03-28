@@ -1,4 +1,4 @@
-<?php namespace App\Commands\Status;
+<?php namespace App\Commands\Activities;
 
 use App\Commands\Command;
 use App\Events\Statuses\StatusReceivedNewComment;
@@ -39,9 +39,9 @@ class NewCommentCommand extends Command implements SelfHandling
      */
     public function __construct($statusId, $userId, $body)
     {
-        $this->statusId    = $statusId;
-        $this->userId    = $userId;
-        $this->body        = $body;
+        $this->statusId     = $statusId;
+        $this->userId       = $userId;
+        $this->body         = $body;
     }
 
     /**

@@ -73,7 +73,7 @@ var config = {
     },
     autoPrefixBrowers: {
         browsers: 'last 10 versions',
-    },
+    }
 };
 
 // Less
@@ -100,13 +100,14 @@ gulp.task('styles', ['less', 'css'], function(){
     return gulp.src(config.paths.build.css)
         .pipe(plugins.expectFile(config.paths.build.css))
         .pipe(plugins.concat('gluii.css'))
+        .pipe(plugins.size({title: 'CSS Not Minified'}))
         .pipe(plugins.autoprefixer(config.autoPrefixBrowers))
         .pipe(plugins.combineMediaQueries({log: true}))
         .pipe(gulp.dest(dir.dist + 'css/'))
         .pipe(plugins.rename({ suffix: '.min' }))
         .pipe(plugins.minifyCss())
         .pipe(gulp.dest(dir.dist + 'css/'))
-        .pipe(plugins.size())
+        .pipe(plugins.size({title: 'CSS Minified'}))
         .pipe(plugins.notify({ message: 'All CSS in build folder compiled & minified' }));
 });
 
@@ -115,11 +116,12 @@ gulp.task('scripts', function(){
     return gulp.src(config.paths.js)
         .pipe(plugins.expectFile(config.paths.js))
         .pipe(plugins.concat('gluii.js'))
+        .pipe(plugins.size({title: 'JS Not Minified'}))
         .pipe(gulp.dest(dir.dist + 'js/'))
         .pipe(plugins.rename({ suffix: '.min' }))
         .pipe(plugins.uglify())
         .pipe(gulp.dest(dir.dist + 'js/'))
-        .pipe(plugins.size())
+        .pipe(plugins.size({title: 'JS Minified'}))
         .pipe(plugins.notify({ message: 'Javascripts compiled and minified' }));
 });
 

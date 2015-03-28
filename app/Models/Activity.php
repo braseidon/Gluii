@@ -16,7 +16,7 @@ class Activity extends Model
     protected $table = 'activities';
 
     /**
-     * Fillable fields for a new status.
+     * The attributes that are mass assignable.
      *
      * @var array
      */

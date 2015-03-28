@@ -18,9 +18,9 @@ class NewStatusCommand extends Command implements SelfHandling
     /**
      * The user_id of the User posting the status
      *
-     * @var integer $authorId
+     * @var integer $userId
      */
-    public $authorId;
+    public $userId;
 
 
     /**
@@ -34,13 +34,13 @@ class NewStatusCommand extends Command implements SelfHandling
      * Instantiate the Object
      *
      * @param integer $profileUserId
-     * @param integer $authorId
+     * @param integer $userId
      * @param string $status
      */
-    public function __construct($profileUserId, $authorId, $status)
+    public function __construct($profileUserId, $userId, $status)
     {
         $this->profileUserId    = $profileUserId;
-        $this->authorId         = $authorId;
+        $this->userId           = $userId;
         $this->status           = $status;
     }
 
@@ -52,10 +52,10 @@ class NewStatusCommand extends Command implements SelfHandling
      */
     public function handle(StatusRepository $repository)
     {
-        $status = $repository->postStatus($this->profileUserId, $this->authorId, $this->status);
+        $status = $repository->postStatus($this->profileUserId, $this->userId, $this->status);
 
         // Fire the Events
         Event::fire(new \App\Events\Statuses\NewStatusPosted($status));
-        Event::fire(new \App\Events\Statuses\UserReceivedNewStatus($this->authorId, $this->profileUserId, $status));
+        Event::fire(new \App\Events\Statuses\UserReceivedNewStatus($this->userId, $this->profileUserId, $status));
     }
 }

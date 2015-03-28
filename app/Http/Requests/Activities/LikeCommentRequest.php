@@ -1,9 +1,9 @@
-<?php namespace App\Http\Requests\Status;
+<?php namespace App\Http\Requests\Activities;
 
 use Auth;
 use App\Http\Requests\Request;
 
-class LikeStatusRequest extends Request
+class LikeCommentRequest extends Request
 {
 
     /**
@@ -28,7 +28,7 @@ class LikeStatusRequest extends Request
     public function rules()
     {
         return [
-            'status_id'    => 'required|integer|exists:statuses,id'
+            'comment_id'    => 'required|integer|exists:comments,id'
         ];
     }
 }

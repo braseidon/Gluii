@@ -26,32 +26,6 @@ Route::group(['prefix' => 'feed'], function () {
 });
 
 /**
- * Authentication
- *
- * @namespace Auth
- */
-Route::group(['namespace' => 'Auth'], function () {
-    # Log In
-    Route::get('login', ['as' => 'auth/login', 'uses' => 'AuthController@getLogin']);
-    Route::post('login', 'AuthController@postLogin');
-    # Log Out
-    Route::get('logout', ['as' => 'auth/logout', 'uses' => 'AuthController@getLogout']);
-
-    # Forgot Password
-    Route::get('forgot-password', ['as' => 'auth/forgot-password', 'uses' => 'PasswordController@getForgotPassword']);
-    Route::post('forgot-password', 'PasswordController@postForgotPassword');
-    # Reset Password
-    Route::get('reset-password/{id}/{code}', ['as' => 'auth/reset-password', 'uses' => 'PasswordController@getResetPassword']);
-    Route::post('reset-password/{id}/{code}', 'PasswordController@postResetPassword');
-
-    # Register
-    Route::get('register', ['as' => 'auth/register', 'uses' => 'AuthController@getRegister']);
-    Route::post('register', 'AuthController@postRegister');
-    # Activate Account
-    Route::get('activate/{id}/{code}', [ 'as' => 'auth/activate', 'uses' => 'ActivationsController@activate' ])->where('id', '\d+');
-});
-
-/**
  * User Timeline/Photos/Videos/Calendar
  *
  * @namespace User
@@ -86,33 +60,43 @@ Route::group(['prefix' => 'friends', 'middleware' => 'auth', 'namespace' => 'Use
 });
 
 /**
- * Statuses - Actions
+ * Statuses - View/Like/Comment
  *
  * @namespace User
  */
-Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function () {
+Route::group(['prefix' => 'status', 'namespace' => 'User'], function () {
     # View Single
-    Route::post('{id}/view', ['as' => 'status/view', 'uses' => 'StatusController@getViewStatus']);
-    # Post Status
-    Route::post('post-new', ['as' => 'status/new', 'uses' => 'StatusController@postNewStatus']);
+    Route::get('{id}/view', ['as' => 'status/view', 'uses' => 'StatusController@getViewStatus']);
+
     # Like Status
     Route::post('like', ['as' => 'status/like', 'uses' => 'StatusController@postLikeStatus']);
     # Unlike Status
     Route::post('unlike', ['as' => 'status/unlike', 'uses' => 'StatusController@postUnlikeStatus']);
-    # Delete Status
-    Route::post('delete', ['as' => 'status/delete', 'uses' => 'StatusController@postDeleteStatus']);
 
     # Comments
     Route::group(['prefix' => 'comments'], function () {
         # Post Comment
         Route::post('post-new', ['as' => 'status/comment/new', 'uses' => 'StatusController@postNewComment']);
+        # Delete Comment
+        Route::post('delete', ['as' => 'status/comment/delete', 'uses' => 'StatusController@postDeleteComment']);
+
         # Like Comment
         Route::post('like', ['as' => 'status/comment/like', 'uses' => 'StatusController@postLikeComment']);
         # Unlike Comment
         Route::post('unlike', ['as' => 'status/comment/unlike', 'uses' => 'StatusController@postUnlikeComment']);
-        # Delete Comment
-        Route::post('delete', ['as' => 'status/comment/delete', 'uses' => 'StatusController@postDeleteComment']);
     });
+});
+
+/**
+ * Statuses - Management
+ *
+ * @namespace User
+ */
+Route::group(['prefix' => 'statuses', 'namespace' => 'User'], function () {
+    # Post Status
+    Route::post('post-new', ['as' => 'status/new', 'uses' => 'StatusController@postNewStatus']);
+    # Delete Status
+    Route::post('delete', ['as' => 'status/delete', 'uses' => 'StatusController@postDeleteStatus']);
 });
 
 /**
@@ -130,17 +114,24 @@ Route::group(['prefix' => 'notifications', 'middleware' => 'auth', 'namespace' =
 });
 
 /**
- * Photos - View
+ * Photos - View/Like/Comment
  *
  * @namespace Photos
  */
-Route::group(['prefix' => 'photos', 'namespace' => 'Photos'], function () {
+Route::group(['prefix' => 'photo', 'namespace' => 'Photos'], function () {
     # View Photo
-    Route::get('{id}/view', ['as' => 'user/photo/view', 'uses' => 'UserPhotoController@getViewPhoto']);
+    Route::get('{id}/view', ['as' => 'photo/view', 'uses' => 'PhotoController@getViewPhoto']);
+
+    # Like Photo
+    Route::post('like', ['as' => 'photo/like', 'uses' => 'PhotoController@postLikePhoto']);
+    # Unlike Photo
+    Route::post('unlike', ['as' => 'photo/unlike', 'uses' => 'PhotoController@postUnlikePhoto']);
+
+
 });
 
 /**
- * Photos - Actions
+ * Photos - Management
  *
  * @namespace Photos
  */
@@ -153,6 +144,33 @@ Route::group(['prefix' => 'photos', 'middleware' => 'auth', 'namespace' => 'Phot
     # Crop Photo
     Route::get('{id}/crop', ['as' => 'user/manage/photos/crop', 'uses' => 'PhotoUploadController@getPhotoCropper']);
     Route::post('{id}/crop-process', ['as' => 'user/manage/photos/crop-process', 'uses' => 'PhotoUploadController@postPhotoCropperProcess']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Activity Actions
+|--------------------------------------------------------------------------
+|
+|
+*/
+Route::group(['prefix' => 'activity/{activityType}', 'namespace' => 'Activities'], function () {
+    # Like Activity
+    Route::post('like', ['as' => 'activity/like', 'uses' => 'ActivityActionController@postLikeActivity']);
+    # Unlike Activity
+    Route::post('unlike', ['as' => 'activity/unlike', 'uses' => 'ActivityActionController@postUnlikeActivity']);
+
+    # Comments
+    Route::group(['prefix' => 'comments'], function () {
+        # Post Comment
+        Route::post('post-new', ['as' => 'activity/comment/new', 'uses' => 'ActivityActionController@postNewComment']);
+        # Delete Comment
+        Route::post('delete', ['as' => 'activity/comment/delete', 'uses' => 'ActivityActionController@postDeleteComment']);
+
+        # Like Comment
+        Route::post('like', ['as' => 'activity/comment/like', 'uses' => 'ActivityActionController@postLikeComment']);
+        # Unlike Comment
+        Route::post('unlike', ['as' => 'activity/comment/unlike', 'uses' => 'ActivityActionController@postUnlikeComment']);
+    });
 });
 
 /*

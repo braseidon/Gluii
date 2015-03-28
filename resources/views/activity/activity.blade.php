@@ -11,31 +11,7 @@
 
 		{{-- Activity Content --}}
 		{!! trim($__env->yieldContent('activity-content')) !!}
-
 	</div>
-	<footer class="panel-footer no-padder">
-		<ul class="list-group no-borders no-radius m-b-none auto">
-
-			{{-- Activity Stats --}}
-			<li class="list-group-item bg-light clear">
-				@include('activity.partials.likecount')
-			</li>
-
-			{{-- Comment Loop --}}
-			@if(isset($activity->subject->comments) && ! $activity->subject->comments->isEmpty())
-				@foreach($activity->subject->comments as $comment)
-					<li class="list-group-item clear">
-						@include('activity.partials.comments.comment')
-					</li>
-				@endforeach
-			@endif
-
-			{{-- New Comment --}}
-			@if(Auth::check())
-				<li class="list-group-item clear">
-					@include('activity.forms.new-comment')
-				</li>
-			@endif
-		</ul>
-	</footer>
+	{{-- Likes + Comments --}}
+	@include('activity.partials.interactions', ['activity' => $activity->subject, 'activityType' => $activity->name])
 </section>

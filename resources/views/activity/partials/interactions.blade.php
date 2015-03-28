@@ -1,50 +1,20 @@
-<ul class="list-inline m-t-sm m-b-none block">
-	{{-- Like / Unlike --}}
-	@if(Auth::check())
-		<li>
-			@if($activity->isLikedBy(Auth::getUser()))
-				<form action="{{ route('activity/unlike') }}" method="POST">
-					{!! Form::hidden('activity_id', $activity->id) !!}
-					{!! Form::token() !!}
-					<button type="submit" class="btn btn-link btn-sm">
-						<i class="icon icon-dislike"></i> Unlike
-					</button>
-				</form>
-			@else
-				<form action="{{ route('activity/like') }}" method="POST">
-					{!! Form::hidden('activity_id', $activity->id) !!}
-					{!! Form::token() !!}
-					<button type="submit" class="btn btn-link btn-sm">
-						<i class="icon icon-like"></i> Like
-					</button>
-				</form>
-			@endif
+<footer class="panel-footer no-padder">
+	<ul class="list-group no-borders no-radius m-b-none auto">
+		{{-- Activity Stats --}}
+		<li class="list-group-item clear">
+			@include('activity.partials.actions', ['activityType' => $activityType])
 		</li>
-	@endif
-	{{-- Comment --}}
-	<li>
-		<a href="javascript:void(0);" class="btn btn-link btn-sm">
-			<i class="icon icon-bubble"></i> Comment
-		</a>
-	</li>
-	{{-- Show Comments --}}
-	<li>
-		<a href="javascript:void(0);" class="btn btn-link btn-sm">
-			Show All Comments ({{ $activity->present()->replyCount }})
-		</a>
-	</li>
-	<li>
-		<a href="javascript:void(0);" class="btn btn-link btn-sm">
-			ID#{{ $activity->id }}
-		</a>
-	</li>
-	{{-- Edit --}}
-	@if(Auth::check() && $activity->user->id == Auth::getUser()->id)
-		<li class="pull-right">
-			<!-- edit -->
-			<a href="javascript:void(0);" class="btn btn-link btn-sm text-muted">Edit</a>
-			<!-- delete -->
-			<!-- <a href="javascript:void(0);" class="btn btn-link btn-sm text-muted">Delete</a> -->
-		</li>
-	@endif
-</ul>
+
+		{{-- Comment Loop --}}
+		@if(isset($activity->comments))
+			@include('activity.partials.comments', ['comments' => $activity->comments])
+		@endif
+
+		{{-- New Comment --}}
+		@if(Auth::check())
+			<li class="list-group-item clear">
+				@include('activity.forms.new-comment', ['activityType' => $activityType])
+			</li>
+		@endif
+	</ul>
+</footer>
