@@ -24,16 +24,6 @@ class HomeController extends BaseController
     }
 
     /**
-     * Some page
-     *
-     * @return Response
-     */
-    public function getHome()
-    {
-        return view('home');
-    }
-
-    /**
      * Test sending an email
      *
      * @return die()

@@ -1,47 +1,56 @@
 <?php namespace App\Commands\Activities;
 
+use App\Models\User;
+use App\Repositories\ActivityRepositoryInterface;
 use App\Commands\Command;
-use App\Repositories\StatusRepository;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 class LikeCommentCommand extends Command implements SelfHandling
 {
 
     /**
-     * The User doing the liking
+     * The Activity type being liked
      *
-     * @var User
+     * @var Model
+     */
+    public $activityType;
+
+    /**
+     * The Activity being liked
+     *
+     * @var integer
+     */
+    public $activityId;
+
+    /**
+     * The User liking a Activity
+     *
+     * @var integer
      */
     public $userId;
 
     /**
-     * The ID of the Status.Comment being liked
-     *
-     * @var integer
-     */
-    public $commentId;
-
-    /**
      * Create a new command instance.
      *
-     * @param integer $commentId
-     * @param integer $userId
+     * @return void
      */
-    public function __construct($userId, $commentId)
+    public function __construct($activityType, $activityId, $userId)
     {
+        $this->activityType  = $activityType;
+        $this->activityId    = $activityId;
         $this->userId        = $userId;
-        $this->commentId    = $commentId;
     }
 
     /**
      * Execute the command.
      *
-     * @return void
+     * @param  ActivityRepositoryInterface $repository
+     * @return Void
      */
-    public function handle(StatusRepository $repository)
+    public function handle(ActivityRepositoryInterface $repository)
     {
-        $user = \App\Models\User::find($this->userId);
+        $user = User::find($this->userId);
 
-        $repository->likeComment($user, $this->commentId);
+        $repository->likeActivity($this->activityType, $this->activityId, $this->userId);
     }
 }

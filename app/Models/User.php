@@ -134,11 +134,11 @@ class User extends EloquentUser implements AuthenticatableContract, CanResetPass
      * @param  integer  $activitiesPerPage
      * @return Builder
      */
-    public function scopeLoadProfile($query, $subjectTypes = ['status', 'photo'], $activitiesPerPage = 10)
+    public function scopeLoadProfile($query, $activityTypes = ['status', 'photo'], $activitiesPerPage = 10)
     {
         return $query->with([
-                // 'activities' => function ($q) use ($subjectTypes, $activitiesPerPage) {
-                //     $q->whereIn('subject_type', $subjectTypes)
+                // 'activities' => function ($q) use ($activityTypes, $activitiesPerPage) {
+                //     $q->whereIn('subject_type', $activityTypes)
                 //         ->limit($activitiesPerPage);
                 // },
                 // 'activities.likes',

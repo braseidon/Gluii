@@ -59,12 +59,12 @@ class Activity extends Model
     */
 
     /**
-     * Return SubjectType for selecting the model
+     * Return activityType for selecting the model
      *
      * @param  string $value
      * @return string
      */
-    public function getSubjectTypeAttribute($value)
+    public function getactivityTypeAttribute($value)
     {
         if (is_null($value)) {
             return $value;

@@ -6,7 +6,6 @@ use App\Commands\Activities\NewCommentCommand;
 use App\Commands\Activities\UnlikeActivityCommand;
 use App\Repositories\ActivityRepositoryInterface;
 use Auth;
-
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
@@ -32,7 +31,7 @@ class ActivityActionController extends BaseController
 
     /*
     |--------------------------------------------------------------------------
-    | Likes
+    | Activity Like / Unlike
     |--------------------------------------------------------------------------
     |
     |
@@ -93,18 +92,27 @@ class ActivityActionController extends BaseController
      *
      * @return Response
      */
-    public function postNewComment(\App\Http\Requests\Activity\NewCommentRequest $request)
+    public function postNewComment($activityType, \App\Http\Requests\Activities\NewCommentRequest $request)
     {
         $this->dispatch(
             new NewCommentCommand(
+                $activityType,
                 $request->input('activity_id'),
-                Auth::getUser()->id,
-                $request->input('body')
+                $request->input('body'),
+                Auth::getUser()->id
             )
         );
 
         return redirect()->back();
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Comment Like / Unlike
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
 
     /**
      * Process liking a Comment
@@ -112,12 +120,13 @@ class ActivityActionController extends BaseController
      * @param   $request
      * @return Response
      */
-    public function postLikeComment(\App\Http\Requests\Activity\LikeCommentRequest $request)
+    public function postLikeComment($activityType, \App\Http\Requests\Activities\LikeCommentRequest $request)
     {
         $this->dispatch(
             new LikeCommentCommand(
-                Auth::getUser()->id,
-                $request->input('comment_id')
+                $activityType,
+                $request->input('activity_id'),
+                Auth::getUser()->id
             )
         );
 
@@ -132,9 +141,9 @@ class ActivityActionController extends BaseController
      * @param  \App\Http\Requests\Activity\LikeCommentRequest $request
      * @return Response
      */
-    public function postUnlikeComment(\App\Http\Requests\Activity\LikeCommentRequest $request)
+    public function postUnlikeComment(\App\Http\Requests\Activities\LikeCommentRequest $request)
     {
-        $this->repository->unlikeComment(Auth::getUser(), $request->input('comment_id'));
+        $this->repository->unlikeComment(Auth::getUser(), $request->input('activity_id'));
 
         if (! $request->ajax()) {
             return redirect()->back();

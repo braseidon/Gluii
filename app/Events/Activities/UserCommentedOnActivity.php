@@ -1,10 +1,12 @@
 <?php namespace App\Events\Statuses;
 
 use App\Models\Status;
+use App\Models\User;
+
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
-class StatusReceivedNewComment extends Event
+class UserCommentedOnActivity extends Event
 {
 
     use SerializesModels;
@@ -33,7 +35,7 @@ class StatusReceivedNewComment extends Event
      * @param integer $toId
      * @param integer $statusId
      */
-    public function __construct($fromId, $toId, Status $status)
+    public function __construct($activity, User $user)
     {
         $this->fromId    = $fromId;
         $this->toId        = $toId;

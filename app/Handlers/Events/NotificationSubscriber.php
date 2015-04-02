@@ -1,8 +1,10 @@
 <?php namespace App\Handlers\Events;
 
-use App\Events\Statuses\StatusReceivedNewComment;
+use App\Events\Activities\UserCommentedOnActivity;
+use App\Events\Activities\UserLikedActivity;
 use App\Events\Statuses\UserReceivedNewStatus;
 use App\Events\Users\FriendRequestAccepted;
+
 use App\Repositories\NotificationRepositoryInterface;
 
 class NotificationSubscriber
@@ -24,12 +26,25 @@ class NotificationSubscriber
     }
 
     /**
-     * Notify subscribed Users of a new Comment
+     * Send a Notification when a User liked an Activity
      *
-     * @param  StatusReceivedNewComment $event
+     * @param  UserLikedActivity $event
      * @return void
      */
-    public function whenStatusReceivedNewComment(StatusReceivedNewComment $event)
+    public function whenUserLikedActivity(UserLikedActivity $event)
+    {
+        if ($event->activity->user->id !== $event->user->id) {
+            $this->repository->push($event->activity->user->id, $event->activity->shortName . '.like', $event->user->id, $routeParams = ['id' => $event->activity->id]);
+        }
+    }
+
+    /**
+     * Notify subscribed Users of a new Comment
+     *
+     * @param  UserCommentedOnActivity $event
+     * @return void
+     */
+    public function whenUserCommentedOnActivity(UserCommentedOnActivity $event)
     {
         $subscribers = $event->status->subscribers->lists('id');
 
@@ -71,8 +86,10 @@ class NotificationSubscriber
      */
     public function subscribe($events)
     {
-        $events->listen(\App\Events\Statuses\StatusReceivedNewComment::class,
-            'App\Handlers\Events\NotificationSubscriber@whenStatusReceivedNewComment');
+        $events->listen(\App\Events\Activities\UserLikedActivity::class,
+            'App\Handlers\Events\NotificationSubscriber@whenUserLikedActivity');
+        $events->listen(\App\Events\Activities\UserCommentedOnActivity::class,
+            'App\Handlers\Events\NotificationSubscriber@whenUserCommentedOnActivity');
         $events->listen(\App\Events\Statuses\UserReceivedNewStatus::class,
             'App\Handlers\Events\NotificationSubscriber@whenUserReceivedNewStatus');
         $events->listen(\App\Events\Users\FriendRequestAccepted::class,

@@ -28,7 +28,7 @@ class LikeCommentRequest extends Request
     public function rules()
     {
         return [
-            'comment_id'    => 'required|integer|exists:comments,id'
+            'activity_id'    => 'required|integer|exists:comments,id'
         ];
     }
 }

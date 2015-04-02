@@ -1,5 +1,8 @@
 <?php namespace App\Gluii\Support\Traits;
 
+use App\Models\Comment;
+use Auth;
+
 trait ReceivesComments
 {
 
@@ -13,29 +16,48 @@ trait ReceivesComments
         return $this->morphMany('\App\Models\Comment', 'commentable');
     }
 
-    // Idk
-    // public function commentscount()
-    // {
-    //  return $this->with(['comments' => function($q)
-    //  {
-    //      $q->select( [\DB::raw("count(*) as like_count"), "user_id"] )
-    //          ->groupBy("user_id");
-    //  }]);
-    // }
+    /*
+    |--------------------------------------------------------------------------
+    | Query Scopes
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
 
-    public function addComment(User $user)
+    /**
+     * Fetch only records that currently logged in user has liked/followed
+     *
+     * @param  Builder $query
+     * @param  integer $userId
+     * @return Builder
+     */
+    public function scopeWhereCommented($query, $userId = null)
     {
-        //
+        if (is_null($userId)) {
+            $userId = $this->loggedInUserId();
+        }
+
+        return $query->whereHas('likes', function ($q) use ($userId) {
+            $q->where('user_id', '=', $userId);
+        });
     }
 
     /**
-     * Use ReflectionClass to get the class name
+     * Add a Comment to an Activity
      *
-     * @param  Model $model
-     * @return string
+     * @param string  $body
+     * @param integer $userId
      */
-    protected function getModelName($model)
+    public function addComment($body, $userId = null)
     {
-        return strtolower((new ReflectionClass($model))->getShortName());
+        if (is_null($userId)) {
+            $userId = Auth::getUser()->id;
+        }
+
+        $comment            = new Comment();
+        $comment->body      = $body;
+        $comment->user_id   = $userId;
+
+        $this->comments()->save($comment);
     }
 }

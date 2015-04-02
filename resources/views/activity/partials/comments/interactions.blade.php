@@ -1,12 +1,12 @@
 {{-- time posted --}}
 <span class="btn btn-link btn-xs text-muted no-padder" title="{{ $comment->present()->timeFormatted }}">
-	<i class="fa fa-fw fa-clock-o"></i> {{ $comment->created_at->diffForHumans() }}
+	<i class="icon icon-clock"></i> {{ $comment->created_at->diffForHumans() }}
 </span>
 {{-- like --}}
 @if(Auth::check())
-	@if($comment->isLikedBy(Auth::getUser()))
+	@if($comment->liked())
 		<form class="inline" action="{{ route('activity/comment/unlike', $activityType) }}" method="POST">
-			{!! Form::hidden('comment_id', $comment->id) !!}
+			{!! Form::hidden('activity_id', $comment->id) !!}
 			{!! Form::token() !!}
 			<button type="submit" class="btn btn-link btn-xs text-primary no-padder m-l-sm">
 				Unlike
@@ -14,7 +14,7 @@
 		</form>
 	@else
 		<form class="inline" action="{{ route('activity/comment/like', $activityType) }}" method="POST">
-			{!! Form::hidden('comment_id', $comment->id) !!}
+			{!! Form::hidden('activity_id', $comment->id) !!}
 			{!! Form::token() !!}
 			<button type="submit" class="btn btn-link btn-xs text-primary no-padder m-l-sm">
 				Like

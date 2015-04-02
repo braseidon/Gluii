@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
 /**
  * News Feeds
  */
@@ -67,24 +56,6 @@ Route::group(['prefix' => 'friends', 'middleware' => 'auth', 'namespace' => 'Use
 Route::group(['prefix' => 'status', 'namespace' => 'User'], function () {
     # View Single
     Route::get('{id}/view', ['as' => 'status/view', 'uses' => 'StatusController@getViewStatus']);
-
-    # Like Status
-    Route::post('like', ['as' => 'status/like', 'uses' => 'StatusController@postLikeStatus']);
-    # Unlike Status
-    Route::post('unlike', ['as' => 'status/unlike', 'uses' => 'StatusController@postUnlikeStatus']);
-
-    # Comments
-    Route::group(['prefix' => 'comments'], function () {
-        # Post Comment
-        Route::post('post-new', ['as' => 'status/comment/new', 'uses' => 'StatusController@postNewComment']);
-        # Delete Comment
-        Route::post('delete', ['as' => 'status/comment/delete', 'uses' => 'StatusController@postDeleteComment']);
-
-        # Like Comment
-        Route::post('like', ['as' => 'status/comment/like', 'uses' => 'StatusController@postLikeComment']);
-        # Unlike Comment
-        Route::post('unlike', ['as' => 'status/comment/unlike', 'uses' => 'StatusController@postUnlikeComment']);
-    });
 });
 
 /**
@@ -114,20 +85,13 @@ Route::group(['prefix' => 'notifications', 'middleware' => 'auth', 'namespace' =
 });
 
 /**
- * Photos - View/Like/Comment
+ * Photos - View
  *
  * @namespace Photos
  */
 Route::group(['prefix' => 'photo', 'namespace' => 'Photos'], function () {
     # View Photo
     Route::get('{id}/view', ['as' => 'photo/view', 'uses' => 'PhotoController@getViewPhoto']);
-
-    # Like Photo
-    Route::post('like', ['as' => 'photo/like', 'uses' => 'PhotoController@postLikePhoto']);
-    # Unlike Photo
-    Route::post('unlike', ['as' => 'photo/unlike', 'uses' => 'PhotoController@postUnlikePhoto']);
-
-
 });
 
 /**
@@ -153,14 +117,14 @@ Route::group(['prefix' => 'photos', 'middleware' => 'auth', 'namespace' => 'Phot
 |
 |
 */
-Route::group(['prefix' => 'activity/{activityType}', 'namespace' => 'Activities'], function () {
+Route::group(['prefix' => 'activity/{activityType}', 'middleware' => 'auth', 'namespace' => 'Activities'], function () {
     # Like Activity
     Route::post('like', ['as' => 'activity/like', 'uses' => 'ActivityActionController@postLikeActivity']);
     # Unlike Activity
     Route::post('unlike', ['as' => 'activity/unlike', 'uses' => 'ActivityActionController@postUnlikeActivity']);
 
     # Comments
-    Route::group(['prefix' => 'comments'], function () {
+    Route::group(['prefix' => 'comment'], function () {
         # Post Comment
         Route::post('post-new', ['as' => 'activity/comment/new', 'uses' => 'ActivityActionController@postNewComment']);
         # Delete Comment
@@ -172,68 +136,3 @@ Route::group(['prefix' => 'activity/{activityType}', 'namespace' => 'Activities'
         Route::post('unlike', ['as' => 'activity/comment/unlike', 'uses' => 'ActivityActionController@postUnlikeComment']);
     });
 });
-
-/*
-|--------------------------------------------------------------------------
-| Influencers / Families / Calendar /+ Explore
-|--------------------------------------------------------------------------
-|
-|
-*/
-
-/**
- * Explore
- *
- * @namespace Explore
- */
-Route::group(['namespace' => 'Explore', 'prefix' => 'explore'], function () {
-    # Feed
-    Route::get('/', ['as' => 'explore', 'uses' => 'ExploreController@getIndex']);
-});
-
-/**
- * Festivals
- *
- * @namespace Festivals
- */
-Route::group(['namespace' => 'Festivals', 'prefix' => 'festivals'], function () {
-    # Feed
-    Route::get('/', ['as' => 'festivals', 'uses' => 'FestivalsController@getIndex']);
-});
-
-/**
- * Families
- *
- * @namespace Families
- */
-Route::group(['namespace' => 'Families', 'prefix' => 'families'], function () {
-    # Feed
-    Route::get('/', ['as' => 'families', 'uses' => 'FamiliesController@getIndex']);
-    # View Family
-    Route::get('{slug}', ['as' => 'families/view', 'uses' => 'FamiliesController@getIndex']);
-});
-
-/**
- * Influencers
- *
- * @namespace Influencers
- */
-Route::group(['namespace' => 'Influencers', 'prefix' => 'influencers'], function () {
-    # Feed
-    Route::get('/', ['as' => 'influencers', 'uses' => 'InfluencersController@getIndex']);
-    # View Family
-    Route::get('{slug}', ['as' => 'influencers/view', 'uses' => 'InfluencersController@getIndex']);
-});
-
-/*
-|--------------------------------------------------------------------------
-| Random Tests
-|--------------------------------------------------------------------------
-|
-|
-*/
-
-# Testing Event
-Route::get('test-event', ['as' => 'test-event', 'uses' => 'WelcomeController@getTestEvent']);
-# Testing Email
-Route::get('test-email', ['as' => 'test-email', 'uses' => 'HomeController@getTestEmail']);

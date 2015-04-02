@@ -1,7 +1,7 @@
 <?php namespace App\Handlers\Events\Statuses;
 
 use App\Events\Statuses\NewStatusPosted;
-use App\Events\Statuses\StatusReceivedNewComment;
+use App\Events\Activities\UserCommentedOnActivity;
 use App\Repositories\StatusRepositoryInterface;
 
 class StatusSubscriber
@@ -36,10 +36,10 @@ class StatusSubscriber
     /**
      * Subscribe the User that commented to the Status
      *
-     * @param  StatusReceivedNewComment $event
+     * @param  UserCommentedOnActivity $event
      * @return void
      */
-    public function whenStatusReceivedNewComment(StatusReceivedNewComment $event)
+    public function whenUserCommentedOnActivity(UserCommentedOnActivity $event)
     {
         $this->repository->subscriberFirstOrNew($event->status, $event->fromId);
     }
@@ -54,7 +54,7 @@ class StatusSubscriber
     {
         $events->listen(\App\Events\Statuses\NewStatusPosted::class,
             'App\Handlers\Events\Statuses\StatusSubscriber@subscribeUsersToStatus');
-        $events->listen(\App\Events\Statuses\StatusReceivedNewComment::class,
-            'App\Handlers\Events\Statuses\StatusSubscriber@whenStatusReceivedNewComment');
+        $events->listen(\App\Events\Activities\UserCommentedOnActivity::class,
+            'App\Handlers\Events\Statuses\StatusSubscriber@whenUserCommentedOnActivity');
     }
 }

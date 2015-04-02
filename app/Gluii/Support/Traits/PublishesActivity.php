@@ -23,9 +23,20 @@ trait PublishesActivity
      * @param  Model $model
      * @return string
      */
-    protected function getActivityName($model)
+    public function getActivityNameOne($model)
     {
         return strtolower((new ReflectionClass($model))->getShortName());
+    }
+
+    /**
+     * Use ReflectionClass to get the class name
+     *
+     * @param  Model $model
+     * @return string
+     */
+    public function getActivityNameTwo($model)
+    {
+        return strtolower(class_basename(get_class($model)));
     }
 
     /**
@@ -81,5 +92,16 @@ trait PublishesActivity
     public function getMorphClass()
     {
         return rtrim(get_class($this), 'Activity');
+    }
+
+    /**
+     * Use ReflectionClass to get the class name
+     *
+     * @param  Model $model
+     * @return string
+     */
+    protected function getModelName($model)
+    {
+        return strtolower((new ReflectionClass($model))->getShortName());
     }
 }

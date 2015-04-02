@@ -1,6 +1,8 @@
 <?php namespace App\Repositories;
 
+use Auth;
 use App\Models\Activity;
+use Event;
 
 class ActivityRepository extends AbstractRepository implements ActivityRepositoryInterface
 {
@@ -53,17 +55,17 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
      * Returns single User's Activity feed
      *
      * @param  integer    $userId
-     * @param  array      $subjectTypes
+     * @param  array      $activityTypes
      * @param  integer    $perPage
      * @return Collection
      */
-    public function getFeedByUserId($userId, $subjectTypes = ['status', 'photo'], $perPage = 20)
+    public function getFeedByUserId($userId, $activityTypes = ['status', 'photo'], $perPage = 20)
     {
         $activities = Activity::with(['user', 'subject'])
             ->where('user_id', $userId);
 
-        if ($subjectTypes !== []) {
-            $activities = $activities->whereIn('name', $subjectTypes);
+        if ($activityTypes !== []) {
+            $activities = $activities->whereIn('name', $activityTypes);
         }
 
         return $activities->latest()->paginate($perPage);
@@ -73,17 +75,17 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
      * Returns multiple Users' Activity feeds
      *
      * @param  array      $userIds
-     * @param  array      $subjectTypes
+     * @param  array      $activityTypes
      * @param  integer    $perPage
      * @return Collection
      */
-    public function getFeedByUserIds(array $userIds, $subjectTypes = ['status', 'photo'], $perPage = 20)
+    public function getFeedByUserIds(array $userIds, $activityTypes = ['status', 'photo'], $perPage = 20)
     {
         $activities = Activity::with(['user', 'subject'])
             ->whereIn('user_id', $userIds);
 
-        if ($subjectTypes !== []) {
-            $activities = $activities->latest()->whereIn('name', $subjectTypes);
+        if ($activityTypes !== []) {
+            $activities = $activities->latest()->whereIn('name', $activityTypes);
         }
 
         return $activities->paginate($perPage);
@@ -92,16 +94,16 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
     /**
      * Returns all Users' feeds
      *
-     * @param  array      $subjectTypes
+     * @param  array      $activityTypes
      * @param  integer    $perPage
      * @return Collection
      */
-    public function getAllUsersFeeds($subjectTypes = [], $perPage = 20)
+    public function getAllUsersFeeds($activityTypes = [], $perPage = 20)
     {
-        $activities = Activity::with(['user', 'subject']);
+        $activities = Activity::with(['user', 'subject', 'subject.user', 'subject.likes']);
 
-        if ($subjectTypes !== []) {
-            $activities = $activities->whereIn('name', $subjectTypes);
+        if ($activityTypes !== []) {
+            $activities = $activities->whereIn('name', $activityTypes);
         }
 
         $activities = $activities->latest()->paginate($perPage);
@@ -128,7 +130,11 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
     {
         $activity = $this->getActivityModel($activityType, $activityId);
 
-        return $activity->like($userId);
+        // dd($activity);
+
+        $activity->like($userId);
+
+        Event::fire(new \App\Events\Activities\UserLikedActivity($activity, Auth::getUser()));
     }
 
     /**
@@ -142,7 +148,9 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
     {
         $activity = $this->getActivityModel($activityType, $activityId);
 
-        return $activity->unlike($userId);
+        $activity->unlike($userId);
+
+        Event::fire(new \App\Events\Activities\UserUnlikedActivity($activity, Auth::getUser()));
     }
 
     /*
@@ -152,6 +160,17 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
     |
     |
     */
+
+    public function commentOnActivity($activityType, $activityId, $body, $userId)
+    {
+        $activity = $this->getActivityModel($activityType, $activityId);
+
+        // dd($activity);
+
+        $activity->addComment($body, $userId);
+
+        Event::fire(new \App\Events\Activities\UserCommentedOnActivity($activity, Auth::getUser()));
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -176,6 +195,6 @@ class ActivityRepository extends AbstractRepository implements ActivityRepositor
             \App::abort(404);
         }
 
-        return (new $model())->findOrFail($activityId);
+        return (new $model())->with(['user', 'likes'])->findOrFail($activityId);
     }
 }

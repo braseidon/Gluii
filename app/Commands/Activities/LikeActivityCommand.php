@@ -1,8 +1,9 @@
 <?php namespace App\Commands\Activities;
 
-use App\Commands\Command;
 use App\Models\User;
 use App\Repositories\ActivityRepositoryInterface;
+
+use App\Commands\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 class LikeActivityCommand extends Command implements SelfHandling
@@ -36,15 +37,16 @@ class LikeActivityCommand extends Command implements SelfHandling
      */
     public function __construct($activityType, $activityId, $userId)
     {
-        $this->activityType = $activityType;
-        $this->activityId   = $activityId;
-        $this->userId       = $userId;
+        $this->activityType  = $activityType;
+        $this->activityId    = $activityId;
+        $this->userId        = $userId;
     }
 
     /**
      * Execute the command.
      *
-     * @return void
+     * @param  ActivityRepositoryInterface $repository
+     * @return Void
      */
     public function handle(ActivityRepositoryInterface $repository)
     {

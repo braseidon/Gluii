@@ -3,19 +3,10 @@
 use App\Models\Like;
 use App\Models\LikeCounter;
 use Auth;
-use DB;
 use Exception;
 
 trait ReceivesLikes
 {
-
-    /*
-    |--------------------------------------------------------------------------
-    | Relationships
-    |--------------------------------------------------------------------------
-    |
-    |
-    */
 
     /**
      * Collection of the likes on this record
@@ -24,8 +15,6 @@ trait ReceivesLikes
      */
     public function likes()
     {
-        // dd($this->morphMany('App\Models\Like', 'likable')->);
-        // dd($this->getMorphClass());
         return $this->morphMany('App\Models\Like', 'likable');
     }
 
@@ -112,8 +101,10 @@ trait ReceivesLikes
 
             $like = new Like();
             $like->user_id = $userId;
+
             $this->likes()->save($like);
         }
+
         $this->incrementLikeCount();
     }
     /**
@@ -137,6 +128,7 @@ trait ReceivesLikes
 
             $like->delete();
         }
+
         $this->decrementLikeCount();
     }
 

@@ -28,8 +28,8 @@ class NewCommentRequest extends Request
     public function rules()
     {
         return [
-            'status_id'    => 'required|integer|exists:statuses,id',
-            'body'        => 'required|min:3'
+            'activity_id'   => 'required|integer',
+            'body'          => 'required|min:3'
         ];
     }
 }
